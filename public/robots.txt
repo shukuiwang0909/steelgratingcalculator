@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 
 Disallow: /inquiry/thanks/
+Disallow: /zh/inquiry/thanks/
 
 Sitemap: https://steelgratingcalculator.com/sitemap-index.xml

@@ -37,7 +37,7 @@ export function getStaticPaths() {
 }
 
 const { factory, forceTranslation } = Astro.props;
-const origin = Astro.site?.origin ?? "https://meshcalculator.com";
+const origin = Astro.site?.origin ?? "https://steelgratingcalculator.com";
 const lang = "zh";
 
 const labelFor = (key: string) => CATEGORIES.find((c) => c.key === key)?.zh ?? key;
@@ -154,8 +154,7 @@ const infoRows: [string, string][] = [
     </div>
 
     <p class="mt-6 text-xs text-theme-muted">
-      MeshCalculator 仅收录工厂信息，不对产品认证或担保交易。付款前请自行核验供应商——
-      参考<a href="/blog/how-to-verify-china-wire-mesh-factory/" hreflang="en" class="underline hover:text-theme-primary">如何核实中国丝网工厂（英文）</a>。
+      SteelGratingCalculator 仅收录工厂信息，不对产品认证或担保交易。付款前请自行核验供应商。
     </p>
 
     <script type="application/ld+json" set:html={JSON.stringify(orgJson)} />

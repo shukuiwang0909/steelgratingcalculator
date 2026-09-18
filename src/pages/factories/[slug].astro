@@ -37,7 +37,7 @@ export function getStaticPaths() {
 }
 
 const { factory, forceTranslation } = Astro.props;
-const origin = Astro.site?.origin ?? "https://meshcalculator.com";
+const origin = Astro.site?.origin ?? "https://steelgratingcalculator.com";
 const lang = "en";
 
 const labelFor = (key: string) => CATEGORIES.find((c) => c.key === key)?.en ?? key;
