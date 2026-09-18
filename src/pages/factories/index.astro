@@ -1,0 +1,110 @@
+---
+import Base from "../../layouts/Base.astro";
+import factoriesJson from "../../data/factories.json";
+
+const title = "Anping Steel Grating & Wire Mesh Factory Directory | SteelGratingCalculator";
+const description = "Direct manufacturer listings from Anping, Hebei — China's largest steel grating and wire mesh manufacturing hub. Browse verified and listed factories for steel grating, expanded metal, and more.";
+
+interface Factory {
+  slug: string;
+  name: string;
+  nameZh?: string;
+  tier: "listed" | "verified";
+  categories: string[];
+  city: string;
+  province: string;
+  website?: string;
+  description: string;
+  founded?: number;
+  employees?: string;
+}
+
+const factories = factoriesJson as unknown as Factory[];
+
+function labelFor(key: string): string {
+  return key.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+}
+---
+<Base title={title} description={description} lang="en">
+
+  <section class="max-w-6xl mx-auto px-4 py-10">
+
+    <nav class="text-xs text-theme-muted mb-6 flex items-center gap-2">
+      <a href="/" class="hover:text-theme-primary transition-colors">Home</a>
+      <span>/</span>
+      <span class="accent-text">Factory Directory</span>
+    </nav>
+
+    <div class="mb-10">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-theme accent-border accent-text text-xs font-mono uppercase tracking-wider mb-4">
+        <span class="w-1.5 h-1.5 rounded-full accent-bg"></span>
+        Anping, Hebei, China
+      </div>
+      <h1 class="text-3xl font-semibold text-theme-primary mb-3">Anping Factory Directory</h1>
+      <p class="text-theme-secondary max-w-2xl leading-relaxed">
+        Direct manufacturer listings from Anping County — China's largest steel grating and wire mesh production hub. Browse factories for steel grating, wire mesh, expanded metal, and related products. No trading company markups.
+      </p>
+    </div>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+      {[
+        { stat: String(factories.length), label: "Listed factories" },
+        { stat: "1,700+", label: "Total Anping metal enterprises" },
+        { stat: "80+", label: "Export countries" },
+        { stat: "FOB", label: "Direct factory pricing" },
+      ].map((s) => (
+        <div class="card text-center">
+          <p class="text-2xl font-bold accent-text font-mono">{s.stat}</p>
+          <p class="text-xs text-theme-muted mt-1">{s.label}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Factory grid -->
+    <div class="grid md:grid-cols-2 gap-5">
+      {factories.map((f) => (
+        <a href={`/factories/${f.slug}/`} class="card card-accent group flex flex-col gap-3 hover:shadow-none transition-all">
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex-1">
+              <h2 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors leading-snug">{f.name}</h2>
+              {f.nameZh && <p class="text-xs text-theme-muted mt-0.5">{f.nameZh}</p>}
+            </div>
+            <div class="flex flex-col items-end gap-1 shrink-0">
+              {f.tier === "verified" && (
+                <span class="text-xs font-semibold px-2 py-0.5 rounded-full accent-bg on-accent">Verified ✓</span>
+              )}
+              <span class="text-xs text-theme-muted">{f.city}, {f.province}</span>
+            </div>
+          </div>
+          <p class="text-sm text-theme-secondary leading-relaxed flex-1">{f.description}</p>
+          <div class="flex flex-wrap gap-1.5 pt-2 border-t border-theme">
+            {f.categories.map((c) => (
+              <span class="text-xs px-2 py-0.5 rounded-full bg-theme-secondary border border-theme text-theme-muted">{labelFor(c)}</span>
+            ))}
+            {f.founded && <span class="text-xs px-2 py-0.5 rounded-full bg-theme-secondary border border-theme text-theme-muted ml-auto">Est. {f.founded}</span>}
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <!-- CTA -->
+    <div class="mt-12 p-6 bg-theme-secondary rounded-xl border border-theme">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <div class="flex-1">
+          <h2 class="text-lg font-semibold text-theme-primary mb-1">Need a Specific Specification?</h2>
+          <p class="text-sm text-theme-secondary">Tell us your spec — bearing bar size, pitch, surface finish, panel dimensions — and we'll connect you with the right factory.</p>
+        </div>
+        <a href="/inquiry/" class="accent-bg on-accent px-6 py-3 rounded-lg font-semibold text-sm hover:opacity-90 transition-opacity shrink-0">
+          Send an Inquiry →
+        </a>
+      </div>
+    </div>
+
+    <div class="mt-8 text-xs text-theme-muted text-center">
+      More factories added regularly. <a href="/inquiry/" class="accent-text hover:opacity-80">Contact us</a> to list your factory.
+    </div>
+
+  </section>
+
+</Base>

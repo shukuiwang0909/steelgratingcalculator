@@ -1,0 +1,183 @@
+---
+import Base from "../../../layouts/Base.astro";
+
+const title = "钢格栅重量速查表 — 常用规格每平方米重量（kg/m²）";
+const description = "钢格栅常用规格重量速查表，包含碳钢、不锈钢和铝合金。承重扁钢 × 间距矩阵，无需计算，一表查清。";
+
+// 与英文版完全相同的计算逻辑
+const SPECS = [
+  { bb: "20×3 mm", pitch: [20, 30, 40, 60] },
+  { bb: "25×3 mm", pitch: [20, 30, 40, 60] },
+  { bb: "25×5 mm", pitch: [22, 30, 34, 40] },
+  { bb: "30×3 mm", pitch: [22, 30, 40, 60] },
+  { bb: "30×5 mm", pitch: [22, 30, 34, 40] },
+  { bb: "35×5 mm", pitch: [22, 30, 34, 40] },
+  { bb: "40×5 mm", pitch: [22, 30, 40, 60] },
+  { bb: "50×5 mm", pitch: [22, 30, 40, 60] },
+  { bb: "65×5 mm", pitch: [22, 30, 40, 60] },
+];
+
+// 横杆：6mm 圆钢 @ 50mm 间距（标准）
+const XB_W = (Math.PI / 4 * 36 * 7.85) / 50;
+
+function bbWeight(H: number, T: number, P: number, rho = 7.85) {
+  return (H * T * rho) / P;
+}
+function totalW(H: number, T: number, P: number, rho = 7.85) {
+  return (bbWeight(H, T, P, rho) + XB_W * (rho / 7.85)).toFixed(2);
+}
+
+function parseSpec(s: string) {
+  const m = s.match(/(\d+)×(\d+)/);
+  return m ? { H: parseInt(m[1]), T: parseInt(m[2]) } : { H: 0, T: 0 };
+}
+
+const POPULAR = [
+  { label: "20×3@30", bb: "20×3 mm", P: 30 },
+  { label: "25×3@30", bb: "25×3 mm", P: 30 },
+  { label: "25×5@22", bb: "25×5 mm", P: 22 },
+  { label: "25×5@30", bb: "25×5 mm", P: 30 },
+  { label: "25×5@34", bb: "25×5 mm", P: 34 },
+  { label: "30×5@30", bb: "30×5 mm", P: 30 },
+  { label: "35×5@30", bb: "35×5 mm", P: 30 },
+  { label: "40×5@30", bb: "40×5 mm", P: 30 },
+  { label: "50×5@30", bb: "50×5 mm", P: 30 },
+  { label: "65×5@30", bb: "65×5 mm", P: 30 },
+  { label: "40×5@22", bb: "40×5 mm", P: 22 },
+  { label: "50×5@22", bb: "50×5 mm", P: 22 },
+];
+---
+<Base title={title} description={description} lang="zh">
+
+  <section class="max-w-6xl mx-auto px-4 py-10">
+
+    <nav class="text-xs text-theme-muted mb-6 flex items-center gap-2">
+      <a href="/zh/" class="hover:text-theme-primary transition-colors">首页</a>
+      <span>/</span>
+      <span class="accent-text">格栅重量速查表</span>
+    </nav>
+
+    <div class="mb-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-theme accent-border accent-text text-xs font-mono uppercase tracking-wider mb-4">
+        <span class="w-1.5 h-1.5 rounded-full accent-bg"></span>
+        规格速查 · GB/T 12755
+      </div>
+      <h1 class="text-3xl font-semibold text-theme-primary mb-3">钢格栅重量速查表</h1>
+      <p class="text-theme-secondary max-w-2xl leading-relaxed">
+        常用钢格栅规格每平方米重量预算表。横杆：6 mm 圆钢，间距 50 mm。碳钢密度 7.85 g/cm³。其它规格请使用<a href="/zh/tools/steel-grating-weight-calculator/" class="accent-text hover:opacity-80">重量计算器</a>。
+      </p>
+    </div>
+
+    <!-- 常用规格速查表 -->
+    <div class="card mb-8">
+      <h2 class="text-base font-semibold text-theme-primary mb-4">常用规格速查</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-theme">
+              <th class="text-left py-2 pr-4 text-theme-muted text-xs font-semibold uppercase tracking-wide">承重扁钢</th>
+              <th class="text-right py-2 pr-4 text-theme-muted text-xs font-semibold uppercase tracking-wide">扁钢间距 (mm)</th>
+              <th class="text-right py-2 pr-4 text-theme-muted text-xs font-semibold uppercase tracking-wide">碳钢</th>
+              <th class="text-right py-2 pr-4 text-theme-muted text-xs font-semibold uppercase tracking-wide">不锈钢 304</th>
+              <th class="text-right py-2 text-theme-muted text-xs font-semibold uppercase tracking-wide">铝合金</th>
+            </tr>
+          </thead>
+          <tbody>
+            {POPULAR.map((row) => {
+              const { H, T } = parseSpec(row.bb);
+              const steel = totalW(H, T, row.P, 7.85);
+              const ss = totalW(H, T, row.P, 7.93);
+              const al = totalW(H, T, row.P, 2.7);
+              const isPopular = row.label === "25×5@30";
+              return (
+                <tr class={`border-b border-theme/50 ${isPopular ? 'bg-theme-tertiary' : ''}`}>
+                  <td class="py-2 pr-4 font-mono text-theme-primary font-medium">{row.bb}</td>
+                  <td class="py-2 pr-4 text-right font-mono text-theme-secondary">{row.P}</td>
+                  <td class="py-2 pr-4 text-right font-mono">
+                    <span class={isPopular ? 'accent-text font-bold' : 'text-theme-primary'}>{steel} kg/m²</span>
+                    {isPopular && <span class="ml-2 text-xs text-theme-muted">（标准）</span>}
+                  </td>
+                  <td class="py-2 pr-4 text-right font-mono text-theme-secondary">{ss} kg/m²</td>
+                  <td class="py-2 text-right font-mono text-theme-secondary">{al} kg/m²</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-theme-muted mt-3">已含横杆：6 mm 圆钢 @ 50 mm 间距。热镀锌重量约增加 +4%（ISO 1461）。数值误差 ±2–3%。</p>
+    </div>
+
+    <!-- 完整矩阵表 -->
+    <div class="card mb-8">
+      <h2 class="text-base font-semibold text-theme-primary mb-4">碳钢重量矩阵（kg/m²）— 6 mm 圆钢横杆 @ 50 mm</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-theme">
+              <th class="text-left py-2 pr-6 text-theme-muted text-xs font-semibold uppercase tracking-wide">承重扁钢</th>
+              {SPECS[0].pitch.map(p => (
+                <th class="text-right py-2 px-3 text-theme-muted text-xs font-semibold uppercase tracking-wide">{p} mm 间距</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {SPECS.map((row) => {
+              const { H, T } = parseSpec(row.bb);
+              return (
+                <tr class="border-b border-theme/50 hover:bg-theme-tertiary transition-colors">
+                  <td class="py-2 pr-6 font-mono text-theme-primary font-medium">{row.bb}</td>
+                  {row.pitch.map(P => (
+                    <td class="py-2 px-3 text-right font-mono text-theme-secondary">
+                      {totalW(H, T, P)}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 热镀锌说明 + CTA -->
+    <div class="grid md:grid-cols-2 gap-4 mb-8">
+      <div class="card bg-theme-tertiary">
+        <h3 class="font-semibold text-theme-primary mb-2 text-sm">热镀锌格栅重量</h3>
+        <p class="text-sm text-theme-secondary">热镀锌格栅重量约增加 <span class="accent-text font-semibold">+4%</span>（锌层 610 g/m²，符合 ISO 1461）。将表中任意数值乘以 1.04 即可。</p>
+        <p class="text-xs text-theme-muted mt-2">示例：25×5@30 碳钢 = 37.05 kg/m² → 热镀锌后 ≈ 38.5 kg/m²</p>
+      </div>
+      <div class="card bg-theme-tertiary">
+        <h3 class="font-semibold text-theme-primary mb-2 text-sm">需要自定义计算？</h3>
+        <p class="text-sm text-theme-secondary mb-3">使用完整计算器，可输入任意承重扁钢规格、横杆类型（圆钢/扭方钢）、面板尺寸和订货数量。</p>
+        <a href="/zh/tools/steel-grating-weight-calculator/" class="inline-flex items-center gap-2 accent-bg hover:opacity-90 text-sm font-semibold px-4 py-2 rounded-lg transition-opacity on-accent">
+          打开重量计算器 →
+        </a>
+      </div>
+    </div>
+
+    <!-- 相关工具 -->
+    <div class="pt-8 border-t border-theme">
+      <h2 class="text-lg font-semibold text-theme-primary mb-4">相关工具</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        <a href="/zh/tools/steel-grating-weight-calculator/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">工具 01</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">重量计算器</h3>
+          <p class="text-sm text-theme-secondary mt-1">任意规格——横杆类型、材质、面板尺寸、数量。</p>
+        </a>
+        <a href="/zh/tools/bar-grating-load-capacity-calculator/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">工具 02</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">承载能力计算器</h3>
+          <p class="text-sm text-theme-secondary mt-1">NAAMM 和 BS 4592 允许均布荷载与挠度。</p>
+        </a>
+        <a href="/zh/tools/open-area-percentage-calculator/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">工具 03</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">开孔率计算器</h3>
+          <p class="text-sm text-theme-secondary mt-1">排水和通风开孔率计算。</p>
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+</Base>

@@ -1,0 +1,146 @@
+---
+import Base from "../../layouts/Base.astro";
+import FaqJsonLd from "../../components/FaqJsonLd.astro";
+
+const title = "安平钢格栅产地指南 — 中国最大钢格栅出口基地 | SteelGratingCalculator";
+const description = "安平县是全球最大的钢格栅生产出口基地，拥有1700+家金属企业，出口至80余个国家。了解安平的价格优势、技术能力和采购流程。";
+
+const faqs: [string, string][] = [
+  ["安平为什么以钢格栅出名？", "安平拥有500年金属加工历史，现有1700余家金属制品企业，形成了钢格栅、金属网、钢板网、冲孔板等专业产业集群。供应商、原材料加工和镀锌服务高度集中在方圆30公里内，FOB价格无可匹敌。"],
+  ["安平工厂可以定制尺寸吗？", "可以。大多数工厂能生产非标面板尺寸、定制承重扁钢高度和间距、以及各类加工件——踏步板、沟盖板、结构框架等。一般3–5天确认样品，7–15天生产交货。"],
+  ["安平发货到海外需要多长时间？", "标准规格通常有现货（1–3天）。定制生产需7–15个工作日。从天津港发货：欧洲25–35天海运；美国西海岸18–25天；中东15–20天；东南亚10–18天。"],
+  ["安平工厂有质量认证吗？", "主要出口工厂持有ISO 9001认证；部分工厂提供SGS检测报告、CE声明和材料测试记录（MTR）。大批量订单前建议要求第三方检验或工厂审计报告。"],
+  ["安平钢格栅的起订量是多少？", "标准规格通常1吨起订。定制加工件可能需要3–5吨MOQ。部分贸易商可接受5–10块面板的样品订单。"],
+];
+---
+<Base title={title} description={description} lang="zh">
+
+  <section class="max-w-5xl mx-auto px-4 py-12">
+
+    <nav class="text-xs text-theme-muted mb-6 flex items-center gap-2">
+      <a href="/zh/" class="hover:text-theme-primary transition-colors">首页</a>
+      <span>/</span>
+      <span class="accent-text">安平钢格栅产地</span>
+    </nav>
+
+    <div class="mb-10">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-theme accent-border accent-text text-xs font-mono uppercase tracking-wider mb-4">
+        <span class="w-1.5 h-1.5 rounded-full accent-bg"></span>
+        中国 · 河北省 · 安平县
+      </div>
+      <h1 class="text-4xl font-semibold text-theme-primary mb-4">中国钢格栅之都</h1>
+      <p class="text-theme-secondary text-lg leading-relaxed max-w-3xl">
+        河北省安平县是中国最大的钢格栅生产出口基地，也是全球最具竞争力的工业格栅采购地。1700余家金属制品企业生产全系列钢格栅产品，出口至80余个国家。
+      </p>
+    </div>
+
+    <!-- 核心数据 -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+      {[
+        { stat: "1,700+", label: "金属制品企业" },
+        { stat: "80+", label: "出口目的地国家" },
+        { stat: "500年", label: "金属加工历史" },
+        { stat: "300万吨/年", label: "金属网及格栅产量" },
+      ].map((s) => (
+        <div class="card text-center">
+          <p class="text-2xl font-bold accent-text font-mono">{s.stat}</p>
+          <p class="text-xs text-theme-muted mt-1">{s.label}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- 为什么选安平 -->
+    <div class="prose max-w-none text-theme-secondary leading-relaxed mb-12 space-y-6">
+      <h2 class="text-2xl font-semibold text-theme-primary">工程师和采购商为何从安平采购格栅</h2>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="card">
+          <h3 class="font-semibold text-theme-primary mb-2">无可比拟的价格竞争力</h3>
+          <p class="text-sm text-theme-secondary">产业集群在方圆30公里内汇聚了数百家格栅工厂，竞争激烈。原材料、镀锌和加工服务均可本地完成，省去长链物流，FOB价格比同等西方产品低30–50%。</p>
+        </div>
+        <div class="card">
+          <h3 class="font-semibold text-theme-primary mb-2">深厚的技术加工能力</h3>
+          <p class="text-sm text-theme-secondary">安平工厂经数十年锤炼，可生产承重扁钢从20×3mm到75×10mm，间距11mm至76mm，各种横杆组合。多数工厂具备NAAMM、BS 4592及AS/NZS 1576对应合规能力。</p>
+        </div>
+        <div class="card">
+          <h3 class="font-semibold text-theme-primary mb-2">全系列产品覆盖</h3>
+          <p class="text-sm text-theme-secondary">从普通焊接格栅到防滑齿型、热镀锌（610g/m²锌层）、不锈钢304/316L、铝合金6061-T6、踏步板、沟盖板到定制结构件——一票货可涵盖多种型号，从同一港口发运。</p>
+        </div>
+        <div class="card">
+          <h3 class="font-semibold text-theme-primary mb-2">配套镀锌基础设施</h3>
+          <p class="text-sm text-theme-secondary">安平拥有多家热镀锌厂为本地格栅工厂服务。格栅面板生产完成后可就地镀锌打包，速度远快于需要外运镀锌的地区，大幅缩短交货周期。</p>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-semibold text-theme-primary mt-10">安平可供应的产品品类</h2>
+      <div class="grid md:grid-cols-2 gap-3">
+        {[
+          ["普通钢格栅", "碳钢标准焊接格栅，最常见出口产品，所有标准间距均有供应。"],
+          ["防滑齿型钢格栅", "顶面V形齿槽防滑设计，适用于安全要求较高场所，所有标准规格均可生产。"],
+          ["热镀锌钢格栅", "符合ISO 1461（610g/m²锌层），户外及腐蚀性环境的标准表面处理。"],
+          ["不锈钢格栅", "304和316L牌号，适用于食品加工、制药、海洋和化工环境。"],
+          ["铝合金格栅", "6061-T6铝合金，重量轻、不产生火花、耐腐蚀，适合海工、船舶和洁净环境。"],
+          ["格栅踏步板", "带防滑包角的定尺切割面板，标准和定制尺寸均可。"],
+          ["排水沟盖板", "定制宽度排水格栅（含可选框架），提供荷载等级选项。"],
+          ["重型钢格栅", "50–75mm承重扁钢，适用于车辆荷载和重工业地板。"],
+        ].map(([name, desc]) => (
+          <div class="flex gap-3 p-3 bg-theme-tertiary rounded-lg border border-theme">
+            <span class="w-1.5 h-1.5 rounded-full accent-bg mt-1.5 shrink-0"></span>
+            <div>
+              <p class="font-semibold text-theme-primary text-sm">{name}</p>
+              <p class="text-xs text-theme-secondary mt-0.5">{desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- CTA 双卡片 -->
+    <div class="grid md:grid-cols-2 gap-4 mb-12">
+      <div class="card card-accent text-center p-8">
+        <h3 class="font-semibold text-lg text-theme-primary mb-2">先算好规格再询价</h3>
+        <p class="text-sm text-theme-secondary mb-4">用我们的免费工具核实重量、承载能力和开孔率，再向工厂发送准确询价单。</p>
+        <a href="/zh/tools/steel-grating-weight-calculator/" class="inline-flex items-center gap-2 accent-bg hover:opacity-90 font-semibold px-6 py-3 rounded-lg transition-opacity on-accent text-sm">
+          打开重量计算器 →
+        </a>
+      </div>
+      <div class="card text-center p-8 border border-theme">
+        <h3 class="font-semibold text-lg text-theme-primary mb-2">同时采购金属网？</h3>
+        <p class="text-sm text-theme-secondary mb-4">安平也是中国最大的金属网产地。在我们的姊妹站计算焊接网和编织网的重量。</p>
+        <a href="https://meshcalculator.com" target="_blank" rel="noopener" class="inline-flex items-center gap-2 border border-theme hover:accent-border font-semibold px-6 py-3 rounded-lg transition-colors text-sm text-theme-primary hover:accent-text">
+          MeshCalculator.com →
+        </a>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <FaqJsonLd items={faqs.map(([q, a]) => ({ question: q, answer: a }))} inLanguage="zh" />
+    <h2 class="text-2xl font-semibold text-theme-primary mb-6">常见问题</h2>
+    <div class="space-y-3 mb-12">
+      {faqs.map(([q, a]) => (
+        <details class="card group">
+          <summary class="flex items-center justify-between cursor-pointer list-none">
+            <span class="font-medium text-theme-primary">{q}</span>
+            <svg class="w-5 h-5 text-theme-muted shrink-0 ml-4 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <p class="mt-3 text-sm text-theme-secondary leading-relaxed">{a}</p>
+        </details>
+      ))}
+    </div>
+
+    <!-- 最终 CTA -->
+    <div class="card card-accent relative overflow-hidden text-center py-12">
+      <div class="absolute inset-0 bg-gradient-to-br from-theme-tertiary via-transparent to-transparent"></div>
+      <div class="relative">
+        <h2 class="text-2xl font-semibold text-theme-primary mb-3">准备好向安平直接采购钢格栅了吗？</h2>
+        <p class="text-theme-secondary mb-6 max-w-lg mx-auto">发送您的规格给匹配工厂。无中间商，无贸易商加价。</p>
+        <a href="/zh/inquiry/" class="inline-flex items-center gap-2 accent-bg hover:opacity-90 font-semibold px-8 py-4 rounded-lg transition-all on-accent">
+          发送询价
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+</Base>
