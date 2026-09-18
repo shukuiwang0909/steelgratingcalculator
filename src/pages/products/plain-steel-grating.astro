@@ -1,0 +1,177 @@
+---
+import Base from "../../layouts/Base.astro";
+import FaqJsonLd from "../../components/FaqJsonLd.astro";
+
+const faqs = [
+  ["What is plain steel bar grating?", "Plain (smooth-top) steel bar grating has flat-top bearing bars welded to cross bars at regular intervals. It is the most common form used in industrial flooring, platforms, and walkways where slip resistance is not the primary concern."],
+  ["What are standard bearing bar sizes for plain grating?", "Common sizes range from 20×3mm to 75×6mm. The most popular global specification is 25×5mm with 30mm centre-to-centre pitch, which gives approximately 37 kg/m²."],
+  ["What is the difference between plain and serrated grating?", "Plain grating has smooth flat-top bars. Serrated (notched) grating has teeth cut into the top edge of each bearing bar, providing better grip in wet or oily environments. Serrated grating weighs slightly less due to material removed."],
+  ["Can plain steel grating be hot-dip galvanized?", "Yes. Plain carbon steel grating is routinely hot-dip galvanized to ISO 1461 / ASTM A123. Galvanizing adds approximately 4% to the weight and provides 25–40 years of corrosion protection in outdoor environments."],
+];
+---
+
+<Base title="Plain Steel Bar Grating — Specifications, Weight, and Sourcing | Anping" description="Plain steel bar grating specifications: bearing bar sizes, pitches, weight per m², standards (NAAMM MBG 531, BS 4592, GB/T 12755). Source from Anping factories.">
+
+  <article class="max-w-4xl mx-auto px-4 py-10">
+
+    <nav class="text-xs text-theme-muted mb-6 flex items-center gap-2">
+      <a href="/" class="hover:text-theme-primary transition-colors">Home</a>
+      <span>/</span>
+      <a href="/products/" class="hover:text-theme-primary transition-colors">Products</a>
+      <span>/</span>
+      <span class="accent-text">Plain Steel Grating</span>
+    </nav>
+
+    <div class="mb-8">
+      <span class="text-xs font-mono accent-text uppercase tracking-wider">Product Guide</span>
+      <h1 class="text-4xl font-semibold text-theme-primary leading-tight mt-2 mb-4">Plain Steel Bar Grating</h1>
+      <p class="text-lg text-theme-secondary leading-relaxed">Flat-top bearing bar grating for industrial flooring, platforms, walkways, and drainage covers. The most widely specified form of steel grating worldwide.</p>
+    </div>
+
+    <!-- Quick calc CTA -->
+    <div class="mb-8 p-4 bg-theme-tertiary rounded-xl border border-theme flex items-center gap-4">
+      <div class="flex-1">
+        <p class="text-sm font-medium text-theme-primary">Calculate weight for your spec</p>
+        <p class="text-xs text-theme-muted">Enter bearing bar size, pitch, and panel dimensions to get exact kg/m² and order weight.</p>
+      </div>
+      <a href="/tools/steel-grating-weight-calculator/" class="text-sm accent-text font-semibold hover:opacity-80 transition-opacity shrink-0 whitespace-nowrap">Weight Calculator →</a>
+    </div>
+
+    <div class="prose max-w-none text-theme-secondary leading-relaxed space-y-8">
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Specification Overview</h2>
+        <p>Plain steel bar grating consists of bearing bars (flat steel strips running longitudinally) welded to cross bars at uniform intervals. The "plain" designation means the bearing bar tops are left flat — as opposed to serrated grating where the tops are notched for anti-slip performance.</p>
+
+        <div class="overflow-x-auto mt-4">
+          <table class="w-full text-sm">
+            <thead><tr class="border-b border-theme"><th class="text-left py-2 pr-4 text-theme-muted font-medium">Parameter</th><th class="text-left py-2 text-theme-muted font-medium">Standard Range</th></tr></thead>
+            <tbody class="text-theme-secondary">
+              {[
+                ["Bearing bar height", "20 mm – 75 mm"],
+                ["Bearing bar thickness", "3 mm, 4 mm, 5 mm, 6 mm"],
+                ["Bearing bar pitch (c/c)", "11 / 15 / 22 / 30 / 34 / 40 / 60 mm"],
+                ["Cross bar type", "Round (⌀5–10mm), twisted square (5–6mm), flat"],
+                ["Cross bar pitch", "25 / 50 / 76.2 / 100 mm"],
+                ["Panel width", "Up to 1,200 mm (standard: 1,000 mm)"],
+                ["Panel length", "Up to 6,100 mm (standard: 6,000 mm)"],
+                ["Weight range", "10 – 80 kg/m² depending on spec"],
+                ["Steel grade", "Q235 / A36 / S235–S355"],
+              ].map(([p, v]) => (
+                <tr class="border-b border-theme/50"><td class="py-2 pr-4 font-medium text-theme-primary">{p}</td><td class="py-2">{v}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Most Common Specifications</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead><tr class="border-b border-theme"><th class="text-left py-2 pr-4 text-theme-muted font-medium">Bearing Bar</th><th class="text-right py-2 pr-4 text-theme-muted font-medium">Pitch (mm)</th><th class="text-right py-2 pr-4 text-theme-muted font-medium">Weight (kg/m²)</th><th class="text-left py-2 text-theme-muted font-medium">Typical Use</th></tr></thead>
+            <tbody class="text-theme-secondary">
+              {[
+                ["25×5 mm", "30", "37.1", "General industrial flooring — most popular globally"],
+                ["25×5 mm", "22", "48.2", "Heavy-duty floors, closer load distribution"],
+                ["30×5 mm", "30", "43.2", "Medium-heavy platforms"],
+                ["40×5 mm", "30", "57.1", "Long-span walkways, structural floors"],
+                ["20×3 mm", "30", "19.9", "Light-duty covers, architectural"],
+                ["65×5 mm", "30", "88.0", "Long-span, heavy industrial"],
+              ].map(([bb, p, w, u]) => (
+                <tr class="border-b border-theme/50">
+                  <td class="py-2 pr-4 font-mono font-medium text-theme-primary">{bb}</td>
+                  <td class="py-2 pr-4 text-right font-mono">{p}</td>
+                  <td class="py-2 pr-4 text-right font-mono accent-text font-semibold">{w}</td>
+                  <td class="py-2 text-xs">{u}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="text-xs text-theme-muted mt-2">Cross bar: 6 mm round @ 50 mm pitch. For other configurations use the <a href="/tools/steel-grating-weight-calculator/" class="underline">weight calculator</a>.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Applicable Standards</h2>
+        <div class="grid md:grid-cols-3 gap-4 mt-4">
+          {[
+            { std: "GB/T 12755-2008", desc: "Chinese national standard — used by virtually all Anping factories. Covers bearing bar, cross bar dimensions and tolerances." },
+            { std: "NAAMM MBG 531", desc: "North American standard. Designation codes (e.g. 19-W-4) describe bar height in 1/16\", type (W=welded), and c/c pitch in 1/4\"." },
+            { std: "BS 4592", desc: "UK/European standard. Defines load classes A–E and structural performance requirements. Commonly specified for UK construction projects." },
+          ].map(({ std, desc }) => (
+            <div class="card">
+              <div class="font-mono text-sm accent-text font-semibold mb-1">{std}</div>
+              <p class="text-sm text-theme-secondary">{desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Surface Finishes Available</h2>
+        <ul class="list-disc pl-6 space-y-2 mt-2">
+          <li><strong class="text-theme-primary">Black (mill finish)</strong> — oiled to prevent transit rust, must be painted or galvanized after installation in outdoor environments</li>
+          <li><strong class="text-theme-primary">Hot-dip galvanized</strong> — ISO 1461 / ASTM A123, 45–85 μm zinc coating, 25–40 year service life outdoors</li>
+          <li><strong class="text-theme-primary">Painted</strong> — primer + topcoat; less durable than galvanizing but lower initial cost</li>
+          <li><strong class="text-theme-primary">Epoxy coated</strong> — for chemical environments; consult factory for specific chemical resistance</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Why Source from Anping, Hebei?</h2>
+        <p>Anping County produces over 70% of China's steel grating exports. The industrial cluster of 1,700+ factories enables competitive pricing, full specification flexibility, and short lead times (typically 15–25 days FOB). Most factories hold ISO 9001 certification and can provide mill certificates, test reports, and third-party inspection.</p>
+        <div class="mt-4 grid md:grid-cols-2 gap-4">
+          <a href="/inquiry/" class="card card-accent group text-center">
+            <div class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors">Get a Quote</div>
+            <div class="text-sm text-theme-secondary mt-1">Send your spec — factories reply directly</div>
+          </a>
+          <a href="/anping-steel-grating/" class="card card-accent group text-center">
+            <div class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors">About Anping Grating</div>
+            <div class="text-sm text-theme-secondary mt-1">Production capacity, certifications, logistics</div>
+          </a>
+        </div>
+      </section>
+
+    </div>
+
+    <FaqJsonLd items={faqs.map(([q, a]) => ({ question: q, answer: a }))} inLanguage="en" />
+    <div class="mt-10 pt-8 border-t border-theme">
+      <h2 class="text-xl font-semibold text-theme-primary mb-5">Frequently Asked Questions</h2>
+      <div class="space-y-3">
+        {faqs.map(([q, a]) => (
+          <details class="card group">
+            <summary class="flex items-center justify-between cursor-pointer list-none">
+              <span class="font-medium text-theme-primary">{q}</span>
+              <svg class="w-5 h-5 text-theme-muted shrink-0 ml-4 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-3 text-sm text-theme-secondary leading-relaxed">{a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+
+    <div class="mt-8 pt-8 border-t border-theme">
+      <h2 class="text-lg font-semibold text-theme-primary mb-4">Related Products & Tools</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        <a href="/products/serrated-steel-grating/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">Product</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">Serrated Steel Grating</h3>
+          <p class="text-sm text-theme-secondary mt-1">Anti-slip notched-top variant</p>
+        </a>
+        <a href="/products/galvanized-steel-grating/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">Product</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">Galvanized Grating</h3>
+          <p class="text-sm text-theme-secondary mt-1">Hot-dip galvanized for corrosive environments</p>
+        </a>
+        <a href="/tools/bar-grating-load-capacity-calculator/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">Tool 02</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">Load Capacity Calculator</h3>
+          <p class="text-sm text-theme-secondary mt-1">Check span capacity to NAAMM / BS 4592</p>
+        </a>
+      </div>
+    </div>
+
+  </article>
+
+</Base>

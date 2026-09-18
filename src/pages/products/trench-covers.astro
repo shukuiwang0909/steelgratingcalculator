@@ -1,0 +1,122 @@
+---
+import Base from "../../layouts/Base.astro";
+import FaqJsonLd from "../../components/FaqJsonLd.astro";
+
+const faqs = [
+  ["What is a trench cover grating?", "A trench cover (drain grating) is a steel grating panel that spans a drainage channel or trench, supporting foot and vehicle traffic while allowing water and debris to drain through. The grating sits in a channel frame (angle iron or U-bar) that is embedded in the concrete surround."],
+  ["What load class do I need for vehicle traffic?", "For foot traffic only: BS 4592 Class A–B or NAAMM equivalent. For light vehicles (forklifts, cars): Class C–D (approximately 15–25 kN concentrated load). For heavy vehicles (trucks, HGVs): Class E or heavy-duty custom specification. Always confirm with a structural engineer for safety-critical applications."],
+  ["What is the maximum single panel size for trench covers?", "Standard single panels up to 1000×1000mm are common. For longer spans (1200×1000 mm or wider), intermediate support frames or composite construction may be required. Heavy-duty trench covers with 50×6mm or 65×6mm bearing bars can span up to 2000mm."],
+  ["Can trench covers be locked in place?", "Yes. Anti-theft locking systems (bolt-down brackets, padlock eyes) are available as standard factory options. Lifting keys and flush-mounted handles can also be added for easy maintenance access while preventing accidental displacement."],
+];
+---
+
+<Base title="Trench Covers & Drain Grating — Steel, Load Ratings, Sizes | Anping" description="Steel trench covers and drain grates for foot traffic to heavy vehicle loads. BS 4592 load classes, panel sizes, locking options. Source from Anping, China.">
+
+  <article class="max-w-4xl mx-auto px-4 py-10">
+
+    <nav class="text-xs text-theme-muted mb-6 flex items-center gap-2">
+      <a href="/" class="hover:text-theme-primary transition-colors">Home</a>
+      <span>/</span>
+      <a href="/products/" class="hover:text-theme-primary transition-colors">Products</a>
+      <span>/</span>
+      <span class="accent-text">Trench Covers</span>
+    </nav>
+
+    <div class="mb-8">
+      <span class="text-xs font-mono accent-text uppercase tracking-wider">Product Guide</span>
+      <h1 class="text-4xl font-semibold text-theme-primary leading-tight mt-2 mb-4">Trench Covers & Drain Grates</h1>
+      <p class="text-lg text-theme-secondary leading-relaxed">Steel bar grating panels and frames for spanning drainage trenches and sumps. Available in foot-traffic to heavy-vehicle load ratings, plain or galvanized finish.</p>
+    </div>
+
+    <div class="mb-8 p-4 bg-theme-tertiary rounded-xl border border-theme flex items-center gap-4">
+      <div class="flex-1">
+        <p class="text-sm font-medium text-theme-primary">Check span capacity for your trench width</p>
+        <p class="text-xs text-theme-muted">Use the load capacity calculator to verify bearing bar depth vs span and load class.</p>
+      </div>
+      <a href="/tools/bar-grating-load-capacity-calculator/" class="text-sm accent-text font-semibold hover:opacity-80 transition-opacity shrink-0 whitespace-nowrap">Load Calculator →</a>
+    </div>
+
+    <div class="prose max-w-none text-theme-secondary leading-relaxed space-y-8">
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Load Class Selection</h2>
+        <div class="overflow-x-auto mt-3">
+          <table class="w-full text-sm">
+            <thead><tr class="border-b border-theme"><th class="text-left py-2 pr-4 text-theme-muted font-medium">Application</th><th class="text-right py-2 pr-4 text-theme-muted font-medium">BS 4592 Class</th><th class="text-left py-2 text-theme-muted font-medium">Typical Bearing Bar</th></tr></thead>
+            <tbody class="text-theme-secondary">
+              {[
+                ["Pedestrian foot traffic only", "Class A–B", "25×5mm @ 30mm"],
+                ["Light vehicles, forklifts up to 2.5t", "Class B–C", "30×5mm @ 30mm"],
+                ["Cars and light trucks up to 5t", "Class C–D", "40×5mm @ 30mm"],
+                ["Heavy trucks, HGVs up to 12.5t", "Class D–E", "50×6mm @ 22mm"],
+                ["Heavy industry, axle loads > 20t", "Heavy Duty", "65×6mm @ 22mm or custom"],
+              ].map(([app, cls, bb]) => (
+                <tr class="border-b border-theme/50">
+                  <td class="py-2 pr-4">{app}</td>
+                  <td class="py-2 pr-4 text-right font-mono accent-text font-semibold">{cls}</td>
+                  <td class="py-2 text-sm font-mono">{bb}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="text-xs text-theme-muted mt-2">Span and bearing bar selection must be verified for specific trench widths. Use the <a href="/tools/bar-grating-load-capacity-calculator/" class="underline">load calculator</a> or consult a structural engineer for safety-critical applications.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Standard Components</h2>
+        <ul class="list-disc pl-6 space-y-2 mt-2 text-sm">
+          <li><strong class="text-theme-primary">Grating panel</strong> — plain or serrated steel bar grating cut to trench width</li>
+          <li><strong class="text-theme-primary">Channel frame</strong> — angle iron (L50×50×5) or U-bar recess frame, cast into concrete surround</li>
+          <li><strong class="text-theme-primary">Locking brackets</strong> — anti-tilt or anti-theft bolt-down options</li>
+          <li><strong class="text-theme-primary">Lifting handles</strong> — flush T-bar or ring handle for maintenance access</li>
+          <li><strong class="text-theme-primary">Surface finish</strong> — black mill / hot-dip galvanized (most common) / stainless</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Typical Applications</h2>
+        <ul class="grid md:grid-cols-2 gap-2 mt-3 text-sm">
+          {[
+            "Industrial plant drainage channels", "Car park surface drains",
+            "Loading dock sumps", "Chemical plant bund drains",
+            "Road and highway drainage", "Airport apron drains",
+            "Food processing floor channels", "Swimming pool gutters"
+          ].map(app => (
+            <li class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full accent-bg shrink-0"></span>
+              <span class="text-theme-secondary">{app}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Order Information</h2>
+        <p>Provide trench width, cover length (per run), required load class, surface finish, and whether locking is required. Factories supply complete sets (panels + frames) or panels only. MOQ typically 5 tonnes for standard specs; custom sizes as low as 1 tonne.</p>
+        <div class="mt-4">
+          <a href="/inquiry/?product=trench-covers" class="accent-bg hover:opacity-90 on-accent text-sm font-semibold px-4 py-2 rounded-lg transition-opacity">Get a Trench Cover Quote</a>
+        </div>
+      </section>
+
+    </div>
+
+    <FaqJsonLd items={faqs.map(([q, a]) => ({ question: q, answer: a }))} inLanguage="en" />
+    <div class="mt-10 pt-8 border-t border-theme">
+      <h2 class="text-xl font-semibold text-theme-primary mb-5">Frequently Asked Questions</h2>
+      <div class="space-y-3">
+        {faqs.map(([q, a]) => (
+          <details class="card group">
+            <summary class="flex items-center justify-between cursor-pointer list-none">
+              <span class="font-medium text-theme-primary">{q}</span>
+              <svg class="w-5 h-5 text-theme-muted shrink-0 ml-4 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-3 text-sm text-theme-secondary leading-relaxed">{a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+
+  </article>
+
+</Base>

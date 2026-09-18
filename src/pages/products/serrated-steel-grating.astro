@@ -1,0 +1,152 @@
+---
+import Base from "../../layouts/Base.astro";
+import FaqJsonLd from "../../components/FaqJsonLd.astro";
+
+const faqs = [
+  ["What is serrated steel grating?", "Serrated (notched) steel grating has teeth cut into the top edge of each bearing bar. The notching increases surface friction by 30–60%, making it the preferred choice for wet, oily, or sloped surfaces."],
+  ["How much heavier is serrated grating than plain?", "Serrated grating is actually slightly lighter than plain — the notching removes a small amount of material from the bearing bar tops. The difference is typically 1–3%."],
+  ["What standards cover serrated steel grating?", "NAAMM MBG 531 uses the suffix 'I' for irregular serration (e.g. 19-W-4 I). BS 4592 classifies serrated grating under the same load classes (A–E) as plain. GB/T 12755 covers both types."],
+  ["When is serrated grating required?", "Serrated grating is typically specified for offshore platforms, food processing plants, chemical plant walkways, ramps and inclines, and any surface exposed to water, oil, or chemical splash. OSHA does not mandate serrated, but many engineering specifications do for slopes over 5°."],
+];
+---
+
+<Base title="Serrated Steel Bar Grating — Anti-Slip, Specifications & Sourcing | Anping" description="Serrated steel grating: notched-top bearing bars for anti-slip industrial walkways. Specifications, weight vs plain grating, NAAMM MBG 531 I-series, BS 4592. Source from Anping.">
+
+  <article class="max-w-4xl mx-auto px-4 py-10">
+
+    <nav class="text-xs text-theme-muted mb-6 flex items-center gap-2">
+      <a href="/" class="hover:text-theme-primary transition-colors">Home</a>
+      <span>/</span>
+      <a href="/products/" class="hover:text-theme-primary transition-colors">Products</a>
+      <span>/</span>
+      <span class="accent-text">Serrated Steel Grating</span>
+    </nav>
+
+    <div class="mb-8">
+      <span class="text-xs font-mono accent-text uppercase tracking-wider">Product Guide</span>
+      <h1 class="text-4xl font-semibold text-theme-primary leading-tight mt-2 mb-4">Serrated Steel Bar Grating</h1>
+      <p class="text-lg text-theme-secondary leading-relaxed">Anti-slip notched-top grating for wet, oily, and sloped surfaces. Preferred for offshore platforms, food processing, and chemical plant walkways.</p>
+    </div>
+
+    <div class="mb-8 p-4 bg-theme-tertiary rounded-xl border border-theme flex items-center gap-4">
+      <div class="flex-1">
+        <p class="text-sm font-medium text-theme-primary">Calculate weight for serrated grating</p>
+        <p class="text-xs text-theme-muted">Weight differs only marginally from plain — use the same calculator and subtract ~2%.</p>
+      </div>
+      <a href="/tools/steel-grating-weight-calculator/" class="text-sm accent-text font-semibold hover:opacity-80 transition-opacity shrink-0 whitespace-nowrap">Weight Calculator →</a>
+    </div>
+
+    <div class="prose max-w-none text-theme-secondary leading-relaxed space-y-8">
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">What is Serrated Grating?</h2>
+        <p>Serrated (also called notched, anti-slip, or I-series in NAAMM terminology) grating is produced by cutting regular V-shaped or rectangular teeth into the top edge of each bearing bar after welding. The serration depth is typically 3–5 mm, with teeth pitched at approximately 10 mm intervals.</p>
+        <p>The notching creates sharp edges that bite into footwear soles, gloves, and machinery surfaces, dramatically reducing slip risk in wet or contaminated environments.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Serrated vs Plain: When to Choose</h2>
+        <div class="overflow-x-auto mt-4">
+          <table class="w-full text-sm">
+            <thead><tr class="border-b border-theme"><th class="text-left py-2 pr-4 text-theme-muted font-medium">Factor</th><th class="text-right py-2 pr-4 text-theme-muted font-medium">Plain</th><th class="text-right py-2 text-theme-muted font-medium">Serrated</th></tr></thead>
+            <tbody class="text-theme-secondary">
+              {[
+                ["Surface friction", "Standard", "30–60% higher"],
+                ["Weight", "Baseline", "~1–3% lighter"],
+                ["Cost", "Baseline", "+10–20% (extra machining)"],
+                ["Cleaning", "Easy", "Slightly harder (notch accumulation)"],
+                ["Wet/oily environments", "Acceptable", "Recommended"],
+                ["Slopes > 5°", "Not recommended", "Required"],
+                ["Offshore / petrochemical", "Not typically specified", "Standard requirement"],
+              ].map(([f, p, s]) => (
+                <tr class="border-b border-theme/50">
+                  <td class="py-2 pr-4 font-medium text-theme-primary">{f}</td>
+                  <td class="py-2 pr-4 text-right">{p}</td>
+                  <td class="py-2 text-right font-medium text-theme-primary">{s}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Standard Designations</h2>
+        <div class="grid md:grid-cols-3 gap-4 mt-4">
+          {[
+            { std: "NAAMM MBG 531", desc: "I-series suffix: 19-W-4 I (irregular serration), 19-W-4 R (regular). The 'I' suffix is the most common for industrial use." },
+            { std: "BS 4592", desc: "Serrated grating is specified as 'anti-slip serrated top' under the same load classes A–E. No separate designation code." },
+            { std: "GB/T 12755-2008", desc: "Type G (锯齿型 — serrated). All standard bearing bar sizes available in serrated form." },
+          ].map(({ std, desc }) => (
+            <div class="card">
+              <div class="font-mono text-sm accent-text font-semibold mb-1">{std}</div>
+              <p class="text-sm text-theme-secondary">{desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Applications</h2>
+        <ul class="grid md:grid-cols-2 gap-2 mt-3 text-sm">
+          {[
+            "Offshore oil & gas platforms", "Chemical plant walkways",
+            "Food processing facilities", "Ramps and inclined surfaces",
+            "Car park drainage grates", "Marine decking",
+            "Brewery and distillery floors", "Stair treads (serrated standard)"
+          ].map(app => (
+            <li class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full accent-bg shrink-0"></span>
+              <span class="text-theme-secondary">{app}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Sourcing from Anping</h2>
+        <p>Anping factories produce serrated grating using cold-milling or press-cutting of bearing bar tops post-welding. MOQ is typically 5–10 tonnes for standard specs; custom serration patterns available from 20 t+. Lead time 20–30 days FOB Tianjin/Qingdao.</p>
+        <div class="mt-4 flex flex-wrap gap-3">
+          <a href="/inquiry/?product=serrated-steel-grating" class="accent-bg hover:opacity-90 on-accent text-sm font-semibold px-4 py-2 rounded-lg transition-opacity">Get a Quote</a>
+          <a href="/blog/plain-vs-serrated-steel-grating/" class="border border-theme text-sm font-semibold px-4 py-2 rounded-lg hover:border-theme-primary transition-colors text-theme-primary">Plain vs Serrated Guide →</a>
+        </div>
+      </section>
+
+    </div>
+
+    <FaqJsonLd items={faqs.map(([q, a]) => ({ question: q, answer: a }))} inLanguage="en" />
+    <div class="mt-10 pt-8 border-t border-theme">
+      <h2 class="text-xl font-semibold text-theme-primary mb-5">Frequently Asked Questions</h2>
+      <div class="space-y-3">
+        {faqs.map(([q, a]) => (
+          <details class="card group">
+            <summary class="flex items-center justify-between cursor-pointer list-none">
+              <span class="font-medium text-theme-primary">{q}</span>
+              <svg class="w-5 h-5 text-theme-muted shrink-0 ml-4 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-3 text-sm text-theme-secondary leading-relaxed">{a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+
+    <div class="mt-8 pt-8 border-t border-theme">
+      <div class="grid md:grid-cols-3 gap-4">
+        <a href="/products/plain-steel-grating/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">Product</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">Plain Steel Grating</h3>
+        </a>
+        <a href="/products/grating-stair-treads/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">Product</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">Grating Stair Treads</h3>
+        </a>
+        <a href="/tools/open-area-percentage-calculator/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">Tool 03</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">Open Area Calculator</h3>
+        </a>
+      </div>
+    </div>
+
+  </article>
+
+</Base>

@@ -1,0 +1,23 @@
+---
+interface Props {
+  items: { question: string; answer: string }[];
+  inLanguage?: string;
+}
+
+const { items, inLanguage = "en" } = Astro.props;
+
+const json = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  inLanguage,
+  mainEntity: items.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(json)} />

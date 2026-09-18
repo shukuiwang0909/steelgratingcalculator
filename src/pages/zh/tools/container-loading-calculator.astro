@@ -1,0 +1,354 @@
+---
+import Base from "../../../layouts/Base.astro";
+---
+
+<Base title="集装箱装载计算器 — 20尺/40尺集装箱容量计算 | MeshCalculator" description="计算丝网产品装入20尺或40尺集装箱的数量。优化编织网卷、焊接网片、石笼网的装载方案。" lang="zh">
+  <section class="max-w-4xl mx-auto px-4 py-12">
+    <h1 class="text-3xl font-bold text-theme-primary">集装箱装载计算器</h1>
+    <p class="mt-2 text-theme-secondary">估算丝网产品装入标准集装箱的数量。高效规划您的出口货运。</p>
+
+    <div class="mt-8 bg-theme-card border border-theme rounded-xl p-6 grid md:grid-cols-2 gap-6">
+      <!-- Input Section -->
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-semibold mb-1 text-theme-primary" for="containerType">集装箱类型</label>
+          <select id="containerType" class="w-full border border-theme rounded-lg px-3 py-2 bg-theme-card text-theme-primary">
+            <option value="20ft">20尺标准箱 (5.90 × 2.35 × 2.39 m)</option>
+            <option value="40ft" selected>40尺标准箱 (12.03 × 2.35 × 2.39 m)</option>
+            <option value="40hq">40尺高柜 (12.03 × 2.35 × 2.70 m)</option>
+            <option value="20reefer">20尺冷藏箱</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold mb-1 text-theme-primary" for="productType">产品类型</label>
+          <select id="productType" class="w-full border border-theme rounded-lg px-3 py-2 bg-theme-card text-theme-primary">
+            <option value="woven_rolls">编织网（卷状）</option>
+            <option value="welded_panels">焊接网片</option>
+            <option value="fence_panels">护栏网片（3D/2D）</option>
+            <option value="gabions">石笼网（平铺打包）</option>
+            <option value="custom">自定义尺寸</option>
+          </select>
+        </div>
+
+        <!-- Product Dimensions -->
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-sm font-semibold mb-1 text-theme-primary" for="productLength">长度 (m)</label>
+            <input id="productLength" type="number" step="0.01" value="30" class="w-full border border-theme rounded-lg px-3 py-2 bg-theme-card text-theme-primary" />
+          </div>
+          <div>
+            <label class="block text-sm font-semibold mb-1 text-theme-primary" for="productWidth">宽度 (m)</label>
+            <input id="productWidth" type="number" step="0.01" value="1" class="w-full border border-theme rounded-lg px-3 py-2 bg-theme-card text-theme-primary" />
+          </div>
+          <div>
+            <label class="block text-sm font-semibold mb-1 text-theme-primary" for="productHeight">高度 (m)</label>
+            <input id="productHeight" type="number" step="0.01" value="0.5" class="w-full border border-theme rounded-lg px-3 py-2 bg-theme-card text-theme-primary" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold mb-1 text-theme-primary" for="unitWeight">单件重量 (kg)</label>
+          <input id="unitWeight" type="number" step="0.1" value="50" class="w-full border border-theme rounded-lg px-3 py-2 bg-theme-card text-theme-primary" />
+          <p class="text-xs text-theme-muted mt-1">每卷/片/个的重量</p>
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold mb-1 text-theme-primary" for="totalQty">总数量</label>
+          <input id="totalQty" type="number" step="1" value="100" class="w-full border border-theme rounded-lg px-3 py-2 bg-theme-card text-theme-primary" />
+          <p class="text-xs text-theme-muted mt-1">您需要运输的总件数</p>
+        </div>
+      </div>
+
+      <!-- Results Section -->
+      <div class="bg-theme-tertiary rounded-lg p-6 flex flex-col justify-center border border-theme">
+        <p class="text-sm font-semibold text-theme-muted uppercase tracking-wide">装载结果</p>
+        
+        <div class="mt-4 space-y-3">
+          <div class="flex justify-between items-center">
+            <span class="text-theme-secondary">装载容量:</span>
+            <span id="capacityResult" class="font-semibold text-theme-primary">—</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-theme-secondary">利用率:</span>
+            <span id="utilizationResult" class="font-semibold text-theme-primary">—</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-theme-secondary">总重量:</span>
+            <span id="weightResult" class="font-semibold text-theme-primary">—</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-theme-secondary">需集装箱数:</span>
+            <span id="containersResult" class="font-bold text-2xl accent-text">—</span>
+          </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="mt-6">
+          <div class="w-full bg-theme rounded-full h-2">
+            <div id="progressBar" class="accent-bg h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+          </div>
+          <p id="progressText" class="text-xs text-theme-muted mt-1 text-center">0% 满</p>
+        </div>
+
+        <!-- Warning -->
+        <div id="warningBox" class="mt-4 p-3 border border-theme rounded-lg bg-theme-card hidden">
+          <p class="text-sm text-theme-primary" id="warningText"></p>
+        </div>
+
+        <div class="mt-6 flex flex-wrap gap-2">
+          <button id="copyBtn" class="accent-bg text-sm font-semibold px-4 py-2 rounded-lg hover:opacity-90 transition-opacity on-accent">复制结果</button>
+          <button id="shareBtn" class="border border-theme text-sm font-semibold px-4 py-2 rounded-lg hover:border-theme-muted transition-colors text-theme-primary">分享链接</button>
+          <button id="printBtn" class="border border-theme text-sm font-semibold px-4 py-2 rounded-lg hover:border-theme-muted transition-colors text-theme-primary">打印</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Container Specifications Reference -->
+    <h2 class="text-xl font-bold text-theme-primary mt-12">集装箱规格参数</h2>
+    <div class="overflow-x-auto mt-4">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr>
+            <th class="text-left px-3 py-2 border border-theme bg-theme-tertiary text-theme-primary font-semibold">类型</th>
+            <th class="text-left px-3 py-2 border border-theme bg-theme-tertiary text-theme-primary font-semibold">内部尺寸 (长×宽×高)</th>
+            <th class="text-left px-3 py-2 border border-theme bg-theme-tertiary text-theme-primary font-semibold">容量 (立方米)</th>
+            <th class="text-left px-3 py-2 border border-theme bg-theme-tertiary text-theme-primary font-semibold">最大载重 (kg)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-theme">
+            <td class="px-3 py-2 border border-theme text-theme-primary">20尺标准箱</td>
+            <td class="px-3 py-2 border border-theme text-theme-secondary">5.90 × 2.35 × 2.39 m</td>
+            <td class="px-3 py-2 border border-theme text-theme-secondary">33.2 立方米</td>
+            <td class="px-3 py-2 border border-theme text-theme-secondary">28,200 kg</td>
+          </tr>
+          <tr class="border-b border-theme">
+            <td class="px-3 py-2 border border-theme text-theme-primary">40尺标准箱</td>
+            <td class="px-3 py-2 border border-theme text-theme-secondary">12.03 × 2.35 × 2.39 m</td>
+            <td class="px-3 py-2 border border-theme text-theme-secondary">67.7 立方米</td>
+            <td class="px-3 py-2 border border-theme text-theme-secondary">26,700 kg</td>
+          </tr>
+          <tr class="border-b border-theme">
+            <td class="px-3 py-2 border border-theme text-theme-primary">40尺高柜</td>
+            <td class="px-3 py-2 border border-theme text-theme-secondary">12.03 × 2.35 × 2.70 m</td>
+            <td class="px-3 py-2 border border-theme text-theme-secondary">76.3 立方米</td>
+            <td class="px-3 py-2 border border-theme text-theme-secondary">26,500 kg</td>
+          </tr>
+          <tr class="border-b border-theme">
+            <td class="px-3 py-2 border border-theme text-theme-primary">20尺冷藏箱</td>
+            <td class="px-3 py-2 border border-theme text-theme-secondary">5.44 × 2.29 × 2.27 m</td>
+            <td class="px-3 py-2 border border-theme text-theme-secondary">28.3 立方米</td>
+            <td class="px-3 py-2 border border-theme text-theme-secondary">27,400 kg</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Loading Tips -->
+    <div class="mt-8 bg-theme-tertiary border border-theme rounded-xl p-6">
+      <h3 class="font-bold text-theme-primary mb-3">丝网装载技巧</h3>
+      <ul class="space-y-2 text-sm text-theme-secondary">
+        <li><strong class="text-theme-primary">编织网卷：</strong>竖直放置（立着放）以最大化空间。40尺集装箱通常可装80-100卷标准30米长度的网卷。</li>
+        <li><strong class="text-theme-primary">焊接网片：</strong>平放堆叠。使用垫片防止弯曲。最大堆叠高度取决于网片线径。</li>
+        <li><strong class="text-theme-primary">护栏网片：</strong>通常平放带包装装载。3D网片比2D网片占用更多空间。</li>
+        <li><strong class="text-theme-primary">石笼网：</strong>平铺打包的石笼网空间效率高。捆绑牢固以防移位。</li>
+        <li><strong class="text-theme-primary">重量限制：</strong>务必同时检查体积和重量限制。丝网产品较重——可能在装满集装箱之前就达到重量上限。</li>
+      </ul>
+    </div>
+
+    <!-- CTA -->
+    <div class="mt-8 bg-theme-tertiary border border-theme rounded-xl p-6">
+      <p class="font-semibold text-theme-primary">需要运输报价？</p>
+      <a href="/zh/inquiry/" class="accent-text font-semibold">联系安平工厂获取FOB/CIF报价 →</a>
+    </div>
+  </section>
+
+  <script>
+    interface ContainerSpec {
+      name: string;
+      length: number;
+      width: number;
+      height: number;
+      capacityCbm: number;
+      maxWeight: number;
+    }
+
+    const containers: Record<string, ContainerSpec> = {
+      "20ft": { name: "20尺标准箱", length: 5.90, width: 2.35, height: 2.39, capacityCbm: 33.2, maxWeight: 28200 },
+      "40ft": { name: "40尺标准箱", length: 12.03, width: 2.35, height: 2.39, capacityCbm: 67.7, maxWeight: 26700 },
+      "40hq": { name: "40尺高柜", length: 12.03, width: 2.35, height: 2.70, capacityCbm: 76.3, maxWeight: 26500 },
+      "20reefer": { name: "20尺冷藏箱", length: 5.44, width: 2.29, height: 2.27, capacityCbm: 28.3, maxWeight: 27400 }
+    };
+
+    // Product type presets
+    const productPresets: Record<string, { length: number; width: number; height: number; weight: number }> = {
+      "woven_rolls": { length: 30, width: 1, height: 0.5, weight: 50 },
+      "welded_panels": { length: 2.4, width: 1.2, height: 0.05, weight: 15 },
+      "fence_panels": { length: 2.5, width: 2.0, height: 0.1, weight: 25 },
+      "gabions": { length: 2.0, width: 1.0, height: 0.5, weight: 20 },
+      "custom": { length: 1, width: 1, height: 1, weight: 10 }
+    };
+
+    const $ = (id: string) => document.getElementById(id) as HTMLInputElement | HTMLSelectElement;
+
+    function calc() {
+      const containerType = ($("containerType") as HTMLSelectElement).value;
+      const container = containers[containerType];
+
+      const productType = ($("productType") as HTMLSelectElement).value;
+      const preset = productPresets[productType];
+
+      const pLength = parseFloat($("productLength").value) || preset.length;
+      const pWidth = parseFloat($("productWidth").value) || preset.width;
+      const pHeight = parseFloat($("productHeight").value) || preset.height;
+      const unitWeight = parseFloat($("unitWeight").value) || preset.weight;
+      const totalQty = parseInt($("totalQty").value) || 0;
+
+      if (!container || totalQty <= 0) {
+        resetResults();
+        return;
+      }
+
+      // Calculate product volume
+      const productVolume = pLength * pWidth * pHeight;
+      const totalProductVolume = productVolume * totalQty;
+      const totalWeight = unitWeight * totalQty;
+
+      // Calculate how many fit by volume
+      const byVolume = Math.floor(container.capacityCbm / productVolume);
+
+      // Calculate how many fit by weight
+      const byWeight = Math.floor(container.maxWeight / unitWeight);
+
+      // Actual capacity is the limiting factor
+      const actualCapacity = Math.min(byVolume, byWeight);
+      const containersNeeded = Math.ceil(totalQty / actualCapacity);
+
+      // Utilization
+      const volumeUtil = Math.min(100, (totalProductVolume / container.capacityCbm) * 100);
+      const weightUtil = Math.min(100, (totalWeight / container.maxWeight) * 100);
+      const limitingFactor = byVolume < byWeight ? "体积" : "重量";
+
+      // Display results
+      $("capacityResult").textContent = `${actualCapacity.toLocaleString()} 件`;
+      $("utilizationResult").textContent = `体积: ${volumeUtil.toFixed(1)}% | 重量: ${weightUtil.toFixed(1)}%`;
+      $("weightResult").textContent = `${totalWeight.toLocaleString()} kg (${(totalWeight / 1000).toFixed(1)} 吨)`;
+      $("containersResult").textContent = containersNeeded.toString();
+
+      // Progress bar (use the higher utilization)
+      const maxUtil = Math.max(volumeUtil, weightUtil);
+      const progressBar = document.getElementById("progressBar");
+      const progressText = document.getElementById("progressText");
+      if (progressBar && progressText) {
+        progressBar.style.width = Math.min(100, maxUtil) + "%";
+        progressText.textContent = `${maxUtil.toFixed(1)}% 满 (${limitingFactor}限制)`;
+      }
+
+      // Warnings
+      const warningBox = document.getElementById("warningBox");
+      const warningText = document.getElementById("warningText");
+      if (warningBox && warningText) {
+        if (totalWeight > container.maxWeight * containersNeeded) {
+          warningBox.classList.remove("hidden");
+          warningText.textContent = "⚠️ 总重量超过集装箱容量。请考虑分批运输。";
+        } else if (volumeUtil > 90) {
+          warningBox.classList.remove("hidden");
+          warningText.textContent = "⚠️ 集装箱快满了。请预留5-10%空间用于装卸。";
+        } else {
+          warningBox.classList.add("hidden");
+        }
+      }
+    }
+
+    function resetResults() {
+      $("capacityResult").textContent = "—";
+      $("utilizationResult").textContent = "—";
+      $("weightResult").textContent = "—";
+      $("containersResult").textContent = "—";
+      const progressBar = document.getElementById("progressBar");
+      const progressText = document.getElementById("progressText");
+      if (progressBar) progressBar.style.width = "0%";
+      if (progressText) progressText.textContent = "0% 满";
+    }
+
+    function copyResult() {
+      const text = `集装箱装载计算
+集装箱: ${containers[($("containerType") as HTMLSelectElement).value].name}
+产品: ${($("productType") as HTMLSelectElement).value}
+尺寸: ${$("productLength").value}m × ${$("productWidth").value}m × ${$("productHeight").value}m
+单件重量: ${$("unitWeight").value} kg
+数量: ${$("totalQty").value} 件
+
+结果:
+- 每箱容量: ${$("capacityResult").textContent}
+- 利用率: ${$("utilizationResult").textContent}
+- 总重量: ${$("weightResult").textContent}
+- 需集装箱数: ${$("containersResult").textContent}
+
+由 MeshCalculator 集装箱装载计算器计算`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById("copyBtn");
+        if (!btn) return;
+        const original = btn.textContent;
+        btn.textContent = "已复制!";
+        setTimeout(() => { btn.textContent = original; }, 2000);
+      });
+    }
+
+    function shareLink() {
+      const params = new URLSearchParams({
+        container: ($("containerType") as HTMLSelectElement).value,
+        product: ($("productType") as HTMLSelectElement).value,
+        length: $("productLength").value,
+        width: $("productWidth").value,
+        height: $("productHeight").value,
+        weight: $("unitWeight").value,
+        qty: $("totalQty").value
+      });
+      const url = window.location.origin + window.location.pathname + "?" + params.toString();
+      
+      navigator.clipboard.writeText(url).then(() => {
+        const btn = document.getElementById("shareBtn");
+        if (!btn) return;
+        const original = btn.textContent;
+        btn.textContent = "链接已复制!";
+        setTimeout(() => { btn.textContent = original; }, 2000);
+      });
+    }
+
+    // Event listeners
+    $("containerType").addEventListener("change", calc);
+    $("productType").addEventListener("change", () => {
+      const productType = ($("productType") as HTMLSelectElement).value;
+      const preset = productPresets[productType];
+      $("productLength").value = preset.length.toString();
+      $("productWidth").value = preset.width.toString();
+      $("productHeight").value = preset.height.toString();
+      $("unitWeight").value = preset.weight.toString();
+      calc();
+    });
+
+    ["productLength", "productWidth", "productHeight", "unitWeight", "totalQty"].forEach(id => {
+      $(id).addEventListener("input", calc);
+    });
+
+    $("copyBtn").addEventListener("click", copyResult);
+    $("shareBtn").addEventListener("click", shareLink);
+    $("printBtn").addEventListener("click", () => window.print());
+
+    // Load from URL params
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get("container")) ($("containerType") as HTMLSelectElement).value = urlParams.get("container")!;
+    if (urlParams.get("product")) ($("productType") as HTMLSelectElement).value = urlParams.get("product")!;
+    if (urlParams.get("length")) $("productLength").value = urlParams.get("length")!;
+    if (urlParams.get("width")) $("productWidth").value = urlParams.get("width")!;
+    if (urlParams.get("height")) $("productHeight").value = urlParams.get("height")!;
+    if (urlParams.get("weight")) $("unitWeight").value = urlParams.get("weight")!;
+    if (urlParams.get("qty")) $("totalQty").value = urlParams.get("qty")!;
+
+    // Initialize
+    calc();
+  </script>
+</Base>

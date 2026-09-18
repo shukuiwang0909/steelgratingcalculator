@@ -1,0 +1,209 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Dark theme (default) */
+  --color-ink-950: #07090c;
+  --color-ink-900: #0c0f14;
+  --color-ink-850: #11151c;
+  --color-ink-800: #171c26;
+  --color-ink-700: #232a38;
+  --color-ink-600: #323b4d;
+  --color-ink-500: #4a5568;
+  --color-ink-400: #6b7686;
+  --color-ink-300: #94a0b3;
+  --color-ink-200: #c3cbd8;
+  --color-ink-100: #dde3ec;
+  --color-ink-50: #f2f5f9;
+
+  --color-amber-400: #fbbf24;
+  --color-amber-500: #f59e0b;
+  --color-amber-600: #d97706;
+
+  --color-steel-50: #f2f5f9;
+  --color-steel-100: #dde3ec;
+  --color-steel-200: #c3cbd8;
+  --color-steel-300: #94a0b3;
+  --color-steel-400: #6b7686;
+  --color-steel-500: #4a5568;
+  --color-steel-600: #323b4d;
+  --color-steel-700: #232a38;
+  --color-steel-800: #171c26;
+  --color-steel-900: #0c0f14;
+  --color-steel-950: #07090c;
+
+  --color-accent-400: #fbbf24;
+  --color-accent-500: #f59e0b;
+  --color-accent-600: #d97706;
+
+  --font-sans: "Inter", "Noto Sans SC", system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* On Chinese pages, skip Inter for CJK entirely and use Noto Sans SC first */
+html[lang="zh"] body {
+  font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+html[lang="zh"] h1, html[lang="zh"] h2, html[lang="zh"] h3,
+html[lang="zh"] h4, html[lang="zh"] th, html[lang="zh"] td,
+html[lang="zh"] button, html[lang="zh"] a, html[lang="zh"] p,
+html[lang="zh"] span, html[lang="zh"] li, html[lang="zh"] strong {
+  font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+/* CSS Variables for theming */
+:root {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f1f5f9;
+  --bg-card: #ffffff;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --border-color: #e2e8f0;
+  --accent: #f59e0b;
+  --accent-hover: #d97706;
+  --accent-light: rgba(245, 158, 11, 0.1);
+}
+
+.dark {
+  --bg-primary: #07090c;
+  --bg-secondary: #0c0f14;
+  --bg-tertiary: #11151c;
+  --bg-card: #171c26;
+  --text-primary: #f2f5f9;
+  --text-secondary: #c3cbd8;
+  --text-muted: #6b7686;
+  --border-color: #232a38;
+  --accent: #fbbf24;
+  --accent-hover: #f59e0b;
+  --accent-light: rgba(251, 191, 36, 0.1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  @apply antialiased;
+  font-feature-settings: "cv01", "ss03";
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Subtle ambient background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse at 20% 80%, rgba(245, 158, 11, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(245, 158, 11, 0.02) 0%, transparent 50%);
+}
+
+.dark body::before {
+  background:
+    radial-gradient(ellipse at 20% 80%, rgba(251, 191, 36, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(251, 191, 36, 0.02) 0%, transparent 50%);
+}
+
+/* Grid pattern overlay */
+.tech-grid {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(245, 158, 11, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245, 158, 11, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+}
+
+.dark .tech-grid {
+  background-image:
+    linear-gradient(rgba(251, 191, 36, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(251, 191, 36, 0.02) 1px, transparent 1px);
+}
+
+.prose table {
+  @apply w-full text-sm border-collapse;
+}
+
+.prose th {
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+  @apply text-left px-3 py-2 border font-semibold;
+  border-color: var(--border-color);
+}
+
+.prose td {
+  color: var(--text-secondary);
+  @apply px-3 py-2 border;
+  border-color: var(--border-color);
+}
+
+/* Card component */
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  @apply rounded-xl p-6;
+  transition: all 0.3s;
+}
+
+.card:hover {
+  border-color: var(--text-muted);
+  box-shadow: 0 0 30px rgba(245, 158, 11, 0.05);
+  transform: translateY(-2px);
+}
+
+.dark .card:hover {
+  box-shadow: 0 0 30px rgba(251, 191, 36, 0.05);
+}
+
+/* Glass effect */
+.glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.dark .glass {
+  background: rgba(17, 21, 28, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Top accent line */
+.card-accent::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 20px;
+  right: 20px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.3), transparent);
+}
+
+.dark .card-accent::before {
+  background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.3), transparent);
+}
+
+/* Utility classes using CSS variables */
+.bg-theme-primary { background-color: var(--bg-primary); }
+.bg-theme-secondary { background-color: var(--bg-secondary); }
+.bg-theme-tertiary { background-color: var(--bg-tertiary); }
+.bg-theme-card { background-color: var(--bg-card); }
+.text-theme-primary { color: var(--text-primary); }
+.text-theme-secondary { color: var(--text-secondary); }
+.text-theme-muted { color: var(--text-muted); }
+.border-theme { border-color: var(--border-color); }
+.accent-text { color: var(--accent); }
+.accent-bg { background-color: var(--accent); }
+.accent-border { border-color: var(--accent); }
+/* Dark foreground for text sitting on accent-bg (unlayered rule beats Tailwind utilities) */
+.on-accent { color: #07090c; }

@@ -1,0 +1,320 @@
+---
+import Base from "../../layouts/Base.astro";
+import FaqJsonLd from "../../components/FaqJsonLd.astro";
+import zh from "../../i18n/zh.json";
+
+const t = zh;
+
+const faqs = [
+  ["所有计算工具都免费吗？", "是的。SteelGratingCalculator 上的所有计算工具完全免费，无需注册，无需登录，永久免费使用。"],
+  ["计算工具使用哪些标准？", "重量计算器基于 GB/T 12755-2008 钢密度值。承载能力计算器支持 NAAMM MBG 531（美国标准）和 BS 4592（英国/英联邦标准），可一键切换。"],
+  ["钢格栅的标准面板尺寸是多少？", "中国出口最常用的标准尺寸是 6000 × 1000 mm。美国规格遵循 NAAMM 标准（通常为 24\" × 96\"）。澳大利亚规格通常使用 1200 mm 宽度。"],
+  ["重量计算的准确度如何？", "标准焊接钢格栅的典型精度为 ±2–3%。对于锯齿型扁钢、扭方钢横杆或端部绑条，请额外预留 2–5% 误差。"],
+  ["最常见的扁钢规格是什么？", "25×5mm 扁钢 + 30mm 间距是全球中型工业用途的标准规格。轻型用 20×3mm，重型用 40×5mm 或 50×5mm。"],
+  ["安平工厂是否出口到我所在的国家？", "是的。安平工厂定期通过海运整柜和拼箱出口至欧洲、中东、东南亚、澳大利亚和北美。大多数工厂可提供商业发票、装箱单和检测证书。"],
+  ["你们参与交易吗？", "不参与。我们将买家与安平工厂直接对接。所有谈判、合同、付款和质量控制均由您与工厂直接完成。"],
+  ["镀锌钢格栅比普通钢格栅重吗？", "是的。热镀锌工艺会使面板重量增加约 3–5%（ISO 1461 标准镀锌量 610 g/m²）。FOB 价格计算器包含镀锌重量切换选项。"],
+];
+---
+<Base
+  title="钢格栅计算工具 — 免费重量与承载能力计算 | 安平工厂直供"
+  description="免费钢格栅重量、承载能力、开孔率及集装箱装载计算工具。符合 NAAMM MBG 531 及 BS 4592 标准。直接对接中国安平工厂，无中间商。"
+  lang="zh"
+>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-theme-tertiary via-theme-primary to-theme-primary"></div>
+    <div class="absolute inset-0 opacity-30" style="background-image: linear-gradient(rgba(245,158,11,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(245,158,11,0.03) 1px, transparent 1px); background-size: 40px 40px;"></div>
+    <div class="relative max-w-6xl mx-auto px-4 py-16 md:py-24">
+      <div class="grid lg:grid-cols-2 gap-12 items-start">
+
+        <!-- Left -->
+        <div class="flex flex-col justify-center">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-theme accent-border accent-text text-xs font-mono uppercase tracking-wider mb-6 self-start">
+            <span class="w-1.5 h-1.5 rounded-full accent-bg animate-pulse"></span>
+            {t.hero.badge}
+          </div>
+          <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-theme-primary leading-[1.1]">
+            {t.hero.title1}<br />
+            <span class="accent-text">{t.hero.title2}</span><br />
+            {t.hero.title3}
+          </h1>
+          <p class="mt-5 text-base text-theme-secondary leading-relaxed max-w-lg">{t.hero.subtitle}</p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="#tools" class="inline-flex items-center gap-2 accent-bg hover:opacity-90 font-semibold px-6 py-3 rounded-lg transition-all hover:shadow-[0_0_30px_rgba(245,158,11,0.3)] on-accent text-sm">
+              {t.hero.tryCalculator}
+            </a>
+            <a href="/zh/inquiry/" class="inline-flex items-center gap-2 border border-theme hover:border-theme-muted text-theme-secondary hover:text-theme-primary px-6 py-3 rounded-lg transition-all text-sm">
+              {t.hero.browseFactories}
+            </a>
+          </div>
+          <div class="mt-10 flex flex-wrap gap-8">
+            <div class="text-center">
+              <p class="text-2xl font-bold text-theme-primary">6</p>
+              <p class="text-xs text-theme-muted mt-1">{t.hero.stats.tools}</p>
+            </div>
+            <div class="text-center">
+              <p class="text-2xl font-bold text-theme-primary">1,700+</p>
+              <p class="text-xs text-theme-muted mt-1">{t.hero.stats.factories}</p>
+            </div>
+            <div class="text-center">
+              <p class="text-2xl font-bold text-theme-primary">100%</p>
+              <p class="text-xs text-theme-muted mt-1">{t.hero.stats.free}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Inline calculator -->
+        <div class="bg-theme-card border border-theme rounded-xl p-6 shadow-xl">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-base font-semibold text-theme-primary">钢格栅重量计算器</h2>
+            <span class="text-xs font-mono text-theme-muted">GB/T 12755</span>
+          </div>
+          <div class="space-y-3">
+            <div class="grid grid-cols-3 gap-3">
+              <div>
+                <label class="block text-xs font-semibold mb-1 text-theme-muted uppercase" for="zh-h-height">扁钢高度</label>
+                <select id="zh-h-height" class="w-full border border-theme rounded-lg px-2 py-2 bg-theme-secondary text-theme-primary text-sm">
+                  <option value="20">20 mm</option><option value="25" selected>25 mm</option><option value="30">30 mm</option>
+                  <option value="35">35 mm</option><option value="40">40 mm</option><option value="50">50 mm</option>
+                  <option value="65">65 mm</option><option value="75">75 mm</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold mb-1 text-theme-muted uppercase" for="zh-h-thick">厚度</label>
+                <select id="zh-h-thick" class="w-full border border-theme rounded-lg px-2 py-2 bg-theme-secondary text-theme-primary text-sm">
+                  <option value="3">3 mm</option><option value="4">4 mm</option><option value="5" selected>5 mm</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold mb-1 text-theme-muted uppercase" for="zh-h-pitch">扁钢间距</label>
+                <select id="zh-h-pitch" class="w-full border border-theme rounded-lg px-2 py-2 bg-theme-secondary text-theme-primary text-sm">
+                  <option value="11">11 mm</option><option value="15">15 mm</option><option value="22">22 mm</option>
+                  <option value="30" selected>30 mm</option><option value="34">34 mm</option><option value="40">40 mm</option>
+                  <option value="60">60 mm</option><option value="76">76 mm</option>
+                </select>
+              </div>
+            </div>
+            <div class="grid grid-cols-3 gap-3">
+              <div>
+                <label class="block text-xs font-semibold mb-1 text-theme-muted uppercase" for="zh-h-xbtype">横杆类型</label>
+                <select id="zh-h-xbtype" class="w-full border border-theme rounded-lg px-2 py-2 bg-theme-secondary text-theme-primary text-sm">
+                  <option value="round" selected>圆钢</option><option value="square">扭方钢</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold mb-1 text-theme-muted uppercase" for="zh-h-xbsize">横杆尺寸</label>
+                <select id="zh-h-xbsize" class="w-full border border-theme rounded-lg px-2 py-2 bg-theme-secondary text-theme-primary text-sm">
+                  <option value="5">5 mm</option><option value="6" selected>6 mm</option><option value="8">8 mm</option><option value="10">10 mm</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold mb-1 text-theme-muted uppercase" for="zh-h-xbpitch">横杆间距</label>
+                <select id="zh-h-xbpitch" class="w-full border border-theme rounded-lg px-2 py-2 bg-theme-secondary text-theme-primary text-sm">
+                  <option value="25">25 mm</option><option value="50" selected>50 mm</option><option value="76.2">76 mm</option><option value="100">100 mm</option>
+                </select>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold mb-1 text-theme-muted uppercase" for="zh-h-mat">材质</label>
+                <select id="zh-h-mat" class="w-full border border-theme rounded-lg px-2 py-2 bg-theme-secondary text-theme-primary text-sm">
+                  <option value="7.85" selected>普通钢</option><option value="7.93">不锈钢 304</option>
+                  <option value="7.98">不锈钢 316</option><option value="2.7">铝合金</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold mb-1 text-theme-muted uppercase" for="zh-h-qty">数量（块）</label>
+                <input id="zh-h-qty" type="number" min="1" value="10" class="w-full border border-theme rounded-lg px-2 py-2 bg-theme-secondary text-theme-primary text-sm" />
+              </div>
+            </div>
+          </div>
+          <div class="mt-4 bg-theme-tertiary rounded-lg p-4 border border-theme">
+            <div class="grid grid-cols-3 gap-2 text-center">
+              <div>
+                <p class="text-xs text-theme-muted mb-1">每平方米</p>
+                <p id="zh-h-m2" class="text-xl font-bold text-theme-primary font-mono">—</p>
+              </div>
+              <div class="border-l border-r border-theme">
+                <p class="text-xs text-theme-muted mb-1">每块面板</p>
+                <p id="zh-h-panel" class="text-xl font-bold accent-text font-mono">—</p>
+                <p class="text-xs text-theme-muted">6000×1000mm</p>
+              </div>
+              <div>
+                <p class="text-xs text-theme-muted mb-1">合计重量</p>
+                <p id="zh-h-total" class="text-xl font-bold text-theme-primary font-mono">—</p>
+              </div>
+            </div>
+          </div>
+          <div class="mt-3 flex gap-2">
+            <a href="/zh/tools/steel-grating-weight-calculator/" class="flex-1 text-center accent-bg hover:opacity-90 text-xs font-semibold px-3 py-2 rounded-lg transition-opacity on-accent">
+              完整计算工具 →
+            </a>
+            <a href="/zh/inquiry/" class="flex-1 text-center border border-theme hover:accent-border text-xs font-semibold px-3 py-2 rounded-lg transition-colors text-theme-primary hover:accent-text">
+              获取报价
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Tools Grid -->
+  <section id="tools" class="relative py-20">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-center gap-3 mb-10">
+        <div class="h-px flex-1 bg-gradient-to-r from-transparent via-theme-muted to-transparent"></div>
+        <span class="accent-text font-mono text-xs uppercase tracking-widest">{t.tools.badge}</span>
+        <div class="h-px flex-1 bg-gradient-to-r from-transparent via-theme-muted to-transparent"></div>
+      </div>
+      <h2 class="text-3xl font-semibold text-theme-primary text-center mb-12">{t.tools.title}</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {t.tools.items.map((tool, i) => {
+          const hrefs = [
+            "/zh/tools/steel-grating-weight-calculator/",
+            "/zh/tools/bar-grating-load-capacity-calculator/",
+            "/zh/tools/open-area-percentage-calculator/",
+          ];
+          const nums = ["01","02","03"];
+          return (
+            <a href={hrefs[i] ?? "/zh/tools/steel-grating-weight-calculator/"} class="card card-accent relative group">
+              <div class="flex items-start justify-between mb-4">
+                <span class="text-xs font-mono text-theme-muted opacity-50">{nums[i]}</span>
+                <span class="text-xs font-mono accent-text uppercase tracking-wider opacity-70">{tool.tag}</span>
+              </div>
+              <h3 class="font-semibold text-base text-theme-primary mb-2 group-hover:text-theme-secondary transition-colors">{tool.title}</h3>
+              <p class="text-sm text-theme-secondary leading-relaxed">{tool.desc}</p>
+              <div class="mt-4 flex items-center gap-1 text-sm accent-text opacity-80 group-hover:opacity-100 transition-opacity">
+                {tool.open}
+                <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="relative py-20 bg-theme-secondary">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-center gap-3 mb-10">
+        <div class="h-px flex-1 bg-gradient-to-r from-transparent via-theme-muted to-transparent"></div>
+        <span class="accent-text font-mono text-xs uppercase tracking-widest">{t.process.badge}</span>
+        <div class="h-px flex-1 bg-gradient-to-r from-transparent via-theme-muted to-transparent"></div>
+      </div>
+      <h2 class="text-3xl font-semibold text-theme-primary text-center mb-12">{t.process.title}</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        {t.process.steps.map((step) => (
+          <div class="card h-full">
+            <span class="text-5xl font-bold text-theme-muted font-mono opacity-30">{step.num}</span>
+            <h3 class="font-semibold text-lg text-theme-primary mt-4 mb-2">{step.title}</h3>
+            <p class="text-sm text-theme-secondary leading-relaxed">{step.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Anping -->
+  <section class="relative py-20">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <div class="flex items-center gap-3 mb-10">
+        <div class="h-px flex-1 bg-gradient-to-r from-transparent via-theme-muted to-transparent"></div>
+        <span class="accent-text font-mono text-xs uppercase tracking-widest">{t.whyAnping.badge}</span>
+        <div class="h-px flex-1 bg-gradient-to-r from-transparent via-theme-muted to-transparent"></div>
+      </div>
+      <h2 class="text-3xl font-semibold text-theme-primary mb-6">{t.whyAnping.title}</h2>
+      <p class="text-theme-secondary leading-relaxed max-w-2xl mx-auto">{t.whyAnping.desc}</p>
+      <div class="mt-6 flex flex-wrap justify-center gap-4">
+        <a href="/zh/anping-steel-grating/" class="inline-flex items-center gap-2 accent-text hover:opacity-80 font-medium transition-opacity">
+          {t.whyAnping.learnMore}
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+        <span class="text-theme-muted">·</span>
+        <a href="https://meshcalculator.com" class="inline-flex items-center gap-2 text-theme-secondary hover:text-theme-primary transition-colors text-sm" target="_blank" rel="noopener">
+          同样采购钢丝网？
+          <span class="accent-text font-semibold">MeshCalculator.com →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <FaqJsonLd items={faqs.map(([q, a]) => ({ question: q, answer: a }))} inLanguage="zh" />
+  <section class="relative py-20 bg-theme-secondary">
+    <div class="max-w-3xl mx-auto px-4">
+      <div class="flex items-center gap-3 mb-10">
+        <div class="h-px flex-1 bg-gradient-to-r from-transparent via-theme-muted to-transparent"></div>
+        <span class="accent-text font-mono text-xs uppercase tracking-widest">{t.faq.badge}</span>
+        <div class="h-px flex-1 bg-gradient-to-r from-transparent via-theme-muted to-transparent"></div>
+      </div>
+      <h2 class="text-3xl font-semibold text-theme-primary text-center mb-12">{t.faq.title}</h2>
+      <div class="space-y-3">
+        {faqs.map(([q, a]) => (
+          <details class="card group">
+            <summary class="flex items-center justify-between cursor-pointer list-none">
+              <span class="font-medium text-theme-primary">{q}</span>
+              <svg class="w-5 h-5 text-theme-muted shrink-0 ml-4 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-3 text-sm text-theme-secondary leading-relaxed">{a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="relative py-20">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="card card-accent relative overflow-hidden text-center py-16">
+        <div class="absolute inset-0 bg-gradient-to-br from-theme-tertiary via-transparent to-transparent"></div>
+        <div class="relative">
+          <h2 class="text-3xl font-semibold text-theme-primary mb-4">{t.cta.title}</h2>
+          <p class="text-theme-secondary max-w-xl mx-auto mb-8">{t.cta.desc}</p>
+          <a href="/zh/inquiry/" class="inline-flex items-center gap-2 accent-bg hover:opacity-90 font-semibold px-8 py-4 rounded-lg transition-all hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] on-accent">
+            {t.cta.button}
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Base>
+
+<script>
+  (function () {
+    function getNum(id: string): number {
+      const el = document.getElementById(id) as HTMLInputElement | HTMLSelectElement;
+      return parseFloat(el?.value || '0') || 0;
+    }
+    function zhHeroCalc(): void {
+      const H = getNum('zh-h-height');
+      const T = getNum('zh-h-thick');
+      const P_bb = getNum('zh-h-pitch');
+      const xbType = (document.getElementById('zh-h-xbtype') as HTMLSelectElement).value;
+      const d = getNum('zh-h-xbsize');
+      const P_xb = getNum('zh-h-xbpitch');
+      const rho = getNum('zh-h-mat');
+      const qty = Math.max(1, Math.round(getNum('zh-h-qty')));
+      const w_bb = (H * T * rho) / P_bb;
+      const w_xb = xbType === 'round' ? (Math.PI / 4 * d * d * rho) / P_xb : (d * d * rho) / P_xb;
+      const w_m2 = w_bb + w_xb;
+      const w_panel = w_m2 * 6.0 * 1.0;
+      const w_total = w_panel * qty;
+      const m2El = document.getElementById('zh-h-m2');
+      const panelEl = document.getElementById('zh-h-panel');
+      const totalEl = document.getElementById('zh-h-total');
+      if (m2El) m2El.textContent = w_m2.toFixed(2) + ' kg/m²';
+      if (panelEl) panelEl.textContent = w_panel.toFixed(1) + ' kg';
+      if (totalEl) totalEl.textContent = w_total >= 1000 ? (w_total/1000).toFixed(2) + ' t' : w_total.toFixed(0) + ' kg';
+    }
+    document.querySelectorAll('#zh-h-height,#zh-h-thick,#zh-h-pitch,#zh-h-xbtype,#zh-h-xbsize,#zh-h-xbpitch,#zh-h-mat,#zh-h-qty')
+      .forEach(el => el.addEventListener('change', zhHeroCalc));
+    document.getElementById('zh-h-qty')?.addEventListener('input', zhHeroCalc);
+    zhHeroCalc();
+  })();
+</script>

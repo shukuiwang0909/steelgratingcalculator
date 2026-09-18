@@ -1,0 +1,349 @@
+---
+import Base from "../../layouts/Base.astro";
+
+const title = "Steel Grating Container Loading Calculator — 20ft/40ft FCL Planning | Free";
+const description = "Calculate how many steel grating panels fit in a 20ft GP, 40ft GP, or 40ft HC container. Optimize your shipment. Free container loading calculator for bar grating sourcing.";
+---
+<Base title={title} description={description} lang="en">
+
+  <section class="max-w-6xl mx-auto px-4 py-10">
+
+    <nav class="text-xs text-theme-muted mb-6 flex items-center gap-2">
+      <a href="/" class="hover:text-theme-primary transition-colors">Home</a>
+      <span>/</span>
+      <a href="/tools/container-loading-calculator/" class="accent-text">Container Loading Calculator</a>
+    </nav>
+
+    <div class="mb-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-theme accent-border accent-text text-xs font-mono uppercase tracking-wider mb-4">
+        <span class="w-1.5 h-1.5 rounded-full accent-bg animate-pulse"></span>
+        Tool 06 · Shipping Optimization
+      </div>
+      <h1 class="text-3xl font-semibold text-theme-primary mb-3">Steel Grating Container Loading Calculator</h1>
+      <p class="text-theme-secondary max-w-2xl leading-relaxed">
+        Calculate exactly how many steel grating panels fit in a 20ft GP, 40ft GP, or 40ft HC container. Checks both volume (stacking height) and weight payload to find the actual limiting factor for your shipment.
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-[1fr_400px] gap-6">
+
+      <!-- LEFT: Inputs -->
+      <div class="space-y-5">
+
+        <!-- Container type -->
+        <div class="card">
+          <h2 class="text-sm font-semibold text-theme-primary uppercase tracking-wide mb-4 flex items-center gap-2">
+            <span class="w-1 h-4 accent-bg rounded-full"></span>
+            Container Type
+          </h2>
+          <div class="grid grid-cols-3 gap-3">
+            {[
+              { id: "c-20gp", value: "20gp", label: "20' GP", sub: "5,900×2,350×2,390mm\nPayload: 27,600 kg" },
+              { id: "c-40gp", value: "40gp", label: "40' GP", sub: "12,000×2,350×2,390mm\nPayload: 26,500 kg" },
+              { id: "c-40hc", value: "40hc", label: "40' HC", sub: "12,000×2,350×2,700mm\nPayload: 26,500 kg" },
+            ].map((c) => (
+              <label class="cursor-pointer">
+                <input type="radio" name="container" value={c.value} class="sr-only peer" id={c.id} checked={c.value === "40gp" ? true : undefined} />
+                <div class="p-3 rounded-xl border-2 border-theme peer-checked:accent-border peer-checked:bg-theme-tertiary transition-all text-center">
+                  <p class="font-bold text-theme-primary text-base">{c.label}</p>
+                  <p class="text-xs text-theme-muted mt-1 whitespace-pre-line">{c.sub}</p>
+                </div>
+              </label>
+            ))}
+          </div>
+        </div>
+
+        <!-- Panel dimensions -->
+        <div class="card">
+          <h2 class="text-sm font-semibold text-theme-primary uppercase tracking-wide mb-4 flex items-center gap-2">
+            <span class="w-1 h-4 accent-bg rounded-full"></span>
+            Panel Dimensions & Weight
+          </h2>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div>
+              <label class="block text-xs font-semibold mb-1 text-theme-muted uppercase tracking-wide" for="p-length">Panel Length (mm)</label>
+              <select id="p-length" style="width:100%;border:1px solid var(--border-color);border-radius:.5rem;padding:.5rem .75rem;background-color:var(--bg-secondary);color:var(--text-primary);font-size:.875rem;outline:none;">
+                <option value="6000" selected>6000 mm (standard)</option>
+                <option value="3000">3000 mm</option>
+                <option value="2400">2400 mm</option>
+                <option value="1200">1200 mm</option>
+                <option value="custom">Custom</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold mb-1 text-theme-muted uppercase tracking-wide" for="p-length-custom">Custom Length (mm)</label>
+              <input id="p-length-custom" type="number" min="500" max="12000" value="6000" style="width:100%;border:1px solid var(--border-color);border-radius:.5rem;padding:.5rem .75rem;background-color:var(--bg-secondary);color:var(--text-primary);font-size:.875rem;outline:none;" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold mb-1 text-theme-muted uppercase tracking-wide" for="p-width">Panel Width (mm)</label>
+              <select id="p-width" style="width:100%;border:1px solid var(--border-color);border-radius:.5rem;padding:.5rem .75rem;background-color:var(--bg-secondary);color:var(--text-primary);font-size:.875rem;outline:none;">
+                <option value="1000" selected>1000 mm (standard)</option>
+                <option value="1200">1200 mm</option>
+                <option value="500">500 mm</option>
+                <option value="610">610 mm (24")</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold mb-1 text-theme-muted uppercase tracking-wide" for="bb-height-c">Bearing Bar H (mm)</label>
+              <select id="bb-height-c" style="width:100%;border:1px solid var(--border-color);border-radius:.5rem;padding:.5rem .75rem;background-color:var(--bg-secondary);color:var(--text-primary);font-size:.875rem;outline:none;">
+                <option value="20">20 mm</option>
+                <option value="25" selected>25 mm</option>
+                <option value="30">30 mm</option>
+                <option value="35">35 mm</option>
+                <option value="40">40 mm</option>
+                <option value="50">50 mm</option>
+              </select>
+              <p class="mt-1 text-xs text-theme-muted">Affects stack height per layer</p>
+            </div>
+          </div>
+          <div class="mt-4 grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold mb-1 text-theme-muted uppercase tracking-wide" for="panel-weight-c">Panel Weight (kg)</label>
+              <input id="panel-weight-c" type="number" min="1" step="0.1" placeholder="From weight calculator" style="width:100%;border:1px solid var(--border-color);border-radius:.5rem;padding:.5rem .75rem;background-color:var(--bg-secondary);color:var(--text-primary);font-size:.875rem;outline:none;" />
+              <p class="mt-1 text-xs text-theme-muted">Leave blank to auto-estimate</p>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold mb-1 text-theme-muted uppercase tracking-wide" for="packing-gap">Gap Between Layers (mm)</label>
+              <input id="packing-gap" type="number" min="0" max="100" value="5" style="width:100%;border:1px solid var(--border-color);border-radius:.5rem;padding:.5rem .75rem;background-color:var(--bg-secondary);color:var(--text-primary);font-size:.875rem;outline:none;" />
+              <p class="mt-1 text-xs text-theme-muted">Timber/dunnage between layers</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Container specs reference -->
+        <div class="card bg-theme-tertiary text-xs">
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-theme-muted mb-3">Container Internal Dimensions Reference</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-theme-secondary">
+              <thead>
+                <tr class="text-theme-muted">
+                  <th class="text-left py-1 pr-4">Type</th>
+                  <th class="text-right py-1 pr-4">Int. Length</th>
+                  <th class="text-right py-1 pr-4">Int. Width</th>
+                  <th class="text-right py-1 pr-4">Int. Height</th>
+                  <th class="text-right py-1">Max Payload</th>
+                </tr>
+              </thead>
+              <tbody class="font-mono">
+                <tr><td class="py-1 pr-4">20' GP</td><td class="text-right pr-4">5,900 mm</td><td class="text-right pr-4">2,350 mm</td><td class="text-right pr-4">2,390 mm</td><td class="text-right">27,600 kg</td></tr>
+                <tr><td class="py-1 pr-4">40' GP</td><td class="text-right pr-4">12,000 mm</td><td class="text-right pr-4">2,350 mm</td><td class="text-right pr-4">2,390 mm</td><td class="text-right">26,500 kg</td></tr>
+                <tr><td class="py-1 pr-4">40' HC</td><td class="text-right pr-4">12,000 mm</td><td class="text-right pr-4">2,350 mm</td><td class="text-right pr-4">2,700 mm</td><td class="text-right">26,500 kg</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-theme-muted mt-3">Panels are loaded flat (bearing bars vertical). Stack height per layer = bearing bar height + dunnage gap. Orientation optimized for maximum panels per layer.</p>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: Results -->
+      <div>
+        <div class="card sticky top-20 space-y-3">
+          <div class="flex items-center justify-between mb-2">
+            <h2 class="text-sm font-semibold text-theme-primary uppercase tracking-wide">Loading Results</h2>
+            <span id="c-type-label" class="text-xs font-mono accent-text">40' GP</span>
+          </div>
+
+          <div id="warn-c" class="hidden p-3 bg-amber-500/10 border border-amber-500/30 rounded-lg">
+            <p id="warn-c-text" class="text-xs text-amber-400"></p>
+          </div>
+
+          <div class="p-4 accent-bg rounded-lg">
+            <p class="text-xs uppercase tracking-wide mb-1 on-accent opacity-80">Panels Per Container</p>
+            <p id="c-panels" class="text-3xl font-bold on-accent font-mono">—</p>
+            <p id="c-panels-sub" class="text-xs on-accent opacity-70 mt-0.5"></p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div class="p-3 bg-theme-tertiary rounded-lg border border-theme">
+              <p class="text-xs text-theme-muted uppercase tracking-wide mb-1">Total Grating Area</p>
+              <p id="c-area" class="text-xl font-bold text-theme-primary font-mono">—</p>
+            </div>
+            <div class="p-3 bg-theme-tertiary rounded-lg border border-theme">
+              <p class="text-xs text-theme-muted uppercase tracking-wide mb-1">Total Weight</p>
+              <p id="c-weight" class="text-xl font-bold text-theme-primary font-mono">—</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div class="p-3 bg-theme-tertiary rounded-lg border border-theme">
+              <p class="text-xs text-theme-muted uppercase tracking-wide mb-1">Weight Utilization</p>
+              <p id="c-weight-pct" class="text-lg font-bold text-theme-primary font-mono">—</p>
+            </div>
+            <div class="p-3 bg-theme-tertiary rounded-lg border border-theme">
+              <p class="text-xs text-theme-muted uppercase tracking-wide mb-1">Layers × Per Layer</p>
+              <p id="c-layers" class="text-lg font-bold text-theme-primary font-mono">—</p>
+            </div>
+          </div>
+
+          <div class="p-3 bg-theme-tertiary rounded-lg border border-theme">
+            <p class="text-xs text-theme-muted uppercase tracking-wide mb-1">Limiting Factor</p>
+            <p id="c-limiting" class="text-base font-bold text-theme-primary">—</p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2 mt-2">
+            <button id="btn-copy-c" class="flex items-center justify-center gap-2 border border-theme rounded-lg py-2 text-sm text-theme-secondary hover:text-theme-primary transition-all">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+              Copy Result
+            </button>
+            <a href="/inquiry/" class="flex items-center justify-center gap-2 accent-bg rounded-lg py-2 text-sm font-semibold on-accent hover:opacity-90 transition-opacity">
+              Get a Quote
+            </a>
+          </div>
+
+          <p id="c-copy-fb" class="hidden text-xs text-center text-green-400">Copied!</p>
+
+          <!-- Cross-site link -->
+          <div class="mt-4 p-3 bg-theme-tertiary rounded-lg border border-theme text-xs">
+            <p class="text-theme-secondary">Also loading wire mesh? <a href="https://meshcalculator.com" target="_blank" rel="noopener" class="accent-text font-medium hover:opacity-80">MeshCalculator.com →</a></p>
+          </div>
+
+          <p class="text-xs text-theme-muted pt-3 border-t border-theme">
+            Actual loading may vary by packing method, dunnage, and shipper requirements. Verify with your freight forwarder.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Related tools -->
+    <div class="mt-12 pt-8 border-t border-theme">
+      <h2 class="text-lg font-semibold text-theme-primary mb-4">Related Tools</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        <a href="/tools/steel-grating-weight-calculator/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">Tool 01</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">Weight Calculator</h3>
+          <p class="text-sm text-theme-secondary mt-1">Get panel weight to use here.</p>
+        </a>
+        <a href="/tools/panel-count-estimator/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">Tool 04</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">Panel Count Estimator</h3>
+          <p class="text-sm text-theme-secondary mt-1">Total panels needed for a project area.</p>
+        </a>
+        <a href="/tools/fob-price-calculator/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">Tool 05</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">FOB Price Calculator</h3>
+          <p class="text-sm text-theme-secondary mt-1">Convert RMB factory price to USD/EUR.</p>
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+</Base>
+
+<script>
+(function () {
+  const CONTAINERS: Record<string, { L: number; W: number; H: number; payload: number; label: string }> = {
+    '20gp': { L: 5900, W: 2350, H: 2390, payload: 27600, label: "20' GP" },
+    '40gp': { L: 12000, W: 2350, H: 2390, payload: 26500, label: "40' GP" },
+    '40hc': { L: 12000, W: 2350, H: 2700, payload: 26500, label: "40' HC" },
+  };
+
+  function getNum(id: string, fallback = 0): number {
+    const el = document.getElementById(id) as HTMLInputElement | HTMLSelectElement | null;
+    const v = parseFloat(el?.value || '');
+    return isNaN(v) ? fallback : v;
+  }
+
+  function calc(): void {
+    const cType = (document.querySelector('input[name="container"]:checked') as HTMLInputElement)?.value || '40gp';
+    const c = CONTAINERS[cType];
+    if (!c) return;
+
+    // Panel dimensions
+    const pLenSel = (document.getElementById('p-length') as HTMLSelectElement).value;
+    const panelL = pLenSel === 'custom' ? getNum('p-length-custom', 6000) : parseFloat(pLenSel);
+    const panelW = getNum('p-width', 1000);
+    const bbH = getNum('bb-height-c', 25);
+    const gap = getNum('packing-gap', 5);
+    const panelWeightInput = getNum('panel-weight-c', 0);
+
+    // Auto-estimate panel weight if not provided (25×5 @30mm carbon steel default)
+    const panelArea = (panelL / 1000) * (panelW / 1000);
+    const autoWeightM2 = ((25 * 5 * 7.85) / 30) + ((Math.PI / 4 * 36 * 7.85) / 50); // ~37 kg/m²
+    const panelWeight = panelWeightInput > 0 ? panelWeightInput : autoWeightM2 * panelArea;
+
+    // Panels per layer (fit long side of panel along container length)
+    const panelsAlongLength = Math.floor(c.L / panelL);
+    const panelsAlongWidth = Math.floor(c.W / panelW);
+    let panelsPerLayer = panelsAlongLength * panelsAlongWidth;
+
+    // If no fit, try rotating 90°
+    if (panelsPerLayer === 0) {
+      const rotL = Math.floor(c.L / panelW);
+      const rotW = Math.floor(c.W / panelL);
+      panelsPerLayer = rotL * rotW;
+    }
+
+    const stackHeightPerLayer = bbH + gap; // mm
+    const maxLayers = Math.floor(c.H / stackHeightPerLayer);
+
+    // Volume limit
+    const maxByVolume = panelsPerLayer * maxLayers;
+    // Weight limit
+    const maxByWeight = Math.floor(c.payload / panelWeight);
+
+    const actualPanels = Math.min(maxByVolume, maxByWeight);
+    const totalArea = actualPanels * panelArea;
+    const totalWeight = actualPanels * panelWeight;
+    const weightPct = (totalWeight / c.payload) * 100;
+
+    const limiting = maxByVolume <= maxByWeight ? 'Volume governs (stacking height)' : 'Weight governs (payload limit)';
+    const actualLayers = Math.min(maxLayers, Math.ceil(actualPanels / panelsPerLayer));
+
+    // Warnings
+    const warnings: string[] = [];
+    if (panelL > c.L) warnings.push(`⚠ Panel length (${panelL}mm) exceeds container length (${c.L}mm). Consider shorter panels.`);
+    if (panelsPerLayer === 0) warnings.push('⚠ Panels cannot fit in this container with the selected dimensions.');
+    if (weightPct > 100) warnings.push('⚠ Calculated load exceeds container payload. Reduce quantity.');
+
+    // DOM updates
+    const set = (id: string, v: string) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+    set('c-type-label', c.label);
+    set('c-panels', actualPanels > 0 ? String(actualPanels) : '—');
+    set('c-panels-sub', `${panelsPerLayer} panels/layer × ${actualLayers} layers`);
+    set('c-area', actualPanels > 0 ? totalArea.toFixed(1) + ' m²' : '—');
+    set('c-weight', actualPanels > 0 ? (totalWeight / 1000).toFixed(2) + ' t' : '—');
+    set('c-weight-pct', actualPanels > 0 ? weightPct.toFixed(1) + '%' : '—');
+    set('c-layers', actualPanels > 0 ? `${actualLayers} × ${panelsPerLayer}` : '—');
+    set('c-limiting', actualPanels > 0 ? limiting : '—');
+
+    const warnBox = document.getElementById('warn-c');
+    const warnText = document.getElementById('warn-c-text');
+    if (warnBox && warnText) {
+      if (warnings.length > 0) {
+        warnBox.classList.remove('hidden');
+        warnText.textContent = warnings.join(' ');
+      } else {
+        warnBox.classList.add('hidden');
+      }
+    }
+  }
+
+  document.querySelectorAll('input[name="container"]').forEach(el => el.addEventListener('change', calc));
+  document.querySelectorAll('#p-length,#p-width,#bb-height-c,#packing-gap').forEach(el => el.addEventListener('change', calc));
+  document.querySelectorAll('#p-length-custom,#panel-weight-c').forEach(el => el.addEventListener('input', calc));
+
+  document.getElementById('btn-copy-c')?.addEventListener('click', () => {
+    const panels = document.getElementById('c-panels')?.textContent || '';
+    const area = document.getElementById('c-area')?.textContent || '';
+    const weight = document.getElementById('c-weight')?.textContent || '';
+    const limiting = document.getElementById('c-limiting')?.textContent || '';
+    const cType = (document.querySelector('input[name="container"]:checked') as HTMLInputElement)?.value || '40gp';
+    const c = CONTAINERS[cType];
+    const text = [
+      `Container Loading: ${c.label}`,
+      `Panels: ${panels} | Area: ${area} | Weight: ${weight}`,
+      `Limiting factor: ${limiting}`,
+      `SteelGratingCalculator.com`,
+    ].join('\n');
+    navigator.clipboard.writeText(text).then(() => {
+      const fb = document.getElementById('c-copy-fb');
+      if (fb) { fb.classList.remove('hidden'); setTimeout(() => fb.classList.add('hidden'), 2500); }
+    });
+  });
+
+  calc();
+})();
+</script>

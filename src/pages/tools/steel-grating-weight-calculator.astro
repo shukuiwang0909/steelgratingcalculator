@@ -1,0 +1,482 @@
+---
+import Base from "../../layouts/Base.astro";
+
+const title = "Steel Grating Weight Calculator — kg/m² per Panel & Order Weight | Free";
+const description = "Free steel grating weight calculator. Input bearing bar height, thickness, pitch, cross bar size and material to get exact kg/m², panel weight and order weight. GB/T 12755 compliant.";
+---
+<Base title={title} description={description} lang="en">
+
+  <section class="max-w-6xl mx-auto px-4 py-10">
+
+    <!-- Breadcrumb -->
+    <nav class="text-xs text-theme-muted mb-6 flex items-center gap-2">
+      <a href="/" class="hover:text-theme-primary transition-colors">Home</a>
+      <span>/</span>
+      <a href="/tools/steel-grating-weight-calculator/" class="accent-text">Steel Grating Weight Calculator</a>
+    </nav>
+
+    <div class="mb-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-theme accent-border accent-text text-xs font-mono uppercase tracking-wider mb-4">
+        <span class="w-1.5 h-1.5 rounded-full accent-bg"></span>
+        Tool 01 · GB/T 12755
+      </div>
+      <h1 class="text-3xl font-semibold text-theme-primary mb-3">Steel Grating Weight Calculator</h1>
+      <p class="text-theme-secondary max-w-2xl leading-relaxed">
+        Calculate the weight of any steel bar grating specification — per m², per panel, and total order weight. Supports carbon steel, stainless 304/316, and aluminum. Bearing bar and cross bar independently calculated.
+      </p>
+    </div>
+
+    <!-- Main 2-col layout -->
+    <div class="grid lg:grid-cols-[1fr_380px] gap-6">
+
+      <!-- LEFT: Inputs -->
+      <div class="space-y-5">
+
+        <!-- Bearing Bars -->
+        <div class="card">
+          <h2 class="text-sm font-semibold text-theme-primary uppercase tracking-wide mb-4 flex items-center gap-2">
+            <span class="w-1 h-4 accent-bg rounded-full"></span>
+            Bearing Bars
+          </h2>
+          <div class="grid grid-cols-3 gap-4">
+            <div>
+              <label class="label" for="bb-height">Height (mm)</label>
+              <select id="bb-height" class="select">
+                <option value="20">20 mm</option>
+                <option value="25" selected>25 mm</option>
+                <option value="30">30 mm</option>
+                <option value="35">35 mm</option>
+                <option value="40">40 mm</option>
+                <option value="50">50 mm</option>
+                <option value="65">65 mm</option>
+                <option value="75">75 mm</option>
+              </select>
+              <p class="input-hint">Bar depth / height H</p>
+            </div>
+            <div>
+              <label class="label" for="bb-thickness">Thickness (mm)</label>
+              <select id="bb-thickness" class="select">
+                <option value="3">3 mm</option>
+                <option value="4">4 mm</option>
+                <option value="5" selected>5 mm</option>
+              </select>
+              <p class="input-hint">Web thickness T</p>
+            </div>
+            <div>
+              <label class="label" for="bb-pitch">Pitch c/c (mm)</label>
+              <select id="bb-pitch" class="select">
+                <option value="11">11 mm</option>
+                <option value="15">15 mm</option>
+                <option value="22">22 mm</option>
+                <option value="30" selected>30 mm</option>
+                <option value="34">34 mm</option>
+                <option value="40">40 mm</option>
+                <option value="41">41 mm (1-5/8")</option>
+                <option value="60">60 mm</option>
+                <option value="76">76 mm (3")</option>
+              </select>
+              <p class="input-hint">Centre-to-centre spacing</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross Bars -->
+        <div class="card">
+          <h2 class="text-sm font-semibold text-theme-primary uppercase tracking-wide mb-4 flex items-center gap-2">
+            <span class="w-1 h-4 accent-bg rounded-full"></span>
+            Cross Bars
+          </h2>
+          <div class="grid grid-cols-3 gap-4">
+            <div>
+              <label class="label" for="xb-type">Type</label>
+              <select id="xb-type" class="select">
+                <option value="round" selected>Round bar</option>
+                <option value="square">Twisted square</option>
+              </select>
+              <p class="input-hint">Round = π/4·d²·ρ, Square = d²·ρ</p>
+            </div>
+            <div>
+              <label class="label" for="xb-size">Size (mm)</label>
+              <select id="xb-size" class="select">
+                <option value="5">5 mm</option>
+                <option value="6" selected>6 mm</option>
+                <option value="8">8 mm</option>
+                <option value="10">10 mm</option>
+                <option value="12">12 mm</option>
+              </select>
+              <p class="input-hint">Diameter (round) or side (square)</p>
+            </div>
+            <div>
+              <label class="label" for="xb-pitch">Pitch (mm)</label>
+              <select id="xb-pitch" class="select">
+                <option value="25">25 mm (1")</option>
+                <option value="50" selected>50 mm (2")</option>
+                <option value="76.2">76.2 mm (3")</option>
+                <option value="100">100 mm (4")</option>
+              </select>
+              <p class="input-hint">Centre-to-centre spacing</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Material & Panel -->
+        <div class="card">
+          <h2 class="text-sm font-semibold text-theme-primary uppercase tracking-wide mb-4 flex items-center gap-2">
+            <span class="w-1 h-4 accent-bg rounded-full"></span>
+            Material & Panel Size
+          </h2>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div>
+              <label class="label" for="material">Material</label>
+              <select id="material" class="select">
+                <option value="7.85" selected>Carbon Steel</option>
+                <option value="7.93">Stainless SS 304</option>
+                <option value="7.98">Stainless SS 316</option>
+                <option value="2.7">Aluminum 6061</option>
+              </select>
+              <p class="input-hint">Density g/cm³</p>
+            </div>
+            <div>
+              <label class="label" for="panel-length">Panel Length (mm)</label>
+              <input id="panel-length" type="number" min="100" max="12000" value="6000" class="input" />
+              <p class="input-hint">Default 6000mm export</p>
+            </div>
+            <div>
+              <label class="label" for="panel-width">Panel Width (mm)</label>
+              <input id="panel-width" type="number" min="100" max="3000" value="1000" class="input" />
+              <p class="input-hint">Default 1000mm width</p>
+            </div>
+            <div>
+              <label class="label" for="quantity">Quantity (panels)</label>
+              <input id="quantity" type="number" min="1" value="10" class="input" />
+              <p class="input-hint">Number of panels ordered</p>
+            </div>
+          </div>
+          <!-- Galvanized toggle -->
+          <div class="mt-4 flex items-center gap-3 p-3 bg-theme-tertiary rounded-lg border border-theme">
+            <input id="galvanized" type="checkbox" class="w-4 h-4 accent-amber-500" />
+            <div>
+              <label for="galvanized" class="text-sm font-medium text-theme-primary cursor-pointer">Hot-Dip Galvanized (+4%)</label>
+              <p class="text-xs text-theme-muted">Adds ~610 g/m² zinc coating per ISO 1461</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formula reference -->
+        <div class="card bg-theme-tertiary">
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-theme-muted mb-3">Formula Reference</h3>
+          <div class="grid md:grid-cols-2 gap-3 text-xs font-mono text-theme-secondary">
+            <div>
+              <p class="text-theme-muted mb-1">Bearing Bar (kg/m²):</p>
+              <p class="accent-text">W_bb = H × T × ρ / P_bb</p>
+            </div>
+            <div>
+              <p class="text-theme-muted mb-1">Cross Bar — Round (kg/m²):</p>
+              <p class="accent-text">W_xb = π/4 × d² × ρ / P_xb</p>
+            </div>
+            <div>
+              <p class="text-theme-muted mb-1">Cross Bar — Twisted Square:</p>
+              <p class="accent-text">W_xb = d² × ρ / P_xb</p>
+            </div>
+            <div>
+              <p class="text-theme-muted mb-1">Total weight:</p>
+              <p class="accent-text">W = W_bb + W_xb (kg/m²)</p>
+            </div>
+          </div>
+          <p class="text-xs text-theme-muted mt-3">H, T, d in mm; P in mm; ρ in g/cm³ = kg/dm³. Convert: W_bb = (H/1000 × T/1000 × ρ × 1000) / (P_bb/1000) = H × T × ρ / P_bb.</p>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: Results -->
+      <div class="space-y-4">
+        <div class="card sticky top-20">
+          <div class="flex items-center justify-between mb-5">
+            <h2 class="text-sm font-semibold text-theme-primary uppercase tracking-wide">Results</h2>
+            <span id="calc-standard" class="text-xs font-mono text-theme-muted">GB/T 12755</span>
+          </div>
+
+          <!-- Main results -->
+          <div class="space-y-3">
+            <div class="p-3 bg-theme-tertiary rounded-lg border border-theme">
+              <p class="text-xs text-theme-muted uppercase tracking-wide mb-1">Bearing Bar contribution</p>
+              <p id="result-bb" class="text-lg font-bold text-theme-primary font-mono">—</p>
+            </div>
+            <div class="p-3 bg-theme-tertiary rounded-lg border border-theme">
+              <p class="text-xs text-theme-muted uppercase tracking-wide mb-1">Cross Bar contribution</p>
+              <p id="result-xb" class="text-lg font-bold text-theme-primary font-mono">—</p>
+            </div>
+            <div class="p-4 accent-bg rounded-lg">
+              <p class="text-xs uppercase tracking-wide mb-1 on-accent opacity-80">Total Weight per m²</p>
+              <p id="result-per-m2" class="text-3xl font-bold on-accent font-mono">—</p>
+            </div>
+            <div class="p-3 bg-theme-tertiary rounded-lg border border-theme">
+              <p class="text-xs text-theme-muted uppercase tracking-wide mb-1">Weight per Panel</p>
+              <p id="result-per-panel" class="text-xl font-bold accent-text font-mono">—</p>
+              <p id="panel-dims" class="text-xs text-theme-muted mt-0.5">6000 × 1000 mm</p>
+            </div>
+            <div id="galv-row" class="hidden p-3 bg-theme-tertiary rounded-lg border border-theme">
+              <p class="text-xs text-theme-muted uppercase tracking-wide mb-1">Galvanized Weight per m²</p>
+              <p id="result-galv" class="text-lg font-bold text-theme-primary font-mono">—</p>
+            </div>
+            <div class="p-4 bg-theme-tertiary rounded-lg border-2 border-theme">
+              <p class="text-xs text-theme-muted uppercase tracking-wide mb-1">Total Order Weight</p>
+              <p id="result-total" class="text-2xl font-bold text-theme-primary font-mono">—</p>
+              <p id="result-qty-label" class="text-xs text-theme-muted mt-0.5"></p>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="mt-5 grid grid-cols-2 gap-2">
+            <button id="btn-copy" class="flex items-center justify-center gap-2 border border-theme rounded-lg py-2 text-sm text-theme-secondary hover:text-theme-primary hover:border-theme-muted transition-all">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+              Copy Result
+            </button>
+            <button id="btn-share" class="flex items-center justify-center gap-2 border border-theme rounded-lg py-2 text-sm text-theme-secondary hover:text-theme-primary hover:border-theme-muted transition-all">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+              Share Link
+            </button>
+            <button id="btn-print" class="flex items-center justify-center gap-2 border border-theme rounded-lg py-2 text-sm text-theme-secondary hover:text-theme-primary hover:border-theme-muted transition-all">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+              Print / Save PDF
+            </button>
+            <a id="btn-inquiry" href="/inquiry/" class="flex items-center justify-center gap-2 accent-bg rounded-lg py-2 text-sm font-semibold on-accent hover:opacity-90 transition-opacity">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              Get a Quote
+            </a>
+          </div>
+
+          <p id="copy-feedback" class="hidden text-xs text-center text-green-400 mt-2">Copied to clipboard!</p>
+
+          <div class="mt-5 pt-4 border-t border-theme">
+            <p class="text-xs text-theme-muted">
+              All results are theoretical estimates (±2–3%). Verify with your qualified engineer before specifying. Galvanized weight adds ~610 g/m² per ISO 1461.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Related guides -->
+    <div class="mt-12 pt-8 border-t border-theme">
+      <h2 class="text-lg font-semibold text-theme-primary mb-6">Related Tools & Guides</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        <a href="/tools/bar-grating-load-capacity-calculator/" class="card card-accent group">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-xs font-mono accent-text uppercase tracking-wider">Tool 02</span>
+          </div>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mb-1">Bar Grating Load Capacity Calculator</h3>
+          <p class="text-sm text-theme-secondary">NAAMM MBG 531 + BS 4592. Import bearing bar spec from this calculator.</p>
+        </a>
+        <a href="/tools/open-area-percentage-calculator/" class="card card-accent group">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-xs font-mono accent-text uppercase tracking-wider">Tool 03</span>
+          </div>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mb-1">Open Area Percentage Calculator</h3>
+          <p class="text-sm text-theme-secondary">Calculate drainage and ventilation open area % from bar pitch.</p>
+        </a>
+        <a href="/charts/grating-weight-chart/" class="card card-accent group">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-xs font-mono accent-text uppercase tracking-wider">Chart</span>
+          </div>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mb-1">Grating Weight Quick Reference</h3>
+          <p class="text-sm text-theme-secondary">kg/m² for the 20 most common bearing bar + pitch combinations.</p>
+        </a>
+      </div>
+
+      <!-- Cross-site link -->
+      <div class="mt-6 p-4 bg-theme-tertiary rounded-xl border border-theme flex items-center gap-4">
+        <div class="w-10 h-10 rounded-lg accent-bg flex items-center justify-center shrink-0">
+          <svg class="w-5 h-5 on-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+        </div>
+        <div class="flex-1">
+          <p class="text-sm font-medium text-theme-primary">Also importing wire mesh?</p>
+          <p class="text-xs text-theme-muted">Calculate woven or welded wire mesh weight on our sister site.</p>
+        </div>
+        <a href="https://meshcalculator.com" target="_blank" rel="noopener" class="text-sm accent-text font-semibold hover:opacity-80 transition-opacity shrink-0">
+          MeshCalculator.com →
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+</Base>
+
+<script>
+(function () {
+  const $ = (id: string) => document.getElementById(id) as HTMLElement;
+
+  function getNum(id: string): number {
+    const el = document.getElementById(id) as HTMLInputElement | HTMLSelectElement;
+    return parseFloat(el?.value || '0') || 0;
+  }
+
+  function calc(): void {
+    const H = getNum('bb-height');         // mm
+    const T = getNum('bb-thickness');      // mm
+    const P_bb = getNum('bb-pitch');       // mm
+    const xbType = (document.getElementById('xb-type') as HTMLSelectElement).value;
+    const d = getNum('xb-size');           // mm
+    const P_xb = getNum('xb-pitch');       // mm
+    const rho = getNum('material');        // g/cm³ = kg/dm³
+    const L = getNum('panel-length');      // mm
+    const W = getNum('panel-width');       // mm
+    const qty = Math.max(1, Math.round(getNum('quantity')));
+    const galv = (document.getElementById('galvanized') as HTMLInputElement).checked;
+
+    if (!H || !T || !P_bb || !d || !P_xb || !L || !W) return;
+
+    const w_bb = (H * T * rho) / P_bb;   // kg/m²
+    const w_xb = xbType === 'round'
+      ? (Math.PI / 4 * d * d * rho) / P_xb
+      : (d * d * rho) / P_xb;
+    const w_m2 = w_bb + w_xb;
+    const w_panel = w_m2 * (L / 1000) * (W / 1000);
+    const w_total = w_panel * qty;
+    const w_galv = w_m2 * 1.04;
+
+    // Update DOM
+    const bbEl = $('result-bb');
+    if (bbEl) bbEl.textContent = w_bb.toFixed(3) + ' kg/m²';
+    const xbEl = $('result-xb');
+    if (xbEl) xbEl.textContent = w_xb.toFixed(3) + ' kg/m²';
+    const m2El = $('result-per-m2');
+    if (m2El) m2El.textContent = w_m2.toFixed(2) + ' kg/m²';
+    const panelEl = $('result-per-panel');
+    if (panelEl) panelEl.textContent = w_panel.toFixed(1) + ' kg';
+    const dimsEl = $('panel-dims');
+    if (dimsEl) dimsEl.textContent = `${L} × ${W} mm`;
+    const totalEl = $('result-total');
+    if (totalEl) {
+      totalEl.textContent = w_total >= 1000
+        ? (w_total / 1000).toFixed(3) + ' t'
+        : w_total.toFixed(1) + ' kg';
+    }
+    const qtyLabelEl = $('result-qty-label');
+    if (qtyLabelEl) qtyLabelEl.textContent = `${qty} panel${qty !== 1 ? 's' : ''} × ${w_panel.toFixed(1)} kg/panel`;
+
+    const galvRow = $('galv-row');
+    const galvEl = $('result-galv');
+    if (galvRow && galvEl) {
+      if (galv) {
+        galvRow.classList.remove('hidden');
+        galvEl.textContent = w_galv.toFixed(2) + ' kg/m²';
+      } else {
+        galvRow.classList.add('hidden');
+      }
+    }
+
+    // Update inquiry href with params
+    const btnInquiry = document.getElementById('btn-inquiry') as HTMLAnchorElement | null;
+    if (btnInquiry) {
+      const matSelect = document.getElementById('material') as HTMLSelectElement;
+      const matLabel = matSelect?.options[matSelect.selectedIndex]?.text || '';
+      const spec = `${H}x${T}mm@${P_bb}mm-${d}mm${xbType === 'square' ? 'sq' : 'rd'}@${P_xb}mm`;
+      btnInquiry.href = `/inquiry/?bb_spec=${encodeURIComponent(spec)}&material=${encodeURIComponent(matLabel)}&panel=${L}x${W}mm&qty=${qty}`;
+    }
+
+    // Save to localStorage for Tool 02 import
+    try {
+      localStorage.setItem('sgc_last_bb', JSON.stringify({ H, T, P_bb, material: getNum('material') }));
+    } catch (_) {}
+  }
+
+  function copyResult(): void {
+    const m2 = ($('result-per-m2') as HTMLElement)?.textContent || '';
+    const panel = ($('result-per-panel') as HTMLElement)?.textContent || '';
+    const total = ($('result-total') as HTMLElement)?.textContent || '';
+    const H = getNum('bb-height'), T = getNum('bb-thickness'), P_bb = getNum('bb-pitch');
+    const d = getNum('xb-size'), P_xb = getNum('xb-pitch');
+    const xbType = (document.getElementById('xb-type') as HTMLSelectElement).value;
+    const matEl = document.getElementById('material') as HTMLSelectElement;
+    const mat = matEl?.options[matEl.selectedIndex]?.text || '';
+    const L = getNum('panel-length'), W = getNum('panel-width');
+    const qty = getNum('quantity');
+    const text = [
+      `Steel Grating Weight Calculation`,
+      `Specification: ${H}×${T}mm BB @ ${P_bb}mm pitch + ${d}mm ${xbType} XB @ ${P_xb}mm pitch`,
+      `Material: ${mat} | Panel: ${L}×${W}mm`,
+      `---`,
+      `Weight per m²: ${m2}`,
+      `Weight per panel: ${panel}`,
+      `Total order (${qty} panels): ${total}`,
+      `Calculated on SteelGratingCalculator.com`,
+    ].join('\n');
+    navigator.clipboard.writeText(text).then(() => {
+      const fb = $('copy-feedback');
+      if (fb) { fb.classList.remove('hidden'); setTimeout(() => fb.classList.add('hidden'), 2500); }
+    });
+  }
+
+  function shareLink(): void {
+    const params = new URLSearchParams({
+      h: String(getNum('bb-height')),
+      t: String(getNum('bb-thickness')),
+      p: String(getNum('bb-pitch')),
+      xt: (document.getElementById('xb-type') as HTMLSelectElement).value,
+      xs: String(getNum('xb-size')),
+      xp: String(getNum('xb-pitch')),
+      m: String(getNum('material')),
+      l: String(getNum('panel-length')),
+      w: String(getNum('panel-width')),
+      q: String(getNum('quantity')),
+    });
+    const url = `${location.origin}/tools/steel-grating-weight-calculator/?${params.toString()}`;
+    navigator.clipboard.writeText(url).then(() => {
+      const fb = $('copy-feedback');
+      if (fb) { fb.textContent = 'Share link copied!'; fb.classList.remove('hidden'); setTimeout(() => { fb.textContent = 'Copied to clipboard!'; fb.classList.add('hidden'); }, 2500); }
+    });
+  }
+
+  function hydrateFromParams(): void {
+    const p = new URLSearchParams(location.search);
+    const setSelect = (id: string, key: string) => {
+      const val = p.get(key);
+      const el = document.getElementById(id) as HTMLSelectElement | null;
+      if (val && el) el.value = val;
+    };
+    const setInput = (id: string, key: string) => {
+      const val = p.get(key);
+      const el = document.getElementById(id) as HTMLInputElement | null;
+      if (val && el) el.value = val;
+    };
+    setSelect('bb-height', 'h');
+    setSelect('bb-thickness', 't');
+    setSelect('bb-pitch', 'p');
+    setSelect('xb-type', 'xt');
+    setSelect('xb-size', 'xs');
+    setSelect('xb-pitch', 'xp');
+    setSelect('material', 'm');
+    setInput('panel-length', 'l');
+    setInput('panel-width', 'w');
+    setInput('quantity', 'q');
+  }
+
+  // Wire up events
+  document.querySelectorAll('#bb-height,#bb-thickness,#bb-pitch,#xb-type,#xb-size,#xb-pitch,#material,#galvanized')
+    .forEach(el => el.addEventListener('change', calc));
+  document.querySelectorAll('#panel-length,#panel-width,#quantity')
+    .forEach(el => el.addEventListener('input', calc));
+
+  document.getElementById('btn-copy')?.addEventListener('click', copyResult);
+  document.getElementById('btn-share')?.addEventListener('click', shareLink);
+  document.getElementById('btn-print')?.addEventListener('click', () => window.print());
+
+  hydrateFromParams();
+  calc();
+})();
+</script>
+
+<style>
+  .label { display:block; font-size:.75rem; font-weight:600; margin-bottom:.25rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:.05em; }
+  .select, .input { width:100%; border:1px solid var(--border-color); border-radius:.5rem; padding:.5rem .75rem; background-color:var(--bg-secondary); color:var(--text-primary); font-size:.875rem; outline:none; transition:all .2s; }
+  .select:focus, .input:focus { box-shadow:0 0 0 1px #f59e0b; }
+  .input-hint { margin-top:.25rem; font-size:.75rem; color:var(--text-muted); }
+
+  @media print {
+    header, footer, #btn-copy, #btn-share, #btn-print, #btn-inquiry, nav, a[href*="/tools"] { display: none; }
+    .card { border: 1px solid #ccc; break-inside: avoid; }
+  }
+</style>

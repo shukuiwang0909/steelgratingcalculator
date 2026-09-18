@@ -1,0 +1,103 @@
+---
+import Base from "../../layouts/Base.astro";
+import FaqJsonLd from "../../components/FaqJsonLd.astro";
+
+const faqs = [
+  ["What bearing bar orientation should trench grating use?", "Bearing bars should run perpendicular to the longer axis of the trench (i.e., across the trench width). This way the bearing bars span the trench and the cross bars run along the trench length, which is the structurally correct and most efficient arrangement."],
+  ["What is the maximum trench width that can be spanned without intermediate supports?", "Depends entirely on the load and bearing bar spec. As a rough guide: 25×5mm @ 30mm (foot traffic, 5 kPa) can span up to ~800mm; 40×5mm @ 30mm can span ~1200mm; 50×5mm @ 22mm can span ~1500mm. Use the load capacity calculator to verify for your specific case."],
+  ["Should trench covers in food plants be stainless?", "For direct food contact areas or areas washed down with hot water and chemicals, SS 304 or SS 316L is specified. For secondary areas (corridors, loading docks), hot-dip galvanized is typically acceptable under most food safety standards."],
+];
+---
+
+<Base title="Steel Grating for Drainage Trench Covers — Sizing & Load Ratings | Anping" description="Steel grating for drainage trench covers and channel grates. Load class selection, trench width vs bearing bar spec, food plant and industrial applications. Source from Anping.">
+
+  <article class="max-w-4xl mx-auto px-4 py-10">
+
+    <nav class="text-xs text-theme-muted mb-6 flex items-center gap-2">
+      <a href="/" class="hover:text-theme-primary transition-colors">Home</a>
+      <span>/</span>
+      <a href="/applications/" class="hover:text-theme-primary transition-colors">Applications</a>
+      <span>/</span>
+      <span class="accent-text">Drainage Trench Covers</span>
+    </nav>
+
+    <div class="mb-8">
+      <span class="text-xs font-mono accent-text uppercase tracking-wider">Application Guide</span>
+      <h1 class="text-4xl font-semibold text-theme-primary leading-tight mt-2 mb-4">Steel Grating for Drainage Trench Covers</h1>
+      <p class="text-lg text-theme-secondary leading-relaxed">Steel bar grating is the most widely used material for spanning drainage trenches and sumps in industrial, food processing, and civil engineering applications.</p>
+    </div>
+
+    <div class="mb-8 p-4 bg-theme-tertiary rounded-xl border border-theme flex items-center gap-4">
+      <div class="flex-1">
+        <p class="text-sm font-medium text-theme-primary">Check span capacity for your trench width</p>
+        <p class="text-xs text-theme-muted">Enter bearing bar, pitch, and trench width as clear span to get allowable load.</p>
+      </div>
+      <a href="/tools/bar-grating-load-capacity-calculator/" class="text-sm accent-text font-semibold hover:opacity-80 transition-opacity shrink-0 whitespace-nowrap">Load Calculator →</a>
+    </div>
+
+    <div class="prose max-w-none text-theme-secondary leading-relaxed space-y-8">
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Specification by Application</h2>
+        <div class="overflow-x-auto mt-3">
+          <table class="w-full text-sm">
+            <thead><tr class="border-b border-theme"><th class="text-left py-2 pr-4 text-theme-muted font-medium">Application</th><th class="text-left py-2 pr-4 text-theme-muted font-medium">Bearing Bar</th><th class="text-left py-2 pr-4 text-theme-muted font-medium">Surface Finish</th><th class="text-left py-2 text-theme-muted font-medium">Load Class</th></tr></thead>
+            <tbody class="text-theme-secondary">
+              {[
+                ["Foot traffic indoor drain", "25×5@30mm plain", "Galvanized", "A–B"],
+                ["Food processing wet areas", "25×5@30mm serrated", "SS 304/316", "A–B"],
+                ["Loading dock / forklift", "40×5@30mm serrated", "Galvanized", "C–D"],
+                ["Car park surface drain", "30×5@30mm plain", "Galvanized", "B–C"],
+                ["Heavy vehicle / truck", "50×5@22mm serrated", "Galvanized", "D–E"],
+                ["Chemical bund drain", "25×5@30mm plain", "SS 316L", "A–B"],
+              ].map(([app, bb, fin, cls]) => (
+                <tr class="border-b border-theme/50">
+                  <td class="py-2 pr-4">{app}</td>
+                  <td class="py-2 pr-4 font-mono text-sm">{bb}</td>
+                  <td class="py-2 pr-4">{fin}</td>
+                  <td class="py-2 font-semibold accent-text">{cls}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Frame Systems</h2>
+        <p>Trench grating panels sit in a perimeter frame that is cast into or bolted to the concrete surround. Frame options:</p>
+        <ul class="list-disc pl-6 space-y-1 mt-2 text-sm">
+          <li><strong class="text-theme-primary">Angle iron frame</strong> (L75×75×8mm) — welded to grating perimeter, frame legs cast into concrete</li>
+          <li><strong class="text-theme-primary">U-channel (recessed frame)</strong> — flush-to-floor installation; better for wheeled traffic</li>
+          <li><strong class="text-theme-primary">Adjustable shim frame</strong> — for retrofit into existing trenches of non-standard depth</li>
+        </ul>
+        <p class="mt-2">All frames are supplied in same finish as grating. Lifting keys, padlock tabs, and flush handles are standard options.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Ordering</h2>
+        <p>Provide your trench dimensions (width × length per run), load class, surface finish, and frame system preference. Factories cut panels to your exact trench width. Sets (panels + frames + fixings) or panels only.</p>
+        <a href="/inquiry/?product=trench-covers" class="inline-block mt-4 accent-bg hover:opacity-90 on-accent text-sm font-semibold px-4 py-2 rounded-lg transition-opacity">Get a Trench Cover Quote</a>
+      </section>
+
+    </div>
+
+    <FaqJsonLd items={faqs.map(([q, a]) => ({ question: q, answer: a }))} inLanguage="en" />
+    <div class="mt-10 pt-8 border-t border-theme">
+      <h2 class="text-xl font-semibold text-theme-primary mb-5">FAQs</h2>
+      <div class="space-y-3">
+        {faqs.map(([q, a]) => (
+          <details class="card group">
+            <summary class="flex items-center justify-between cursor-pointer list-none">
+              <span class="font-medium text-theme-primary">{q}</span>
+              <svg class="w-5 h-5 text-theme-muted shrink-0 ml-4 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-3 text-sm text-theme-secondary leading-relaxed">{a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+
+  </article>
+
+</Base>

@@ -1,0 +1,101 @@
+---
+import Base from "../../layouts/Base.astro";
+
+---
+
+<Base title="Steel Grating for Stair Nosings — Anti-Slip Requirements & Specifications" description="Steel grating stair nosings and treads for industrial staircases. Anti-slip serrated surface, OSHA 1910.23 compliance, fixings, and material options. Source from Anping, China.">
+
+  <article class="max-w-4xl mx-auto px-4 py-10">
+
+    <nav class="text-xs text-theme-muted mb-6 flex items-center gap-2">
+      <a href="/" class="hover:text-theme-primary transition-colors">Home</a>
+      <span>/</span>
+      <a href="/applications/" class="hover:text-theme-primary transition-colors">Applications</a>
+      <span>/</span>
+      <span class="accent-text">Stair Nosings</span>
+    </nav>
+
+    <div class="mb-8">
+      <span class="text-xs font-mono accent-text uppercase tracking-wider">Application Guide</span>
+      <h1 class="text-4xl font-semibold text-theme-primary leading-tight mt-2 mb-4">Steel Grating for Stair Nosings</h1>
+      <p class="text-lg text-theme-secondary leading-relaxed">Serrated bar grating stair treads with anti-slip nosings for industrial and commercial staircases. Compliant with OSHA 1910.23, BS 4592, and NAAMM stair specifications.</p>
+    </div>
+
+    <div class="prose max-w-none text-theme-secondary leading-relaxed space-y-8">
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">What Is a Stair Nosing?</h2>
+        <p>A stair nosing is the leading edge of a stair tread — the front 25–50mm that receives the most wear and poses the greatest slip hazard. On grating stair treads, the nosing is typically a separate anti-slip component: a checkered steel plate, an abrasive-embedded aluminium extrusion, or a welded round bar cluster.</p>
+        <p>For steel bar grating treads, the grating bearing bars must run <strong class="text-theme-primary">perpendicular to the nosing</strong> (NAAMM MBG 531 requirement), ensuring the bars provide structural support across the tread depth.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Anti-Slip Nosing Options</h2>
+        <div class="grid md:grid-cols-3 gap-4 mt-3">
+          {[
+            { type: "Welded bar nosing", desc: "Round bars (⌀12–16mm) welded along the tread front edge. Simple, robust, weldable to the frame. Most common for industrial use." },
+            { type: "Checkered plate nosing", desc: "50–75mm wide checkered plate welded to the frame front face. Provides a solid leading edge and retains fine aggregate as abrasive." },
+            { type: "Aluminium extruded nosing", desc: "Carborundum-filled grooves in an aluminium extrusion bolted to the front edge. High visibility (yellow/black optional), removable for replacement." },
+          ].map(({ type, desc }) => (
+            <div class="card">
+              <div class="font-semibold text-theme-primary text-sm mb-1">{type}</div>
+              <p class="text-xs text-theme-secondary">{desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Compliance Requirements</h2>
+        <div class="overflow-x-auto mt-3">
+          <table class="w-full text-sm">
+            <thead><tr class="border-b border-theme"><th class="text-left py-2 pr-4 text-theme-muted font-medium">Standard</th><th class="text-left py-2 text-theme-muted font-medium">Key Stair Nosing Requirement</th></tr></thead>
+            <tbody class="text-theme-secondary">
+              {[
+                ["OSHA 1910.23", "Slip-resistant surface required on all stair treads; nosing projection max 1.5 in (38mm) beyond riser face"],
+                ["NAAMM MBG 531", "Bearing bars must be perpendicular to nosing; recommended serrated top surface"],
+                ["BS 4592 / BS 5395-1", "Anti-slip nosing required; tread depth ≥ 220mm; nosing overhang ≤ 25mm"],
+                ["AS 1657", "Non-slip nosing required for all industrial stairs; contrast marking recommended"],
+              ].map(([std, req]) => (
+                <tr class="border-b border-theme/50">
+                  <td class="py-2 pr-4 font-mono text-sm font-medium text-theme-primary whitespace-nowrap">{std}</td>
+                  <td class="py-2">{req}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Typical Specifications</h2>
+        <ul class="list-disc pl-6 space-y-2 mt-2 text-sm">
+          <li><strong class="text-theme-primary">Grating infill:</strong> 25×5mm @ 30mm pitch, serrated top</li>
+          <li><strong class="text-theme-primary">Frame:</strong> 75×50×6mm steel channel, welded perimeter</li>
+          <li><strong class="text-theme-primary">Nosing:</strong> welded round bars or checkered plate (project-specific)</li>
+          <li><strong class="text-theme-primary">Tread depth:</strong> 250mm / 270mm / 300mm to order</li>
+          <li><strong class="text-theme-primary">Surface finish:</strong> hot-dip galvanized for outdoor; SS 304 for food/pharma</li>
+        </ul>
+        <div class="mt-4">
+          <a href="/products/grating-stair-treads/" class="text-sm accent-text font-semibold hover:opacity-80 transition-opacity">View Stair Tread Product Guide →</a>
+        </div>
+      </section>
+
+    </div>
+
+    <div class="mt-10 pt-8 border-t border-theme">
+      <div class="grid md:grid-cols-2 gap-4">
+        <a href="/products/serrated-steel-grating/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">Product</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">Serrated Steel Grating</h3>
+        </a>
+        <a href="/inquiry/?product=stair-treads" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">Get Quote</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">Request Stair Nosing / Treads</h3>
+        </a>
+      </div>
+    </div>
+
+  </article>
+
+</Base>

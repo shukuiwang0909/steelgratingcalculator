@@ -1,0 +1,508 @@
+---
+import Base from "../layouts/Base.astro";
+import FaqJsonLd from "../components/FaqJsonLd.astro";
+import en from "../i18n/en.json";
+
+const t = en;
+
+const tools = [
+  {
+    href: "/tools/steel-grating-weight-calculator/",
+    title: "Steel Grating Weight Calculator",
+    desc: "Get kg/m² and panel weight instantly from bearing bar size, pitch, and material.",
+    icon: "M3 10h18M3 14h18M10 3v18M14 3v18",
+    tag: "Most Popular",
+    num: "01"
+  },
+  {
+    href: "/tools/bar-grating-load-capacity-calculator/",
+    title: "Bar Grating Load Capacity",
+    desc: "Max allowable UDL & point load by span. NAAMM MBG 531 and BS 4592 dual-standard.",
+    icon: "M3 6h18M3 12h18M3 18h18",
+    tag: "For Engineers",
+    num: "02"
+  },
+  {
+    href: "/tools/open-area-percentage-calculator/",
+    title: "Open Area Percentage",
+    desc: "Calculate the open area % for drainage, ventilation, and debris shedding design.",
+    icon: "M12 4v16m-8-8h16",
+    tag: "Drainage Design",
+    num: "03"
+  },
+  {
+    href: "/tools/panel-count-estimator/",
+    title: "Panel Count Estimator",
+    desc: "Enter your total area and get the exact number of panels required plus total weight.",
+    icon: "M4 6h16M4 10h16M4 14h16M4 18h16",
+    tag: "Procurement",
+    num: "04"
+  },
+  {
+    href: "/tools/fob-price-calculator/",
+    title: "FOB Price Calculator",
+    desc: "Convert RMB factory price to USD/EUR/GBP FOB quotes with live exchange rates.",
+    icon: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
+    tag: "Export Tool",
+    num: "05"
+  },
+  {
+    href: "/tools/container-loading-calculator/",
+    title: "Container Loading Calculator",
+    desc: "Calculate how many grating panels fit in a 20ft/40ft container. Optimize shipments.",
+    icon: "M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4",
+    tag: "Shipping Tool",
+    num: "06"
+  },
+];
+
+const products = [
+  { href: "/products/plain-steel-grating/", title: "Plain Steel Bar Grating", desc: "Standard industrial flooring, platforms & walkways" },
+  { href: "/products/serrated-steel-grating/", title: "Serrated Steel Grating", desc: "Anti-slip notched top edge for safety-critical areas" },
+  { href: "/products/galvanized-steel-grating/", title: "Hot-Dip Galvanized Grating", desc: "610 g/m² zinc coating for outdoor & corrosive environments" },
+  { href: "/products/stainless-steel-grating/", title: "Stainless Steel Grating", desc: "Grade 304 & 316L for food, pharma & marine" },
+  { href: "/products/aluminum-grating/", title: "Aluminum Bar Grating", desc: "6061-T6, lightweight & non-sparking applications" },
+  { href: "/products/grating-stair-treads/", title: "Grating Stair Treads", desc: "Cut-to-size with checkered plate nosing" },
+  { href: "/products/trench-covers/", title: "Trench Covers & Drain Grates", desc: "Custom widths and load ratings for drainage systems" },
+  { href: "/products/heavy-duty-grating/", title: "Heavy Duty Steel Grating", desc: "50–75mm bearing bars for vehicle loading and heavy industry" },
+];
+
+const applications = [
+  { href: "/applications/industrial-flooring/", title: "Industrial Flooring", desc: "Mezzanine levels, refineries, chemical plants" },
+  { href: "/applications/walkways-platforms/", title: "Walkways & Platforms", desc: "Safe access across all industrial facilities" },
+  { href: "/applications/drainage-trench-covers/", title: "Drainage & Trench Covers", desc: "Open area drainage for process areas & roads" },
+  { href: "/applications/stair-nosings/", title: "Stair Nosings", desc: "Anti-slip stair treads for all metal structures" },
+  { href: "/applications/oil-gas-platforms/", title: "Oil & Gas Platforms", desc: "Offshore & onshore compliance grating" },
+  { href: "/applications/food-processing/", title: "Food Processing", desc: "Hygienic SS 316L with FDA-compliant finishes" },
+];
+
+const faqs = [
+  ["Are all calculators free?", "Yes. All 6 calculators on SteelGratingCalculator are completely free with no signup, no login, and no time limits."],
+  ["What standards do the calculators use?", "The weight calculator follows GB/T 12755-2008 steel density values. The load capacity calculator supports NAAMM MBG 531 (US) and BS 4592 (UK/Commonwealth) — switchable with one click."],
+  ["What is the standard panel size for steel grating?", "The most common Chinese export size is 6000 × 1000 mm. US sizes follow NAAMM standards (often 24\" × 96\"). Australian sizes often use 1200 mm widths per AS/NZS 1576."],
+  ["How accurate are the weight calculations?", "Typical accuracy is ±2–3% for standard welded bar grating. For serrated bars, twist bars, or end banding, allow an additional 2–5% for the steel removed or added."],
+  ["What is the most common bearing bar specification?", "25×5mm bearing bars at 30mm centre-to-centre pitch is the global standard for medium-duty industrial use. Lighter duty uses 20×3mm; heavy duty uses 40×5mm or 50×5mm."],
+  ["Do the factories export to my country?", "Yes. Anping factories regularly export by sea FCL and LCL to Europe, Middle East, Southeast Asia, Australia and North America. Most can provide commercial invoices, packing lists, and test certificates."],
+  ["Do you handle transactions?", "No. We connect buyers with matched Anping factories. All negotiations, contracts, payment, and quality control are between you and the factory directly."],
+  ["Is galvanized grating heavier than plain grating?", "Yes. Hot-dip galvanizing adds approximately 3–5% to the panel weight (standard coating 610 g/m² per ISO 1461). The FOB price calculator includes a galvanized weight toggle."],
+];
+---
+<Base
+  title="Steel Grating Calculator — Free Bar Grating Weight & Load Tools | Anping Factory Sourcing"
+  description="Free steel grating weight calculator, load capacity, open area, and container loading tools. NAAMM MBG 531 & BS 4592 compliant. Source direct from Anping, China factories."
+  lang="en"
+>
+
+  <!-- Hero: 2-column with inline weight calculator -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-theme-tertiary via-theme-primary to-theme-primary"></div>
+    <div class="absolute inset-0 opacity-30" style="background-image: linear-gradient(rgba(245,158,11,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(245,158,11,0.03) 1px, transparent 1px); background-size: 40px 40px;"></div>
+    <div class="relative max-w-6xl mx-auto px-4 py-16 md:py-24">
+      <div class="grid lg:grid-cols-2 gap-12 items-start">
+
+        <!-- Left: Badge + Headline + CTA + Stats -->
+        <div class="flex flex-col justify-center">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-theme accent-border accent-text text-xs font-mono uppercase tracking-wider mb-6 self-start">
+            <span class="w-1.5 h-1.5 rounded-full accent-bg animate-pulse"></span>
+            {t.hero.badge}
+          </div>
+          <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-theme-primary leading-[1.1]">
+            {t.hero.title1}<br />
+            <span class="accent-text">{t.hero.title2}</span><br />
+            {t.hero.title3}
+          </h1>
+          <p class="mt-5 text-base text-theme-secondary leading-relaxed max-w-lg">
+            {t.hero.subtitle}
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="#tools" class="inline-flex items-center gap-2 accent-bg hover:opacity-90 font-semibold px-6 py-3 rounded-lg transition-all hover:shadow-[0_0_30px_rgba(245,158,11,0.3)] on-accent text-sm">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+              {t.hero.tryCalculator}
+            </a>
+            <a href="/factories/" class="inline-flex items-center gap-2 border border-theme hover:border-theme-muted text-theme-secondary hover:text-theme-primary px-6 py-3 rounded-lg transition-all text-sm">
+              {t.hero.browseFactories}
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+          </div>
+          <div class="mt-10 flex flex-wrap gap-8">
+            <div class="text-center">
+              <p class="text-2xl font-bold text-theme-primary">6</p>
+              <p class="text-xs text-theme-muted mt-1">{t.hero.stats.tools}</p>
+            </div>
+            <div class="text-center">
+              <p class="text-2xl font-bold text-theme-primary">1,700+</p>
+              <p class="text-xs text-theme-muted mt-1">{t.hero.stats.factories}</p>
+            </div>
+            <div class="text-center">
+              <p class="text-2xl font-bold text-theme-primary">100%</p>
+              <p class="text-xs text-theme-muted mt-1">{t.hero.stats.free}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Inline Weight Calculator -->
+        <div class="bg-theme-card border border-theme rounded-xl p-6 shadow-xl">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-base font-semibold text-theme-primary">Steel Grating Weight Calculator</h2>
+            <span class="text-xs font-mono text-theme-muted uppercase tracking-wider">GB/T 12755</span>
+          </div>
+          <div class="space-y-3">
+            <div class="grid grid-cols-3 gap-3">
+              <div>
+                <label class="block text-xs font-semibold mb-1 text-theme-muted uppercase tracking-wide" for="h-bb-height">Bar Height</label>
+                <select id="h-bb-height" class="w-full border border-theme rounded-lg px-2 py-2 bg-theme-secondary text-theme-primary text-sm">
+                  <option value="20">20 mm</option>
+                  <option value="25" selected>25 mm</option>
+                  <option value="30">30 mm</option>
+                  <option value="35">35 mm</option>
+                  <option value="40">40 mm</option>
+                  <option value="50">50 mm</option>
+                  <option value="65">65 mm</option>
+                  <option value="75">75 mm</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold mb-1 text-theme-muted uppercase tracking-wide" for="h-bb-thick">Thickness</label>
+                <select id="h-bb-thick" class="w-full border border-theme rounded-lg px-2 py-2 bg-theme-secondary text-theme-primary text-sm">
+                  <option value="3">3 mm</option>
+                  <option value="4">4 mm</option>
+                  <option value="5" selected>5 mm</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold mb-1 text-theme-muted uppercase tracking-wide" for="h-bb-pitch">BB Pitch</label>
+                <select id="h-bb-pitch" class="w-full border border-theme rounded-lg px-2 py-2 bg-theme-secondary text-theme-primary text-sm">
+                  <option value="11">11 mm</option>
+                  <option value="15">15 mm</option>
+                  <option value="22">22 mm</option>
+                  <option value="30" selected>30 mm</option>
+                  <option value="34">34 mm</option>
+                  <option value="40">40 mm</option>
+                  <option value="41">41 mm</option>
+                  <option value="60">60 mm</option>
+                  <option value="76">76 mm</option>
+                </select>
+              </div>
+            </div>
+            <div class="grid grid-cols-3 gap-3">
+              <div>
+                <label class="block text-xs font-semibold mb-1 text-theme-muted uppercase tracking-wide" for="h-xb-type">Cross Bar</label>
+                <select id="h-xb-type" class="w-full border border-theme rounded-lg px-2 py-2 bg-theme-secondary text-theme-primary text-sm">
+                  <option value="round" selected>Round</option>
+                  <option value="square">Twist Sq.</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold mb-1 text-theme-muted uppercase tracking-wide" for="h-xb-size">XB Size</label>
+                <select id="h-xb-size" class="w-full border border-theme rounded-lg px-2 py-2 bg-theme-secondary text-theme-primary text-sm">
+                  <option value="5">5 mm</option>
+                  <option value="6" selected>6 mm</option>
+                  <option value="8">8 mm</option>
+                  <option value="10">10 mm</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold mb-1 text-theme-muted uppercase tracking-wide" for="h-xb-pitch">XB Pitch</label>
+                <select id="h-xb-pitch" class="w-full border border-theme rounded-lg px-2 py-2 bg-theme-secondary text-theme-primary text-sm">
+                  <option value="25">25 mm</option>
+                  <option value="50" selected>50 mm</option>
+                  <option value="76.2">76 mm</option>
+                  <option value="100">100 mm</option>
+                </select>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold mb-1 text-theme-muted uppercase tracking-wide" for="h-material">Material</label>
+                <select id="h-material" class="w-full border border-theme rounded-lg px-2 py-2 bg-theme-secondary text-theme-primary text-sm">
+                  <option value="7.85" selected>Carbon Steel</option>
+                  <option value="7.93">SS 304</option>
+                  <option value="7.98">SS 316</option>
+                  <option value="2.7">Aluminum</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold mb-1 text-theme-muted uppercase tracking-wide" for="h-qty">Panels (qty)</label>
+                <input id="h-qty" type="number" min="1" value="10" class="w-full border border-theme rounded-lg px-2 py-2 bg-theme-secondary text-theme-primary text-sm" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Results -->
+          <div class="mt-4 bg-theme-tertiary rounded-lg p-4 border border-theme">
+            <div class="grid grid-cols-3 gap-2 text-center">
+              <div>
+                <p class="text-xs text-theme-muted uppercase tracking-wide mb-1">Per m²</p>
+                <p id="h-result-m2" class="text-xl font-bold text-theme-primary font-mono">—</p>
+              </div>
+              <div class="border-l border-r border-theme">
+                <p class="text-xs text-theme-muted uppercase tracking-wide mb-1">Per Panel</p>
+                <p id="h-result-panel" class="text-xl font-bold accent-text font-mono">—</p>
+                <p class="text-xs text-theme-muted">6000×1000mm</p>
+              </div>
+              <div>
+                <p class="text-xs text-theme-muted uppercase tracking-wide mb-1">Total Order</p>
+                <p id="h-result-total" class="text-xl font-bold text-theme-primary font-mono">—</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-3 flex gap-2">
+            <a href="/tools/steel-grating-weight-calculator/" class="flex-1 text-center accent-bg hover:opacity-90 text-xs font-semibold px-3 py-2 rounded-lg transition-opacity on-accent">
+              Full Calculator →
+            </a>
+            <a href="/inquiry/" class="flex-1 text-center border border-theme hover:accent-border text-xs font-semibold px-3 py-2 rounded-lg transition-colors text-theme-primary hover:accent-text">
+              Get a Quote
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Tools Grid -->
+  <section id="tools" class="relative py-20">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-center gap-3 mb-10">
+        <div class="h-px flex-1 bg-gradient-to-r from-transparent via-theme-muted to-transparent"></div>
+        <span class="accent-text font-mono text-xs uppercase tracking-widest">{t.tools.badge}</span>
+        <div class="h-px flex-1 bg-gradient-to-r from-transparent via-theme-muted to-transparent"></div>
+      </div>
+      <h2 class="text-3xl font-semibold text-theme-primary text-center mb-12">{t.tools.title}</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {tools.map((tool) => (
+          <a href={tool.href} class="card card-accent relative group">
+            <div class="flex items-start justify-between mb-4">
+              <span class="text-xs font-mono text-theme-muted opacity-50">{tool.num}</span>
+              <span class="text-xs font-mono accent-text uppercase tracking-wider opacity-70">{tool.tag}</span>
+            </div>
+            <div class="mb-4">
+              <svg class="w-8 h-8 accent-text opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={tool.icon}/></svg>
+            </div>
+            <h3 class="font-semibold text-base text-theme-primary mb-2 group-hover:text-theme-secondary transition-colors">{tool.title}</h3>
+            <p class="text-sm text-theme-secondary leading-relaxed">{tool.desc}</p>
+            <div class="mt-4 flex items-center gap-1 text-sm accent-text opacity-80 group-hover:opacity-100 transition-opacity">
+              Open calculator
+              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="relative py-20 bg-theme-secondary">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-center gap-3 mb-10">
+        <div class="h-px flex-1 bg-gradient-to-r from-transparent via-theme-muted to-transparent"></div>
+        <span class="accent-text font-mono text-xs uppercase tracking-widest">{t.process.badge}</span>
+        <div class="h-px flex-1 bg-gradient-to-r from-transparent via-theme-muted to-transparent"></div>
+      </div>
+      <h2 class="text-3xl font-semibold text-theme-primary text-center mb-12">{t.process.title}</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        {t.process.steps.map((step) => (
+          <div class="card h-full">
+            <span class="text-5xl font-bold text-theme-muted font-mono opacity-30">{step.num}</span>
+            <h3 class="font-semibold text-lg text-theme-primary mt-4 mb-2">{step.title}</h3>
+            <p class="text-sm text-theme-secondary leading-relaxed">{step.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section class="relative py-20">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-center gap-3 mb-10">
+        <div class="h-px flex-1 bg-gradient-to-r from-transparent via-theme-muted to-transparent"></div>
+        <span class="accent-text font-mono text-xs uppercase tracking-widest">{t.products.badge}</span>
+        <div class="h-px flex-1 bg-gradient-to-r from-transparent via-theme-muted to-transparent"></div>
+      </div>
+      <h2 class="text-3xl font-semibold text-theme-primary text-center mb-12">{t.products.title}</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        {products.map((p) => (
+          <a href={p.href} class="card card-accent group flex items-center gap-4">
+            <div class="w-10 h-10 rounded-lg bg-theme-tertiary border border-theme flex items-center justify-center shrink-0">
+              <svg class="w-5 h-5 accent-text" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 5h16M4 9h16M4 13h8"/></svg>
+            </div>
+            <div class="flex-1">
+              <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors">{p.title}</h3>
+              <p class="text-sm text-theme-secondary mt-0.5">{p.desc}</p>
+            </div>
+            <svg class="w-5 h-5 text-theme-muted group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Applications -->
+  <section class="relative py-20 bg-theme-secondary">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-center gap-3 mb-10">
+        <div class="h-px flex-1 bg-gradient-to-r from-transparent via-theme-muted to-transparent"></div>
+        <span class="accent-text font-mono text-xs uppercase tracking-widest">{t.applications.badge}</span>
+        <div class="h-px flex-1 bg-gradient-to-r from-transparent via-theme-muted to-transparent"></div>
+      </div>
+      <h2 class="text-3xl font-semibold text-theme-primary text-center mb-12">{t.applications.title}</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        {applications.map((a) => (
+          <a href={a.href} class="card card-accent group">
+            <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mb-1">{a.title}</h3>
+            <p class="text-xs text-theme-secondary leading-relaxed">{a.desc}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Anping (with meshcalculator.com crosslink) -->
+  <section class="relative py-20">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <div class="flex items-center gap-3 mb-10">
+        <div class="h-px flex-1 bg-gradient-to-r from-transparent via-theme-muted to-transparent"></div>
+        <span class="accent-text font-mono text-xs uppercase tracking-widest">{t.whyAnping.badge}</span>
+        <div class="h-px flex-1 bg-gradient-to-r from-transparent via-theme-muted to-transparent"></div>
+      </div>
+      <h2 class="text-3xl font-semibold text-theme-primary mb-6">{t.whyAnping.title}</h2>
+      <p class="text-theme-secondary leading-relaxed max-w-2xl mx-auto">{t.whyAnping.desc}</p>
+      <div class="mt-6 flex flex-wrap justify-center gap-4">
+        <a href="/anping-steel-grating/" class="inline-flex items-center gap-2 accent-text hover:opacity-80 font-medium transition-opacity">
+          {t.whyAnping.learnMore}
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+        <span class="text-theme-muted">·</span>
+        <a href="https://meshcalculator.com" class="inline-flex items-center gap-2 text-theme-secondary hover:text-theme-primary transition-colors text-sm" target="_blank" rel="noopener">
+          Also sourcing wire mesh?
+          <span class="accent-text font-semibold">MeshCalculator.com →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog -->
+  <section class="relative py-20 bg-theme-secondary">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-center gap-3 mb-10">
+        <div class="h-px flex-1 bg-gradient-to-r from-transparent via-theme-muted to-transparent"></div>
+        <span class="accent-text font-mono text-xs uppercase tracking-widest">Guides & Insights</span>
+        <div class="h-px flex-1 bg-gradient-to-r from-transparent via-theme-muted to-transparent"></div>
+      </div>
+      <h2 class="text-3xl font-semibold text-theme-primary text-center mb-12">Technical Guides</h2>
+      <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <a href="/blog/how-to-calculate-steel-grating-weight/" class="card card-accent group">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-xs font-mono accent-text uppercase tracking-wider">Technical Guide</span>
+            <span class="text-xs text-theme-muted">· 8 min read</span>
+          </div>
+          <h3 class="font-semibold text-lg text-theme-primary mb-2 group-hover:text-theme-secondary transition-colors">How to Calculate Steel Grating Weight: Formula + Free Calculator</h3>
+          <p class="text-sm text-theme-secondary leading-relaxed mb-4">The exact formula used by engineers and procurement buyers to calculate bar grating weight per m².</p>
+          <div class="flex items-center gap-1 text-sm accent-text opacity-80 group-hover:opacity-100 transition-opacity">
+            Read guide
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+        <a href="/blog/naamm-bar-grating-designations/" class="card card-accent group">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-xs font-mono accent-text uppercase tracking-wider">Standards Guide</span>
+            <span class="text-xs text-theme-muted">· 6 min read</span>
+          </div>
+          <h3 class="font-semibold text-lg text-theme-primary mb-2 group-hover:text-theme-secondary transition-colors">NAAMM Bar Grating Designations Explained (19-W-4, 15-W-4...)</h3>
+          <p class="text-sm text-theme-secondary leading-relaxed mb-4">Decode NAAMM MBG 531 designation codes and find the equivalent metric specification from China.</p>
+          <div class="flex items-center gap-1 text-sm accent-text opacity-80 group-hover:opacity-100 transition-opacity">
+            Read guide
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+      </div>
+      <div class="text-center mt-8">
+        <a href="/blog/" class="inline-flex items-center gap-2 text-sm text-theme-secondary hover:text-theme-primary transition-colors">
+          View all articles
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <FaqJsonLd items={faqs.map(([q, a]) => ({ question: q, answer: a }))} inLanguage="en" />
+  <section class="relative py-20">
+    <div class="max-w-3xl mx-auto px-4">
+      <div class="flex items-center gap-3 mb-10">
+        <div class="h-px flex-1 bg-gradient-to-r from-transparent via-theme-muted to-transparent"></div>
+        <span class="accent-text font-mono text-xs uppercase tracking-widest">{t.faq.badge}</span>
+        <div class="h-px flex-1 bg-gradient-to-r from-transparent via-theme-muted to-transparent"></div>
+      </div>
+      <h2 class="text-3xl font-semibold text-theme-primary text-center mb-12">{t.faq.title}</h2>
+      <div class="space-y-3">
+        {faqs.map(([q, a]) => (
+          <details class="card group">
+            <summary class="flex items-center justify-between cursor-pointer list-none">
+              <span class="font-medium text-theme-primary">{q}</span>
+              <svg class="w-5 h-5 text-theme-muted shrink-0 ml-4 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-3 text-sm text-theme-secondary leading-relaxed">{a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="relative py-20 bg-theme-secondary">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="card card-accent relative overflow-hidden text-center py-16">
+        <div class="absolute inset-0 bg-gradient-to-br from-theme-tertiary via-transparent to-transparent"></div>
+        <div class="relative">
+          <h2 class="text-3xl font-semibold text-theme-primary mb-4">{t.cta.title}</h2>
+          <p class="text-theme-secondary max-w-xl mx-auto mb-8">{t.cta.desc}</p>
+          <a href="/inquiry/" class="inline-flex items-center gap-2 accent-bg hover:opacity-90 font-semibold px-8 py-4 rounded-lg transition-all hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] on-accent">
+            {t.cta.button}
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Base>
+
+<script>
+  // Hero inline weight calculator
+  const $ = (id: string) => document.getElementById(id) as HTMLElement;
+  function heroCalc() {
+    const H = parseFloat((document.getElementById('h-bb-height') as HTMLSelectElement).value);
+    const T = parseFloat((document.getElementById('h-bb-thick') as HTMLSelectElement).value);
+    const P_bb = parseFloat((document.getElementById('h-bb-pitch') as HTMLSelectElement).value);
+    const xbType = (document.getElementById('h-xb-type') as HTMLSelectElement).value;
+    const d_xb = parseFloat((document.getElementById('h-xb-size') as HTMLSelectElement).value);
+    const P_xb = parseFloat((document.getElementById('h-xb-pitch') as HTMLSelectElement).value);
+    const rho = parseFloat((document.getElementById('h-material') as HTMLSelectElement).value);
+    const qty = parseInt((document.getElementById('h-qty') as HTMLInputElement).value) || 1;
+
+    const w_bb = (H * T * rho) / P_bb;
+    const w_xb = xbType === 'round'
+      ? (Math.PI / 4 * d_xb * d_xb * rho) / P_xb
+      : (d_xb * d_xb * rho) / P_xb;
+    const w_total = w_bb + w_xb;
+    const w_panel = w_total * 6.0 * 1.0; // 6000×1000mm default
+    const w_order = w_panel * qty;
+
+    const m2El = document.getElementById('h-result-m2');
+    const panelEl = document.getElementById('h-result-panel');
+    const totalEl = document.getElementById('h-result-total');
+    if (m2El) m2El.textContent = w_total.toFixed(2) + ' kg/m²';
+    if (panelEl) panelEl.textContent = w_panel.toFixed(1) + ' kg';
+    if (totalEl) totalEl.textContent = w_order >= 1000
+      ? (w_order / 1000).toFixed(2) + ' t'
+      : w_order.toFixed(0) + ' kg';
+  }
+
+  document.querySelectorAll('#h-bb-height,#h-bb-thick,#h-bb-pitch,#h-xb-type,#h-xb-size,#h-xb-pitch,#h-material,#h-qty')
+    .forEach(el => el.addEventListener('change', heroCalc));
+  document.getElementById('h-qty')?.addEventListener('input', heroCalc);
+  heroCalc();
+</script>

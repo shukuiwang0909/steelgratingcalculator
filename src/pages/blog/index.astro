@@ -1,0 +1,72 @@
+---
+import Base from "../../layouts/Base.astro";
+
+const title = "Steel Grating Technical Blog — Weight Formulas, Standards, and Sourcing Guides";
+const description = "Technical guides for specifying, calculating, and sourcing steel bar grating. NAAMM MBG 531, BS 4592, GB/T 12755. Weight formulas, load capacity, and Anping factory sourcing.";
+
+const posts = [
+  {
+    href: "/blog/how-to-calculate-steel-grating-weight/",
+    tag: "Technical Guide",
+    readTime: "8 min read",
+    title: "How to Calculate Steel Grating Weight: Formula + Free Calculator",
+    excerpt: "The exact formula used by engineers and procurement buyers to calculate bar grating weight per m². Step-by-step worked example with bearing bar and cross bar calculations.",
+  },
+  {
+    href: "/blog/naamm-bar-grating-designations/",
+    tag: "Standards Guide",
+    readTime: "6 min read",
+    title: "NAAMM Bar Grating Designations Explained (19-W-4, 15-W-4...)",
+    excerpt: "Decode NAAMM MBG 531 designation codes like 19-W-4 and 15-W-4. Find the equivalent metric specification from Anping, China with our conversion table.",
+  },
+  {
+    href: "/blog/plain-vs-serrated-steel-grating/",
+    tag: "Selection Guide",
+    readTime: "7 min read",
+    title: "Plain vs Serrated Steel Grating: When Do You Need Anti-Slip?",
+    excerpt: "When is serrated (notched) grating required? Applications, cost difference, weight difference, and which NAAMM/BS 4592 load classes are available in serrated form.",
+  },
+  {
+    href: "/blog/how-to-load-steel-grating-in-container/",
+    tag: "Shipping Guide",
+    readTime: "5 min read",
+    title: "How to Load Steel Grating in a 20' Container: A Buyer's Guide",
+    excerpt: "Exactly how many panels fit in a 20ft GP container? Stacking method, weight and volume limits, dunnage requirements. Use our container loading calculator to plan your shipment.",
+  },
+];
+---
+<Base title={title} description={description} lang="en">
+
+  <section class="max-w-5xl mx-auto px-4 py-10">
+
+    <nav class="text-xs text-theme-muted mb-6 flex items-center gap-2">
+      <a href="/" class="hover:text-theme-primary transition-colors">Home</a>
+      <span>/</span>
+      <span class="accent-text">Blog</span>
+    </nav>
+
+    <div class="mb-10">
+      <h1 class="text-3xl font-semibold text-theme-primary mb-3">Steel Grating Guides & Insights</h1>
+      <p class="text-theme-secondary max-w-2xl">Technical guides for specifying, calculating, and sourcing industrial bar grating. From weight formulas to container loading plans.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      {posts.map((post) => (
+        <a href={post.href} class="card card-accent group">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-xs font-mono accent-text uppercase tracking-wider">{post.tag}</span>
+            <span class="text-xs text-theme-muted">· {post.readTime}</span>
+          </div>
+          <h2 class="font-semibold text-lg text-theme-primary mb-2 group-hover:text-theme-secondary transition-colors leading-snug">{post.title}</h2>
+          <p class="text-sm text-theme-secondary leading-relaxed mb-4">{post.excerpt}</p>
+          <div class="flex items-center gap-1 text-sm accent-text opacity-80 group-hover:opacity-100 transition-opacity">
+            Read article
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+      ))}
+    </div>
+
+  </section>
+
+</Base>

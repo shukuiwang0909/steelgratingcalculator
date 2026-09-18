@@ -1,0 +1,129 @@
+---
+import Base from "../../layouts/Base.astro";
+import FaqJsonLd from "../../components/FaqJsonLd.astro";
+
+const faqs = [
+  ["What is the difference between SS 304 and SS 316 grating?", "Both are austenitic stainless steels. SS 304 (18% Cr, 8% Ni) is the most common and cost-effective choice for food, pharmaceutical, and mild chemical environments. SS 316 adds 2–3% molybdenum, significantly improving resistance to chlorides, marine environments, and aggressive chemicals."],
+  ["How much does stainless steel grating weigh compared to carbon steel?", "SS 304 has a density of 7.93 g/cm³ vs 7.85 for carbon steel — approximately 1% heavier. SS 316 is 7.98 g/cm³, about 1.7% heavier than carbon steel. The difference is small enough that most weight calculations treat them as equivalent."],
+  ["Can stainless steel grating be welded to carbon steel structures?", "Direct welding of stainless to carbon steel causes galvanic corrosion at the joint over time. The correct method is to isolate them with a stainless fastener or neoprene pad, or weld with an appropriate filler metal if structural attachment is required."],
+  ["What surface finish is standard for stainless steel grating?", "Anping factories typically supply stainless grating with a 2B (bright annealed) or No. 1 (hot-rolled, annealed, pickled) finish. Mirror polish (#4, #8) is available at extra cost. The welded cross-bar joints are typically left as-welded unless electropolishing is specified."],
+];
+---
+
+<Base title="Stainless Steel Grating — SS 304 / SS 316, Weight, and Sourcing | Anping" description="Stainless steel bar grating in SS 304 and SS 316L. Specifications, weight per m², corrosion resistance, food-grade and marine applications. Source from Anping, China.">
+
+  <article class="max-w-4xl mx-auto px-4 py-10">
+
+    <nav class="text-xs text-theme-muted mb-6 flex items-center gap-2">
+      <a href="/" class="hover:text-theme-primary transition-colors">Home</a>
+      <span>/</span>
+      <a href="/products/" class="hover:text-theme-primary transition-colors">Products</a>
+      <span>/</span>
+      <span class="accent-text">Stainless Steel Grating</span>
+    </nav>
+
+    <div class="mb-8">
+      <span class="text-xs font-mono accent-text uppercase tracking-wider">Product Guide</span>
+      <h1 class="text-4xl font-semibold text-theme-primary leading-tight mt-2 mb-4">Stainless Steel Bar Grating</h1>
+      <p class="text-lg text-theme-secondary leading-relaxed">SS 304 and SS 316L bar grating for food processing, pharmaceutical, marine, and chemical plant applications requiring corrosion resistance without coatings.</p>
+    </div>
+
+    <div class="mb-8 p-4 bg-theme-tertiary rounded-xl border border-theme flex items-center gap-4">
+      <div class="flex-1">
+        <p class="text-sm font-medium text-theme-primary">Calculate stainless grating weight</p>
+        <p class="text-xs text-theme-muted">Select SS 304 (7.93 g/cm³) or SS 316 (7.98 g/cm³) in the material dropdown.</p>
+      </div>
+      <a href="/tools/steel-grating-weight-calculator/" class="text-sm accent-text font-semibold hover:opacity-80 transition-opacity shrink-0 whitespace-nowrap">Weight Calculator →</a>
+    </div>
+
+    <div class="prose max-w-none text-theme-secondary leading-relaxed space-y-8">
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Grade Comparison: SS 304 vs SS 316</h2>
+        <div class="overflow-x-auto mt-3">
+          <table class="w-full text-sm">
+            <thead><tr class="border-b border-theme"><th class="text-left py-2 pr-4 text-theme-muted font-medium">Property</th><th class="text-right py-2 pr-4 text-theme-muted font-medium">SS 304</th><th class="text-right py-2 text-theme-muted font-medium">SS 316 / 316L</th></tr></thead>
+            <tbody class="text-theme-secondary">
+              {[
+                ["Composition", "18% Cr, 8% Ni", "16% Cr, 10% Ni, 2% Mo"],
+                ["Density", "7.93 g/cm³", "7.98 g/cm³"],
+                ["Tensile strength", "515 MPa min", "515 MPa min"],
+                ["Yield strength", "205 MPa min", "205 MPa min"],
+                ["Chloride resistance", "Limited", "Good (molybdenum addition)"],
+                ["Marine suitability", "Marginal", "Yes"],
+                ["Food/pharma use", "Yes (USDA/FDA OK)", "Yes (preferred)"],
+                ["Relative price", "Baseline", "+15–25%"],
+              ].map(([p, a, b]) => (
+                <tr class="border-b border-theme/50">
+                  <td class="py-2 pr-4 font-medium text-theme-primary">{p}</td>
+                  <td class="py-2 pr-4 text-right">{a}</td>
+                  <td class="py-2 text-right font-medium">{b}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Applications</h2>
+        <div class="grid md:grid-cols-2 gap-4 mt-4">
+          <div>
+            <h3 class="text-base font-semibold text-theme-primary mb-2">SS 304 Typical Applications</h3>
+            <ul class="space-y-1 text-sm text-theme-secondary">
+              {["Food processing facilities", "Breweries & distilleries", "Pharmaceutical cleanrooms", "Commercial kitchens", "Swimming pool surrounds"].map(a => (
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full accent-bg shrink-0"></span>{a}</li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-base font-semibold text-theme-primary mb-2">SS 316 Typical Applications</h3>
+            <ul class="space-y-1 text-sm text-theme-secondary">
+              {["Offshore marine structures", "Coastal industrial plants", "Chlorinated water treatment", "Chemical processing (mild acids/chlorides)", "Desalination plants"].map(a => (
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full accent-bg shrink-0"></span>{a}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Specifications Available</h2>
+        <p>Anping factories produce stainless grating in the same bearing bar sizes as carbon steel — from 20×3mm up to 65×6mm. Most common export spec: <strong class="text-theme-primary">25×5mm @ 30mm pitch, 6mm round cross bar @ 50mm, SS 304</strong>.</p>
+        <p class="mt-2">Both plain and serrated (anti-slip) top surface available. Panel dimensions up to 6000×1200mm. Custom cut-to-size available. Electropolished finish on request.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Ordering & Documentation</h2>
+        <ul class="list-disc pl-6 space-y-2 text-sm mt-2">
+          <li>Material test certificates (MTC per EN 10204 3.1 or 2.2) available</li>
+          <li>SGS / BV / TÜV third-party inspection available on request</li>
+          <li>Specify grade (304 / 316 / 316L) and surface finish (2B / No.1 / electropolished) in your inquiry</li>
+          <li>Typical MOQ: 3–5 tonnes; lead time 25–35 days FOB</li>
+        </ul>
+        <div class="mt-4">
+          <a href="/inquiry/?product=stainless-steel-grating" class="accent-bg hover:opacity-90 on-accent text-sm font-semibold px-4 py-2 rounded-lg transition-opacity">Get a Stainless Grating Quote</a>
+        </div>
+      </section>
+
+    </div>
+
+    <FaqJsonLd items={faqs.map(([q, a]) => ({ question: q, answer: a }))} inLanguage="en" />
+    <div class="mt-10 pt-8 border-t border-theme">
+      <h2 class="text-xl font-semibold text-theme-primary mb-5">Frequently Asked Questions</h2>
+      <div class="space-y-3">
+        {faqs.map(([q, a]) => (
+          <details class="card group">
+            <summary class="flex items-center justify-between cursor-pointer list-none">
+              <span class="font-medium text-theme-primary">{q}</span>
+              <svg class="w-5 h-5 text-theme-muted shrink-0 ml-4 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-3 text-sm text-theme-secondary leading-relaxed">{a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+
+  </article>
+
+</Base>

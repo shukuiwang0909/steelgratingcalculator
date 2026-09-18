@@ -1,0 +1,336 @@
+---
+import Base from "../../layouts/Base.astro";
+
+const title = "Steel Grating Open Area Percentage Calculator — Drainage & Ventilation | Free";
+const description = "Calculate the open area percentage of any steel bar grating specification. Critical for drainage, ventilation, and debris shedding design. Free online calculator.";
+---
+<Base title={title} description={description} lang="en">
+
+  <section class="max-w-6xl mx-auto px-4 py-10">
+
+    <nav class="text-xs text-theme-muted mb-6 flex items-center gap-2">
+      <a href="/" class="hover:text-theme-primary transition-colors">Home</a>
+      <span>/</span>
+      <a href="/tools/open-area-percentage-calculator/" class="accent-text">Open Area Calculator</a>
+    </nav>
+
+    <div class="mb-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-theme accent-border accent-text text-xs font-mono uppercase tracking-wider mb-4">
+        <span class="w-1.5 h-1.5 rounded-full accent-bg animate-pulse"></span>
+        Tool 03 · Drainage Design
+      </div>
+      <h1 class="text-3xl font-semibold text-theme-primary mb-3">Steel Grating Open Area Percentage Calculator</h1>
+      <p class="text-theme-secondary max-w-2xl leading-relaxed">
+        Calculate the open area percentage for any bar grating specification. Open area determines drainage capacity, ventilation flow, light transmission, and debris retention. Enter bearing bar and cross bar dimensions to get your result instantly.
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-[1fr_380px] gap-6">
+
+      <!-- LEFT: Inputs -->
+      <div class="space-y-5">
+
+        <!-- Bearing Bars -->
+        <div class="card">
+          <h2 class="text-sm font-semibold text-theme-primary uppercase tracking-wide mb-4 flex items-center gap-2">
+            <span class="w-1 h-4 accent-bg rounded-full"></span>
+            Bearing Bars
+          </h2>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="label" for="oa-bb-thick">Thickness (mm)</label>
+              <select id="oa-bb-thick" class="select">
+                <option value="3">3 mm</option>
+                <option value="4">4 mm</option>
+                <option value="5" selected>5 mm</option>
+              </select>
+              <p class="input-hint">Top face width = thickness T</p>
+            </div>
+            <div>
+              <label class="label" for="oa-bb-pitch">Pitch c/c (mm)</label>
+              <select id="oa-bb-pitch" class="select">
+                <option value="11">11 mm</option>
+                <option value="15">15 mm</option>
+                <option value="22">22 mm</option>
+                <option value="30" selected>30 mm</option>
+                <option value="34">34 mm</option>
+                <option value="40">40 mm</option>
+                <option value="41">41 mm</option>
+                <option value="60">60 mm</option>
+                <option value="76">76 mm</option>
+              </select>
+              <p class="input-hint">Clear space = pitch − thickness</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross Bars -->
+        <div class="card">
+          <h2 class="text-sm font-semibold text-theme-primary uppercase tracking-wide mb-4 flex items-center gap-2">
+            <span class="w-1 h-4 accent-bg rounded-full"></span>
+            Cross Bars
+          </h2>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="label" for="oa-xb-size">Size / Diameter (mm)</label>
+              <select id="oa-xb-size" class="select">
+                <option value="5">5 mm</option>
+                <option value="6" selected>6 mm</option>
+                <option value="8">8 mm</option>
+                <option value="10">10 mm</option>
+                <option value="12">12 mm</option>
+              </select>
+              <p class="input-hint">Round rod diameter or square side</p>
+            </div>
+            <div>
+              <label class="label" for="oa-xb-pitch">Pitch (mm)</label>
+              <select id="oa-xb-pitch" class="select">
+                <option value="25">25 mm</option>
+                <option value="50" selected>50 mm</option>
+                <option value="76.2">76.2 mm</option>
+                <option value="100">100 mm</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formula -->
+        <div class="card bg-theme-tertiary">
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-theme-muted mb-3">Formula</h3>
+          <div class="font-mono text-sm accent-text">
+            <p>OpenArea% =</p>
+            <p class="ml-4">[(P_bb − T_bb) / P_bb]</p>
+            <p class="ml-4">× [(P_xb − d_xb) / P_xb]</p>
+            <p class="ml-4">× 100</p>
+          </div>
+          <div class="mt-4 text-xs text-theme-secondary space-y-1">
+            <p><span class="text-theme-muted">P_bb</span> = Bearing bar pitch (c/c)</p>
+            <p><span class="text-theme-muted">T_bb</span> = Bearing bar thickness</p>
+            <p><span class="text-theme-muted">P_xb</span> = Cross bar pitch (c/c)</p>
+            <p><span class="text-theme-muted">d_xb</span> = Cross bar diameter or side</p>
+          </div>
+        </div>
+
+        <!-- Application guide -->
+        <div class="card">
+          <h2 class="text-sm font-semibold text-theme-primary uppercase tracking-wide mb-4 flex items-center gap-2">
+            <span class="w-1 h-4 accent-bg rounded-full"></span>
+            Application Guide by Open Area
+          </h2>
+          <div class="space-y-2 text-sm">
+            <div class="flex items-start gap-3 p-3 bg-theme-tertiary rounded-lg">
+              <span class="w-3 h-3 rounded-full bg-red-500 mt-0.5 shrink-0"></span>
+              <div>
+                <p class="font-medium text-theme-primary">&lt; 40% — Minimal Drainage</p>
+                <p class="text-theme-secondary text-xs mt-0.5">Structural floors, heavy vehicle areas. Not recommended for water-intensive environments.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 p-3 bg-theme-tertiary rounded-lg">
+              <span class="w-3 h-3 rounded-full bg-amber-400 mt-0.5 shrink-0"></span>
+              <div>
+                <p class="font-medium text-theme-primary">40–55% — Standard Industrial</p>
+                <p class="text-theme-secondary text-xs mt-0.5">Most common range. Suitable for walkways, platforms, mezzanines. Handles moderate drainage.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 p-3 bg-theme-tertiary rounded-lg">
+              <span class="w-3 h-3 rounded-full bg-green-400 mt-0.5 shrink-0"></span>
+              <div>
+                <p class="font-medium text-theme-primary">55–70% — Good Drainage</p>
+                <p class="text-theme-secondary text-xs mt-0.5">Suitable for wet processing areas, trench covers, oil & gas decks.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 p-3 bg-theme-tertiary rounded-lg">
+              <span class="w-3 h-3 rounded-full bg-emerald-400 mt-0.5 shrink-0"></span>
+              <div>
+                <p class="font-medium text-theme-primary">&gt; 70% — High Flow</p>
+                <p class="text-theme-secondary text-xs mt-0.5">Drainage grates, screens, filtration applications. Maximum water and air throughput.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: Results -->
+      <div>
+        <div class="card sticky top-20 space-y-4">
+          <h2 class="text-sm font-semibold text-theme-primary uppercase tracking-wide">Open Area Results</h2>
+
+          <!-- Big donut visual -->
+          <div class="flex flex-col items-center py-4">
+            <div class="relative w-40 h-40">
+              <svg viewBox="0 0 100 100" class="w-full h-full -rotate-90">
+                <circle cx="50" cy="50" r="38" fill="none" stroke="currentColor" stroke-width="12" class="text-theme-tertiary"/>
+                <circle id="donut-arc" cx="50" cy="50" r="38" fill="none" stroke="currentColor" stroke-width="12"
+                  stroke-dasharray="238.76" stroke-dashoffset="238.76" stroke-linecap="round"
+                  class="accent-text transition-all duration-500"/>
+              </svg>
+              <div class="absolute inset-0 flex flex-col items-center justify-center">
+                <p id="result-pct-big" class="text-3xl font-bold text-theme-primary font-mono">—</p>
+                <p class="text-xs text-theme-muted">open</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-4 accent-bg rounded-lg text-center">
+            <p class="text-xs uppercase tracking-wide mb-1 on-accent opacity-80">Open Area Percentage</p>
+            <p id="result-open" class="text-3xl font-bold on-accent font-mono">—</p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div class="p-3 bg-theme-tertiary rounded-lg border border-theme text-center">
+              <p class="text-xs text-theme-muted uppercase tracking-wide mb-1">Solid Area</p>
+              <p id="result-solid" class="text-xl font-bold text-theme-primary font-mono">—</p>
+            </div>
+            <div class="p-3 bg-theme-tertiary rounded-lg border border-theme text-center">
+              <p class="text-xs text-theme-muted uppercase tracking-wide mb-1">BB Open %</p>
+              <p id="result-bb-open" class="text-xl font-bold text-theme-primary font-mono">—</p>
+            </div>
+          </div>
+
+          <div class="p-3 bg-theme-tertiary rounded-lg border border-theme">
+            <p class="text-xs text-theme-muted uppercase tracking-wide mb-1">Suitability Rating</p>
+            <div id="result-rating" class="flex items-center gap-2 mt-1">
+              <span id="rating-dot" class="w-3 h-3 rounded-full bg-theme-muted shrink-0"></span>
+              <p id="rating-text" class="text-sm font-medium text-theme-primary">—</p>
+            </div>
+          </div>
+
+          <div class="p-3 bg-theme-tertiary rounded-lg border border-theme text-xs font-mono text-theme-secondary">
+            <p class="text-theme-muted mb-1">Bearing bar clear gap:</p>
+            <p id="result-bb-gap" class="accent-text">—</p>
+            <p class="text-theme-muted mt-2 mb-1">Cross bar clear gap:</p>
+            <p id="result-xb-gap" class="accent-text">—</p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <button id="btn-copy-oa" class="flex items-center justify-center gap-2 border border-theme rounded-lg py-2 text-sm text-theme-secondary hover:text-theme-primary transition-all">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+              Copy
+            </button>
+            <a href="/inquiry/" class="flex items-center justify-center gap-2 accent-bg rounded-lg py-2 text-sm font-semibold on-accent hover:opacity-90 transition-opacity">
+              Get a Quote
+            </a>
+          </div>
+          <p id="oa-copy-feedback" class="hidden text-xs text-center text-green-400">Copied!</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Related tools -->
+    <div class="mt-12 pt-8 border-t border-theme">
+      <h2 class="text-lg font-semibold text-theme-primary mb-4">Related Tools</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        <a href="/tools/steel-grating-weight-calculator/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">Tool 01</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">Weight Calculator</h3>
+          <p class="text-sm text-theme-secondary mt-1">kg/m², panel weight and order weight.</p>
+        </a>
+        <a href="/tools/bar-grating-load-capacity-calculator/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">Tool 02</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">Load Capacity</h3>
+          <p class="text-sm text-theme-secondary mt-1">NAAMM & BS 4592 allowable UDL and point load.</p>
+        </a>
+        <a href="/tools/panel-count-estimator/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">Tool 04</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">Panel Count Estimator</h3>
+          <p class="text-sm text-theme-secondary mt-1">Calculate how many panels you need for a project.</p>
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+</Base>
+
+<script>
+(function () {
+  const $ = (id: string) => document.getElementById(id) as HTMLElement;
+  const getNum = (id: string) => parseFloat((document.getElementById(id) as HTMLInputElement | HTMLSelectElement)?.value || '0') || 0;
+
+  const CIRCUMFERENCE = 2 * Math.PI * 38; // ≈ 238.76
+
+  function calc(): void {
+    const T_bb = getNum('oa-bb-thick');
+    const P_bb = getNum('oa-bb-pitch');
+    const d_xb = getNum('oa-xb-size');
+    const P_xb = getNum('oa-xb-pitch');
+
+    if (!T_bb || !P_bb || !d_xb || !P_xb) return;
+
+    const bb_open_frac = (P_bb - T_bb) / P_bb;
+    const xb_open_frac = (P_xb - d_xb) / P_xb;
+    const open_pct = bb_open_frac * xb_open_frac * 100;
+    const solid_pct = 100 - open_pct;
+    const bb_gap = P_bb - T_bb;
+    const xb_gap = P_xb - d_xb;
+
+    // Rating
+    let ratingColor = 'bg-theme-muted', ratingText = '—';
+    if (open_pct < 40) { ratingColor = 'bg-red-500'; ratingText = 'Minimal drainage — structural use only'; }
+    else if (open_pct < 55) { ratingColor = 'bg-amber-400'; ratingText = 'Standard industrial — walkways, platforms'; }
+    else if (open_pct < 70) { ratingColor = 'bg-green-400'; ratingText = 'Good drainage — wet/process areas'; }
+    else { ratingColor = 'bg-emerald-400'; ratingText = 'Excellent drainage — high-flow applications'; }
+
+    // Update DOM
+    const bigEl = $('result-pct-big');
+    if (bigEl) bigEl.textContent = open_pct.toFixed(1) + '%';
+    const openEl = $('result-open');
+    if (openEl) openEl.textContent = open_pct.toFixed(2) + '%';
+    const solidEl = $('result-solid');
+    if (solidEl) solidEl.textContent = solid_pct.toFixed(2) + '%';
+    const bbOpenEl = $('result-bb-open');
+    if (bbOpenEl) bbOpenEl.textContent = (bb_open_frac * 100).toFixed(1) + '%';
+    const bbGapEl = $('result-bb-gap');
+    if (bbGapEl) bbGapEl.textContent = `${bb_gap} mm clear between bars`;
+    const xbGapEl = $('result-xb-gap');
+    if (xbGapEl) xbGapEl.textContent = `${xb_gap.toFixed(1)} mm clear between cross bars`;
+    const dotEl = $('rating-dot');
+    if (dotEl) { dotEl.className = `w-3 h-3 rounded-full shrink-0 ${ratingColor}`; }
+    const ratingTextEl = $('rating-text');
+    if (ratingTextEl) ratingTextEl.textContent = ratingText;
+
+    // Donut animation
+    const arc = document.getElementById('donut-arc') as SVGCircleElement | null;
+    if (arc) {
+      const offset = CIRCUMFERENCE * (1 - open_pct / 100);
+      arc.style.strokeDashoffset = String(offset);
+    }
+  }
+
+  function copyResult(): void {
+    const open = $('result-open')?.textContent || '';
+    const solid = $('result-solid')?.textContent || '';
+    const rating = $('rating-text')?.textContent || '';
+    const T_bb = getNum('oa-bb-thick'), P_bb = getNum('oa-bb-pitch');
+    const d_xb = getNum('oa-xb-size'), P_xb = getNum('oa-xb-pitch');
+    const text = [
+      `Steel Grating Open Area Calculation`,
+      `BB: ${T_bb}mm thick @ ${P_bb}mm pitch | XB: ${d_xb}mm @ ${P_xb}mm pitch`,
+      `---`,
+      `Open Area: ${open}`,
+      `Solid Area: ${solid}`,
+      `Rating: ${rating}`,
+      `Calculated on SteelGratingCalculator.com`,
+    ].join('\n');
+    navigator.clipboard.writeText(text).then(() => {
+      const fb = $('oa-copy-feedback');
+      if (fb) { fb.classList.remove('hidden'); setTimeout(() => fb.classList.add('hidden'), 2500); }
+    });
+  }
+
+  document.querySelectorAll('#oa-bb-thick,#oa-bb-pitch,#oa-xb-size,#oa-xb-pitch')
+    .forEach(el => el.addEventListener('change', calc));
+  document.getElementById('btn-copy-oa')?.addEventListener('click', copyResult);
+
+  calc();
+})();
+</script>
+
+<style>
+  .label { display:block; font-size:.75rem; font-weight:600; margin-bottom:.25rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:.05em; }
+  .select { width:100%; border:1px solid var(--border-color); border-radius:.5rem; padding:.5rem .75rem; background-color:var(--bg-secondary); color:var(--text-primary); font-size:.875rem; outline:none; transition:all .2s; }
+  .select:focus { box-shadow:0 0 0 1px #f59e0b; }
+  .input-hint { margin-top:.25rem; font-size:.75rem; color:var(--text-muted); }
+</style>

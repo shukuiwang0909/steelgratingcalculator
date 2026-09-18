@@ -1,0 +1,185 @@
+---
+import Base from "../../layouts/Base.astro";
+
+const title = "Steel Grating Weight Chart — Quick Reference kg/m² for Common Specifications";
+const description = "Quick reference chart for steel grating weight per m². Carbon steel, stainless, and aluminum. Most common bearing bar and pitch combinations in a single table. No calculation needed.";
+
+// Weight matrix: BB size → [20, 30, 40, 60] mm pitch
+const SPECS = [
+  { bb: "20×3 mm", pitch: [20, 30, 40, 60] },
+  { bb: "25×3 mm", pitch: [20, 30, 40, 60] },
+  { bb: "25×5 mm", pitch: [22, 30, 34, 40] },
+  { bb: "30×3 mm", pitch: [22, 30, 40, 60] },
+  { bb: "30×5 mm", pitch: [22, 30, 34, 40] },
+  { bb: "35×5 mm", pitch: [22, 30, 34, 40] },
+  { bb: "40×5 mm", pitch: [22, 30, 40, 60] },
+  { bb: "50×5 mm", pitch: [22, 30, 40, 60] },
+  { bb: "65×5 mm", pitch: [22, 30, 40, 60] },
+];
+
+// Cross bar: 6mm round @ 50mm pitch (standard)
+const XB_W = (Math.PI / 4 * 36 * 7.85) / 50; // ≈ 4.45 kg/m²
+
+function bbWeight(H: number, T: number, P: number, rho = 7.85) {
+  return (H * T * rho) / P;
+}
+function totalW(H: number, T: number, P: number, rho = 7.85) {
+  return (bbWeight(H, T, P, rho) + XB_W * (rho / 7.85)).toFixed(2);
+}
+
+// Parse "25×5 mm" → {H: 25, T: 5}
+function parseSpec(s: string) {
+  const m = s.match(/(\d+)×(\d+)/);
+  return m ? { H: parseInt(m[1]), T: parseInt(m[2]) } : { H: 0, T: 0 };
+}
+
+// Popular specs for the compact table (BB size × 4 pitches)
+const POPULAR = [
+  { label: "20×3@30", bb: "20×3 mm", P: 30 },
+  { label: "25×3@30", bb: "25×3 mm", P: 30 },
+  { label: "25×5@22", bb: "25×5 mm", P: 22 },
+  { label: "25×5@30", bb: "25×5 mm", P: 30 },
+  { label: "25×5@34", bb: "25×5 mm", P: 34 },
+  { label: "30×5@30", bb: "30×5 mm", P: 30 },
+  { label: "35×5@30", bb: "35×5 mm", P: 30 },
+  { label: "40×5@30", bb: "40×5 mm", P: 30 },
+  { label: "50×5@30", bb: "50×5 mm", P: 30 },
+  { label: "65×5@30", bb: "65×5 mm", P: 30 },
+  { label: "40×5@22", bb: "40×5 mm", P: 22 },
+  { label: "50×5@22", bb: "50×5 mm", P: 22 },
+];
+---
+<Base title={title} description={description} lang="en">
+
+  <section class="max-w-6xl mx-auto px-4 py-10">
+
+    <nav class="text-xs text-theme-muted mb-6 flex items-center gap-2">
+      <a href="/" class="hover:text-theme-primary transition-colors">Home</a>
+      <span>/</span>
+      <a href="/charts/grating-weight-chart/" class="accent-text">Grating Weight Chart</a>
+    </nav>
+
+    <div class="mb-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-theme accent-border accent-text text-xs font-mono uppercase tracking-wider mb-4">
+        <span class="w-1.5 h-1.5 rounded-full accent-bg"></span>
+        Spec Chart · GB/T 12755
+      </div>
+      <h1 class="text-3xl font-semibold text-theme-primary mb-3">Steel Grating Weight Quick Reference Chart</h1>
+      <p class="text-theme-secondary max-w-2xl leading-relaxed">
+        Pre-calculated weight per m² for the most common bar grating specifications. Cross bar: 6 mm round at 50 mm pitch. Carbon steel (7.85 g/cm³). For other specs, use the <a href="/tools/steel-grating-weight-calculator/" class="accent-text hover:opacity-80">weight calculator</a>.
+      </p>
+    </div>
+
+    <!-- Popular specs quick table -->
+    <div class="card mb-8">
+      <h2 class="text-base font-semibold text-theme-primary mb-4">Most Common Specifications</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-theme">
+              <th class="text-left py-2 pr-4 text-theme-muted text-xs font-semibold uppercase tracking-wide">Bearing Bar</th>
+              <th class="text-right py-2 pr-4 text-theme-muted text-xs font-semibold uppercase tracking-wide">BB Pitch (mm)</th>
+              <th class="text-right py-2 pr-4 text-theme-muted text-xs font-semibold uppercase tracking-wide">Carbon Steel</th>
+              <th class="text-right py-2 pr-4 text-theme-muted text-xs font-semibold uppercase tracking-wide">SS 304</th>
+              <th class="text-right py-2 text-theme-muted text-xs font-semibold uppercase tracking-wide">Aluminum</th>
+            </tr>
+          </thead>
+          <tbody>
+            {POPULAR.map((row) => {
+              const { H, T } = parseSpec(row.bb);
+              const steel = totalW(H, T, row.P, 7.85);
+              const ss = totalW(H, T, row.P, 7.93);
+              const al = totalW(H, T, row.P, 2.7);
+              const isPopular = row.label === "25×5@30";
+              return (
+                <tr class={`border-b border-theme/50 ${isPopular ? 'bg-theme-tertiary' : ''}`}>
+                  <td class="py-2 pr-4 font-mono text-theme-primary font-medium">{row.bb}</td>
+                  <td class="py-2 pr-4 text-right font-mono text-theme-secondary">{row.P}</td>
+                  <td class="py-2 pr-4 text-right font-mono">
+                    <span class={isPopular ? 'accent-text font-bold' : 'text-theme-primary'}>{steel} kg/m²</span>
+                    {isPopular && <span class="ml-2 text-xs text-theme-muted">(standard)</span>}
+                  </td>
+                  <td class="py-2 pr-4 text-right font-mono text-theme-secondary">{ss} kg/m²</td>
+                  <td class="py-2 text-right font-mono text-theme-secondary">{al} kg/m²</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-theme-muted mt-3">Cross bar: 6 mm round @ 50 mm pitch included. Galvanized: add ~4% (ISO 1461). Values ±2–3%.</p>
+    </div>
+
+    <!-- Full matrix table -->
+    <div class="card mb-8">
+      <h2 class="text-base font-semibold text-theme-primary mb-4">Carbon Steel Weight Matrix (kg/m²) — 6 mm Round XB @ 50 mm</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-theme">
+              <th class="text-left py-2 pr-6 text-theme-muted text-xs font-semibold uppercase tracking-wide">Bearing Bar</th>
+              {SPECS[0].pitch.map(p => (
+                <th class="text-right py-2 px-3 text-theme-muted text-xs font-semibold uppercase tracking-wide">{p} mm pitch</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {SPECS.map((row) => {
+              const { H, T } = parseSpec(row.bb);
+              return (
+                <tr class="border-b border-theme/50 hover:bg-theme-tertiary transition-colors">
+                  <td class="py-2 pr-6 font-mono text-theme-primary font-medium">{row.bb}</td>
+                  {row.pitch.map(P => (
+                    <td class="py-2 px-3 text-right font-mono text-theme-secondary">
+                      {totalW(H, T, P)}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Galvanized note + CTA -->
+    <div class="grid md:grid-cols-2 gap-4 mb-8">
+      <div class="card bg-theme-tertiary">
+        <h3 class="font-semibold text-theme-primary mb-2 text-sm">For Galvanized Grating</h3>
+        <p class="text-sm text-theme-secondary">Hot-dip galvanized grating adds approximately <span class="accent-text font-semibold">+4%</span> to the bare weight (610 g/m² zinc coating per ISO 1461). Multiply any value in the table by 1.04.</p>
+        <p class="text-xs text-theme-muted mt-2">Example: 25×5@30 carbon = 37.05 kg/m² → galvanized ≈ 38.5 kg/m²</p>
+      </div>
+      <div class="card bg-theme-tertiary">
+        <h3 class="font-semibold text-theme-primary mb-2 text-sm">Need a Custom Calculation?</h3>
+        <p class="text-sm text-theme-secondary mb-3">Use the full calculator for any bearing bar size, cross bar type (round/twisted square), panel dimensions, and order quantity.</p>
+        <a href="/tools/steel-grating-weight-calculator/" class="inline-flex items-center gap-2 accent-bg hover:opacity-90 text-sm font-semibold px-4 py-2 rounded-lg transition-opacity on-accent">
+          Open Weight Calculator →
+        </a>
+      </div>
+    </div>
+
+    <!-- Related tools -->
+    <div class="pt-8 border-t border-theme">
+      <h2 class="text-lg font-semibold text-theme-primary mb-4">Related Charts & Tools</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        <a href="/tools/steel-grating-weight-calculator/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">Tool 01</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">Weight Calculator</h3>
+          <p class="text-sm text-theme-secondary mt-1">Any spec — with cross bar type, material, panel size, quantity.</p>
+        </a>
+        <a href="/tools/bar-grating-load-capacity-calculator/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">Tool 02</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">Load Capacity</h3>
+          <p class="text-sm text-theme-secondary mt-1">NAAMM & BS 4592 allowable UDL and deflection.</p>
+        </a>
+        <a href="/tools/open-area-percentage-calculator/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">Tool 03</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">Open Area %</h3>
+          <p class="text-sm text-theme-secondary mt-1">Drainage and ventilation open area calculation.</p>
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+</Base>

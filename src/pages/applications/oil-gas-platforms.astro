@@ -1,0 +1,121 @@
+---
+import Base from "../../layouts/Base.astro";
+import FaqJsonLd from "../../components/FaqJsonLd.astro";
+
+const faqs = [
+  ["What grating specification is standard for offshore oil & gas platforms?", "The most common offshore spec is 25×5mm serrated bearing bars at 30mm c/c pitch, 6mm round cross bar at 50mm pitch, hot-dip galvanized to ISO 1461. This meets NORSOK M-001 and most major operator standards. IP ratings and coating inspection certificates are typically required."],
+  ["Why must offshore grating be serrated?", "Sea spray, condensation, and hydrocarbon liquids create consistently wet surfaces on offshore structures. Serrated grating reduces slip risk on wet decks. Most operator HSE requirements mandate serrated grating on all offshore walkways and working platforms."],
+  ["Can epoxy-coated grating replace hot-dip galvanized offshore?", "Not typically. Hot-dip galvanizing provides a metallurgically bonded coating that resists impact damage and undercutting corrosion better than paint systems. For highly corrosive tropical offshore environments, some operators specify both galvanizing plus a topcoat of epoxy or polyurethane."],
+  ["What documentation is required for offshore grating?", "Typically: mill certificates (material grade), galvanizing certificate (coating weight), dimensional inspection certificate, and sometimes third-party verification (BV, DNV, LR, or SGS). Specify documentation requirements in your inquiry."],
+];
+---
+
+<Base title="Steel Grating for Oil & Gas Offshore Platforms — Specs & Standards | Anping" description="Offshore oil and gas platform grating: 25×5mm serrated hot-dip galvanized, NORSOK M-001 compliance, documentation requirements. Source from Anping grating factories.">
+
+  <article class="max-w-4xl mx-auto px-4 py-10">
+
+    <nav class="text-xs text-theme-muted mb-6 flex items-center gap-2">
+      <a href="/" class="hover:text-theme-primary transition-colors">Home</a>
+      <span>/</span>
+      <a href="/applications/" class="hover:text-theme-primary transition-colors">Applications</a>
+      <span>/</span>
+      <span class="accent-text">Oil & Gas Platforms</span>
+    </nav>
+
+    <div class="mb-8">
+      <span class="text-xs font-mono accent-text uppercase tracking-wider">Application Guide</span>
+      <h1 class="text-4xl font-semibold text-theme-primary leading-tight mt-2 mb-4">Steel Grating for Oil & Gas Offshore Platforms</h1>
+      <p class="text-lg text-theme-secondary leading-relaxed">Serrated hot-dip galvanized bar grating for offshore production platforms, FPSOs, drilling rigs, and topside structures. High corrosion resistance, anti-slip, and compliance with major offshore standards.</p>
+    </div>
+
+    <div class="prose max-w-none text-theme-secondary leading-relaxed space-y-8">
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Standard Offshore Specification</h2>
+        <div class="grid md:grid-cols-2 gap-4 mt-3">
+          {[
+            { label: "Bearing bar", value: "25×5mm serrated @ 30mm pitch" },
+            { label: "Cross bar", value: "6mm round @ 50mm pitch" },
+            { label: "Material", value: "Carbon steel Q235 / A36 / S275" },
+            { label: "Surface finish", value: "Hot-dip galvanized ISO 1461" },
+            { label: "Min. coating thickness", value: "55–70 μm (ISO 1461 Grade A)" },
+            { label: "Panel standard", value: "GB/T 12755 / NAAMM MBG 531" },
+          ].map(({ label, value }) => (
+            <div class="flex items-start gap-3">
+              <span class="text-xs text-theme-muted font-medium uppercase tracking-wide mt-0.5 shrink-0 w-36">{label}</span>
+              <span class="font-semibold text-theme-primary">{value}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Applicable Standards</h2>
+        <div class="grid md:grid-cols-2 gap-4 mt-3">
+          {[
+            { std: "NORSOK M-001", desc: "Norwegian offshore standard for materials selection. Specifies hot-dip galvanized serrated grating for topside walkways and platforms." },
+            { std: "ISO 1461 / EN ISO 1461", desc: "Hot-dip galvanizing specification. Minimum average coating 55 μm for 3–6mm steel sections." },
+            { std: "NAAMM MBG 531", desc: "Bar grating specification. Serrated (I-series) designation for anti-slip surface." },
+            { std: "API / OSHA 1910.28", desc: "Safe walking-working surfaces. Maximum 1-inch (25mm) opening in the least dimension for working surfaces." },
+          ].map(({ std, desc }) => (
+            <div class="card">
+              <div class="font-mono text-sm accent-text font-semibold mb-1">{std}</div>
+              <p class="text-sm text-theme-secondary">{desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Offshore Applications</h2>
+        <ul class="grid md:grid-cols-2 gap-2 mt-3 text-sm">
+          {[
+            "Production platform main decks", "Drill floor gratings",
+            "FPSO accommodation decks", "Helideck perimeter walkways",
+            "Subsea topside access bridges", "Escape route floors",
+            "Module and equipment access platforms", "Jetty and loading arm walkways"
+          ].map(app => (
+            <li class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full accent-bg shrink-0"></span>
+              <span class="text-theme-secondary">{app}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Documentation Package</h2>
+        <p>Offshore procurement typically requires the following documentation from the Anping factory:</p>
+        <ul class="list-disc pl-6 space-y-1 mt-2 text-sm">
+          <li>Material test certificate (MTC) — chemical composition and mechanical properties</li>
+          <li>Galvanizing certificate — coating weight per m², test method, compliance to ISO 1461</li>
+          <li>Dimensional inspection certificate</li>
+          <li>Weld inspection report (visual, and MT/PT on request)</li>
+          <li>Third-party verification (SGS / BV / DNV / LR) on request</li>
+        </ul>
+        <div class="mt-4">
+          <a href="/inquiry/?product=galvanized-grating" class="accent-bg hover:opacity-90 on-accent text-sm font-semibold px-4 py-2 rounded-lg transition-opacity">Request Offshore Grating Quote</a>
+        </div>
+      </section>
+
+    </div>
+
+    <FaqJsonLd items={faqs.map(([q, a]) => ({ question: q, answer: a }))} inLanguage="en" />
+    <div class="mt-10 pt-8 border-t border-theme">
+      <h2 class="text-xl font-semibold text-theme-primary mb-5">FAQs</h2>
+      <div class="space-y-3">
+        {faqs.map(([q, a]) => (
+          <details class="card group">
+            <summary class="flex items-center justify-between cursor-pointer list-none">
+              <span class="font-medium text-theme-primary">{q}</span>
+              <svg class="w-5 h-5 text-theme-muted shrink-0 ml-4 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-3 text-sm text-theme-secondary leading-relaxed">{a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+
+  </article>
+
+</Base>

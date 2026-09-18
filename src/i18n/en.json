@@ -1,0 +1,102 @@
+{
+  "nav": {
+    "home": "Home",
+    "tools": "Calculators",
+    "charts": "Spec Charts",
+    "whyAnping": "Why Anping",
+    "factories": "Factories",
+    "getQuote": "Get a Quote"
+  },
+  "hero": {
+    "badge": "NAAMM MBG 531 · BS 4592 · GB/T 12755",
+    "title1": "Steel Grating Calculators.",
+    "title2": "Exact Weight",
+    "title3": "& Load Capacity.",
+    "subtitle": "Free bar grating weight, load capacity, open area, and container loading calculators. Built for engineers and procurement buyers sourcing from Anping, China. No signup. No ads.",
+    "tryCalculator": "Calculate Weight",
+    "browseFactories": "Browse Factories",
+    "stats": {
+      "tools": "Free Calculators",
+      "factories": "Anping Factories",
+      "free": "Always Free"
+    }
+  },
+  "tools": {
+    "badge": "Free Tools",
+    "title": "Engineering Calculators",
+    "items": [
+      {
+        "tag": "Most Popular",
+        "title": "Steel Grating Weight Calculator",
+        "desc": "Get kg/m² and total panel weight instantly. Supports carbon steel, stainless 304/316, and aluminum.",
+        "open": "Open calculator"
+      },
+      {
+        "tag": "For Engineers",
+        "title": "Bar Grating Load Capacity",
+        "desc": "Max allowable UDL and point load by span. NAAMM MBG 531 and BS 4592 dual-standard results.",
+        "open": "Open calculator"
+      },
+      {
+        "tag": "Drainage Design",
+        "title": "Open Area Percentage",
+        "desc": "Calculate the open area % of any grating specification. Critical for drainage and ventilation design.",
+        "open": "Open calculator"
+      }
+    ]
+  },
+  "process": {
+    "badge": "Process",
+    "title": "How It Works",
+    "steps": [
+      {
+        "num": "01",
+        "title": "Enter your specification",
+        "desc": "Input bearing bar size, pitch, cross bar size, and panel dimensions. Results update instantly."
+      },
+      {
+        "num": "02",
+        "title": "Verify load capacity",
+        "desc": "Check your spec meets the required load class per NAAMM MBG 531 or BS 4592 for your span."
+      },
+      {
+        "num": "03",
+        "title": "Source direct from Anping",
+        "desc": "Send your verified specification to matched Anping factories — no middlemen, no trading companies."
+      }
+    ]
+  },
+  "products": {
+    "badge": "Products",
+    "title": "Product Guides"
+  },
+  "applications": {
+    "badge": "Applications",
+    "title": "Application Guides"
+  },
+  "whyAnping": {
+    "badge": "Why Anping",
+    "title": "The Steel Grating Capital of China",
+    "desc": "Anping County in Hebei Province produces the majority of China's wire mesh — and is also the largest steel grating manufacturing hub in China. Over 1,700 metal product enterprises cover the full spectrum: plain, serrated, galvanized, stainless, and aluminum grating, stair treads, trench covers, and custom fabrications. Decades of clustered supply chains mean competitive pricing, deep technical know-how, and fast sampling.",
+    "learnMore": "Learn more about Anping"
+  },
+  "faq": {
+    "badge": "FAQ",
+    "title": "Frequently Asked Questions"
+  },
+  "cta": {
+    "title": "Ready to Source Steel Grating?",
+    "desc": "Send your specification to matched Anping factories. No middlemen, no trading company markups.",
+    "button": "Send an Inquiry"
+  },
+  "footer": {
+    "tagline": "Free steel grating calculators and direct factory sourcing from Anping, Hebei — China's steel grating manufacturing hub.",
+    "legal": "Legal",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "disclaimer": "Disclaimer",
+    "contact": "Contact",
+    "disclaimerText": "Calculations are theoretical estimates for reference only. Always verify with a qualified engineer before use on site. We do not participate in transactions; verify suppliers independently.",
+    "copyright": "© 2026 SteelGratingCalculator. All tools are free."
+  }
+}

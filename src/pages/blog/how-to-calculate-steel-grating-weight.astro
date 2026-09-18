@@ -1,0 +1,158 @@
+---
+import Base from "../../layouts/Base.astro";
+import FaqJsonLd from "../../components/FaqJsonLd.astro";
+
+const title = "How to Calculate Steel Grating Weight: Formula + Free Calculator";
+const description = "The exact formula to calculate steel bar grating weight per m² and per panel. Bearing bar + cross bar method, worked example for 25×5mm @ 30mm pitch. Free online calculator.";
+
+const faqs = [
+  ["What formula is used to calculate steel grating weight?", "The standard formula is: W_bb = H × T × ρ / P_bb for bearing bars, and W_xb = π/4 × d² × ρ / P_xb for round cross bars. Total weight = W_bb + W_xb (kg/m²)."],
+  ["What density should I use for carbon steel grating?", "Use 7.85 g/cm³ (or 7850 kg/m³) for carbon and low-alloy structural steel (A36, Q235, S275). Stainless 304 uses 7.93, stainless 316 uses 7.98, aluminum 6061 uses 2.70."],
+  ["How accurate are grating weight calculations?", "Typically ±2–3% for standard welded grating. For serrated bars, allow an additional 2–5% for material removed. For hot-dip galvanized grating, add approximately 4% for the zinc coating."],
+  ["What is the weight of standard 25×5mm @ 30mm pitch grating?", "25×5mm bearing bar at 30mm pitch + 6mm round cross bar at 50mm pitch in carbon steel weighs approximately 37.1 kg/m². Use our calculator for exact results with your cross bar configuration."],
+];
+---
+<Base title={title} description={description} lang="en" ogType="article">
+
+  <article class="max-w-3xl mx-auto px-4 py-10">
+
+    <nav class="text-xs text-theme-muted mb-6 flex items-center gap-2">
+      <a href="/" class="hover:text-theme-primary transition-colors">Home</a>
+      <span>/</span>
+      <a href="/blog/" class="hover:text-theme-primary transition-colors">Blog</a>
+      <span>/</span>
+      <span class="accent-text">Steel Grating Weight Formula</span>
+    </nav>
+
+    <div class="mb-8">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="text-xs font-mono accent-text uppercase tracking-wider">Technical Guide</span>
+        <span class="text-xs text-theme-muted">· 8 min read</span>
+      </div>
+      <h1 class="text-4xl font-semibold text-theme-primary leading-tight mb-4">How to Calculate Steel Grating Weight: Formula + Free Calculator</h1>
+      <p class="text-lg text-theme-secondary leading-relaxed">The exact formula engineers and procurement buyers use to calculate bar grating weight per m² — with a worked example for the most common specification.</p>
+    </div>
+
+    <!-- CTA to calculator -->
+    <div class="mb-8 p-4 bg-theme-tertiary rounded-xl border border-theme flex items-center gap-4">
+      <div class="w-10 h-10 rounded-lg accent-bg flex items-center justify-center shrink-0">
+        <svg class="w-5 h-5 on-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+      </div>
+      <div class="flex-1">
+        <p class="text-sm font-medium text-theme-primary">Skip the manual calculation</p>
+        <p class="text-xs text-theme-muted">Our free calculator handles all specs and materials instantly.</p>
+      </div>
+      <a href="/tools/steel-grating-weight-calculator/" class="text-sm accent-text font-semibold hover:opacity-80 transition-opacity shrink-0">
+        Open Calculator →
+      </a>
+    </div>
+
+    <div class="prose max-w-none text-theme-secondary leading-relaxed space-y-6">
+
+      <h2 class="text-2xl font-semibold text-theme-primary">The Steel Grating Weight Formula</h2>
+      <p>Steel bar grating weight is calculated by independently computing the bearing bar (BB) contribution and the cross bar (XB) contribution, then summing them. This method follows <strong class="text-theme-primary">GB/T 12755-2008</strong>, the Chinese national standard for steel grating, and is equivalent to the calculation method used in NAAMM MBG 531 and BS 4592.</p>
+
+      <h3 class="text-lg font-semibold text-theme-primary">Bearing Bar Weight per m²</h3>
+      <div class="bg-theme-tertiary rounded-xl p-5 font-mono text-sm border border-theme">
+        <p class="text-theme-muted mb-2">W_bb (kg/m²) =</p>
+        <p class="accent-text text-base">(H × T × ρ) / P_bb</p>
+        <div class="mt-4 text-xs text-theme-secondary space-y-1">
+          <p><span class="text-theme-muted">H</span> = Bearing bar height (mm)</p>
+          <p><span class="text-theme-muted">T</span> = Bearing bar thickness (mm)</p>
+          <p><span class="text-theme-muted">ρ</span> = Material density (g/cm³ — carbon steel = 7.85)</p>
+          <p><span class="text-theme-muted">P_bb</span> = Bearing bar pitch, centre-to-centre (mm)</p>
+        </div>
+      </div>
+
+      <h3 class="text-lg font-semibold text-theme-primary">Cross Bar Weight per m² (Round)</h3>
+      <div class="bg-theme-tertiary rounded-xl p-5 font-mono text-sm border border-theme">
+        <p class="text-theme-muted mb-2">W_xb (kg/m²) =</p>
+        <p class="accent-text text-base">(π/4 × d² × ρ) / P_xb</p>
+        <div class="mt-4 text-xs text-theme-secondary space-y-1">
+          <p><span class="text-theme-muted">d</span> = Cross bar diameter (mm)</p>
+          <p><span class="text-theme-muted">P_xb</span> = Cross bar pitch, centre-to-centre (mm)</p>
+        </div>
+      </div>
+
+      <p>For <strong class="text-theme-primary">twisted square cross bars</strong> (common in China export grating): replace π/4 × d² with d², giving W_xb = (d² × ρ) / P_xb.</p>
+      <p>The <strong class="text-theme-primary">total weight per m²</strong> is simply: W_total = W_bb + W_xb</p>
+
+      <h2 class="text-2xl font-semibold text-theme-primary">Worked Example: 25×5mm @ 30mm Pitch</h2>
+      <p>The most common global specification for medium-duty industrial use is <strong class="text-theme-primary">25×5mm bearing bars at 30mm c/c pitch</strong>, with 6mm round cross bars at 50mm pitch. Here is the full calculation:</p>
+
+      <div class="bg-theme-tertiary rounded-xl p-5 font-mono text-sm border border-theme space-y-3">
+        <div>
+          <p class="text-theme-muted text-xs mb-1">Bearing bar contribution:</p>
+          <p class="text-theme-secondary">W_bb = (25 × 5 × 7.85) / 30</p>
+          <p class="accent-text">W_bb = 981.25 / 30 = <strong>32.71 kg/m²</strong></p>
+        </div>
+        <div>
+          <p class="text-theme-muted text-xs mb-1">Cross bar contribution (6mm round @ 50mm):</p>
+          <p class="text-theme-secondary">W_xb = (π/4 × 36 × 7.85) / 50</p>
+          <p class="text-theme-secondary">W_xb = (0.7854 × 36 × 7.85) / 50 = 221.93 / 50</p>
+          <p class="accent-text">W_xb = <strong>4.44 kg/m²</strong></p>
+        </div>
+        <div class="border-t border-theme pt-3">
+          <p class="text-theme-muted text-xs mb-1">Total weight per m²:</p>
+          <p class="text-theme-primary text-base font-bold">W_total = 32.71 + 4.44 = 37.15 kg/m²</p>
+        </div>
+        <div>
+          <p class="text-theme-muted text-xs mb-1">Standard panel (6000 × 1000 mm):</p>
+          <p class="text-theme-primary font-bold">W_panel = 37.15 × 6.0 × 1.0 = 222.9 kg per panel</p>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-semibold text-theme-primary">Why the Formula Works This Way</h2>
+      <p>The bearing bar formula <code class="text-xs bg-theme-tertiary px-2 py-0.5 rounded font-mono">H × T × ρ / P_bb</code> is a dimensional calculation. Each bearing bar has a cross-section of H × T mm². There are 1,000/P_bb bars per metre width. The total steel volume per m² is therefore (H × T × 1000/P_bb) mm³/m², which equals H × T/P_bb dm³/m², and multiplied by density (in kg/dm³ = g/cm³) gives kg/m².</p>
+
+      <h2 class="text-2xl font-semibold text-theme-primary">Galvanized Grating Weight</h2>
+      <p>Hot-dip galvanizing per <strong class="text-theme-primary">ISO 1461</strong> adds approximately <strong>610 g/m²</strong> of zinc coating. For weight purposes, this is typically estimated as a <strong>+4% uplift</strong> on the bare steel weight. So 37.15 kg/m² galvanized ≈ 38.6 kg/m².</p>
+
+      <h2 class="text-2xl font-semibold text-theme-primary">Density Values by Material</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead><tr class="border-b border-theme"><th class="text-left py-2 pr-6 text-theme-muted font-medium">Material</th><th class="text-right py-2 text-theme-muted font-medium">Density (g/cm³)</th></tr></thead>
+          <tbody class="text-theme-secondary">
+            {[["Carbon steel (A36, Q235, S275)","7.85"],["Stainless steel 304","7.93"],["Stainless steel 316","7.98"],["Aluminum 6061-T6","2.70"]].map(([mat,d]) => (
+              <tr class="border-b border-theme/50"><td class="py-2 pr-6">{mat}</td><td class="text-right font-mono">{d}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <FaqJsonLd items={faqs.map(([q, a]) => ({ question: q, answer: a }))} inLanguage="en" />
+    <div class="mt-10 pt-8 border-t border-theme">
+      <h2 class="text-xl font-semibold text-theme-primary mb-5">Frequently Asked Questions</h2>
+      <div class="space-y-3">
+        {faqs.map(([q, a]) => (
+          <details class="card group">
+            <summary class="flex items-center justify-between cursor-pointer list-none">
+              <span class="font-medium text-theme-primary">{q}</span>
+              <svg class="w-5 h-5 text-theme-muted shrink-0 ml-4 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-3 text-sm text-theme-secondary leading-relaxed">{a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+
+    <!-- Related articles -->
+    <div class="mt-10 pt-8 border-t border-theme">
+      <h2 class="text-lg font-semibold text-theme-primary mb-4">Related Articles</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <a href="/blog/naamm-bar-grating-designations/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">Standards Guide</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1 leading-snug">NAAMM Bar Grating Designations Explained</h3>
+        </a>
+        <a href="/blog/plain-vs-serrated-steel-grating/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">Selection Guide</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1 leading-snug">Plain vs Serrated Steel Grating</h3>
+        </a>
+      </div>
+    </div>
+
+  </article>
+
+</Base>

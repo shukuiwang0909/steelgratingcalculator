@@ -1,0 +1,117 @@
+---
+import Base from "../../layouts/Base.astro";
+import FaqJsonLd from "../../components/FaqJsonLd.astro";
+
+const faqs = [
+  ["What is a grating stair tread?", "A grating stair tread is a pre-fabricated steel grating panel cut and fitted to a stair step. It consists of a grating infill welded into a frame (checkered or smooth steel channel). The grating surface is almost always serrated for anti-slip performance."],
+  ["What are standard stair tread dimensions?", "NAAMM recommends a minimum tread depth of 9 inches (228 mm) for industrial stairs; BS 4592 and OSHA 1910.24 both require minimum 9.5 inches (241mm) clear tread. Common stock widths are 600mm, 800mm, 1000mm, and 1200mm. Length (step width) is typically cut to order."],
+  ["Do stair treads need a nosing?", "Yes. An abrasive nosing bar (typically checkered plate or a dedicated non-slip nosing strip) is recommended on the front edge of each tread. OSHA 1910.23 mandates slip-resistant surfaces on stair treads used as walkways."],
+  ["What is the lead time for custom stair treads?", "Standard-size stair treads (full panels with frame) are typically 15–25 days from Anping. Custom sizes with CNC-cut infill and custom channel frames: 25–35 days."],
+];
+---
+
+<Base title="Grating Stair Treads — Steel Bar Grating Steps, Specifications | Anping" description="Steel bar grating stair treads with welded frames. Serrated anti-slip surface, OSHA 1910.23 compliant dimensions. Standard sizes and custom cut-to-order from Anping, China.">
+
+  <article class="max-w-4xl mx-auto px-4 py-10">
+
+    <nav class="text-xs text-theme-muted mb-6 flex items-center gap-2">
+      <a href="/" class="hover:text-theme-primary transition-colors">Home</a>
+      <span>/</span>
+      <a href="/products/" class="hover:text-theme-primary transition-colors">Products</a>
+      <span>/</span>
+      <span class="accent-text">Grating Stair Treads</span>
+    </nav>
+
+    <div class="mb-8">
+      <span class="text-xs font-mono accent-text uppercase tracking-wider">Product Guide</span>
+      <h1 class="text-4xl font-semibold text-theme-primary leading-tight mt-2 mb-4">Grating Stair Treads</h1>
+      <p class="text-lg text-theme-secondary leading-relaxed">Pre-framed serrated steel grating panels for industrial and commercial staircases. Anti-slip serrated surface, open-bar drainage, available in carbon steel, galvanized, and stainless.</p>
+    </div>
+
+    <div class="prose max-w-none text-theme-secondary leading-relaxed space-y-8">
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Construction</h2>
+        <p>A stair tread consists of three components: the <strong class="text-theme-primary">grating infill</strong> (serrated bar grating, typically 25×5mm @ 30mm pitch), a <strong class="text-theme-primary">welded perimeter frame</strong> (75×50×6mm or 100×50×6mm channel), and an <strong class="text-theme-primary">anti-slip nosing</strong> on the front edge (abrasive material or extruded aluminum).</p>
+        <p>The frame is recessed below the tread surface to match existing stair stringers. Fixing holes are pre-drilled at factory to the customer's stringer drawing.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Standard Dimensions</h2>
+        <div class="overflow-x-auto mt-3">
+          <table class="w-full text-sm">
+            <thead><tr class="border-b border-theme"><th class="text-left py-2 pr-4 text-theme-muted font-medium">Parameter</th><th class="text-left py-2 text-theme-muted font-medium">Standard / Typical</th></tr></thead>
+            <tbody class="text-theme-secondary">
+              {[
+                ["Tread depth (front to back)", "250 mm / 270 mm / 300 mm (custom to order)"],
+                ["Tread width (step width)", "600 / 800 / 1000 / 1200 mm (custom)"],
+                ["Frame height", "50 mm typical"],
+                ["Grating infill", "Serrated 25×5mm @ 30mm pitch (standard)"],
+                ["Bearing bar direction", "Perpendicular to nosing (standard safety requirement)"],
+                ["Surface finish", "Black / Galvanized / Stainless / Painted"],
+                ["Fixing", "Weld-on brackets or bolt-through holes"],
+              ].map(([p, v]) => (
+                <tr class="border-b border-theme/50">
+                  <td class="py-2 pr-4 font-medium text-theme-primary">{p}</td>
+                  <td class="py-2">{v}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Standards & Compliance</h2>
+        <div class="grid md:grid-cols-2 gap-4 mt-3">
+          {[
+            { std: "OSHA 1910.23", desc: "Requires slip-resistant surfaces on stair treads; 9.5 in (241mm) min clear tread depth for fixed stairs." },
+            { std: "BS 4592 / BS 5395-1", desc: "UK standards for industrial stairs. Stair tread grating must meet BS 4592 load class for the application." },
+            { std: "NAAMM MBG 531", desc: "Specifies minimum bearing bar direction (perpendicular to nosing for safety). Tread depth and nosing requirements." },
+            { std: "AS 1657", desc: "Australian standard for fixed platforms and stairs. Grating treads must comply with anti-slip and opening size requirements." },
+          ].map(({ std, desc }) => (
+            <div class="card">
+              <div class="font-mono text-sm accent-text font-semibold mb-1">{std}</div>
+              <p class="text-sm text-theme-secondary">{desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">How to Order</h2>
+        <p>Provide the following information in your inquiry for accurate pricing:</p>
+        <ul class="list-disc pl-6 space-y-1 text-sm mt-2">
+          <li>Step width (overall tread length) in mm</li>
+          <li>Tread depth (front nosing to back) in mm</li>
+          <li>Number of treads required</li>
+          <li>Frame channel size and stringer type (bolt-on or weld-on)</li>
+          <li>Surface finish (black / galvanized / stainless)</li>
+          <li>Nosing type preference</li>
+        </ul>
+        <div class="mt-4">
+          <a href="/inquiry/?product=stair-treads" class="accent-bg hover:opacity-90 on-accent text-sm font-semibold px-4 py-2 rounded-lg transition-opacity">Get a Stair Tread Quote</a>
+        </div>
+      </section>
+
+    </div>
+
+    <FaqJsonLd items={faqs.map(([q, a]) => ({ question: q, answer: a }))} inLanguage="en" />
+    <div class="mt-10 pt-8 border-t border-theme">
+      <h2 class="text-xl font-semibold text-theme-primary mb-5">Frequently Asked Questions</h2>
+      <div class="space-y-3">
+        {faqs.map(([q, a]) => (
+          <details class="card group">
+            <summary class="flex items-center justify-between cursor-pointer list-none">
+              <span class="font-medium text-theme-primary">{q}</span>
+              <svg class="w-5 h-5 text-theme-muted shrink-0 ml-4 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-3 text-sm text-theme-secondary leading-relaxed">{a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+
+  </article>
+
+</Base>

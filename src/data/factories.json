@@ -1,0 +1,83 @@
+[
+  {
+    "slug": "zhongtai-expanded-metal",
+    "name": "Anping Zhongtai Expanded Metal Mesh Co., Ltd.",
+    "nameZh": "安平县中泰钢板网业有限公司",
+    "tier": "listed",
+    "categories": ["expanded-metal", "perforated-metal", "wire-mesh-fence-panels"],
+    "city": "Anping",
+    "province": "Hebei",
+    "website": "https://www.zxwiremesh.com/",
+    "description": "Expanded metal and perforated mesh manufacturer tracing to 1991; also steel bar grating, wedge wire screens and fence systems from a 300-mu plant in Anping's industrial park.",
+    "descriptionZh": "钢板网/扩张网与冲孔网生产商，源头可追溯至 1991 年；产品涵盖钢格板、楔形丝筛网及护栏系统，厂区位于安平工业园东区。",
+    "founded": 2005,
+    "contact": {
+      "phone": "+86 318 8067888",
+      "whatsapp": "+86 15832857688",
+      "email": "15832857688@163.com"
+    }
+  },
+  {
+    "slug": "yize-metal",
+    "name": "Anping County YiZe Metal Products Co., Ltd.",
+    "nameZh": "安平县亿泽金属制品有限公司",
+    "tier": "listed",
+    "categories": ["wire-mesh-fence-panels", "gabion-baskets", "perforated-metal", "noise-barriers"],
+    "city": "Anping",
+    "province": "Hebei",
+    "website": "http://www.yizegongsi.com/",
+    "description": "Fence panels, noise barriers, gabions and perforated metal manufacturer founded 2012, serving infrastructure projects with large ready-stock inventory.",
+    "descriptionZh": "成立于 2012 年，主营护栏网、声屏障、石笼网与冲孔网，现货库存充足，服务基建工程项目。",
+    "founded": 2012,
+    "contact": {
+      "phone": "+86 318 8068881",
+      "whatsapp": "+86 13803189026"
+    }
+  },
+  {
+    "slug": "zhonghao-noise-barriers",
+    "name": "Anping County Zhonghao Traffic Safety Facilities Co., Ltd.",
+    "nameZh": "安平县中昊交通安全设施有限公司",
+    "tier": "listed",
+    "categories": ["noise-barriers"],
+    "city": "Anping",
+    "province": "Hebei",
+    "website": "http://www.zhshengpingzhang.com/",
+    "description": "Specialist manufacturer of highway and railway noise barriers — metal sound-insulation wall systems for roads, railways, residential areas and industrial plants.",
+    "descriptionZh": "声屏障专业制造商，产品覆盖公路、铁路、小区及工厂隔音墙系统。",
+    "founded": 2009,
+    "contact": {
+      "phone": "+86 318 7795388",
+      "whatsapp": "+86 13315839997"
+    }
+  },
+  {
+    "slug": "jialu-traffic-tech",
+    "name": "Hebei Jialu Traffic Technology Co., Ltd.",
+    "nameZh": "河北佳陆交通科技有限公司",
+    "tier": "listed",
+    "categories": ["wire-mesh-fence-panels", "gabion-baskets", "noise-barriers"],
+    "city": "Anping",
+    "province": "Hebei",
+    "website": "http://www.jialukeji.com.cn/",
+    "description": "Highway and railway isolation fencing, guardrails and noise barriers; product-plus-installation engineering for transport infrastructure. Founded 2008.",
+    "descriptionZh": "始于 2008 年，主营公路铁路隔离栅、护栏板与声屏障，提供交安设施产品加安装施工一体化服务。",
+    "founded": 2008
+  },
+  {
+    "slug": "ofolan-metal-mesh",
+    "name": "Anping Ofolan Metal Wire Mesh Manufacturing Co., Ltd.",
+    "nameZh": "安平县欧富朗金属丝网制造有限公司",
+    "tier": "listed",
+    "categories": ["stainless-steel-wire-mesh", "specialty-metal-mesh"],
+    "city": "Anping",
+    "province": "Hebei",
+    "website": "http://www.ofolan.com/",
+    "description": "Specialty metal wire mesh — titanium, nickel, tungsten and molybdenum woven mesh for hydrogen electrolyzers, electrodes and filtration; custom sizes from 2 to 600 mesh.",
+    "descriptionZh": "稀有金属丝网制造商，主营钛、镍、钨、钼丝网，应用于电解水制氢、电极与过滤领域，2–600 目可定制。",
+    "founded": 2012,
+    "contact": {
+      "email": "sales01@ofolan.com"
+    }
+  }
+]

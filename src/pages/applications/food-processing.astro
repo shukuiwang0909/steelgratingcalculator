@@ -1,0 +1,104 @@
+---
+import Base from "../../layouts/Base.astro";
+import FaqJsonLd from "../../components/FaqJsonLd.astro";
+
+const faqs = [
+  ["What grade of stainless is required for food processing grating?", "SS 304 (18/8) is acceptable for most food areas where the primary concern is water and organic material contact. SS 316L (with molybdenum) is required for applications involving salt brines, chlorinated sanitisers (CIP chemicals), or acidic marinades, as it resists chloride-induced pitting corrosion better than 304."],
+  ["What surface finish does food grating require?", "Most food safety standards (FDA, EU 1935/2004, HACCP) require smooth, non-porous surfaces. Bar grating top surfaces are inherently open so cannot be 'smooth', but the metal itself must be free of crevices where bacteria can harbour. 2B or electropolished stainless grating is typically specified. Welds must be fully penetrated and free of trapped pockets."],
+  ["Can hot-dip galvanized grating be used in food plants?", "Not in direct food contact or high-humidity wet processing areas — zinc can leach into food products. Galvanized grating is acceptable in non-contact areas (corridors, loading docks, roof access) but not in the processing zones themselves."],
+  ["What is the maximum opening size for food plant floor grating?", "FDA guidance and many plant HACCP plans limit floor openings to dimensions that prevent tool or small-part fallthrough. Typically 25mm max in the least dimension — standard 30mm pitch grating with 5mm thick bars produces a 25mm clear opening, which is compliant."],
+];
+---
+
+<Base title="Steel Grating for Food Processing Plants — SS 304/316, FDA Compliance | Anping" description="Stainless steel grating for food processing floors, walkways, and drains. SS 304 and SS 316L options, FDA and HACCP considerations, hygiene design. Source from Anping, China.">
+
+  <article class="max-w-4xl mx-auto px-4 py-10">
+
+    <nav class="text-xs text-theme-muted mb-6 flex items-center gap-2">
+      <a href="/" class="hover:text-theme-primary transition-colors">Home</a>
+      <span>/</span>
+      <a href="/applications/" class="hover:text-theme-primary transition-colors">Applications</a>
+      <span>/</span>
+      <span class="accent-text">Food Processing</span>
+    </nav>
+
+    <div class="mb-8">
+      <span class="text-xs font-mono accent-text uppercase tracking-wider">Application Guide</span>
+      <h1 class="text-4xl font-semibold text-theme-primary leading-tight mt-2 mb-4">Steel Grating for Food Processing Facilities</h1>
+      <p class="text-lg text-theme-secondary leading-relaxed">Stainless steel bar grating for food production floors, trench covers, and elevated walkways. Hygienic open-surface design, SS 304 and SS 316L, compatible with HACCP and food safety standards.</p>
+    </div>
+
+    <div class="prose max-w-none text-theme-secondary leading-relaxed space-y-8">
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Grade Selection</h2>
+        <div class="grid md:grid-cols-2 gap-4 mt-3">
+          <div class="card">
+            <div class="text-sm font-bold text-theme-primary mb-2">SS 304 — General Food Areas</div>
+            <ul class="list-disc pl-5 space-y-1 text-sm text-theme-secondary">
+              <li>Meat, dairy, bakery, produce</li>
+              <li>Water and mild sanitiser contact</li>
+              <li>Dry processing areas</li>
+              <li>Corridors and secondary walkways</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="text-sm font-bold text-theme-primary mb-2">SS 316L — Demanding Food/Beverage Areas</div>
+            <ul class="list-disc pl-5 space-y-1 text-sm text-theme-secondary">
+              <li>Salt brine and curing environments</li>
+              <li>CIP chemical (chlorinated) wash-down zones</li>
+              <li>Breweries, distilleries (acid CIP)</li>
+              <li>Seafood and fish processing</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Hygienic Design Requirements</h2>
+        <ul class="list-disc pl-6 space-y-2 mt-2 text-sm">
+          <li><strong class="text-theme-primary">Serrated top surface</strong> — mandatory for wet, sloped, or fatty surfaces (slip prevention per local food safety regulations)</li>
+          <li><strong class="text-theme-primary">Full-penetration welds</strong> — no trapped pockets or crevices at cross-bar junctions where bacteria can accumulate</li>
+          <li><strong class="text-theme-primary">Pickling and passivation</strong> — welds passivated post-fabrication to restore corrosion resistance; specify in order</li>
+          <li><strong class="text-theme-primary">Electropolishing option</strong> — reduces surface roughness Ra to &lt;0.8 μm for highest-hygiene zones; extra cost</li>
+          <li><strong class="text-theme-primary">No carbon steel contamination</strong> — SS grating must not contact carbon steel tools, fixtures, or be processed on shared fabrication tables without full passivation</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Typical Specification</h2>
+        <div class="bg-theme-tertiary rounded-xl p-4 border border-theme font-mono text-sm text-theme-primary space-y-1">
+          <p>Material: SS 304 / SS 316L (specify)</p>
+          <p>Bearing bar: 25×5mm serrated @ 30mm c/c pitch</p>
+          <p>Cross bar: 6mm round @ 50mm pitch</p>
+          <p>Panel size: to project dimensions</p>
+          <p>Welds: full penetration, pickled and passivated</p>
+          <p>Surface: 2B or electropolished (specify)</p>
+          <p>Documentation: MTC, passivation certificate</p>
+        </div>
+        <div class="mt-4">
+          <a href="/inquiry/?product=stainless-steel-grating" class="accent-bg hover:opacity-90 on-accent text-sm font-semibold px-4 py-2 rounded-lg transition-opacity">Get a Food Plant Grating Quote</a>
+        </div>
+      </section>
+
+    </div>
+
+    <FaqJsonLd items={faqs.map(([q, a]) => ({ question: q, answer: a }))} inLanguage="en" />
+    <div class="mt-10 pt-8 border-t border-theme">
+      <h2 class="text-xl font-semibold text-theme-primary mb-5">FAQs</h2>
+      <div class="space-y-3">
+        {faqs.map(([q, a]) => (
+          <details class="card group">
+            <summary class="flex items-center justify-between cursor-pointer list-none">
+              <span class="font-medium text-theme-primary">{q}</span>
+              <svg class="w-5 h-5 text-theme-muted shrink-0 ml-4 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-3 text-sm text-theme-secondary leading-relaxed">{a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+
+  </article>
+
+</Base>

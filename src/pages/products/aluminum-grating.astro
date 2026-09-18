@@ -1,0 +1,126 @@
+---
+import Base from "../../layouts/Base.astro";
+import FaqJsonLd from "../../components/FaqJsonLd.astro";
+
+const faqs = [
+  ["What alloy is used for aluminum bar grating?", "The most common alloys are 6061-T6 (North America) and 6063-T5/T6 (export from China). Both are structural alloys with good corrosion resistance and weldability. 6061-T6 has higher strength; 6063-T5 offers better extrudability for complex profiles."],
+  ["How does aluminum grating weight compare to steel?", "Aluminum grating weighs approximately 34% of equivalent carbon steel grating (density 2.70 vs 7.85 g/cm³). A standard 25×5mm @ 30mm pitch spec weighs about 12.8 kg/m² in aluminum vs 37.1 kg/m² in steel."],
+  ["Does aluminum grating need corrosion protection?", "Aluminum naturally forms a thin oxide layer that provides excellent atmospheric corrosion resistance. No coating is required in most environments. Anodizing adds extra protection and can provide colour. Avoid direct contact with carbon steel or concrete (galvanic/alkali attack)."],
+  ["Is aluminum grating safe in explosive atmospheres?", "Aluminum alloys can produce sparks in certain impact conditions. For ATEX-rated explosive atmospheres (petrochemical, dust), consult your explosion protection engineer. Stainless steel or fibreglass grating is typically preferred for classified zones."],
+];
+---
+
+<Base title="Aluminum Bar Grating — Lightweight, Corrosion-Resistant | Anping Supplier" description="Aluminum bar grating (6061-T6, 6063-T5) for lightweight platforms and corrosive environments. ~34% lighter than steel. Specifications and sourcing from Anping, China.">
+
+  <article class="max-w-4xl mx-auto px-4 py-10">
+
+    <nav class="text-xs text-theme-muted mb-6 flex items-center gap-2">
+      <a href="/" class="hover:text-theme-primary transition-colors">Home</a>
+      <span>/</span>
+      <a href="/products/" class="hover:text-theme-primary transition-colors">Products</a>
+      <span>/</span>
+      <span class="accent-text">Aluminum Grating</span>
+    </nav>
+
+    <div class="mb-8">
+      <span class="text-xs font-mono accent-text uppercase tracking-wider">Product Guide</span>
+      <h1 class="text-4xl font-semibold text-theme-primary leading-tight mt-2 mb-4">Aluminum Bar Grating</h1>
+      <p class="text-lg text-theme-secondary leading-relaxed">Lightweight, naturally corrosion-resistant bar grating in 6061-T6 or 6063-T5 aluminium. Approximately 34% lighter than equivalent steel grating — ideal for weight-sensitive structures.</p>
+    </div>
+
+    <div class="mb-8 p-4 bg-theme-tertiary rounded-xl border border-theme flex items-center gap-4">
+      <div class="flex-1">
+        <p class="text-sm font-medium text-theme-primary">Compare aluminum vs steel weight</p>
+        <p class="text-xs text-theme-muted">Select Aluminum (2.70 g/cm³) in the material dropdown — results show ~34% of carbon steel weight.</p>
+      </div>
+      <a href="/tools/steel-grating-weight-calculator/" class="text-sm accent-text font-semibold hover:opacity-80 transition-opacity shrink-0 whitespace-nowrap">Weight Calculator →</a>
+    </div>
+
+    <div class="prose max-w-none text-theme-secondary leading-relaxed space-y-8">
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Key Properties</h2>
+        <div class="grid md:grid-cols-3 gap-3 mt-4">
+          {[
+            { label: "Weight (25×5@30mm)", value: "~12.8 kg/m²" },
+            { label: "vs. carbon steel", value: "~34% lighter" },
+            { label: "Alloy (typical export)", value: "6061-T6 / 6063-T5" },
+          ].map(({ label, value }) => (
+            <div class="bg-theme-tertiary rounded-lg p-4 border border-theme text-center">
+              <div class="text-xs text-theme-muted font-medium uppercase tracking-wide mb-1">{label}</div>
+              <div class="font-semibold accent-text">{value}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">When to Specify Aluminum vs Steel</h2>
+        <div class="overflow-x-auto mt-3">
+          <table class="w-full text-sm">
+            <thead><tr class="border-b border-theme"><th class="text-left py-2 pr-4 text-theme-muted font-medium">Consider Aluminum When…</th><th class="text-left py-2 text-theme-muted font-medium">Stick with Steel When…</th></tr></thead>
+            <tbody class="text-theme-secondary">
+              {[
+                ["Weight is critical (mezzanines, roof access)", "Heavy loads / long spans required"],
+                ["No painting or galvanizing budget", "Cost is primary driver (steel ~30–50% cheaper)"],
+                ["Marine or coastal environment", "High-impact resistance needed"],
+                ["Chemical splash, acids (except strong alkalis)", "Welding to structural steel frame"],
+                ["Aesthetic / architectural applications", "High-temperature service (>150°C)"],
+              ].map(([a, b]) => (
+                <tr class="border-b border-theme/50">
+                  <td class="py-2 pr-4">{a}</td>
+                  <td class="py-2">{b}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Common Applications</h2>
+        <ul class="grid md:grid-cols-2 gap-2 mt-3 text-sm">
+          {[
+            "Mezzanine flooring (reduced structural load)", "Marine vessel decking",
+            "Architectural walkways and bridges", "Airport and transit facilities",
+            "Roof access platforms", "Swimming pool surrounds",
+            "Food processing (secondary areas)", "Clean room access floors"
+          ].map(app => (
+            <li class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full accent-bg shrink-0"></span>
+              <span class="text-theme-secondary">{app}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold text-theme-primary">Sourcing Notes</h2>
+        <p>Anping factories produce aluminum grating by press-locking or welding aluminum extrusions. Sizes and pitches match the carbon steel product line. MOQ typically 2–5 tonnes; lead time 25–35 days.</p>
+        <p class="mt-2">Anodizing (clear or coloured) available at an additional cost. Specify alloy grade and surface requirement in your inquiry.</p>
+        <div class="mt-4">
+          <a href="/inquiry/?product=aluminum-grating" class="accent-bg hover:opacity-90 on-accent text-sm font-semibold px-4 py-2 rounded-lg transition-opacity">Get an Aluminum Grating Quote</a>
+        </div>
+      </section>
+
+    </div>
+
+    <FaqJsonLd items={faqs.map(([q, a]) => ({ question: q, answer: a }))} inLanguage="en" />
+    <div class="mt-10 pt-8 border-t border-theme">
+      <h2 class="text-xl font-semibold text-theme-primary mb-5">Frequently Asked Questions</h2>
+      <div class="space-y-3">
+        {faqs.map(([q, a]) => (
+          <details class="card group">
+            <summary class="flex items-center justify-between cursor-pointer list-none">
+              <span class="font-medium text-theme-primary">{q}</span>
+              <svg class="w-5 h-5 text-theme-muted shrink-0 ml-4 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-3 text-sm text-theme-secondary leading-relaxed">{a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+
+  </article>
+
+</Base>

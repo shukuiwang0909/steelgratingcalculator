@@ -1,0 +1,385 @@
+---
+import "../styles/global.css";
+import en from "../i18n/en.json";
+import zh from "../i18n/zh.json";
+
+interface Props {
+  title: string;
+  description?: string;
+  lang?: "en" | "zh";
+  ogType?: "website" | "article";
+  /** Dynamic routes (e.g. /factories/[slug]/) pass exact translation URLs explicitly */
+  forceTranslation?: { en: string; zh: string };
+  /** Thin utility pages (e.g. /inquiry/thanks/) that must not be indexed */
+  noindex?: boolean;
+}
+const { title, description = "Free steel grating weight calculators, load capacity tools, and direct access to Anping, China bar grating factories.", lang = "en", ogType = "website", forceTranslation, noindex } = Astro.props;
+
+const t = lang === "zh" ? zh : en;
+
+// Language switch URLs that preserve the current page
+const currentPath = Astro.url.pathname;
+const normalizedPath = (currentPath.endsWith("/") ? currentPath : currentPath + "/").replace(/index\.html$/, "");
+const isZhPage = normalizedPath.startsWith("/zh/");
+const enPath = isZhPage ? normalizedPath.replace(/^\/zh(?=\/)/, "") || "/" : normalizedPath;
+const zhPath = enPath === "/" ? "/zh/" : `/zh${enPath}`;
+
+// Enumerate real routes at build time so switcher links and hreflang
+// only ever point to pages that actually exist
+const zhModules = import.meta.glob("../pages/zh/**/*.astro");
+const enModules = import.meta.glob("../pages/**/*.astro");
+function toRoute(key: string): string {
+  const i = key.indexOf("/pages/");
+  let p = key.slice(i + "/pages".length).replace(/\.astro$/, "").replace(/\/index$/, "");
+  if (!p.endsWith("/")) p += "/";
+  return p || "/";
+}
+const zhRoutes = new Set(Object.keys(zhModules).map(toRoute).filter((p) => p !== "/zh/404/"));
+const enRoutes = new Set(Object.keys(enModules).map(toRoute).filter((p) => !p.startsWith("/zh/") && p !== "/404/"));
+const effEnPath = forceTranslation?.en ?? enPath;
+const effZhPath = forceTranslation?.zh ?? zhPath;
+const hasEn = forceTranslation ? true : enRoutes.has(enPath);
+const hasZh = forceTranslation ? true : zhRoutes.has(zhPath);
+const hasTranslation = hasEn && hasZh;
+
+const origin = Astro.site?.origin ?? "https://steelgratingcalculator.com";
+const canonicalUrl = `${origin}${normalizedPath}`;
+
+// Breadcrumbs derived from URL segments
+const crumbLabelMap: Record<string, { en: string; zh: string }> = {
+  blog: { en: "Blog", zh: "博客" },
+  products: { en: "Products", zh: "产品" },
+  applications: { en: "Applications", zh: "应用场景" },
+  tools: { en: "Calculators", zh: "计算工具" },
+  charts: { en: "Spec Charts", zh: "规格表" },
+  factories: { en: "Factories", zh: "工厂目录" },
+  inquiry: { en: "Inquiry", zh: "询价" },
+  privacy: { en: "Privacy Policy", zh: "隐私政策" },
+  terms: { en: "Terms of Use", zh: "使用条款" },
+  disclaimer: { en: "Disclaimer", zh: "免责声明" },
+};
+const prettify = (seg: string) => seg.split("-").map((w) => (w ? w[0].toUpperCase() + w.slice(1) : w)).join(" ");
+const segments = enPath.split("/").filter(Boolean);
+const crumbs: { name: string; path: string }[] = [{ name: lang === "zh" ? "首页" : "Home", path: isZhPage ? "/zh/" : "/" }];
+let crumbAcc = isZhPage ? "/zh" : "";
+segments.forEach((seg, i) => {
+  crumbAcc = `${crumbAcc}/${seg}`;
+  const mapped = crumbLabelMap[seg];
+  crumbs.push({ name: i === segments.length - 1 ? title : mapped ? mapped[lang] : prettify(seg), path: `${crumbAcc}/` });
+});
+
+// Structured data: Organization + WebSite on every page, BreadcrumbList on subpages
+const graph: Record<string, unknown>[] = [
+  {
+    "@type": "Organization",
+    "@id": `${origin}/#organization`,
+    name: "SteelGratingCalculator",
+    url: `${origin}/`,
+    logo: `${origin}/favicon.svg`,
+    description: "Free steel grating weight and load capacity calculators, spec charts, and factory directory for buyers sourcing from Anping, Hebei, China.",
+    knowsAbout: ["steel grating", "bar grating", "welded bar grating", "serrated grating", "galvanized grating", "NAAMM MBG 531", "BS 4592", "Anping steel grating factories", "grating weight calculation", "bar grating load capacity"],
+    areaServed: "Worldwide",
+    serviceType: "Steel grating sourcing tools and factory directory",
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer support",
+      email: "inquiry@steelgratingcalculator.com",
+      availableLanguage: ["English", "Chinese"],
+    },
+  },
+  {
+    "@type": "WebSite",
+    "@id": `${origin}/#website`,
+    name: "SteelGratingCalculator",
+    url: `${origin}/`,
+    publisher: { "@id": `${origin}/#organization` },
+    inLanguage: ["en", "zh"],
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${origin}/tools/steel-grating-weight-calculator/`,
+      "query-input": "required name=search_term_string",
+    },
+  },
+];
+if (crumbs.length > 1) {
+  graph.push({
+    "@type": "BreadcrumbList",
+    itemListElement: crumbs.map((c, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: c.name,
+      item: `${origin}${c.path}`,
+    })),
+  });
+}
+const structuredData = { "@context": "https://schema.org", "@graph": graph };
+
+const inquiryHref = lang === "zh" ? "/zh/inquiry/" : "/inquiry/";
+
+const nav = [
+  { href: lang === "zh" ? "/zh/" : "/", label: t.nav.home },
+  { href: lang === "zh" ? "/zh/tools/steel-grating-weight-calculator/" : "/tools/steel-grating-weight-calculator/", label: t.nav.tools },
+  { href: lang === "zh" ? "/zh/tools/fob-price-calculator/" : "/tools/fob-price-calculator/", label: lang === "zh" ? "FOB计算器" : "FOB Calc" },
+  { href: lang === "zh" ? "/zh/tools/container-loading-calculator/" : "/tools/container-loading-calculator/", label: lang === "zh" ? "装箱计算" : "Container Calc" },
+  { href: lang === "zh" ? "/zh/charts/grating-weight-chart/" : "/charts/grating-weight-chart/", label: t.nav.charts },
+  { href: lang === "zh" ? "/zh/anping-steel-grating/" : "/anping-steel-grating/", label: t.nav.whyAnping },
+  { href: lang === "zh" ? "/zh/factories/" : "/factories/", label: t.nav.factories },
+  { href: lang === "zh" ? "/zh/blog/" : "/blog/", label: lang === "zh" ? "博客" : "Blog" },
+];
+---
+<!doctype html>
+<html lang={lang} class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang={lang} href={canonicalUrl} />
+    {hasTranslation && <link rel="alternate" hreflang={lang === "zh" ? "en" : "zh"} href={`${origin}${lang === "zh" ? effEnPath : effZhPath}`} />}
+    {hasEn && <link rel="alternate" hreflang="x-default" href={`${origin}${effEnPath}`} />}
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="SteelGratingCalculator" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={`${origin}/og-image.png`} />
+    <meta property="og:locale" content={lang === "zh" ? "zh_CN" : "en_US"} />
+    {hasTranslation && <meta property="og:locale:alternate" content={lang === "zh" ? "en_US" : "zh_CN"} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${origin}/og-image.png`} />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="google-site-verification" content="REPLACE_WITH_NEW_VERIFICATION_CODE" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    {lang === "zh" ? (
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet" />
+    ) : (
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    )}
+    <!-- Theme initialization -->
+    <script is:inline>
+      (function() {
+        const theme = localStorage.getItem('theme') || 'dark';
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      })();
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CLQ8Q8ES9P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-CLQ8Q8ES9P');
+    </script>
+  </head>
+  <body class="min-h-screen flex flex-col relative">
+    <div class="tech-grid"></div>
+    <header class="glass sticky top-0 z-50 border-b border-theme">
+      <div class="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between relative z-10">
+        <a href={lang === "zh" ? "/zh/" : "/"} class="font-bold text-lg tracking-tight text-theme-primary">
+          Steel<span class="accent-text">GratingCalc</span>
+        </a>
+        <nav class="hidden md:flex gap-6 text-sm">
+          {nav.map((n) => {
+            const isActive = currentPath === n.href || (n.href !== "/" && currentPath.startsWith(n.href));
+            return (
+              <a href={n.href} class={`transition-colors relative ${isActive ? "accent-text font-semibold" : "text-theme-secondary hover:text-theme-primary"}`}>
+                {n.label}
+                {isActive && <span class="absolute -bottom-[13px] left-0 right-0 h-0.5 accent-bg"></span>}
+              </a>
+            );
+          })}
+        </nav>
+        <!-- Mobile hamburger button -->
+        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg border border-theme hover:bg-theme-tertiary transition-colors" aria-label="Open menu">
+          <svg class="w-5 h-5 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+        <div class="flex items-center gap-2 md:gap-3">
+          <!-- Language Switcher: only link to languages where the page actually exists -->
+          <div class="flex items-center gap-1 text-xs md:text-sm border border-theme rounded-lg px-2 py-1">
+            {hasEn ? (
+              <a href={effEnPath} class={lang === "en" ? "accent-text font-semibold" : "text-theme-muted hover:text-theme-primary"}>EN</a>
+            ) : (
+              <span class="text-theme-muted">EN</span>
+            )}
+            <span class="text-theme-muted">|</span>
+            {hasZh ? (
+              <a href={effZhPath} class={lang === "zh" ? "accent-text font-semibold" : "text-theme-muted hover:text-theme-primary"}>中文</a>
+            ) : (
+              <span class="text-theme-muted" title={lang === "zh" ? "此页面暂无英文版" : "No Chinese version yet"}>中文</span>
+            )}
+          </div>
+          <!-- Theme Toggle -->
+          <button id="theme-toggle" class="p-2 rounded-lg border border-theme hover:bg-theme-tertiary transition-colors" aria-label="Toggle theme">
+            <svg class="w-4 h-4 hidden dark:block text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+            </svg>
+            <svg class="w-4 h-4 block dark:hidden text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+            </svg>
+          </button>
+          <!-- Get Quote - hidden on small mobile, visible from sm -->
+          <a href={inquiryHref} class="hidden sm:inline-block accent-bg hover:opacity-90 text-sm font-semibold px-3 md:px-4 py-2 rounded-lg transition-colors on-accent">
+            {t.nav.getQuote}
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- Mobile menu overlay -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 hidden">
+      <div id="mobile-menu-backdrop" class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+      <div class="absolute top-14 left-0 right-0 bg-theme-primary border-b border-theme shadow-xl">
+        <nav class="max-w-6xl mx-auto px-4 py-4 flex flex-col gap-1">
+          {nav.map((n) => {
+            const isActive = currentPath === n.href || (n.href !== "/" && currentPath.startsWith(n.href));
+            return (
+              <a href={n.href} class={`mobile-menu-link py-3 px-4 rounded-lg transition-colors text-base font-medium ${isActive ? "accent-text bg-theme-tertiary" : "text-theme-secondary hover:text-theme-primary hover:bg-theme-tertiary"}`}>{n.label}</a>
+            );
+          })}
+          <a href={inquiryHref} class="mobile-menu-link mt-2 py-3 px-4 rounded-lg accent-bg text-center font-semibold on-accent">
+            {t.nav.getQuote}
+          </a>
+        </nav>
+      </div>
+    </div>
+    <main class="flex-1 relative z-10">
+      <slot />
+    </main>
+    <footer class="bg-theme-secondary border-t border-theme text-theme-secondary text-sm mt-16 relative z-10">
+      <div class="max-w-6xl mx-auto px-4 py-10 grid md:grid-cols-4 gap-8">
+        <div>
+          <p class="text-theme-primary font-semibold mb-2">SteelGratingCalculator</p>
+          <p>{t.footer.tagline}</p>
+        </div>
+        <div>
+          <p class="text-theme-primary font-semibold mb-2">{t.footer.legal}</p>
+          <ul class="space-y-1">
+            <li><a href={lang === "zh" ? "/zh/privacy/" : "/privacy/"} class="hover:text-theme-primary transition-colors">{t.footer.privacy}</a></li>
+            <li><a href={lang === "zh" ? "/zh/terms/" : "/terms/"} class="hover:text-theme-primary transition-colors">{t.footer.terms}</a></li>
+            <li><a href={lang === "zh" ? "/zh/disclaimer/" : "/disclaimer/"} class="hover:text-theme-primary transition-colors">{t.footer.disclaimer}</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="text-theme-primary font-semibold mb-2">{t.footer.contact}</p>
+          <a href="mailto:inquiry@steelgratingcalculator.com" class="hover:text-theme-primary transition-colors">inquiry@steelgratingcalculator.com</a>
+        </div>
+        <div>
+          <p class="text-theme-primary font-semibold mb-2">{t.footer.disclaimer}</p>
+          <p class="text-xs text-theme-muted">{t.footer.disclaimerText}</p>
+        </div>
+      </div>
+      <div class="border-t border-theme py-4 text-center text-xs text-theme-muted">
+        {t.footer.copyright}
+      </div>
+    </footer>
+    <!-- Theme toggle script -->
+    <script is:inline>
+      document.getElementById('theme-toggle')?.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      });
+    </script>
+    <!-- Mobile menu script -->
+    <script is:inline>
+      (function() {
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const backdrop = document.getElementById('mobile-menu-backdrop');
+        const links = document.querySelectorAll('.mobile-menu-link');
+        function openMenu() {
+          menu.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+        }
+        function closeMenu() {
+          menu.classList.add('hidden');
+          document.body.style.overflow = '';
+        }
+        btn?.addEventListener('click', () => {
+          if (menu.classList.contains('hidden')) {
+            openMenu();
+          } else {
+            closeMenu();
+          }
+        });
+        backdrop?.addEventListener('click', closeMenu);
+        links.forEach(l => l.addEventListener('click', closeMenu));
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && !menu.classList.contains('hidden')) closeMenu();
+        });
+      })();
+    </script>
+    <!-- GA4 conversion events (PRD §10): tool_start / tool_complete / chart_view / factory_click / inquiry_submit / inquiry_success -->
+    <script is:inline>
+      (function () {
+        if (typeof gtag !== 'function') return;
+        var path = location.pathname;
+
+        // inquiry_success: the thanks page only renders after Formspree accepted the POST
+        if (path.indexOf('/inquiry/thanks/') !== -1) {
+          gtag('event', 'inquiry_success');
+        }
+
+        // chart_view: spec chart pages
+        if (path.indexOf('/charts/') !== -1) {
+          gtag('event', 'chart_view', { chart_name: path });
+        }
+
+        if (path.indexOf('/tools/') !== -1) {
+          // tool_start: first form interaction on a tool page
+          var started = false;
+          var onFirstInteraction = function () {
+            if (started) return;
+            started = true;
+            gtag('event', 'tool_start', { tool_name: path });
+          };
+          document.addEventListener('input', onFirstInteraction);
+          document.addEventListener('change', onFirstInteraction);
+
+          // tool_complete: any result/output element changes from placeholder to a value.
+          // Shared flag — one completion per pageview even with several result fields.
+          var completed = false;
+          var results = document.querySelectorAll('main [id*="result" i], main [id*="output" i], main [id^="out" i]');
+          results.forEach(function (el) {
+            var mo = new MutationObserver(function () {
+              if (completed) return;
+              var t = (el.textContent || '').trim();
+              if (t && t !== '—' && t.indexOf('Fill in the form') !== 0) {
+                completed = true;
+                gtag('event', 'tool_complete', { tool_name: path });
+              }
+            });
+            mo.observe(el, { childList: true, characterData: true, subtree: true });
+          });
+        }
+
+        // inquiry_submit: fires with the form POST (success confirmed separately via thanks page)
+        var form = document.querySelector('form[name="inquiry"]');
+        if (form) {
+          form.addEventListener('submit', function () {
+            gtag('event', 'inquiry_submit', { page: path });
+          });
+        }
+
+        // factory_click: outbound /go/ tracked links (worker mirrors this server-side)
+        document.addEventListener('click', function (e) {
+          var t = e.target;
+          var a = t && t.closest ? t.closest('a[href*="/go/"]') : null;
+          if (!a) return;
+          var m = (a.getAttribute('href') || '').match(/\/go\/([a-z0-9-]+)/i);
+          if (m) gtag('event', 'factory_click', { factory_key: m[1] });
+        });
+      })();
+    </script>
+  </body>
+</html>

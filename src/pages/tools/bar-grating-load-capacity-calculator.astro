@@ -1,0 +1,444 @@
+---
+import Base from "../../layouts/Base.astro";
+
+const title = "Bar Grating Load Capacity Calculator — NAAMM MBG 531 & BS 4592 | Free";
+const description = "Calculate max allowable UDL and point load for steel bar grating. Supports NAAMM MBG 531 (US) and BS 4592 (UK/Commonwealth). Simply supported and fixed end conditions. Free tool.";
+---
+<Base title={title} description={description} lang="en">
+
+  <section class="max-w-6xl mx-auto px-4 py-10">
+
+    <nav class="text-xs text-theme-muted mb-6 flex items-center gap-2">
+      <a href="/" class="hover:text-theme-primary transition-colors">Home</a>
+      <span>/</span>
+      <a href="/tools/bar-grating-load-capacity-calculator/" class="accent-text">Load Capacity Calculator</a>
+    </nav>
+
+    <div class="mb-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-theme accent-border accent-text text-xs font-mono uppercase tracking-wider mb-4">
+        <span class="w-1.5 h-1.5 rounded-full accent-bg animate-pulse"></span>
+        Tool 02 · NAAMM MBG 531 / BS 4592
+      </div>
+      <h1 class="text-3xl font-semibold text-theme-primary mb-3">Bar Grating Load Capacity Calculator</h1>
+      <p class="text-theme-secondary max-w-2xl leading-relaxed">
+        Calculate the maximum allowable uniform distributed load (UDL) and point load for any steel bar grating specification. Supports NAAMM MBG 531 (allowable stress method) and BS 4592 (UK limit state). Bending and deflection checks included.
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-[1fr_420px] gap-6">
+
+      <!-- LEFT: Inputs -->
+      <div class="space-y-5">
+
+        <!-- Bearing Bars -->
+        <div class="card">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-sm font-semibold text-theme-primary uppercase tracking-wide flex items-center gap-2">
+              <span class="w-1 h-4 accent-bg rounded-full"></span>
+              Bearing Bar Specification
+            </h2>
+            <!-- Import from weight calculator -->
+            <button id="btn-import" class="text-xs accent-text hover:opacity-80 transition-opacity border border-theme rounded-lg px-3 py-1 flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              Import from Weight Calc
+            </button>
+          </div>
+          <div class="grid grid-cols-3 gap-4">
+            <div>
+              <label class="label" for="lc-height">Bar Height (mm)</label>
+              <select id="lc-height" class="select">
+                <option value="20">20 mm</option>
+                <option value="25" selected>25 mm</option>
+                <option value="30">30 mm</option>
+                <option value="35">35 mm</option>
+                <option value="40">40 mm</option>
+                <option value="50">50 mm</option>
+                <option value="65">65 mm</option>
+                <option value="75">75 mm</option>
+              </select>
+            </div>
+            <div>
+              <label class="label" for="lc-thickness">Thickness (mm)</label>
+              <select id="lc-thickness" class="select">
+                <option value="3">3 mm</option>
+                <option value="4">4 mm</option>
+                <option value="5" selected>5 mm</option>
+              </select>
+            </div>
+            <div>
+              <label class="label" for="lc-pitch">Pitch c/c (mm)</label>
+              <select id="lc-pitch" class="select">
+                <option value="11">11 mm</option>
+                <option value="15">15 mm</option>
+                <option value="22">22 mm</option>
+                <option value="30" selected>30 mm</option>
+                <option value="34">34 mm</option>
+                <option value="40">40 mm</option>
+                <option value="41">41 mm</option>
+                <option value="60">60 mm</option>
+                <option value="76">76 mm</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Loading & Span -->
+        <div class="card">
+          <h2 class="text-sm font-semibold text-theme-primary uppercase tracking-wide mb-4 flex items-center gap-2">
+            <span class="w-1 h-4 accent-bg rounded-full"></span>
+            Span & Design Conditions
+          </h2>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="label" for="span">Clear Span (mm)</label>
+              <input id="span" type="number" min="100" max="3000" value="1000" class="input" />
+              <p class="input-hint">Distance between support centrelines</p>
+            </div>
+            <div>
+              <label class="label" for="standard">Design Standard</label>
+              <select id="standard" class="select">
+                <option value="naamm" selected>NAAMM MBG 531 (US)</option>
+                <option value="bs4592">BS 4592 (UK/Commonwealth)</option>
+              </select>
+            </div>
+            <div>
+              <label class="label" for="end-cond">End Conditions</label>
+              <select id="end-cond" class="select">
+                <option value="ss" selected>Simply Supported</option>
+                <option value="fixed">Fixed Both Ends</option>
+              </select>
+            </div>
+            <div>
+              <label class="label" for="steel-grade">Steel Grade</label>
+              <select id="steel-grade" class="select">
+                <option value="250" selected>A36 / S250 (250 MPa)</option>
+                <option value="275">S275 (275 MPa)</option>
+                <option value="355">S355 (355 MPa)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Method reference -->
+        <div class="card bg-theme-tertiary text-xs font-mono text-theme-secondary">
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-theme-muted mb-3">Calculation Method</h3>
+          <div class="grid md:grid-cols-2 gap-3">
+            <div>
+              <p class="text-theme-muted mb-1">Section Modulus (per bar):</p>
+              <p class="accent-text">S = T × H² / 6 (mm³)</p>
+            </div>
+            <div>
+              <p class="text-theme-muted mb-1">Moment of Inertia:</p>
+              <p class="accent-text">I = T × H³ / 12 (mm⁴)</p>
+            </div>
+            <div>
+              <p class="text-theme-muted mb-1">Bars per metre width:</p>
+              <p class="accent-text">n = 1000 / P_bb</p>
+            </div>
+            <div>
+              <p class="text-theme-muted mb-1">NAAMM allowable stress:</p>
+              <p class="accent-text">σ = 0.55 × f_y (MPa)</p>
+            </div>
+            <div>
+              <p class="text-theme-muted mb-1">UDL allowable (kPa):</p>
+              <p class="accent-text">q = 8·σ·S·n / (L²·1000)</p>
+            </div>
+            <div>
+              <p class="text-theme-muted mb-1">Deflection check (NAAMM):</p>
+              <p class="accent-text">δ ≤ L / 180</p>
+            </div>
+          </div>
+          <p class="text-theme-muted mt-3">E = 200,000 MPa. Fixed ends use coefficient 16 (bending) and 384 (deflection). Results are simplified allowable-stress estimates — always verify with a structural engineer.</p>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: Results -->
+      <div>
+        <div class="card sticky top-20 space-y-3">
+          <div class="flex items-center justify-between mb-2">
+            <h2 class="text-sm font-semibold text-theme-primary uppercase tracking-wide">Load Capacity Results</h2>
+            <span id="standard-label" class="text-xs font-mono accent-text">NAAMM MBG 531</span>
+          </div>
+
+          <!-- Warnings -->
+          <div id="warning-box" class="hidden p-3 bg-amber-500/10 border border-amber-500/30 rounded-lg">
+            <p id="warning-text" class="text-xs text-amber-400"></p>
+          </div>
+
+          <div class="p-4 accent-bg rounded-lg">
+            <p class="text-xs uppercase tracking-wide mb-1 on-accent opacity-80">Max Allowable UDL</p>
+            <p id="result-udl" class="text-3xl font-bold on-accent font-mono">—</p>
+            <p id="result-udl-psf" class="text-xs on-accent opacity-70 mt-0.5"></p>
+          </div>
+
+          <div class="p-3 bg-theme-tertiary rounded-lg border border-theme">
+            <p class="text-xs text-theme-muted uppercase tracking-wide mb-1">Max Point Load (per m width)</p>
+            <p id="result-point" class="text-xl font-bold text-theme-primary font-mono">—</p>
+          </div>
+
+          <div class="p-3 bg-theme-tertiary rounded-lg border border-theme">
+            <p class="text-xs text-theme-muted uppercase tracking-wide mb-1">Deflection at Max Load</p>
+            <p id="result-defl" class="text-xl font-bold text-theme-primary font-mono">—</p>
+            <p id="result-defl-ratio" class="text-xs text-theme-muted mt-0.5"></p>
+          </div>
+
+          <div class="p-3 bg-theme-tertiary rounded-lg border border-theme">
+            <p class="text-xs text-theme-muted uppercase tracking-wide mb-1">Governing Check</p>
+            <p id="result-gov" class="text-base font-bold text-theme-primary">—</p>
+          </div>
+
+          <div class="p-3 bg-theme-tertiary rounded-lg border border-theme">
+            <p class="text-xs text-theme-muted uppercase tracking-wide mb-1">BS 4592 Load Class</p>
+            <p id="result-class" class="text-base font-bold accent-text">—</p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2 mt-2">
+            <button id="btn-copy-lc" class="flex items-center justify-center gap-2 border border-theme rounded-lg py-2 text-sm text-theme-secondary hover:text-theme-primary transition-all">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+              Copy Result
+            </button>
+            <a href="/inquiry/" class="flex items-center justify-center gap-2 accent-bg rounded-lg py-2 text-sm font-semibold on-accent hover:opacity-90 transition-opacity">
+              Get a Quote
+            </a>
+          </div>
+
+          <p id="lc-copy-feedback" class="hidden text-xs text-center text-green-400">Copied!</p>
+
+          <p class="text-xs text-theme-muted pt-3 border-t border-theme">
+            Results are theoretical estimates using simplified beam theory. Always verify structural adequacy with a qualified engineer before installation.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Related tools -->
+    <div class="mt-12 pt-8 border-t border-theme">
+      <h2 class="text-lg font-semibold text-theme-primary mb-4">Related Tools</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        <a href="/tools/steel-grating-weight-calculator/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">Tool 01</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">Steel Grating Weight Calculator</h3>
+          <p class="text-sm text-theme-secondary mt-1">Calculate kg/m² and panel weight.</p>
+        </a>
+        <a href="/tools/open-area-percentage-calculator/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">Tool 03</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">Open Area Percentage</h3>
+          <p class="text-sm text-theme-secondary mt-1">Drainage and ventilation open area %.</p>
+        </a>
+        <a href="/charts/load-capacity-table/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">Chart</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">Load Capacity Reference Table</h3>
+          <p class="text-sm text-theme-secondary mt-1">Common span × bearing bar quick reference.</p>
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+</Base>
+
+<script>
+(function () {
+  const $ = (id: string) => document.getElementById(id) as HTMLElement;
+  const getNum = (id: string) => parseFloat((document.getElementById(id) as HTMLInputElement | HTMLSelectElement)?.value || '0') || 0;
+
+  function getBS4592Class(udl_kpa: number): string {
+    if (udl_kpa >= 12.5) return 'Class E (≥12.5 kPa) — Very Heavy Duty';
+    if (udl_kpa >= 7.5) return 'Class D (≥7.5 kPa) — Heavy Duty';
+    if (udl_kpa >= 5.0) return 'Class C (≥5.0 kPa) — Medium Duty';
+    if (udl_kpa >= 2.5) return 'Class B (≥2.5 kPa) — Pedestrian';
+    if (udl_kpa >= 1.5) return 'Class A (≥1.5 kPa) — Light Pedestrian';
+    return 'Below Class A (<1.5 kPa)';
+  }
+
+  function calc(): void {
+    const H = getNum('lc-height');        // mm
+    const T = getNum('lc-thickness');     // mm
+    const P_bb = getNum('lc-pitch');      // mm
+    const L = getNum('span');             // mm
+    const fy = getNum('steel-grade');     // MPa
+    const standard = (document.getElementById('standard') as HTMLSelectElement).value;
+    const endCond = (document.getElementById('end-cond') as HTMLSelectElement).value;
+
+    if (!H || !T || !P_bb || !L) return;
+
+    const E = 200000; // MPa
+    const S = (T * H * H) / 6;   // mm³ section modulus per bar
+    const I = (T * H * H * H) / 12; // mm⁴ per bar
+    const n = 1000 / P_bb;          // bars per metre width
+
+    // Allowable stress (NAAMM = 0.55·fy, BS4592 simplified = 0.60·fy)
+    const sigma_allow = standard === 'naamm' ? 0.55 * fy : 0.60 * fy; // MPa
+
+    // Bending coefficients
+    const bendCoeff = endCond === 'fixed' ? 16 : 8;
+    const deflCoeff = endCond === 'fixed' ? 384 : 5;
+
+    // Max UDL from bending (kPa)
+    // M_allow = σ·S·n / 1e6 (kN·m per m width)
+    // For SS beam: M_max = q·L²/8 → q = 8·M/(L²)
+    const M_allow_Nmm = sigma_allow * S * n; // N·mm per m width
+    const q_bending = (bendCoeff * M_allow_Nmm) / (L * L * 1000); // kPa (kN/m² × 1e6/1e6 / 1e3)
+    // Actually: q [kN/m²] = bendCoeff × σ_allow[N/mm²] × S[mm³] × n/m / (L[mm]² × 1000)
+    // = bendCoeff × M_allow_Nmm / (L² × 1000) where /1000 converts N·mm/m² to kN/m²
+    // Hmm, let me recalculate clearly:
+    // q [N/mm²=MPa per m width] but we want kPa:
+    // M_allow (N·mm per m-width) = sigma * S * n
+    // q_bend (N/mm²) = 8·M/(L²) for SS → in kPa: multiply by 1000 (N/mm² = 1 MPa = 1000 kPa)
+    // q_bend (kPa) = 8·sigma·S·n/L² * 1000 / 1000 = 8·sigma·S·n/L²
+    // Wait: N/mm² = kPa * 0.001, so N/mm = kN/m
+    // q [N/m²] = 8 * M_allow[N·mm/m] / L[mm]² / (m²/mm²)
+    // Let me be dimensional:
+    // M_allow per metre width = sigma[MPa] * S[mm³] * n[bars/m] = sigma * S * n (N·mm/m * 1 = N·mm/m... )
+    // Actually n is bars per m, S is mm³ per bar → n*S = mm³/m
+    // σ * n * S = N/mm² * mm³/m = N·mm/m
+    // For SS beam: M = q * L² / 8, where q [N/m] and L [mm]
+    // M [N·mm/m] = q[N/(m·m)] * L[mm]² / 8 ... units mismatch
+    // Let's use consistent SI: everything in mm, N
+    // σ [N/mm²], S [mm³/bar], n_per_mm = n/1000 [bars/mm]
+    // M_allow [N·mm per mm-width] = σ * S * n_per_mm = σ * S * n / 1000
+    // q [N/mm per mm-width] = 8 * M [N·mm/mm] / L²
+    // q [N/mm²] = 8 * σ * S * n / (1000 * L²)
+    // 1 N/mm² = 1 MPa = 1000 kPa
+    // q [kPa] = 8 * σ * S * n / (1000 * L²) * 1000 = 8 * σ * S * n / L²
+    // So q_bend [kPa] = bendCoeff * sigma_allow * S * n / L²
+
+    const q_bend_kPa = (bendCoeff * sigma_allow * S * n) / (L * L); // kPa
+
+    // Deflection under q_bend
+    // δ = 5 * q * L⁴ / (384 * E * I_total)
+    // q [N/mm per mm-width] = q_bend_kPa / 1000 [N/mm²] (since kPa / 1000 = N/mm²)
+    // I_total [mm⁴ per mm-width] = I * n_per_mm = I * n / 1000
+    // δ = deflCoeff * (q_bend_kPa/1000) * L⁴ / (384 * E * I * n/1000)
+    //   = deflCoeff * q_bend_kPa * L⁴ / (384 * E * I * n)
+    const I_total = I * n / 1000; // mm⁴ per mm-width
+    const q_Nmm = q_bend_kPa / 1000; // N/mm per mm width = N/mm²
+    const defl_mm = (deflCoeff * q_Nmm * Math.pow(L, 4)) / (384 * E * I_total);
+
+    // Allowable deflection
+    const defl_limit_ratio = standard === 'naamm' ? 180 : 200;
+    const defl_limit = L / defl_limit_ratio;
+
+    // Back-calculate q from deflection limit
+    const q_defl_kPa = defl_limit * 384 * E * I_total / (deflCoeff * Math.pow(L, 4)) * 1000;
+
+    // Governing
+    let q_allow_kPa: number;
+    let governing: string;
+    if (q_bend_kPa <= q_defl_kPa) {
+      q_allow_kPa = q_bend_kPa;
+      governing = 'Bending governs ✓';
+    } else {
+      q_allow_kPa = q_defl_kPa;
+      governing = `Deflection governs ✓ (L/${defl_limit_ratio})`;
+    }
+
+    const q_psf = q_allow_kPa * 20.885; // kPa to psf
+
+    // Point load (kN per m width) — based on bending
+    const P_allow = (4 * sigma_allow * S * n) / L; // N/mm = kN/m per m width... let's verify
+    // M = P*L/4 (SS, midspan point load) → P = 4*M/L = 4*sigma*S*n/L [N/m * mm/... ]
+    // P [N per mm-width] = bendCoeff/2 * sigma * S * n_per_mm / L
+    // Actually for SS midspan: M = P*L/4, so P = 4*M_allow/L
+    // P [N per mm-width] = 4 * sigma * S * n/1000 / L = 4*sigma*S*n/(1000*L)
+    // P [kN per m-width] = 4 * sigma * S * n / (1000 * L) * (1 N / 0.001 kN) * (1000 mm / 1 m)
+    //                    = 4 * sigma * S * n / L [kN/m]
+    const P_kN_per_m = (4 * sigma_allow * S * n) / L; // kN/m width
+
+    // Actual deflection under final q
+    const actual_defl = (deflCoeff * (q_allow_kPa / 1000) * Math.pow(L, 4)) / (384 * E * I_total);
+    const defl_ratio_actual = L / actual_defl;
+
+    // Warnings
+    const warnings: string[] = [];
+    if (L > 1500 && H < 30) warnings.push('⚠ Long span (>1500 mm) with shallow bar — consider 30mm+ height for better stiffness.');
+    if (endCond === 'fixed') warnings.push('ℹ Fixed-end results assume full moment fixity at supports — verify connection detail can achieve this.');
+
+    // Update DOM
+    const udlEl = $('result-udl');
+    if (udlEl) udlEl.textContent = q_allow_kPa.toFixed(2) + ' kPa';
+    const udlPsfEl = $('result-udl-psf');
+    if (udlPsfEl) udlPsfEl.textContent = q_psf.toFixed(1) + ' psf';
+    const pointEl = $('result-point');
+    if (pointEl) pointEl.textContent = P_kN_per_m.toFixed(2) + ' kN/m';
+    const deflEl = $('result-defl');
+    if (deflEl) deflEl.textContent = actual_defl.toFixed(2) + ' mm';
+    const deflRatioEl = $('result-defl-ratio');
+    if (deflRatioEl) deflRatioEl.textContent = `L/${defl_ratio_actual.toFixed(0)} vs L/${defl_limit_ratio} limit`;
+    const govEl = $('result-gov');
+    if (govEl) govEl.textContent = governing;
+    const classEl = $('result-class');
+    if (classEl) classEl.textContent = getBS4592Class(q_allow_kPa);
+    const stdLabelEl = $('standard-label');
+    if (stdLabelEl) stdLabelEl.textContent = standard === 'naamm' ? 'NAAMM MBG 531' : 'BS 4592';
+
+    const warnBox = $('warning-box');
+    const warnText = $('warning-text');
+    if (warnBox && warnText) {
+      if (warnings.length > 0) {
+        warnBox.classList.remove('hidden');
+        warnText.textContent = warnings.join(' · ');
+      } else {
+        warnBox.classList.add('hidden');
+      }
+    }
+  }
+
+  function copyResult(): void {
+    const udl = $('result-udl')?.textContent || '';
+    const point = $('result-point')?.textContent || '';
+    const cls = $('result-class')?.textContent || '';
+    const gov = $('result-gov')?.textContent || '';
+    const H = getNum('lc-height'), T = getNum('lc-thickness'), P_bb = getNum('lc-pitch');
+    const L = getNum('span');
+    const stdEl = document.getElementById('standard') as HTMLSelectElement;
+    const std = stdEl?.options[stdEl.selectedIndex]?.text || '';
+    const text = [
+      `Bar Grating Load Capacity`,
+      `Spec: ${H}×${T}mm @ ${P_bb}mm pitch | Span: ${L}mm | Standard: ${std}`,
+      `---`,
+      `Max Allowable UDL: ${udl}`,
+      `Max Point Load: ${point}`,
+      `BS 4592 Load Class: ${cls}`,
+      `Governing: ${gov}`,
+      `Calculated on SteelGratingCalculator.com`,
+    ].join('\n');
+    navigator.clipboard.writeText(text).then(() => {
+      const fb = $('lc-copy-feedback');
+      if (fb) { fb.classList.remove('hidden'); setTimeout(() => fb.classList.add('hidden'), 2500); }
+    });
+  }
+
+  // Import from Weight Calculator via localStorage
+  document.getElementById('btn-import')?.addEventListener('click', () => {
+    try {
+      const saved = localStorage.getItem('sgc_last_bb');
+      if (!saved) { alert('No saved Weight Calculator result found. Please use the Weight Calculator first.'); return; }
+      const { H, T, P_bb } = JSON.parse(saved);
+      const hEl = document.getElementById('lc-height') as HTMLSelectElement;
+      const tEl = document.getElementById('lc-thickness') as HTMLSelectElement;
+      const pEl = document.getElementById('lc-pitch') as HTMLSelectElement;
+      if (hEl) hEl.value = String(H);
+      if (tEl) tEl.value = String(T);
+      if (pEl) pEl.value = String(P_bb);
+      calc();
+    } catch (_) { alert('Could not read saved specification.'); }
+  });
+
+  document.querySelectorAll('#lc-height,#lc-thickness,#lc-pitch,#span,#standard,#end-cond,#steel-grade')
+    .forEach(el => el.addEventListener('change', calc));
+  document.getElementById('span')?.addEventListener('input', calc);
+  document.getElementById('btn-copy-lc')?.addEventListener('click', copyResult);
+
+  calc();
+})();
+</script>
+
+<style>
+  .label { display:block; font-size:.75rem; font-weight:600; margin-bottom:.25rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:.05em; }
+  .select, .input { width:100%; border:1px solid var(--border-color); border-radius:.5rem; padding:.5rem .75rem; background-color:var(--bg-secondary); color:var(--text-primary); font-size:.875rem; outline:none; transition:all .2s; }
+  .select:focus, .input:focus { box-shadow:0 0 0 1px #f59e0b; }
+  .input-hint { margin-top:.25rem; font-size:.75rem; color:var(--text-muted); }
+</style>

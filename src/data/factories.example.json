@@ -1,0 +1,36 @@
+[
+  {
+    "slug": "anping-example-mesh",
+    "name": "Anping Example Mesh Co., Ltd.",
+    "nameZh": "安平示例丝网有限公司",
+    "tier": "listed",
+    "categories": ["welded-wire-mesh", "wire-mesh-fence-panels"],
+    "city": "Anping",
+    "province": "Hebei",
+    "website": "https://example.com/",
+    "description": "Sample entry for local testing only — welded mesh and fence panel manufacturer (placeholder, not a real factory).",
+    "descriptionZh": "仅用于本地测试的示例条目——焊接网与网片生产商（占位，非真实工厂）。"
+  },
+  {
+    "slug": "hengshui-example-filter",
+    "name": "Hengshui Example Filter Mesh Factory",
+    "nameZh": "衡水示例过滤网厂",
+    "tier": "verified",
+    "categories": ["stainless-steel-wire-mesh"],
+    "city": "Hengshui",
+    "province": "Hebei",
+    "website": "https://example.org/",
+    "description": "Sample entry for local testing only — stainless steel woven mesh for filtration (placeholder, not a real factory).",
+    "descriptionZh": "仅用于本地测试的示例条目——不锈钢过滤编织网生产商（占位，非真实工厂）。",
+    "contact": {
+      "email": "sales@example.org",
+      "phone": "+86 000 0000 0000",
+      "whatsapp": "+86 000 0000 0000"
+    },
+    "founded": 2008,
+    "employees": "100–200",
+    "exportMarkets": ["EU", "Middle East"],
+    "certifications": ["ISO 9001"],
+    "verifiedNote": "示例占位文案：营业执照 + 视频验厂已通过。"
+  }
+]
