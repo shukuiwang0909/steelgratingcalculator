@@ -1,0 +1,107 @@
+---
+import Base from "../../../layouts/Base.astro";
+
+const title = "钢格栅技术博客 — 规格解读·采购指南·计算公式 | SteelGratingCalculator";
+const description = "钢格栅专业技术文章：NAAMM规格代号解读、普通型vs防滑型选择、集装箱装箱计算、重量计算公式。面向采购工程师的实用指南。";
+
+const posts = [
+  {
+    slug: "naamm-bar-grating-designations",
+    tag: "标准解读",
+    readTime: "6分钟",
+    title: "NAAMM钢格栅规格代号详解（19-W-4、15-W-4…）",
+    desc: "解读 NAAMM MBG 531 规格代号的含义，如何将英制规格换算为公制尺寸，以及如何向安平工厂下订单。",
+    href: "/blog/naamm-bar-grating-designations/",
+  },
+  {
+    slug: "plain-vs-serrated-steel-grating",
+    tag: "选型指南",
+    readTime: "7分钟",
+    title: "普通型vs防滑齿型钢格栅：什么情况下必须防滑？",
+    desc: "对比普通（W系列）和防滑齿型（I系列）的防滑性、重量、价格和法规要求。OSHA、NORSOK及BS 4592合规指引。",
+    href: "/blog/plain-vs-serrated-steel-grating/",
+  },
+  {
+    slug: "how-to-load-steel-grating-in-container",
+    tag: "运输指南",
+    readTime: "5分钟",
+    title: "钢格栅装20英尺集装箱完全指南",
+    desc: "精确计算一个20英尺柜能装多少块面板：堆叠方式、重量与体积限制、木方配置，以及从安平发货的装箱规划。",
+    href: "/blog/how-to-load-steel-grating-in-container/",
+  },
+  {
+    slug: "how-to-calculate-steel-grating-weight",
+    tag: "计算方法",
+    readTime: "5分钟",
+    title: "钢格栅重量计算公式——附在线计算器",
+    desc: "完整推导承重扁钢和横杆的重量公式，以及如何用在线计算器快速得出任意规格的精确重量。",
+    href: "/blog/how-to-calculate-steel-grating-weight/",
+  },
+];
+---
+<Base title={title} description={description} lang="zh">
+
+  <section class="max-w-4xl mx-auto px-4 py-10">
+
+    <nav class="text-xs text-theme-muted mb-6 flex items-center gap-2">
+      <a href="/zh/" class="hover:text-theme-primary transition-colors">首页</a>
+      <span>/</span>
+      <span class="accent-text">技术博客</span>
+    </nav>
+
+    <div class="mb-10">
+      <h1 class="text-3xl font-semibold text-theme-primary mb-3">钢格栅技术博客</h1>
+      <p class="text-theme-secondary max-w-2xl leading-relaxed">
+        面向采购工程师和项目经理的实用技术指南——规格解读、选型对比、计算方法和采购实务。
+      </p>
+    </div>
+
+    <div class="space-y-4">
+      {posts.map(post => (
+        <a href={post.href} class="card card-accent group block">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-xs font-mono accent-text uppercase tracking-wider">{post.tag}</span>
+            <span class="text-xs text-theme-muted">· {post.readTime}阅读</span>
+          </div>
+          <h2 class="text-lg font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mb-2 leading-snug">{post.title}</h2>
+          <p class="text-sm text-theme-secondary leading-relaxed">{post.desc}</p>
+          <div class="mt-3 flex items-center gap-1 text-xs accent-text font-medium">
+            阅读全文
+            <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <!-- 工具导航 -->
+    <div class="mt-12 pt-8 border-t border-theme">
+      <h2 class="text-lg font-semibold text-theme-primary mb-5">边读边算——配套计算工具</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        <a href="/zh/tools/steel-grating-weight-calculator/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">工具 01</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">重量计算器</h3>
+          <p class="text-sm text-theme-secondary mt-1">每平方米重量 · 面板重量 · 订单总重</p>
+        </a>
+        <a href="/zh/tools/bar-grating-load-capacity-calculator/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">工具 02</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">承载能力计算器</h3>
+          <p class="text-sm text-theme-secondary mt-1">NAAMM · BS 4592 允许荷载</p>
+        </a>
+        <a href="/zh/tools/container-loading-calculator/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">工具 06</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">集装箱装载计算器</h3>
+          <p class="text-sm text-theme-secondary mt-1">面板数量 · 重量 · 体积利用率</p>
+        </a>
+      </div>
+    </div>
+
+    <div class="mt-10 p-5 bg-theme-secondary rounded-xl border border-theme">
+      <p class="text-sm text-theme-secondary">
+        有采购问题或需要报价？
+        <a href="/zh/inquiry/" class="accent-text font-semibold hover:opacity-80 transition-opacity ml-1">发送询价 →</a>
+      </p>
+    </div>
+
+  </section>
+
+</Base>

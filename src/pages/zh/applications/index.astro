@@ -1,0 +1,145 @@
+---
+import Base from "../../../layouts/Base.astro";
+
+const title = "钢格栅应用场景 — 工业地板·走道·排水·石油化工 | 选型指南";
+const description = "钢格栅六大典型应用场景：工业地板、走道平台、排水沟、楼梯踏步、石油化工平台、食品加工。包含选型建议和规格参数。";
+
+const applications = [
+  {
+    icon: "🏭",
+    tag: "最常见应用",
+    title: "工业地板与夹层",
+    desc: "钢格栅是工厂夹层、设备基座和工业地板的首选材料。承重扁钢直接承受集中荷载，开放的格栅结构便于清洁和视线穿透。",
+    specs: ["承重扁钢推荐：25×5mm @ 30mm间距", "最大跨距：600–900mm（25×5mm简支）", "表面处理：热镀锌或防滑齿型"],
+    href: "/applications/industrial-flooring/",
+  },
+  {
+    icon: "🚶",
+    tag: "行人安全",
+    title: "走道与平台",
+    desc: "户外走道、高架平台和过桥需要防滑表面和耐候处理。防滑齿型热镀锌格栅是绝大多数工业规范的要求。",
+    specs: ["防滑要求：I系列（防滑齿型）", "OSHA 1910.22 合规", "热镀锌 ISO 1461 标准"],
+    href: "/applications/walkways-platforms/",
+  },
+  {
+    icon: "💧",
+    tag: "排水设计",
+    title: "排水沟与沟盖板",
+    desc: "工厂地面、停车场和道路的排水沟盖板需要足够的开孔率（推荐45–65%）和对应荷载等级。",
+    specs: ["开孔率推荐：≥45%", "承载等级：BS 4592 B–D级", "沟宽可定制：100–600mm"],
+    href: "/applications/drainage-trench-covers/",
+  },
+  {
+    icon: "🪜",
+    tag: "安全踏步",
+    title: "楼梯踏步与防滑",
+    desc: "格栅踏步板带前缘包角和防滑齿，完全符合OSHA楼梯踏步防滑要求。常用于工业楼梯、疏散通道和平台爬梯。",
+    specs: ["踏步宽度：250mm / 305mm 标准", "前缘包角：50×6mm扁钢", "OSHA 1910.23 合规"],
+    href: "/applications/stair-nosings/",
+  },
+  {
+    icon: "⛽",
+    tag: "高要求环境",
+    title: "石油化工平台",
+    desc: "海上平台、炼油装置和储罐区对格栅有严格要求：NORSOK M-001强制防滑，高盐雾腐蚀环境需加厚镀锌或不锈钢。",
+    specs: ["NORSOK M-001 — 强制防滑齿型", "热镀锌厚度 ≥85μm（海工特殊要求）", "SS 316L 不锈钢适用极端腐蚀环境"],
+    href: "/applications/oil-gas-platforms/",
+  },
+  {
+    icon: "🍖",
+    tag: "卫生要求",
+    title: "食品加工与制药",
+    desc: "食品和医药生产区域需要HACCP认可的防滑表面和可彻底清洁的材料。不锈钢316L防滑格栅是行业标准。",
+    specs: ["材质：SS 316L不锈钢", "表面：防滑齿型 + 电解抛光", "HACCP合规 · 易清洁设计"],
+    href: "/applications/food-processing/",
+  },
+];
+---
+<Base title={title} description={description} lang="zh">
+
+  <section class="max-w-6xl mx-auto px-4 py-10">
+
+    <nav class="text-xs text-theme-muted mb-6 flex items-center gap-2">
+      <a href="/zh/" class="hover:text-theme-primary transition-colors">首页</a>
+      <span>/</span>
+      <span class="accent-text">应用场景</span>
+    </nav>
+
+    <div class="mb-10">
+      <h1 class="text-3xl font-semibold text-theme-primary mb-3">钢格栅应用场景</h1>
+      <p class="text-theme-secondary max-w-2xl leading-relaxed">
+        钢格栅广泛应用于工业、建筑、能源和食品行业。不同场景对材质、表面处理和荷载等级有不同要求——以下是六大典型应用的选型指南。
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {applications.map(app => (
+        <a href={app.href} class="card card-accent group flex flex-col">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-2xl">{app.icon}</span>
+            <span class="text-xs font-mono accent-text uppercase tracking-wider">{app.tag}</span>
+          </div>
+          <h2 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors text-base mb-2">{app.title}</h2>
+          <p class="text-sm text-theme-secondary leading-relaxed flex-1 mb-4">{app.desc}</p>
+          <ul class="space-y-1">
+            {app.specs.map(s => (
+              <li class="text-xs font-mono text-theme-muted flex items-start gap-1.5">
+                <span class="accent-text shrink-0">·</span>
+                {s}
+              </li>
+            ))}
+          </ul>
+        </a>
+      ))}
+    </div>
+
+    <!-- 快速选型表 -->
+    <div class="mt-12 pt-8 border-t border-theme">
+      <h2 class="text-xl font-semibold text-theme-primary mb-5">快速选型参考</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-theme">
+              {["应用场景", "推荐材质", "表面处理", "是否需防滑"].map(h => (
+                <th class="text-left py-2 pr-4 text-theme-muted font-medium">{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody class="text-theme-secondary">
+            {[
+              ["工业地板（干燥室内）", "碳钢 Q235", "热镀锌 或 喷漆", "可选"],
+              ["户外走道/平台", "碳钢 Q235", "热镀锌 ISO 1461", "必须"],
+              ["排水沟盖板（行人）", "碳钢 Q235", "热镀锌", "推荐"],
+              ["楼梯踏步", "碳钢 Q235", "热镀锌", "必须"],
+              ["石油化工平台", "碳钢/SS 316L", "加厚镀锌 ≥85μm", "必须"],
+              ["食品加工区", "SS 316L", "电解抛光", "必须"],
+            ].map(([app, mat, fin, anti]) => (
+              <tr class="border-b border-theme/50">
+                <td class="py-2.5 pr-4 font-medium text-theme-primary">{app}</td>
+                <td class="py-2.5 pr-4">{mat}</td>
+                <td class="py-2.5 pr-4">{fin}</td>
+                <td class="py-2.5">
+                  <span class={`text-xs px-2 py-0.5 rounded font-mono ${anti === '必须' ? 'bg-amber-900/30 text-amber-400' : anti === '推荐' ? 'bg-slate-700 text-theme-secondary' : 'bg-theme-tertiary text-theme-muted'}`}>{anti}</span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="mt-12 p-6 bg-theme-secondary rounded-xl border border-theme">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <div class="flex-1">
+          <h2 class="text-lg font-semibold text-theme-primary mb-1">不确定选哪种规格？</h2>
+          <p class="text-sm text-theme-secondary">描述您的应用场景和荷载条件，安平工厂技术团队将为您推荐最合适的规格并报价。</p>
+        </div>
+        <a href="/zh/inquiry/" class="accent-bg on-accent px-6 py-3 rounded-lg font-semibold text-sm hover:opacity-90 transition-opacity shrink-0">
+          发送询价 →
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+</Base>

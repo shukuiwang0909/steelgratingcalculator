@@ -1,0 +1,140 @@
+---
+import Base from "../../../layouts/Base.astro";
+
+const title = "钢格栅产品目录 — 8大品类规格参数 | SteelGratingCalculator";
+const description = "安平钢格栅完整产品目录：普通型、防滑齿型、热镀锌、不锈钢、铝合金、踏步板、沟盖板、重型格栅。包含规格参数和询价入口。";
+
+const products = [
+  {
+    slug: "plain-steel-grating",
+    tag: "最常用",
+    title: "普通钢格栅",
+    desc: "承重扁钢与横杆压力焊接，表面光滑。适用于干燥室内工业地板、平台和走道。",
+    specs: "承重扁钢 20–75mm · 厚度 3–5mm · 间距 11–76mm",
+    href: "/products/plain-steel-grating/",
+  },
+  {
+    slug: "serrated-steel-grating",
+    tag: "防滑",
+    title: "防滑齿型钢格栅",
+    desc: "承重扁钢顶面每20–25mm切V形齿槽，防滑性能优异。OSHA、NORSOK及食品加工场所必选。",
+    specs: "NAAMM I系列 · GB/T 12755 防滑型 · 比普通型重约5–8%",
+    href: "/products/serrated-steel-grating/",
+  },
+  {
+    slug: "galvanized-steel-grating",
+    tag: "户外首选",
+    title: "热镀锌钢格栅",
+    desc: "符合 ISO 1461 热浸镀锌处理，耐腐蚀寿命25年以上。沿海、化工和户外平台的标准规格。",
+    specs: "锌层厚度 ≥45μm · ISO 1461 · 重量增加约4%",
+    href: "/products/galvanized-steel-grating/",
+  },
+  {
+    slug: "stainless-steel-grating",
+    tag: "食品/医药",
+    title: "不锈钢格栅",
+    desc: "304或316L不锈钢制造，适用于食品加工、制药和海洋环境。符合HACCP卫生要求。",
+    specs: "SS 304 / SS 316L · 密度7.93–7.98 g/cm³ · 可电解抛光",
+    href: "/products/stainless-steel-grating/",
+  },
+  {
+    slug: "aluminum-grating",
+    tag: "轻量化",
+    title: "铝合金格栅",
+    desc: "6061-T6铝合金，重量约为钢格栅的34%。适合重量敏感场合：船舶、移动平台、建筑装饰。",
+    specs: "铝合金 6061-T6 · 密度2.7 g/cm³ · 自然氧化防腐",
+    href: "/products/aluminum-grating/",
+  },
+  {
+    slug: "stair-treads",
+    tag: "防滑踏步",
+    title: "格栅踏步板",
+    desc: "专为楼梯踏步设计，前缘包角处理。防滑齿型为标准规格，符合OSHA 1910.23楼梯防滑要求。",
+    specs: "前缘包角 · 标准宽度250mm/305mm · 可定制",
+    href: "/products/grating-stair-treads/",
+  },
+  {
+    slug: "trench-covers",
+    tag: "排水沟",
+    title: "排水沟盖板",
+    desc: "工厂和道路排水沟专用盖板，可承受行人和车辆荷载。普通型和防滑型均有供应。",
+    specs: "承载等级 A–E · 带框或不带框 · 可热镀锌",
+    href: "/products/trench-covers/",
+  },
+  {
+    slug: "heavy-duty-grating",
+    tag: "重型",
+    title: "重型钢格栅",
+    desc: "大截面承重扁钢（50–75mm高），适用于长跨距、重载荷场景：停车场、港口装卸区、采矿设施。",
+    specs: "承重扁钢高度50/65/75mm · 跨距可达2400mm · 定制间距",
+    href: "/products/heavy-duty-grating/",
+  },
+];
+---
+<Base title={title} description={description} lang="zh">
+
+  <section class="max-w-6xl mx-auto px-4 py-10">
+
+    <nav class="text-xs text-theme-muted mb-6 flex items-center gap-2">
+      <a href="/zh/" class="hover:text-theme-primary transition-colors">首页</a>
+      <span>/</span>
+      <span class="accent-text">产品目录</span>
+    </nav>
+
+    <div class="mb-10">
+      <h1 class="text-3xl font-semibold text-theme-primary mb-3">钢格栅产品目录</h1>
+      <p class="text-theme-secondary max-w-2xl leading-relaxed">
+        安平产区全系列钢格栅产品，覆盖工业、建筑、食品、海工等各类应用场景。点击产品了解详细规格参数，或直接
+        <a href="/zh/inquiry/" class="accent-text hover:opacity-80 transition-opacity">发送询价</a>。
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+      {products.map(p => (
+        <a href={p.href} class="card card-accent group flex flex-col">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono accent-text uppercase tracking-wider">{p.tag}</span>
+          </div>
+          <h2 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors text-base leading-snug mb-2">{p.title}</h2>
+          <p class="text-sm text-theme-secondary leading-relaxed flex-1 mb-3">{p.desc}</p>
+          <p class="text-xs font-mono text-theme-muted border-t border-theme pt-2">{p.specs}</p>
+        </a>
+      ))}
+    </div>
+
+    <div class="mt-12 p-6 bg-theme-secondary rounded-xl border border-theme">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <div class="flex-1">
+          <h2 class="text-lg font-semibold text-theme-primary mb-1">需要定制规格？</h2>
+          <p class="text-sm text-theme-secondary">安平工厂可定制任意截面尺寸、面板尺寸、表面处理和标准。发送您的技术要求，获取FOB报价。</p>
+        </div>
+        <a href="/zh/inquiry/" class="accent-bg on-accent px-6 py-3 rounded-lg font-semibold text-sm hover:opacity-90 transition-opacity shrink-0">
+          发送询价 →
+        </a>
+      </div>
+    </div>
+
+    <div class="mt-12 pt-8 border-t border-theme">
+      <h2 class="text-lg font-semibold text-theme-primary mb-4">常用计算工具</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        <a href="/zh/tools/steel-grating-weight-calculator/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">工具 01</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">重量计算器</h3>
+          <p class="text-sm text-theme-secondary mt-1">计算任意规格的每平方米重量和订单总重。</p>
+        </a>
+        <a href="/zh/tools/bar-grating-load-capacity-calculator/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">工具 02</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">承载能力计算器</h3>
+          <p class="text-sm text-theme-secondary mt-1">NAAMM / BS 4592 允许荷载计算。</p>
+        </a>
+        <a href="/zh/tools/fob-price-calculator/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">工具 05</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">FOB 价格计算器</h3>
+          <p class="text-sm text-theme-secondary mt-1">出厂价 → FOB 美元报价换算。</p>
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+</Base>

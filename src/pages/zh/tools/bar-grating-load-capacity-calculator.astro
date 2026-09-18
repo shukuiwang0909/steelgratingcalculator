@@ -1,0 +1,384 @@
+---
+import Base from "../../../layouts/Base.astro";
+
+const title = "钢格栅承载能力计算器 — NAAMM MBG 531 & BS 4592 | 免费";
+const description = "计算任意规格钢格栅的最大允许均布荷载（UDL）和集中荷载。支持 NAAMM MBG 531（美标）和 BS 4592（英标/英联邦）。包含弯曲和挠度双重验算。";
+---
+<Base title={title} description={description} lang="zh">
+
+  <section class="max-w-6xl mx-auto px-4 py-10">
+
+    <nav class="text-xs text-theme-muted mb-6 flex items-center gap-2">
+      <a href="/zh/" class="hover:text-theme-primary transition-colors">首页</a>
+      <span>/</span>
+      <a href="/zh/tools/bar-grating-load-capacity-calculator/" class="accent-text">承载能力计算器</a>
+    </nav>
+
+    <div class="mb-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-theme accent-border accent-text text-xs font-mono uppercase tracking-wider mb-4">
+        <span class="w-1.5 h-1.5 rounded-full accent-bg animate-pulse"></span>
+        工具 02 · NAAMM MBG 531 / BS 4592
+      </div>
+      <h1 class="text-3xl font-semibold text-theme-primary mb-3">钢格栅承载能力计算器</h1>
+      <p class="text-theme-secondary max-w-2xl leading-relaxed">
+        计算任意规格钢格栅在给定跨距下的最大允许均布荷载（UDL）和集中荷载。支持 NAAMM MBG 531（允许应力法）和 BS 4592（英国极限状态）。包含弯曲和挠度双重验算。
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-[1fr_420px] gap-6">
+
+      <!-- 左列：输入参数 -->
+      <div class="space-y-5">
+
+        <!-- 承重扁钢 -->
+        <div class="card">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-sm font-semibold text-theme-primary uppercase tracking-wide flex items-center gap-2">
+              <span class="w-1 h-4 accent-bg rounded-full"></span>
+              承重扁钢规格
+            </h2>
+            <button id="btn-import" class="text-xs accent-text hover:opacity-80 transition-opacity border border-theme rounded-lg px-3 py-1 flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              从重量计算器导入
+            </button>
+          </div>
+          <div class="grid grid-cols-3 gap-4">
+            <div>
+              <label class="label" for="lc-height">高度（mm）</label>
+              <select id="lc-height" class="select">
+                <option value="20">20 mm</option>
+                <option value="25" selected>25 mm</option>
+                <option value="30">30 mm</option>
+                <option value="35">35 mm</option>
+                <option value="40">40 mm</option>
+                <option value="50">50 mm</option>
+                <option value="65">65 mm</option>
+                <option value="75">75 mm</option>
+              </select>
+            </div>
+            <div>
+              <label class="label" for="lc-thickness">厚度（mm）</label>
+              <select id="lc-thickness" class="select">
+                <option value="3">3 mm</option>
+                <option value="4">4 mm</option>
+                <option value="5" selected>5 mm</option>
+              </select>
+            </div>
+            <div>
+              <label class="label" for="lc-pitch">间距 c/c（mm）</label>
+              <select id="lc-pitch" class="select">
+                <option value="11">11 mm</option>
+                <option value="15">15 mm</option>
+                <option value="22">22 mm</option>
+                <option value="30" selected>30 mm</option>
+                <option value="34">34 mm</option>
+                <option value="40">40 mm</option>
+                <option value="41">41 mm</option>
+                <option value="60">60 mm</option>
+                <option value="76">76 mm</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- 跨距与设计条件 -->
+        <div class="card">
+          <h2 class="text-sm font-semibold text-theme-primary uppercase tracking-wide mb-4 flex items-center gap-2">
+            <span class="w-1 h-4 accent-bg rounded-full"></span>
+            跨距与设计条件
+          </h2>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="label" for="span">净跨距（mm）</label>
+              <input id="span" type="number" min="100" max="3000" value="1000" class="input" />
+              <p class="input-hint">支座中心线间距离</p>
+            </div>
+            <div>
+              <label class="label" for="standard">设计标准</label>
+              <select id="standard" class="select">
+                <option value="naamm" selected>NAAMM MBG 531（美标）</option>
+                <option value="bs4592">BS 4592（英标/英联邦）</option>
+              </select>
+            </div>
+            <div>
+              <label class="label" for="end-cond">支撑条件</label>
+              <select id="end-cond" class="select">
+                <option value="ss" selected>简支</option>
+                <option value="fixed">两端固定</option>
+              </select>
+            </div>
+            <div>
+              <label class="label" for="steel-grade">钢材等级</label>
+              <select id="steel-grade" class="select">
+                <option value="250" selected>A36 / Q235（250 MPa）</option>
+                <option value="275">S275（275 MPa）</option>
+                <option value="355">Q345 / S355（355 MPa）</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- 计算方法 -->
+        <div class="card bg-theme-tertiary text-xs font-mono text-theme-secondary">
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-theme-muted mb-3">计算方法</h3>
+          <div class="grid md:grid-cols-2 gap-3">
+            <div>
+              <p class="text-theme-muted mb-1">截面模量（每根扁钢）：</p>
+              <p class="accent-text">S = T × H² / 6 (mm³)</p>
+            </div>
+            <div>
+              <p class="text-theme-muted mb-1">惯性矩：</p>
+              <p class="accent-text">I = T × H³ / 12 (mm⁴)</p>
+            </div>
+            <div>
+              <p class="text-theme-muted mb-1">每米宽内扁钢根数：</p>
+              <p class="accent-text">n = 1000 / P_bb</p>
+            </div>
+            <div>
+              <p class="text-theme-muted mb-1">NAAMM 允许应力：</p>
+              <p class="accent-text">σ = 0.55 × f_y (MPa)</p>
+            </div>
+            <div>
+              <p class="text-theme-muted mb-1">允许均布荷载（kPa）：</p>
+              <p class="accent-text">q = 8·σ·S·n / (L²·1000)</p>
+            </div>
+            <div>
+              <p class="text-theme-muted mb-1">挠度限值（NAAMM）：</p>
+              <p class="accent-text">δ ≤ L / 180</p>
+            </div>
+          </div>
+          <p class="text-theme-muted mt-3">E = 200,000 MPa。两端固定时弯曲系数取 16，挠度系数取 384。结果为简化允许应力估算，安装前请由结构工程师复核。</p>
+        </div>
+
+      </div>
+
+      <!-- 右列：结果 -->
+      <div>
+        <div class="card sticky top-20 space-y-3">
+          <div class="flex items-center justify-between mb-2">
+            <h2 class="text-sm font-semibold text-theme-primary uppercase tracking-wide">承载能力结果</h2>
+            <span id="standard-label" class="text-xs font-mono accent-text">NAAMM MBG 531</span>
+          </div>
+
+          <div id="warning-box" class="hidden p-3 bg-amber-500/10 border border-amber-500/30 rounded-lg">
+            <p id="warning-text" class="text-xs text-amber-400"></p>
+          </div>
+
+          <div class="p-4 accent-bg rounded-lg">
+            <p class="text-xs uppercase tracking-wide mb-1 on-accent opacity-80">最大允许均布荷载</p>
+            <p id="result-udl" class="text-3xl font-bold on-accent font-mono">—</p>
+            <p id="result-udl-psf" class="text-xs on-accent opacity-70 mt-0.5"></p>
+          </div>
+
+          <div class="p-3 bg-theme-tertiary rounded-lg border border-theme">
+            <p class="text-xs text-theme-muted uppercase tracking-wide mb-1">最大集中荷载（每米宽）</p>
+            <p id="result-point" class="text-xl font-bold text-theme-primary font-mono">—</p>
+          </div>
+
+          <div class="p-3 bg-theme-tertiary rounded-lg border border-theme">
+            <p class="text-xs text-theme-muted uppercase tracking-wide mb-1">最大荷载下挠度</p>
+            <p id="result-defl" class="text-xl font-bold text-theme-primary font-mono">—</p>
+            <p id="result-defl-ratio" class="text-xs text-theme-muted mt-0.5"></p>
+          </div>
+
+          <div class="p-3 bg-theme-tertiary rounded-lg border border-theme">
+            <p class="text-xs text-theme-muted uppercase tracking-wide mb-1">控制条件</p>
+            <p id="result-gov" class="text-base font-bold text-theme-primary">—</p>
+          </div>
+
+          <div class="p-3 bg-theme-tertiary rounded-lg border border-theme">
+            <p class="text-xs text-theme-muted uppercase tracking-wide mb-1">BS 4592 荷载等级</p>
+            <p id="result-class" class="text-base font-bold accent-text">—</p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2 mt-2">
+            <button id="btn-copy-lc" class="flex items-center justify-center gap-2 border border-theme rounded-lg py-2 text-sm text-theme-secondary hover:text-theme-primary transition-all">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+              复制结果
+            </button>
+            <a href="/zh/inquiry/" class="flex items-center justify-center gap-2 accent-bg rounded-lg py-2 text-sm font-semibold on-accent hover:opacity-90 transition-opacity">
+              获取报价
+            </a>
+          </div>
+
+          <p id="lc-copy-feedback" class="hidden text-xs text-center text-green-400">已复制！</p>
+
+          <p class="text-xs text-theme-muted pt-3 border-t border-theme">
+            结果为简化梁理论估算。安装前请由专业结构工程师验证结构安全性。
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 相关工具 -->
+    <div class="mt-12 pt-8 border-t border-theme">
+      <h2 class="text-lg font-semibold text-theme-primary mb-4">相关工具</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        <a href="/zh/tools/steel-grating-weight-calculator/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">工具 01</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">钢格栅重量计算器</h3>
+          <p class="text-sm text-theme-secondary mt-1">计算每平方米重量和面板重量。</p>
+        </a>
+        <a href="/zh/tools/open-area-percentage-calculator/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">工具 03</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">开孔率计算器</h3>
+          <p class="text-sm text-theme-secondary mt-1">排水通风开孔率计算。</p>
+        </a>
+        <a href="/charts/load-capacity-table/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">图表</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">承载能力速查表</h3>
+          <p class="text-sm text-theme-secondary mt-1">常用跨距×扁钢规格速查。</p>
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+</Base>
+
+<script>
+(function () {
+  const $ = (id: string) => document.getElementById(id) as HTMLElement;
+  const getNum = (id: string) => parseFloat((document.getElementById(id) as HTMLInputElement | HTMLSelectElement)?.value || '0') || 0;
+
+  function getBS4592Class(udl_kpa: number): string {
+    if (udl_kpa >= 12.5) return 'E级（≥12.5 kPa）— 超重型';
+    if (udl_kpa >= 7.5) return 'D级（≥7.5 kPa）— 重型';
+    if (udl_kpa >= 5.0) return 'C级（≥5.0 kPa）— 中型';
+    if (udl_kpa >= 2.5) return 'B级（≥2.5 kPa）— 行人通道';
+    if (udl_kpa >= 1.5) return 'A级（≥1.5 kPa）— 轻型行人';
+    return '低于A级（<1.5 kPa）';
+  }
+
+  function calc(): void {
+    const H = getNum('lc-height');
+    const T = getNum('lc-thickness');
+    const P_bb = getNum('lc-pitch');
+    const L = getNum('span');
+    const fy = getNum('steel-grade');
+    const standard = (document.getElementById('standard') as HTMLSelectElement).value;
+    const endCond = (document.getElementById('end-cond') as HTMLSelectElement).value;
+
+    if (!H || !T || !P_bb || !L) return;
+
+    const E = 200000;
+    const S = (T * H * H) / 6;
+    const I = (T * H * H * H) / 12;
+    const n = 1000 / P_bb;
+
+    const sigma_allow = standard === 'naamm' ? 0.55 * fy : 0.60 * fy;
+    const bendCoeff = endCond === 'fixed' ? 16 : 8;
+    const deflCoeff = endCond === 'fixed' ? 384 : 5;
+
+    const q_bend_kPa = (bendCoeff * sigma_allow * S * n) / (L * L);
+    const I_total = I * n / 1000;
+    const q_Nmm = q_bend_kPa / 1000;
+    const defl_mm = (deflCoeff * q_Nmm * Math.pow(L, 4)) / (384 * E * I_total);
+    const defl_limit_ratio = standard === 'naamm' ? 180 : 200;
+    const defl_limit = L / defl_limit_ratio;
+    const q_defl_kPa = defl_limit * 384 * E * I_total / (deflCoeff * Math.pow(L, 4)) * 1000;
+
+    let q_allow_kPa: number;
+    let governing: string;
+    if (q_bend_kPa <= q_defl_kPa) {
+      q_allow_kPa = q_bend_kPa;
+      governing = '弯曲控制 ✓';
+    } else {
+      q_allow_kPa = q_defl_kPa;
+      governing = `挠度控制 ✓（L/${defl_limit_ratio}）`;
+    }
+
+    const q_psf = q_allow_kPa * 20.885;
+    const P_kN_per_m = (4 * sigma_allow * S * n) / L;
+    const actual_defl = (deflCoeff * (q_allow_kPa / 1000) * Math.pow(L, 4)) / (384 * E * I_total);
+    const defl_ratio_actual = L / actual_defl;
+
+    const warnings: string[] = [];
+    if (L > 1500 && H < 30) warnings.push('⚠ 大跨距（>1500mm）配浅截面扁钢——建议选用30mm以上高度以提高刚度。');
+    if (endCond === 'fixed') warnings.push('ℹ 两端固定结果假定支座完全嵌固——请确认连接节点能实现此条件。');
+
+    const udlEl = $('result-udl');
+    if (udlEl) udlEl.textContent = q_allow_kPa.toFixed(2) + ' kPa';
+    const udlPsfEl = $('result-udl-psf');
+    if (udlPsfEl) udlPsfEl.textContent = q_psf.toFixed(1) + ' psf';
+    const pointEl = $('result-point');
+    if (pointEl) pointEl.textContent = P_kN_per_m.toFixed(2) + ' kN/m';
+    const deflEl = $('result-defl');
+    if (deflEl) deflEl.textContent = actual_defl.toFixed(2) + ' mm';
+    const deflRatioEl = $('result-defl-ratio');
+    if (deflRatioEl) deflRatioEl.textContent = `L/${defl_ratio_actual.toFixed(0)} vs 限值 L/${defl_limit_ratio}`;
+    const govEl = $('result-gov');
+    if (govEl) govEl.textContent = governing;
+    const classEl = $('result-class');
+    if (classEl) classEl.textContent = getBS4592Class(q_allow_kPa);
+    const stdLabelEl = $('standard-label');
+    if (stdLabelEl) stdLabelEl.textContent = standard === 'naamm' ? 'NAAMM MBG 531' : 'BS 4592';
+
+    const warnBox = $('warning-box');
+    const warnText = $('warning-text');
+    if (warnBox && warnText) {
+      if (warnings.length > 0) {
+        warnBox.classList.remove('hidden');
+        warnText.textContent = warnings.join(' · ');
+      } else {
+        warnBox.classList.add('hidden');
+      }
+    }
+  }
+
+  function copyResult(): void {
+    const udl = $('result-udl')?.textContent || '';
+    const point = $('result-point')?.textContent || '';
+    const cls = $('result-class')?.textContent || '';
+    const gov = $('result-gov')?.textContent || '';
+    const H = getNum('lc-height'), T = getNum('lc-thickness'), P_bb = getNum('lc-pitch');
+    const L = getNum('span');
+    const stdEl = document.getElementById('standard') as HTMLSelectElement;
+    const std = stdEl?.options[stdEl.selectedIndex]?.text || '';
+    const text = [
+      `钢格栅承载能力计算结果`,
+      `规格：${H}×${T}mm @ ${P_bb}mm间距 | 跨距：${L}mm | 标准：${std}`,
+      `---`,
+      `最大允许均布荷载：${udl}`,
+      `最大集中荷载：${point}`,
+      `BS 4592 荷载等级：${cls}`,
+      `控制条件：${gov}`,
+      `计算来源：SteelGratingCalculator.com`,
+    ].join('\n');
+    navigator.clipboard.writeText(text).then(() => {
+      const fb = $('lc-copy-feedback');
+      if (fb) { fb.classList.remove('hidden'); setTimeout(() => fb.classList.add('hidden'), 2500); }
+    });
+  }
+
+  document.getElementById('btn-import')?.addEventListener('click', () => {
+    try {
+      const saved = localStorage.getItem('sgc_last_bb');
+      if (!saved) { alert('未找到重量计算器保存的数据，请先使用重量计算器。'); return; }
+      const { H, T, P_bb } = JSON.parse(saved);
+      const hEl = document.getElementById('lc-height') as HTMLSelectElement;
+      const tEl = document.getElementById('lc-thickness') as HTMLSelectElement;
+      const pEl = document.getElementById('lc-pitch') as HTMLSelectElement;
+      if (hEl) hEl.value = String(H);
+      if (tEl) tEl.value = String(T);
+      if (pEl) pEl.value = String(P_bb);
+      calc();
+    } catch (_) { alert('无法读取保存的规格数据。'); }
+  });
+
+  document.querySelectorAll('#lc-height,#lc-thickness,#lc-pitch,#span,#standard,#end-cond,#steel-grade')
+    .forEach(el => el.addEventListener('change', calc));
+  document.getElementById('span')?.addEventListener('input', calc);
+  document.getElementById('btn-copy-lc')?.addEventListener('click', copyResult);
+
+  calc();
+})();
+</script>
+
+<style>
+  .label { display:block; font-size:.75rem; font-weight:600; margin-bottom:.25rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:.05em; }
+  .select, .input { width:100%; border:1px solid var(--border-color); border-radius:.5rem; padding:.5rem .75rem; background-color:var(--bg-secondary); color:var(--text-primary); font-size:.875rem; outline:none; transition:all .2s; }
+  .select:focus, .input:focus { box-shadow:0 0 0 1px #f59e0b; }
+  .input-hint { margin-top:.25rem; font-size:.75rem; color:var(--text-muted); }
+</style>
