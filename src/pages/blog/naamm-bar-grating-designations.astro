@@ -1,0 +1,166 @@
+---
+import Base from "../../layouts/Base.astro";
+import FaqJsonLd from "../../components/FaqJsonLd.astro";
+
+const title = "NAAMM Bar Grating Designations Explained (19-W-4, 15-W-4...)";
+const description = "Decode NAAMM MBG 531 bar grating designation codes. What 19-W-4 means, how to convert to metric mm specs, and how to order equivalent grating from Anping, China.";
+
+const faqs = [
+  ["What does 19-W-4 mean in NAAMM bar grating?", "19-W-4 means: bearing bar depth of 19/16\" (≈ 30mm), W = plain (smooth) welded construction, and 4 = bearing bars at 4/16\" (1/4\") thickness. The c/c pitch is typically 1-3/16\" (30mm) unless separately specified. The metric equivalent is approximately 25×5mm @ 30mm pitch."],
+  ["What is the difference between W and I series NAAMM grating?", "W-series has plain smooth bearing bar tops. I-series has serrated (notched) bearing bar tops for anti-slip performance. I-series is required by OSHA and most offshore standards for wet or sloped surfaces. Both are welded construction."],
+  ["How do I order NAAMM-equivalent grating from China?", "Specify the metric equivalent: bearing bar H×T mm at P mm c/c pitch. For 19-W-4, specify 25×5mm at 30mm c/c pitch, plain top. Chinese factories manufacture to GB/T 12755 which is dimensionally compatible with NAAMM MBG 531 metric equivalents."],
+  ["Is GB/T 12755 the same as NAAMM MBG 531?", "Not identical, but dimensionally compatible for standard specifications. GB/T 12755 uses metric dimensions; NAAMM MBG 531 uses imperial. Both cover welded bar grating with equivalent load capacity when the bearing bar cross-section and pitch are matched. Key difference: NAAMM specifies exact material grades (A36); GB/T uses Q235/Q345."],
+];
+---
+<Base title={title} description={description} lang="en" ogType="article">
+
+  <article class="max-w-3xl mx-auto px-4 py-10">
+
+    <nav class="text-xs text-theme-muted mb-6 flex items-center gap-2">
+      <a href="/" class="hover:text-theme-primary transition-colors">Home</a>
+      <span>/</span>
+      <a href="/blog/" class="hover:text-theme-primary transition-colors">Blog</a>
+      <span>/</span>
+      <span class="accent-text">NAAMM Designations</span>
+    </nav>
+
+    <div class="mb-8">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="text-xs font-mono accent-text uppercase tracking-wider">Standards Guide</span>
+        <span class="text-xs text-theme-muted">· 6 min read</span>
+      </div>
+      <h1 class="text-4xl font-semibold text-theme-primary leading-tight mb-4">NAAMM Bar Grating Designations Explained</h1>
+      <p class="text-lg text-theme-secondary leading-relaxed">What "19-W-4" actually means, how to read any NAAMM MBG 531 designation code, and how to convert it to the metric dimensions used by Anping manufacturers.</p>
+    </div>
+
+    <div class="prose max-w-none text-theme-secondary leading-relaxed space-y-6">
+
+      <h2 class="text-2xl font-semibold text-theme-primary">The NAAMM MBG 531 Designation System</h2>
+      <p>NAAMM MBG 531 is the North American standard for metal bar grating, published by the National Association of Architectural Metal Manufacturers. Every standard bar grating product has a three-part designation code:</p>
+
+      <div class="bg-theme-tertiary rounded-xl p-6 border border-theme font-mono">
+        <p class="text-3xl font-bold text-center accent-text tracking-widest mb-4">19 – W – 4</p>
+        <div class="grid grid-cols-3 gap-4 text-center text-sm">
+          <div>
+            <p class="text-theme-primary font-semibold">19</p>
+            <p class="text-theme-muted text-xs mt-1">Bearing bar depth<br/>in 16ths of an inch<br/>(19/16" = 1-3/16")</p>
+          </div>
+          <div>
+            <p class="text-theme-primary font-semibold">W</p>
+            <p class="text-theme-muted text-xs mt-1">Bar surface type<br/>(W = plain/smooth,<br/>I = serrated)</p>
+          </div>
+          <div>
+            <p class="text-theme-primary font-semibold">4</p>
+            <p class="text-theme-muted text-xs mt-1">Bearing bar thickness<br/>in 16ths of an inch<br/>(4/16" = 1/4" = ~6mm)</p>
+          </div>
+        </div>
+      </div>
+
+      <p>The bearing bar pitch (c/c spacing) is <strong class="text-theme-primary">not encoded in the designation itself</strong> — it is specified separately. The most common pitch used with W and I series is <strong>1-3/16" (30mm)</strong>, but 1-1/4" (32mm) and 1-11/16" (43mm) pitches are also standard.</p>
+
+      <h2 class="text-2xl font-semibold text-theme-primary">Bar Surface Type Codes</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead><tr class="border-b border-theme"><th class="text-left py-2 pr-4 text-theme-muted font-medium">Code</th><th class="text-left py-2 text-theme-muted font-medium">Description</th><th class="text-left py-2 pl-4 text-theme-muted font-medium">Typical Use</th></tr></thead>
+          <tbody class="text-theme-secondary">
+            {[
+              ["W","Plain smooth welded bearing bars","Dry indoor, general industrial"],
+              ["I","Serrated (notched) welded bearing bars","Wet, outdoor, oily, inclined surfaces"],
+              ["SW","Plain smooth swaged cross bars","Architectural, lighter duty"],
+              ["SI","Serrated swaged cross bars","Architectural with anti-slip requirement"],
+              ["DW","Deep plain welded","Long spans, heavy loads"],
+              ["DI","Deep serrated welded","Long spans, anti-slip requirement"],
+            ].map(([code, desc, use]) => (
+              <tr class="border-b border-theme/50">
+                <td class="py-2 pr-4 font-mono font-bold accent-text">{code}</td>
+                <td class="py-2 pr-4">{desc}</td>
+                <td class="py-2 pl-4 text-theme-muted text-xs">{use}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="text-2xl font-semibold text-theme-primary">Common Designations and Metric Equivalents</h2>
+      <p>The table below converts the most widely ordered NAAMM designations to metric bearing bar dimensions. Use these when sourcing from Anping, China.</p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-theme">
+              <th class="text-left py-2 pr-4 text-theme-muted font-medium">NAAMM Code</th>
+              <th class="text-right py-2 pr-4 text-theme-muted font-medium">Depth (in / mm)</th>
+              <th class="text-right py-2 pr-4 text-theme-muted font-medium">Thickness (in / mm)</th>
+              <th class="text-left py-2 text-theme-muted font-medium">Metric Equiv.</th>
+            </tr>
+          </thead>
+          <tbody class="text-theme-secondary">
+            {[
+              ["11-W-4 / 11-I-4", "11/16\" / 17mm", "1/4\" / 6mm", "20×5mm"],
+              ["13-W-4 / 13-I-4", "13/16\" / 21mm", "1/4\" / 6mm", "20×5mm (approx)"],
+              ["15-W-4 / 15-I-4", "15/16\" / 24mm", "1/4\" / 6mm", "25×5mm (closest)"],
+              ["19-W-4 / 19-I-4", "1-3/16\" / 30mm", "1/4\" / 6mm", "30×5mm"],
+              ["19-W-2 / 19-I-2", "1-3/16\" / 30mm", "1/8\" / 3mm", "30×3mm"],
+              ["25-W-4 / 25-I-4", "1-9/16\" / 40mm", "1/4\" / 6mm", "40×5mm"],
+              ["32-W-4 / 32-I-4", "2\" / 50mm",       "1/4\" / 6mm", "50×5mm"],
+            ].map(([code, depth, thick, metric]) => (
+              <tr class="border-b border-theme/50">
+                <td class="py-2 pr-4 font-mono text-sm text-theme-primary">{code}</td>
+                <td class="py-2 pr-4 text-right font-mono">{depth}</td>
+                <td class="py-2 pr-4 text-right font-mono">{thick}</td>
+                <td class="py-2 font-semibold accent-text font-mono">{metric}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-theme-muted">Note: metric equivalents are the nearest standard Chinese mill size. Confirm with your factory if exact imperial dimensions are required.</p>
+
+      <h2 class="text-2xl font-semibold text-theme-primary">Cross Bar Designation</h2>
+      <p>NAAMM also specifies cross bar type separately. The most common cross bar specifications sourced from China are:</p>
+      <ul class="list-disc pl-6 space-y-2 text-sm">
+        <li><strong class="text-theme-primary">Round cross bar</strong> — 6mm (¼") diameter at 50mm (2") pitch. Most common for China export grating.</li>
+        <li><strong class="text-theme-primary">Twisted square cross bar</strong> — 5×5mm or 6×6mm twisted flat bar. Common in Chinese GB/T 12755 grating. Slightly heavier than round bar.</li>
+        <li><strong class="text-theme-primary">Flat cross bar</strong> — square-edged flat bar, often in architectural or close-pitch applications.</li>
+      </ul>
+      <p>When ordering metric equivalents from Anping, specify: <strong class="text-theme-primary">bearing bar H×T mm @ P mm c/c pitch + cross bar d mm round @ P_xb mm pitch</strong>. This gives the factory everything needed to quote accurately.</p>
+
+      <div class="bg-theme-tertiary rounded-xl p-4 border border-theme">
+        <p class="text-sm font-semibold text-theme-primary mb-1">Example order specification</p>
+        <p class="font-mono text-xs text-theme-secondary">25×5mm plain bearing bar @ 30mm c/c pitch<br/>6mm round cross bar @ 50mm pitch<br/>Panel size: 6000×1000mm<br/>Finish: hot-dip galvanized ISO 1461<br/>Standard: GB/T 12755 (equivalent to NAAMM W-series)</p>
+      </div>
+
+    </div>
+
+    <FaqJsonLd items={faqs.map(([q, a]) => ({ question: q, answer: a }))} inLanguage="en" />
+    <div class="mt-10 pt-8 border-t border-theme">
+      <h2 class="text-xl font-semibold text-theme-primary mb-5">FAQs</h2>
+      <div class="space-y-3">
+        {faqs.map(([q, a]) => (
+          <details class="card group">
+            <summary class="flex items-center justify-between cursor-pointer list-none">
+              <span class="font-medium text-theme-primary">{q}</span>
+              <svg class="w-5 h-5 text-theme-muted shrink-0 ml-4 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-3 text-sm text-theme-secondary leading-relaxed">{a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+
+    <div class="mt-10 pt-8 border-t border-theme">
+      <h2 class="text-lg font-semibold text-theme-primary mb-4">Related Articles</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <a href="/blog/how-to-calculate-steel-grating-weight/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">Technical Guide</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1 leading-snug">Steel Grating Weight Formula</h3>
+        </a>
+        <a href="/blog/plain-vs-serrated-steel-grating/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">Selection Guide</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1 leading-snug">Plain vs Serrated: When to Specify I-Series</h3>
+        </a>
+      </div>
+    </div>
+
+  </article>
+
+</Base>

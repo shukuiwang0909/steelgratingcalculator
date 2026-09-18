@@ -1,0 +1,102 @@
+---
+import Base from "../../layouts/Base.astro";
+
+const products = [
+  {
+    href: "/products/plain-steel-grating/",
+    tag: "Standard",
+    title: "Plain Steel Bar Grating",
+    desc: "Smooth-top welded bar grating. The most widely used industrial grating — cost-effective, easy to clean, available in carbon steel, stainless, and aluminum.",
+    specs: "20–75mm bearing bars · 11–60mm pitch · GB/T 12755 / NAAMM MBG 531",
+  },
+  {
+    href: "/products/serrated-steel-grating/",
+    tag: "Anti-Slip",
+    title: "Serrated Steel Bar Grating",
+    desc: "Notched (serrated) top surface for anti-slip performance on wet, oily, or inclined surfaces. Mandated by OSHA and most offshore standards.",
+    specs: "Same range as plain · I-series (NAAMM) · typically +5% cost",
+  },
+  {
+    href: "/products/galvanized-steel-grating/",
+    tag: "Corrosion Resistant",
+    title: "Hot-Dip Galvanized Grating",
+    desc: "Carbon steel grating hot-dip galvanized to ISO 1461 / ASTM A123 for outdoor and corrosive environments. 45–85 μm zinc coating, 20–40 year life.",
+    specs: "ISO 1461 / ASTM A123 / GB/T 13912 · +4% weight · 45–85 μm Zn",
+  },
+  {
+    href: "/products/stainless-steel-grating/",
+    tag: "Stainless",
+    title: "Stainless Steel Grating",
+    desc: "SS 304 for general corrosion resistance. SS 316L for chloride environments, chemical plants, and food processing. Full range of bearing bar sizes.",
+    specs: "Grade 304 / 316L · density 7.93–7.98 g/cm³ · electropolish option",
+  },
+  {
+    href: "/products/aluminum-grating/",
+    tag: "Lightweight",
+    title: "Aluminum Bar Grating",
+    desc: "Alloy 6061-T6 or 6063-T5 bar grating. ~34% the weight of carbon steel — ideal for structural load-limited platforms, marine, and architectural use.",
+    specs: "6061-T6 / 6063-T5 · 2.70 g/cm³ · self-passivating",
+  },
+  {
+    href: "/products/grating-stair-treads/",
+    tag: "Safety",
+    title: "Grating Stair Treads",
+    desc: "Pre-fabricated stair tread panels with perimeter frame, anti-slip serrated surface, and nosing options. OSHA 1910.23, NAAMM MBG 531, BS 4592.",
+    specs: "250–300mm depth · frame: flat or angle · galv / SS / painted finish",
+  },
+  {
+    href: "/products/trench-covers/",
+    tag: "Drainage",
+    title: "Trench Covers & Drain Grates",
+    desc: "Load-rated grating covers for drainage trenches and channels. BS 4592 Class A–E, removable or hinge-mounted, with angle iron or U-channel frames.",
+    specs: "Class A (pedestrian) to E (heavy highway) · frame systems available",
+  },
+  {
+    href: "/products/heavy-duty-grating/",
+    tag: "Heavy Load",
+    title: "Heavy Duty Steel Grating",
+    desc: "Extra-heavy bearing bars (40×5mm to 75×6mm) for steel mills, mining, vehicle crossings, and industrial floors with extreme point loads.",
+    specs: "40–75mm height · 5–6mm thickness · 22mm standard pitch",
+  },
+];
+---
+
+<Base title="Steel Grating Products — Bar Grating Types & Specifications | Anping" description="Complete range of steel bar grating products: plain, serrated, galvanized, stainless, aluminum, stair treads, trench covers, and heavy duty. All sourced direct from Anping, China.">
+
+  <section class="max-w-5xl mx-auto px-4 py-10">
+
+    <nav class="text-xs text-theme-muted mb-6 flex items-center gap-2">
+      <a href="/" class="hover:text-theme-primary transition-colors">Home</a>
+      <span>/</span>
+      <span class="accent-text">Products</span>
+    </nav>
+
+    <div class="mb-10">
+      <h1 class="text-3xl font-semibold text-theme-primary mb-3">Steel Grating Products</h1>
+      <p class="text-theme-secondary max-w-2xl">All major bar grating types in one place. Click any product for full specifications, standard sizes, and sourcing notes from Anping, China.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-5">
+      {products.map((p) => (
+        <a href={p.href} class="card card-accent group flex flex-col gap-3">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-mono accent-text uppercase tracking-wider">{p.tag}</span>
+          </div>
+          <h2 class="font-semibold text-xl text-theme-primary group-hover:text-theme-secondary transition-colors leading-snug">{p.title}</h2>
+          <p class="text-sm text-theme-secondary leading-relaxed flex-1">{p.desc}</p>
+          <p class="text-xs font-mono text-theme-muted border-t border-theme pt-3">{p.specs}</p>
+          <div class="flex items-center gap-1 text-sm accent-text opacity-80 group-hover:opacity-100 transition-opacity">
+            View specifications
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="mt-12 p-5 bg-theme-tertiary rounded-xl border border-theme">
+      <p class="text-sm text-theme-secondary">Need help selecting the right grating type? <a href="/tools/bar-grating-load-capacity-calculator/" class="accent-text font-semibold hover:opacity-80">Use the load capacity calculator</a> or <a href="/inquiry/" class="accent-text font-semibold hover:opacity-80">send a specification inquiry</a> — Anping factories will quote within 24 hours.</p>
+    </div>
+
+  </section>
+
+</Base>

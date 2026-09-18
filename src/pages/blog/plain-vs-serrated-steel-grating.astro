@@ -1,0 +1,139 @@
+---
+import Base from "../../layouts/Base.astro";
+import FaqJsonLd from "../../components/FaqJsonLd.astro";
+
+const title = "Plain vs Serrated Steel Grating: When Do You Need Anti-Slip?";
+const description = "When is serrated (I-series) grating required vs plain (W-series)? Comparison of friction, weight, cost, and applications. OSHA, NORSOK, and BS 4592 requirements.";
+
+const faqs = [
+  ["What is the difference between plain and serrated steel grating?", "Plain grating has smooth flat bar tops. Serrated grating has V-shaped notches pressed or cut across the width of each bearing bar every 20–25mm, creating a grip surface that bites through liquids and contaminants. Serrated is typically 5–8% heavier per m² due to the extra notching process and slightly different bar geometry."],
+  ["When is serrated grating required by code?", "OSHA 1910.22 and 1910.28 require slip-resistant surfaces on all walking-working surfaces. NORSOK M-001 mandates serrated grating on all offshore topside walkways. BS 4592-0 recommends serrated for wet or contaminated environments. In practice: specify serrated any time surfaces will be wet, oily, or exposed to the elements."],
+  ["Is serrated grating more expensive than plain?", "Typically 5–12% more expensive per m². The serrating process adds a machining step. Hot-dip galvanized serrated grating from Anping is approximately USD 1.50–3.00/m² more than equivalent plain grating at typical FOB volumes."],
+  ["Can I use plain grating outdoors?", "Plain grating can be used outdoors in dry covered areas. For outdoor exposed walkways, stair treads, or any surface that will accumulate rain, condensation, moss, or process liquids, specify serrated. OSHA and most insurance/engineering specifications for exposed outdoor gratings require a slip-resistant surface."],
+];
+
+const comparison = [
+  { prop: "Top surface", plain: "Smooth flat bar", serrated: "V-notched @ 20–25mm intervals" },
+  { prop: "NAAMM code", plain: "W-series (e.g. 19-W-4)", serrated: "I-series (e.g. 19-I-4)" },
+  { prop: "Wet slip resistance", plain: "Low — bars become slick", serrated: "High — notches bite through liquid" },
+  { prop: "Weight vs plain", plain: "Baseline", serrated: "+5–8% typically" },
+  { prop: "Unit cost vs plain", plain: "Baseline", serrated: "+5–12% typically" },
+  { prop: "Ease of cleaning", plain: "Easier — no notch pockets", serrated: "Slightly harder — notches trap fine solids" },
+  { prop: "Required for food plants?", plain: "No — not for wet zones", serrated: "Yes — per HACCP slip prevention" },
+  { prop: "Required offshore?", plain: "No", serrated: "Yes — NORSOK M-001" },
+  { prop: "Best applications", plain: "Dry indoor floors, trench covers (vehicle loads)", serrated: "Outdoor walkways, platforms, wet industrial floors, stairs" },
+];
+---
+<Base title={title} description={description} lang="en" ogType="article">
+
+  <article class="max-w-3xl mx-auto px-4 py-10">
+
+    <nav class="text-xs text-theme-muted mb-6 flex items-center gap-2">
+      <a href="/" class="hover:text-theme-primary transition-colors">Home</a>
+      <span>/</span>
+      <a href="/blog/" class="hover:text-theme-primary transition-colors">Blog</a>
+      <span>/</span>
+      <span class="accent-text">Plain vs Serrated</span>
+    </nav>
+
+    <div class="mb-8">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="text-xs font-mono accent-text uppercase tracking-wider">Selection Guide</span>
+        <span class="text-xs text-theme-muted">· 7 min read</span>
+      </div>
+      <h1 class="text-4xl font-semibold text-theme-primary leading-tight mb-4">Plain vs Serrated Steel Grating: When Do You Need Anti-Slip?</h1>
+      <p class="text-lg text-theme-secondary leading-relaxed">The practical guide for deciding between plain (smooth) and serrated (notched) bar grating — by application, by code, and by cost.</p>
+    </div>
+
+    <div class="prose max-w-none text-theme-secondary leading-relaxed space-y-6">
+
+      <h2 class="text-2xl font-semibold text-theme-primary">What Is Serrated Grating?</h2>
+      <p>Serrated steel grating (NAAMM I-series) has <strong class="text-theme-primary">V-shaped notches</strong> pressed or machined across the width of each bearing bar at 20–25mm intervals. These notches create sharp edges that cut through water, oil, mud, and other contaminants on the bar surface — providing grip that plain grating cannot.</p>
+      <p>The notching process is performed before or after the pressure-welding of the bars. Chinese manufacturers typically notch bearing bars individually before welding (pre-notched), which is the method used for GB/T 12755 serrated grating and is dimensionally equivalent to NAAMM I-series.</p>
+
+      <h2 class="text-2xl font-semibold text-theme-primary">Full Comparison</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-theme">
+              <th class="text-left py-2 pr-4 text-theme-muted font-medium w-40">Property</th>
+              <th class="text-left py-2 pr-4 text-theme-muted font-medium">Plain (W-series)</th>
+              <th class="text-left py-2 text-theme-muted font-medium">Serrated (I-series)</th>
+            </tr>
+          </thead>
+          <tbody class="text-theme-secondary">
+            {comparison.map(({ prop, plain, serrated }) => (
+              <tr class="border-b border-theme/50">
+                <td class="py-2.5 pr-4 font-medium text-theme-primary text-xs uppercase tracking-wide">{prop}</td>
+                <td class="py-2.5 pr-4 text-sm">{plain}</td>
+                <td class="py-2.5 text-sm accent-text font-medium">{serrated}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="text-2xl font-semibold text-theme-primary">Code Requirements by Application</h2>
+      <div class="space-y-4">
+        {[
+          { app: "Offshore oil & gas platforms", verdict: "Serrated required", reason: "NORSOK M-001 mandates serrated grating on all topside walkways and platforms. Operators (Shell, BP, Equinor) typically specify this in their material selection documents." },
+          { app: "Food & beverage processing floors", verdict: "Serrated required", reason: "HACCP slip prevention plans and most food safety regulations require slip-resistant walking surfaces in wet processing areas. Serrated SS 316L is the standard specification." },
+          { app: "Industrial stair treads", verdict: "Serrated strongly recommended", reason: "OSHA 1910.23 requires stair treads to have a slip-resistant surface. Plain grating does not meet this on wet stairs. NAAMM MBG 531 recommends serrated for all stair applications." },
+          { app: "Outdoor walkways & platforms", verdict: "Serrated recommended", reason: "Rain, dew, algae, and frost make plain grating hazardous. Most industrial HSE specifications and EN ISO 14122 / OSHA 1910.22 require slip-resistant surfaces for outdoor routes." },
+          { app: "Dry indoor factory floors", verdict: "Plain acceptable", reason: "A controlled dry environment with no process liquids — plain grating is perfectly safe and easier to clean. No regulatory requirement for serrated in typical dry industrial use." },
+          { app: "Trench covers — vehicle traffic", verdict: "Plain typical", reason: "Vehicle tires have their own tread; serrated grating is not required and the notches can accelerate tire wear. Plain galvanized grating in appropriate load class (BS 4592 C/D) is standard." },
+        ].map(({ app, verdict, reason }) => (
+          <div class="card">
+            <div class="flex items-start justify-between gap-4">
+              <span class="font-semibold text-theme-primary text-sm">{app}</span>
+              <span class={`text-xs font-mono px-2 py-0.5 rounded shrink-0 ${verdict.includes("required") ? "bg-amber-900/30 text-amber-400" : verdict.includes("recommended") ? "bg-slate-700 text-theme-secondary" : "bg-theme-tertiary text-theme-muted"}`}>{verdict}</span>
+            </div>
+            <p class="mt-2 text-sm text-theme-secondary">{reason}</p>
+          </div>
+        ))}
+      </div>
+
+      <h2 class="text-2xl font-semibold text-theme-primary">Cost and Lead Time</h2>
+      <p>Serrated grating from Anping typically costs <strong class="text-theme-primary">5–12% more per m²</strong> than equivalent plain grating. The price premium is primarily the notching operation and marginally higher labour in handling notched bars. Lead time is the same — typically 15–25 days ex-works for standard FOB orders.</p>
+      <p>At current Anping FOB pricing (2025), plain galvanized 25×5mm @ 30mm pitch runs approximately <strong>USD 12–16/m²</strong> FOB Tianjin. Serrated equivalent: <strong>USD 14–18/m²</strong>. Volumes above 500m² typically reduce both figures by 10–15%.</p>
+
+      <div class="bg-theme-tertiary rounded-xl p-4 border border-theme">
+        <p class="text-sm font-semibold text-theme-primary mb-1">Quick decision rule</p>
+        <p class="text-sm text-theme-secondary">If the surface will ever be wet, outdoors, or covered by local safety regulations — specify serrated. The 5–12% cost premium is small relative to the liability cost of a slip incident.</p>
+      </div>
+
+    </div>
+
+    <FaqJsonLd items={faqs.map(([q, a]) => ({ question: q, answer: a }))} inLanguage="en" />
+    <div class="mt-10 pt-8 border-t border-theme">
+      <h2 class="text-xl font-semibold text-theme-primary mb-5">FAQs</h2>
+      <div class="space-y-3">
+        {faqs.map(([q, a]) => (
+          <details class="card group">
+            <summary class="flex items-center justify-between cursor-pointer list-none">
+              <span class="font-medium text-theme-primary">{q}</span>
+              <svg class="w-5 h-5 text-theme-muted shrink-0 ml-4 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-3 text-sm text-theme-secondary leading-relaxed">{a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+
+    <div class="mt-10 pt-8 border-t border-theme">
+      <h2 class="text-lg font-semibold text-theme-primary mb-4">Related Articles</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <a href="/products/serrated-steel-grating/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">Product Guide</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1 leading-snug">Serrated Steel Grating — Full Specifications</h3>
+        </a>
+        <a href="/blog/naamm-bar-grating-designations/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">Standards Guide</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1 leading-snug">NAAMM Bar Grating Designations Explained</h3>
+        </a>
+      </div>
+    </div>
+
+  </article>
+
+</Base>

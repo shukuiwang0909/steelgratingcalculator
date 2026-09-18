@@ -1,0 +1,88 @@
+---
+import Base from "../../layouts/Base.astro";
+
+const applications = [
+  {
+    href: "/applications/industrial-flooring/",
+    tag: "Industrial",
+    title: "Industrial Flooring",
+    desc: "Welded bar grating for factory floors, mezzanine decks, and process platforms. Slip resistance, fire resistance, drainage, and span calculations by industry.",
+    keySpec: "Typical: 25×5mm @ 30mm, galvanized",
+  },
+  {
+    href: "/applications/walkways-platforms/",
+    tag: "Infrastructure",
+    title: "Walkways & Elevated Platforms",
+    desc: "OSHA-compliant walkway gratings for elevated platforms, bridges, and catwalks. Wind load advantage, minimum live load requirements, and deflection limits.",
+    keySpec: "Min 2.4 kPa live load (OSHA) · max L/180 deflection",
+  },
+  {
+    href: "/applications/drainage-trench-covers/",
+    tag: "Drainage",
+    title: "Drainage Trench Covers",
+    desc: "Load-rated grating covers for industrial drainage channels, car parks, and highway trenches. BS 4592 Class A–E, frame systems, and flow capacity.",
+    keySpec: "Class A–E · removable or hinged · angle/U-channel frames",
+  },
+  {
+    href: "/applications/stair-nosings/",
+    tag: "Safety",
+    title: "Stair Nosings",
+    desc: "Anti-slip leading edges for grating stair treads. Welded bar, checkered plate, and aluminium extruded nosing options. OSHA 1910.23 and BS 5395-1 compliance.",
+    keySpec: "Nosing projection ≤ 38mm (OSHA) · serrated top surface",
+  },
+  {
+    href: "/applications/oil-gas-platforms/",
+    tag: "Offshore",
+    title: "Oil & Gas Offshore Platforms",
+    desc: "Serrated hot-dip galvanized grating for FPSOs, drilling rigs, and topsides. NORSOK M-001 compliance, ISO 1461 coating, full documentation packages.",
+    keySpec: "25×5mm serrated, galv ISO 1461 · MTC + galv cert required",
+  },
+  {
+    href: "/applications/food-processing/",
+    tag: "Food Safety",
+    title: "Food Processing Facilities",
+    desc: "SS 304 and SS 316L stainless grating for wet processing floors, drain covers, and elevated walkways. HACCP-compatible, full-penetration welds, passivation.",
+    keySpec: "SS 304 (general) / SS 316L (chloride/CIP) · electropolish option",
+  },
+];
+---
+
+<Base title="Steel Grating Applications — Industrial, Offshore, Food Processing | Anping" description="Steel bar grating application guides: industrial flooring, walkways, drainage covers, stair nosings, offshore platforms, and food processing. Specification and compliance by application.">
+
+  <section class="max-w-5xl mx-auto px-4 py-10">
+
+    <nav class="text-xs text-theme-muted mb-6 flex items-center gap-2">
+      <a href="/" class="hover:text-theme-primary transition-colors">Home</a>
+      <span>/</span>
+      <span class="accent-text">Applications</span>
+    </nav>
+
+    <div class="mb-10">
+      <h1 class="text-3xl font-semibold text-theme-primary mb-3">Steel Grating Applications</h1>
+      <p class="text-theme-secondary max-w-2xl">Application-specific specification guides covering the right grating type, load class, finish, and compliance standard for each use case.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-5">
+      {applications.map((a) => (
+        <a href={a.href} class="card card-accent group flex flex-col gap-3">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-mono accent-text uppercase tracking-wider">{a.tag}</span>
+          </div>
+          <h2 class="font-semibold text-xl text-theme-primary group-hover:text-theme-secondary transition-colors leading-snug">{a.title}</h2>
+          <p class="text-sm text-theme-secondary leading-relaxed flex-1">{a.desc}</p>
+          <p class="text-xs font-mono text-theme-muted border-t border-theme pt-3">{a.keySpec}</p>
+          <div class="flex items-center gap-1 text-sm accent-text opacity-80 group-hover:opacity-100 transition-opacity">
+            Read application guide
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="mt-12 p-5 bg-theme-tertiary rounded-xl border border-theme">
+      <p class="text-sm text-theme-secondary">Not sure which specification fits your application? <a href="/inquiry/" class="accent-text font-semibold hover:opacity-80">Send us your project details</a> — we'll match you with the right Anping factory and specification.</p>
+    </div>
+
+  </section>
+
+</Base>

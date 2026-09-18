@@ -1,0 +1,172 @@
+---
+import Base from "../../layouts/Base.astro";
+import FaqJsonLd from "../../components/FaqJsonLd.astro";
+
+const title = "How to Load Steel Grating in a 20' Container: A Buyer's Guide";
+const description = "Exactly how many steel grating panels fit in a 20ft GP container? Stacking method, weight and CBM limits, dunnage, and how to calculate utilization. Free container loading calculator.";
+
+const faqs = [
+  ["How many 6000×1000mm steel grating panels fit in a 20ft container?", "A 20ft GP container (internal 5.9m × 2.35m × 2.39m) can hold approximately 70–110 panels of 6000×1000mm, depending on bearing bar height (stacking height) and total panel weight. For 25×5mm grating at ~222 kg/panel, the weight limit (≈21,700 kg payload) is usually the binding constraint at around 97 panels. Use our container loading calculator for your exact spec."],
+  ["What is the payload limit for a 20ft GP container?", "A standard 20ft GP container has a maximum gross weight of 24,000 kg and a tare weight of approximately 2,200–2,300 kg, giving a net payload of around 21,700 kg. In practice, shipping lines often apply a book payload of 21,700 kg. Always confirm with your freight forwarder — overloaded containers are rejected at port."],
+  ["Can you mix wire mesh and steel grating in the same container?", "Yes — grating panels stacked flat on the container floor, with wire mesh rolls loaded above or alongside. Grating and mesh have similar density; the main consideration is keeping products separated to avoid abrasion damage to mesh coatings. Use timber dunnage between layers."],
+  ["Does panel orientation matter for container loading?", "Yes. 6000mm panels must be loaded lengthways (6m along the 5.9m internal length — 100mm short, so panels need to be tilted slightly or the order shortened to 5.8m). 1000mm width panels fit 2 abreast in a 2350mm internal width with minimal clearance. Most factories cut 5800mm standard for container fit."],
+];
+
+const containers = [
+  { type: "20ft GP", intL: "5.9 m", intW: "2.35 m", intH: "2.39 m", cbm: "33.1 m³", payload: "21,700 kg" },
+  { type: "40ft GP", intL: "12.0 m", intW: "2.35 m", intH: "2.39 m", cbm: "67.3 m³", payload: "26,500 kg" },
+  { type: "40ft HC", intL: "12.0 m", intW: "2.35 m", intH: "2.70 m", cbm: "76.0 m³", payload: "26,500 kg" },
+];
+---
+<Base title={title} description={description} lang="en" ogType="article">
+
+  <article class="max-w-3xl mx-auto px-4 py-10">
+
+    <nav class="text-xs text-theme-muted mb-6 flex items-center gap-2">
+      <a href="/" class="hover:text-theme-primary transition-colors">Home</a>
+      <span>/</span>
+      <a href="/blog/" class="hover:text-theme-primary transition-colors">Blog</a>
+      <span>/</span>
+      <span class="accent-text">Container Loading Guide</span>
+    </nav>
+
+    <div class="mb-8">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="text-xs font-mono accent-text uppercase tracking-wider">Shipping Guide</span>
+        <span class="text-xs text-theme-muted">· 5 min read</span>
+      </div>
+      <h1 class="text-4xl font-semibold text-theme-primary leading-tight mb-4">How to Load Steel Grating in a 20' Container: A Buyer's Guide</h1>
+      <p class="text-lg text-theme-secondary leading-relaxed">Exactly how many panels fit, weight vs volume limits, panel orientation, dunnage requirements, and how to plan your shipment from Anping.</p>
+    </div>
+
+    <!-- CTA to calculator -->
+    <div class="mb-8 p-4 bg-theme-tertiary rounded-xl border border-theme flex items-center gap-4">
+      <div class="w-10 h-10 rounded-lg accent-bg flex items-center justify-center shrink-0">
+        <svg class="w-5 h-5 on-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10"/></svg>
+      </div>
+      <div class="flex-1">
+        <p class="text-sm font-medium text-theme-primary">Calculate your container loading instantly</p>
+        <p class="text-xs text-theme-muted">Panel count, weight, volume utilization — for any container type.</p>
+      </div>
+      <a href="/tools/container-loading-calculator/" class="text-sm accent-text font-semibold hover:opacity-80 transition-opacity shrink-0">
+        Open Calculator →
+      </a>
+    </div>
+
+    <div class="prose max-w-none text-theme-secondary leading-relaxed space-y-6">
+
+      <h2 class="text-2xl font-semibold text-theme-primary">Container Dimensions Reference</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead><tr class="border-b border-theme">{["Type","Int. L","Int. W","Int. H","CBM","Payload"].map(h => <th class="text-left py-2 pr-4 text-theme-muted font-medium">{h}</th>)}</tr></thead>
+          <tbody class="text-theme-secondary">
+            {containers.map(c => (
+              <tr class="border-b border-theme/50">
+                <td class="py-2 pr-4 font-semibold text-theme-primary">{c.type}</td>
+                <td class="py-2 pr-4 font-mono">{c.intL}</td>
+                <td class="py-2 pr-4 font-mono">{c.intW}</td>
+                <td class="py-2 pr-4 font-mono">{c.intH}</td>
+                <td class="py-2 pr-4 font-mono">{c.cbm}</td>
+                <td class="py-2 font-mono">{c.payload}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="text-2xl font-semibold text-theme-primary">How to Calculate Panel Count</h2>
+      <p>Steel grating panels are always loaded <strong class="text-theme-primary">flat (horizontal)</strong>, not on edge. Vertical loading on a moving ship would cause panels to shift, bend, and potentially perforate the container wall. The calculation proceeds in three steps:</p>
+
+      <div class="space-y-4">
+        {[
+          { step: "1", title: "Panels per layer", body: "For 6000×1000mm panels in a 20ft container: floor area = 5900×2350mm. 5900/6000 = 0.98 → 0 full panels lengthways unless panels are cut to 5800mm. Two panels fit abreast (2×1000mm = 2000mm &lt; 2350mm). So: 1 panel lengthways × 2 abreast = 2 panels per layer. (Most Anping factories cut to 5800mm for 20ft loads, allowing 1 per row × 2 = 2 per layer.)" },
+          { step: "2", title: "Layers per container", body: "Stack height per layer = bearing bar height + 20mm (timber dunnage). For 25mm bearing bars: 25 + 20 = 45mm per layer. Internal height 2390mm ÷ 45mm = ~53 layers. But in practice, grating is loaded without stacking dunnage between every layer — layers interlock slightly, so 50–55 layers is typical for 25mm grating." },
+          { step: "3", title: "Weight limit check", body: "Total volume-limited panels = 2 per layer × 53 layers = 106 panels. Each 5800×1000mm panel of 25×5mm grating weighs ≈ 215 kg (37.15 kg/m² × 5.8 m²). 106 panels × 215 kg = 22,790 kg — marginally over the 21,700 kg payload. So reduce to 100 panels = 21,500 kg ✓." },
+        ].map(({ step, title, body }) => (
+          <div class="flex gap-4">
+            <div class="w-8 h-8 rounded-full accent-bg flex items-center justify-center shrink-0 on-accent text-sm font-bold">{step}</div>
+            <div>
+              <p class="font-semibold text-theme-primary text-sm mb-1">{title}</p>
+              <p class="text-sm text-theme-secondary">{body}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <h2 class="text-2xl font-semibold text-theme-primary">20ft vs 40ft: Which Is Better for Grating?</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="card">
+          <p class="font-semibold text-theme-primary mb-2">20ft GP — Best when:</p>
+          <ul class="list-disc pl-5 space-y-1 text-sm text-theme-secondary">
+            <li>Order is below ~100 panels / 20 tonnes</li>
+            <li>Destination port has 20ft restrictions</li>
+            <li>Multiple different specs in one order (split into 20ft)</li>
+            <li>Lower freight rate per box to some ports</li>
+          </ul>
+        </div>
+        <div class="card">
+          <p class="font-semibold text-theme-primary mb-2">40ft GP/HC — Best when:</p>
+          <ul class="list-disc pl-5 space-y-1 text-sm text-theme-secondary">
+            <li>Order exceeds 100 panels or 20 tonnes</li>
+            <li>6m panels (no need to cut to 5.8m)</li>
+            <li>Lower freight cost per m² at scale</li>
+            <li>Mixing grating with other products (wire mesh, pipes)</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-semibold text-theme-primary">Packing and Dunnage</h2>
+      <ul class="list-disc pl-6 space-y-2 text-sm">
+        <li><strong class="text-theme-primary">Bottom dunnage</strong>: 75×75mm timber runners on the container floor, aligned with the bearing bar direction. Prevents panels scraping the container floor and allows forklift access at destination.</li>
+        <li><strong class="text-theme-primary">Layer separation</strong>: For long-haul shipments, thin cardboard or plastic film between layers prevents zinc-on-zinc scratching of galvanized panels.</li>
+        <li><strong class="text-theme-primary">Lashing</strong>: Steel strapping (25mm × 0.8mm) through the grating openings, secured to container D-rings. Minimum 4 lashing points per 20ft load.</li>
+        <li><strong class="text-theme-primary">VCI film</strong>: For bare (non-galvanized) panels, wrap in VCI (volatile corrosion inhibitor) film to prevent oxidation during transit.</li>
+      </ul>
+
+      <div class="bg-theme-tertiary rounded-xl p-4 border border-theme">
+        <p class="text-sm font-semibold text-theme-primary mb-1">Quick reference: 25×5mm plain grating in a 20ft GP</p>
+        <div class="font-mono text-xs text-theme-secondary space-y-0.5 mt-2">
+          <p>Panel size: 5800×1000mm (cut for 20ft)</p>
+          <p>Panel weight: ~215 kg</p>
+          <p>Panels per load: ~100 (payload-limited)</p>
+          <p>Total grating area: ~580 m²</p>
+          <p>Total weight: ~21.5 tonnes</p>
+          <p>Weight utilisation: ~99%</p>
+        </div>
+      </div>
+
+    </div>
+
+    <FaqJsonLd items={faqs.map(([q, a]) => ({ question: q, answer: a }))} inLanguage="en" />
+    <div class="mt-10 pt-8 border-t border-theme">
+      <h2 class="text-xl font-semibold text-theme-primary mb-5">FAQs</h2>
+      <div class="space-y-3">
+        {faqs.map(([q, a]) => (
+          <details class="card group">
+            <summary class="flex items-center justify-between cursor-pointer list-none">
+              <span class="font-medium text-theme-primary">{q}</span>
+              <svg class="w-5 h-5 text-theme-muted shrink-0 ml-4 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-3 text-sm text-theme-secondary leading-relaxed">{a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+
+    <div class="mt-10 pt-8 border-t border-theme">
+      <h2 class="text-lg font-semibold text-theme-primary mb-4">Related</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <a href="/tools/container-loading-calculator/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">Calculator</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1 leading-snug">Container Loading Calculator</h3>
+        </a>
+        <a href="/blog/how-to-calculate-steel-grating-weight/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">Technical Guide</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1 leading-snug">Steel Grating Weight Formula</h3>
+        </a>
+      </div>
+    </div>
+
+  </article>
+
+</Base>
