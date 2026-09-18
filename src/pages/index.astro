@@ -261,6 +261,13 @@ const faqs = [
     </div>
   </section>
 
+  <!-- GEO: prose definition for AI citation -->
+  <section class="border-y border-theme bg-theme-secondary">
+    <div class="max-w-4xl mx-auto px-4 py-4 text-sm text-theme-secondary leading-relaxed">
+      <strong class="text-theme-primary">Steel bar grating</strong> is an open-grid structural panel manufactured by pressure-welding load-bearing flat bars (bearing bars) with perpendicular cross bars. It is the standard material for industrial flooring, walkways, stair treads, and drainage trench covers. The most widely specified global standard — 25×5 mm bearing bars at 30 mm centre-to-centre pitch in carbon steel — weighs <strong class="text-theme-primary">37.15 kg/m²</strong>. Applicable standards include NAAMM MBG 531 (US), BS 4592 (UK/Commonwealth), and GB/T 12755 (China). Anping, Hebei Province accounts for over 60% of global steel grating exports.
+    </div>
+  </section>
+
   <!-- Tools Grid -->
   <section id="tools" class="relative py-20">
     <div class="max-w-6xl mx-auto px-4">
@@ -427,6 +434,34 @@ const faqs = [
     </div>
   </section>
 
+  <!-- GEO: Quick Reference facts table for AI citation -->
+  <section class="relative py-10 border-t border-theme">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="text-lg font-semibold text-theme-primary mb-4">Steel Grating Quick Reference</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-3 text-sm">
+        {[
+          ["Most common spec", "25×5mm @ 30mm pitch"],
+          ["Weight (carbon steel)", "37.15 kg/m²"],
+          ["Standard panel size", "6000×1000 mm"],
+          ["Galvanized weight uplift", "+4% (ISO 1461)"],
+          ["Carbon steel density", "7.85 g/cm³"],
+          ["SS 304 density", "7.93 g/cm³"],
+          ["Aluminum 6061-T6", "2.70 g/cm³"],
+          ["US standard", "NAAMM MBG 531"],
+          ["UK/Commonwealth", "BS 4592"],
+          ["China standard", "GB/T 12755-2008"],
+          ["Offshore standard", "NORSOK M-001"],
+          ["Galv coating std", "ISO 1461 / ASTM A123"],
+        ].map(([label, value]) => (
+          <div class="bg-theme-card border border-theme rounded-lg p-3">
+            <p class="text-xs text-theme-muted mb-1">{label}</p>
+            <p class="font-mono text-theme-primary font-semibold text-sm">{value}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- FAQ -->
   <FaqJsonLd items={faqs.map(([q, a]) => ({ question: q, answer: a }))} inLanguage="en" />
   <section class="relative py-20">
@@ -469,6 +504,29 @@ const faqs = [
   </section>
 
 </Base>
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Free Steel Grating Calculators",
+  "description": "Six free online calculators for steel bar grating weight, load capacity, open area, panel count, FOB price, and container loading.",
+  "url": "https://steelgratingcalculator.com/",
+  "numberOfItems": 6,
+  "itemListElement": tools.map((tool, i) => ({
+    "@type": "ListItem",
+    "position": i + 1,
+    "item": {
+      "@type": "SoftwareApplication",
+      "@id": `https://steelgratingcalculator.com${tool.href}`,
+      "name": tool.title,
+      "url": `https://steelgratingcalculator.com${tool.href}`,
+      "applicationCategory": "EngineeringApplication",
+      "operatingSystem": "Web Browser",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "publisher": { "@id": "https://steelgratingcalculator.com/#organization" }
+    }
+  }))
+})} />
 
 <script>
   // Hero inline weight calculator
