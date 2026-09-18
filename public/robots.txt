@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://meshcalculator.com/sitemap-index.xml
+Disallow: /inquiry/thanks/
+
+Sitemap: https://steelgratingcalculator.com/sitemap-index.xml
