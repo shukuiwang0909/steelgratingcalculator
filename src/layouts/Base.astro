@@ -12,8 +12,12 @@ interface Props {
   forceTranslation?: { en: string; zh: string };
   /** Thin utility pages (e.g. /inquiry/thanks/) that must not be indexed */
   noindex?: boolean;
+  /** FAQPage schema + HTML accordion data */
+  faqs?: { q: string; a: string }[];
+  /** SoftwareApplication or other per-page JSON-LD object */
+  toolSchema?: Record<string, unknown>;
 }
-const { title, description = "Free steel grating weight calculators, load capacity tools, and direct access to Anping, China bar grating factories.", lang = "en", ogType = "website", forceTranslation, noindex } = Astro.props;
+const { title, description = "Free steel grating weight calculators, load capacity tools, and direct access to Anping, China bar grating factories.", lang = "en", ogType = "website", forceTranslation, noindex, faqs, toolSchema } = Astro.props;
 
 const t = lang === "zh" ? zh : en;
 
@@ -137,7 +141,7 @@ const nav = [
     {noindex && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonicalUrl} />
     <link rel="alternate" hreflang={lang} href={canonicalUrl} />
-    {hasTranslation && <link rel="alternate" hreflang={lang === "zh" ? "en" : "zh"} href={`${origin}${lang === "zh" ? effEnPath : effZhPath}`} />}
+    {hasTranslation && <link rel="alternate" hreflang={lang === "zh" ? "en" : "zh-CN"} href={`${origin}${lang === "zh" ? effEnPath : effZhPath}`} />}
     {hasEn && <link rel="alternate" hreflang="x-default" href={`${origin}${effEnPath}`} />}
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content="SteelGratingCalculator" />
@@ -152,6 +156,20 @@ const nav = [
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={`${origin}/og-image.png`} />
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    {faqs && faqs.length > 0 && (
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs.map(f => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a }
+        }))
+      })} />
+    )}
+    {toolSchema && (
+      <script type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", ...toolSchema })} />
+    )}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -277,6 +295,12 @@ const nav = [
           <p class="text-theme-primary font-semibold mb-2">{t.footer.disclaimer}</p>
           <p class="text-xs text-theme-muted">{t.footer.disclaimerText}</p>
         </div>
+      </div>
+      <div class="border-t border-theme py-3 text-center text-xs text-theme-muted flex flex-wrap justify-center gap-x-6 gap-y-1">
+        <span>Sister sites:</span>
+        <a href="https://meshcalculator.com" target="_blank" rel="noopener" class="hover:text-theme-primary transition-colors">MeshCalculator.com</a>
+        <a href="https://riggingcalculators.com" target="_blank" rel="noopener" class="hover:text-theme-primary transition-colors">RiggingCalculators.com</a>
+        <a href="https://pvfcalculator.com" target="_blank" rel="noopener" class="hover:text-theme-primary transition-colors">PVFCalculator.com</a>
       </div>
       <div class="border-t border-theme py-4 text-center text-xs text-theme-muted">
         {t.footer.copyright}

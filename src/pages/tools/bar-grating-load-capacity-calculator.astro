@@ -1,10 +1,28 @@
 ---
 import Base from "../../layouts/Base.astro";
 
-const title = "Bar Grating Load Capacity Calculator — NAAMM MBG 531 & BS 4592 | Free";
+const title = "Bar Grating Load Calculator | NAAMM MBG 531 | Free";
 const description = "Calculate max allowable UDL and point load for steel bar grating. Supports NAAMM MBG 531 (US) and BS 4592 (UK/Commonwealth). Simply supported and fixed end conditions. Free tool.";
+
+const faqs = [
+  { q: "Which design standards does this calculator use?", a: "NAAMM MBG 531 (US standard, allowable stress 138 MPa / 20,000 psi for A36 steel) and BS 4592 (UK/Commonwealth, Parts 0–5). Toggle between them using the Standard selector." },
+  { q: "What is the maximum recommended span for steel grating?", a: "Generally 1,200–1,500 mm for standard pedestrian loads with 25mm bearing bars. Beyond 1,500 mm, deflection typically governs. Use heavier bars (30–40mm height) or reduce pitch for longer spans." },
+  { q: "What does 'deflection controls' mean in the results?", a: "It means the grating can carry more load before yielding than before it deflects excessively. NAAMM limits deflection to L/180 and BS 4592 to L/200. When deflection controls, the allowable load is lower than the bending capacity." },
+  { q: "How does end condition affect load capacity?", a: "Fixed ends provide roughly 60% more capacity than simply supported ends — a fixed-fixed beam has a plastic moment resistance 1.5× higher. Use 'Fixed Both Ends' only if the grating is welded or clamped into its frame, not just resting on supports." },
+  { q: "How do I determine the BS 4592 Load Class?", a: "The calculator outputs the class automatically: Class A (2.0 kPa, light pedestrian), B (5.0 kPa, normal industrial), C (7.5 kPa, forklift aisle), D (10 kPa, heavy vehicle) and E (>10 kPa, special loads)." },
+];
+
+const toolSchema = {
+  "@type": "SoftwareApplication",
+  name: "Bar Grating Load Capacity Calculator",
+  applicationCategory: "EngineeringApplication",
+  operatingSystem: "Web",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  description,
+  url: "https://steelgratingcalculator.com/tools/bar-grating-load-capacity-calculator/",
+};
 ---
-<Base title={title} description={description} lang="en">
+<Base title={title} description={description} lang="en" {faqs} {toolSchema}>
 
   <section class="max-w-6xl mx-auto px-4 py-10">
 
@@ -232,6 +250,22 @@ const description = "Calculate max allowable UDL and point load for steel bar gr
           <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">Load Capacity Reference Table</h3>
           <p class="text-sm text-theme-secondary mt-1">Common span × bearing bar quick reference.</p>
         </a>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="mt-12 pt-8 border-t border-theme">
+      <h2 class="text-lg font-semibold text-theme-primary mb-6">Frequently Asked Questions</h2>
+      <div class="space-y-3 max-w-3xl">
+        {faqs.map(f => (
+          <details class="group bg-theme-card border border-theme rounded-xl overflow-hidden">
+            <summary class="flex items-center justify-between gap-3 px-5 py-4 cursor-pointer font-medium text-theme-primary list-none">
+              {f.q}
+              <svg class="w-4 h-4 shrink-0 text-theme-muted group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <div class="px-5 pb-4 text-sm text-theme-secondary leading-relaxed">{f.a}</div>
+          </details>
+        ))}
       </div>
     </div>
 

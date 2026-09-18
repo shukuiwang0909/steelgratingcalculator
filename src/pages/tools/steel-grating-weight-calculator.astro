@@ -1,10 +1,28 @@
 ---
 import Base from "../../layouts/Base.astro";
 
-const title = "Steel Grating Weight Calculator — kg/m² per Panel & Order Weight | Free";
+const title = "Steel Grating Weight Calculator | Free kg/m² Tool";
 const description = "Free steel grating weight calculator. Input bearing bar height, thickness, pitch, cross bar size and material to get exact kg/m², panel weight and order weight. GB/T 12755 compliant.";
+
+const faqs = [
+  { q: "How is steel grating weight calculated?", a: "Weight per m² = (Bearing bar height × thickness × density ÷ bearing bar pitch) + (cross bar area × density ÷ cross bar pitch). Carbon steel density is 7.85 g/cm³, stainless 304 is 7.93, and aluminum is 2.70." },
+  { q: "What does 25×5mm bearing bar at 30mm pitch weigh per m²?", a: "Approximately 37.1 kg/m² with 6mm round cross bars at 50mm pitch (carbon steel). The bearing bars contribute about 32.7 kg/m² and cross bars about 4.4 kg/m²." },
+  { q: "Does hot-dip galvanizing add weight?", a: "Yes — hot-dip galvanizing adds approximately 4% to the steel weight, per ISO 1461. Enable the 'Galvanized weight estimate' toggle to see this automatically." },
+  { q: "How much lighter is aluminum grating vs carbon steel?", a: "About 66% lighter. Aluminum density is 2.70 g/cm³ vs 7.85 g/cm³ for carbon steel. A panel weighing 50 kg in steel would weigh roughly 17 kg in aluminum." },
+  { q: "How accurate is this calculator?", a: "±2–3% of published NAAMM MBG 531 weight tables. Small differences arise from cross bar end protrusions, edge binding, and manufacturing tolerances not included in the formula." },
+];
+
+const toolSchema = {
+  "@type": "SoftwareApplication",
+  name: "Steel Grating Weight Calculator",
+  applicationCategory: "EngineeringApplication",
+  operatingSystem: "Web",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  description,
+  url: "https://steelgratingcalculator.com/tools/steel-grating-weight-calculator/",
+};
 ---
-<Base title={title} description={description} lang="en">
+<Base title={title} description={description} lang="en" {faqs} {toolSchema}>
 
   <section class="max-w-6xl mx-auto px-4 py-10">
 
@@ -297,6 +315,22 @@ const description = "Free steel grating weight calculator. Input bearing bar hei
         <a href="https://meshcalculator.com" target="_blank" rel="noopener" class="text-sm accent-text font-semibold hover:opacity-80 transition-opacity shrink-0">
           MeshCalculator.com →
         </a>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="mt-12 pt-8 border-t border-theme">
+      <h2 class="text-lg font-semibold text-theme-primary mb-6">Frequently Asked Questions</h2>
+      <div class="space-y-3 max-w-3xl">
+        {faqs.map(f => (
+          <details class="group bg-theme-card border border-theme rounded-xl overflow-hidden">
+            <summary class="flex items-center justify-between gap-3 px-5 py-4 cursor-pointer font-medium text-theme-primary list-none">
+              {f.q}
+              <svg class="w-4 h-4 shrink-0 text-theme-muted group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <div class="px-5 pb-4 text-sm text-theme-secondary leading-relaxed">{f.a}</div>
+          </details>
+        ))}
       </div>
     </div>
 

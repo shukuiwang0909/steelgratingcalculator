@@ -1,10 +1,27 @@
 ---
 import Base from "../../layouts/Base.astro";
 
-const title = "Steel Grating Open Area Percentage Calculator — Drainage & Ventilation | Free";
+const title = "Grating Open Area Calculator | Drainage % | Free";
 const description = "Calculate the open area percentage of any steel bar grating specification. Critical for drainage, ventilation, and debris shedding design. Free online calculator.";
+
+const faqs = [
+  { q: "What open area percentage is required for good drainage?", a: "A minimum of 45% open area is generally recommended for drainage applications. Most standard 25×5mm gratings at 30mm pitch achieve 60–65%, which provides excellent drainage and reduces debris accumulation." },
+  { q: "How does bearing bar pitch affect open area?", a: "Wider pitch directly increases open area. For 5mm thick bearing bars: 22mm pitch gives ~77% open from bars alone, 30mm pitch gives ~83%, and 40mm pitch gives ~87.5%. Cross bars then reduce this further." },
+  { q: "What is the typical open area for 25×5mm at 30mm pitch with 6mm round cross bars at 50mm pitch?", a: "Approximately 62–64%. The bearing bars (5mm thick at 30mm pitch) account for 83.3% open in one direction, and the 6mm cross bars at 50mm pitch account for 88% in the other direction. Combined: 0.833 × 0.880 = 73.3%... adjusted for bar overlap areas the result is ~62–64%." },
+  { q: "Does serrated (anti-slip) grating affect the open area percentage?", a: "No. Serrations are notched into the top edge of bearing bars and do not change the cross-sectional area or pitch, so open area remains identical to plain grating of the same specification." },
+];
+
+const toolSchema = {
+  "@type": "SoftwareApplication",
+  name: "Steel Grating Open Area Percentage Calculator",
+  applicationCategory: "EngineeringApplication",
+  operatingSystem: "Web",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  description,
+  url: "https://steelgratingcalculator.com/tools/open-area-percentage-calculator/",
+};
 ---
-<Base title={title} description={description} lang="en">
+<Base title={title} description={description} lang="en" {faqs} {toolSchema}>
 
   <section class="max-w-6xl mx-auto px-4 py-10">
 
@@ -237,6 +254,22 @@ const description = "Calculate the open area percentage of any steel bar grating
           <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">Panel Count Estimator</h3>
           <p class="text-sm text-theme-secondary mt-1">Calculate how many panels you need for a project.</p>
         </a>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="mt-12 pt-8 border-t border-theme">
+      <h2 class="text-lg font-semibold text-theme-primary mb-6">Frequently Asked Questions</h2>
+      <div class="space-y-3 max-w-3xl">
+        {faqs.map(f => (
+          <details class="group bg-theme-card border border-theme rounded-xl overflow-hidden">
+            <summary class="flex items-center justify-between gap-3 px-5 py-4 cursor-pointer font-medium text-theme-primary list-none">
+              {f.q}
+              <svg class="w-4 h-4 shrink-0 text-theme-muted group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <div class="px-5 pb-4 text-sm text-theme-secondary leading-relaxed">{f.a}</div>
+          </details>
+        ))}
       </div>
     </div>
 
