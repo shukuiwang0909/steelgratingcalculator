@@ -11,8 +11,20 @@ const faqs = [
   ["How accurate are grating weight calculations?", "Typically ±2–3% for standard welded grating. For serrated bars, allow an additional 2–5% for material removed. For hot-dip galvanized grating, add approximately 4% for the zinc coating."],
   ["What is the weight of standard 25×5mm @ 30mm pitch grating?", "25×5mm bearing bar at 30mm pitch + 6mm round cross bar at 50mm pitch in carbon steel weighs approximately 37.1 kg/m². Use our calculator for exact results with your cross bar configuration."],
 ];
+
+const toolSchema = {
+  "@type": "Article",
+  headline: title,
+  description,
+  datePublished: "2026-09-18",
+  dateModified: "2026-09-18",
+  inLanguage: "en",
+  url: "https://steelgratingcalculator.com/blog/how-to-calculate-steel-grating-weight/",
+  publisher: { "@type": "Organization", name: "SteelGratingCalculator", url: "https://steelgratingcalculator.com" },
+  mainEntityOfPage: "https://steelgratingcalculator.com/blog/how-to-calculate-steel-grating-weight/",
+};
 ---
-<Base title={title} description={description} lang="en" ogType="article">
+<Base title={title} description={description} lang="en" ogType="article" {toolSchema}>
 
   <article class="max-w-3xl mx-auto px-4 py-10">
 
@@ -45,6 +57,17 @@ const faqs = [
       <a href="/tools/steel-grating-weight-calculator/" class="text-sm accent-text font-semibold hover:opacity-80 transition-opacity shrink-0">
         Open Calculator →
       </a>
+    </div>
+
+    <!-- Key Takeaways -->
+    <div class="mb-8 p-5 bg-theme-card border border-accent rounded-xl">
+      <p class="text-xs font-mono accent-text uppercase tracking-wider mb-3">Key Takeaways</p>
+      <ul class="space-y-2 text-sm text-theme-secondary">
+        <li class="flex gap-2"><span class="accent-text shrink-0">▸</span> Steel grating weight = bearing bar weight + cross bar weight, calculated independently per m²</li>
+        <li class="flex gap-2"><span class="accent-text shrink-0">▸</span> 25×5mm bearing bar at 30mm pitch + 6mm round cross bar at 50mm pitch = <strong class="text-theme-primary">37.15 kg/m²</strong> (carbon steel)</li>
+        <li class="flex gap-2"><span class="accent-text shrink-0">▸</span> Hot-dip galvanizing (ISO 1461) adds approximately <strong class="text-theme-primary">+4%</strong> to bare steel weight</li>
+        <li class="flex gap-2"><span class="accent-text shrink-0">▸</span> Aluminum grating is ~66% lighter than carbon steel (density 2.70 vs 7.85 g/cm³)</li>
+      </ul>
     </div>
 
     <div class="prose max-w-none text-theme-secondary leading-relaxed space-y-6">
@@ -151,6 +174,24 @@ const faqs = [
           <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1 leading-snug">Plain vs Serrated Steel Grating</h3>
         </a>
       </div>
+    </div>
+
+    <!-- Sister site -->
+    <div class="mt-8 p-4 bg-theme-tertiary rounded-xl border border-theme flex items-center gap-4">
+      <div class="flex-1">
+        <p class="text-sm font-medium text-theme-primary">Also importing wire mesh from Anping?</p>
+        <p class="text-xs text-theme-muted">Calculate welded wire mesh weight, panel count, and FOB price on our sister site.</p>
+      </div>
+      <a href="https://meshcalculator.com/tools/welded-wire-mesh-weight-calculator/" target="_blank" rel="noopener" class="text-sm accent-text font-semibold hover:opacity-80 transition-opacity shrink-0 whitespace-nowrap">
+        MeshCalculator.com →
+      </a>
+    </div>
+
+    <!-- Inquiry CTA -->
+    <div class="mt-8 p-6 bg-theme-card border border-theme rounded-xl text-center">
+      <p class="font-semibold text-theme-primary mb-2">Ready to order? Send your specification to Anping factories.</p>
+      <p class="text-sm text-theme-muted mb-4">Weight, pitch, finish — all confirmed in writing. Free, 24-hour response.</p>
+      <a href="/inquiry/" class="inline-block px-8 py-3 accent-bg font-semibold rounded-lg hover:opacity-90 transition on-accent">Get a Quote →</a>
     </div>
 
   </article>

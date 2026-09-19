@@ -11,8 +11,20 @@ const faqs = [
   ["How do I order NAAMM-equivalent grating from China?", "Specify the metric equivalent: bearing bar H×T mm at P mm c/c pitch. For 19-W-4, specify 25×5mm at 30mm c/c pitch, plain top. Chinese factories manufacture to GB/T 12755 which is dimensionally compatible with NAAMM MBG 531 metric equivalents."],
   ["Is GB/T 12755 the same as NAAMM MBG 531?", "Not identical, but dimensionally compatible for standard specifications. GB/T 12755 uses metric dimensions; NAAMM MBG 531 uses imperial. Both cover welded bar grating with equivalent load capacity when the bearing bar cross-section and pitch are matched. Key difference: NAAMM specifies exact material grades (A36); GB/T uses Q235/Q345."],
 ];
+
+const toolSchema = {
+  "@type": "Article",
+  headline: title,
+  description,
+  datePublished: "2026-09-18",
+  dateModified: "2026-09-18",
+  inLanguage: "en",
+  url: "https://steelgratingcalculator.com/blog/naamm-bar-grating-designations/",
+  publisher: { "@type": "Organization", name: "SteelGratingCalculator", url: "https://steelgratingcalculator.com" },
+  mainEntityOfPage: "https://steelgratingcalculator.com/blog/naamm-bar-grating-designations/",
+};
 ---
-<Base title={title} description={description} lang="en" ogType="article">
+<Base title={title} description={description} lang="en" ogType="article" {toolSchema}>
 
   <article class="max-w-3xl mx-auto px-4 py-10">
 
@@ -31,6 +43,17 @@ const faqs = [
       </div>
       <h1 class="text-4xl font-semibold text-theme-primary leading-tight mb-4">NAAMM Bar Grating Designations Explained</h1>
       <p class="text-lg text-theme-secondary leading-relaxed">What "19-W-4" actually means, how to read any NAAMM MBG 531 designation code, and how to convert it to the metric dimensions used by Anping manufacturers.</p>
+    </div>
+
+    <!-- Key Takeaways -->
+    <div class="mb-8 p-5 bg-theme-card border border-accent rounded-xl">
+      <p class="text-xs font-mono accent-text uppercase tracking-wider mb-3">Key Takeaways</p>
+      <ul class="space-y-2 text-sm text-theme-secondary">
+        <li class="flex gap-2"><span class="accent-text shrink-0">▸</span> NAAMM designation format: <strong class="text-theme-primary">[depth-sixteenths] – [surface type] – [thickness-sixteenths]</strong></li>
+        <li class="flex gap-2"><span class="accent-text shrink-0">▸</span> Most common US code: <strong class="text-theme-primary">19-W-4</strong> = 1-3/16" deep × 1/4" thick plain welded = metric <strong class="text-theme-primary">25×5mm @ 30mm pitch</strong></li>
+        <li class="flex gap-2"><span class="accent-text shrink-0">▸</span> W = plain (smooth); I = serrated (anti-slip). Both are pressure-welded construction per NAAMM MBG 531</li>
+        <li class="flex gap-2"><span class="accent-text shrink-0">▸</span> Chinese GB/T 12755 grating is dimensionally compatible — order by metric H×T mm @ pitch mm</li>
+      </ul>
     </div>
 
     <div class="prose max-w-none text-theme-secondary leading-relaxed space-y-6">
@@ -159,6 +182,24 @@ const faqs = [
           <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1 leading-snug">Plain vs Serrated: When to Specify I-Series</h3>
         </a>
       </div>
+    </div>
+
+    <!-- Sister site -->
+    <div class="mt-8 p-4 bg-theme-tertiary rounded-xl border border-theme flex items-center gap-4">
+      <div class="flex-1">
+        <p class="text-sm font-medium text-theme-primary">Anping also supplies wire mesh — same factories, same port.</p>
+        <p class="text-xs text-theme-muted">Calculate wire mesh weight, open area, and FOB price on our sister site.</p>
+      </div>
+      <a href="https://meshcalculator.com" target="_blank" rel="noopener" class="text-sm accent-text font-semibold hover:opacity-80 transition-opacity shrink-0 whitespace-nowrap">
+        MeshCalculator.com →
+      </a>
+    </div>
+
+    <!-- Inquiry CTA -->
+    <div class="mt-8 p-6 bg-theme-card border border-theme rounded-xl text-center">
+      <p class="font-semibold text-theme-primary mb-2">Need grating to a NAAMM or metric specification?</p>
+      <p class="text-sm text-theme-muted mb-4">Submit your spec once — Anping factories quote directly in writing. Free, 24-hour response.</p>
+      <a href="/inquiry/" class="inline-block px-8 py-3 accent-bg font-semibold rounded-lg hover:opacity-90 transition on-accent">Get a Quote →</a>
     </div>
 
   </article>

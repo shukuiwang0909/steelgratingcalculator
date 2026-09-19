@@ -23,8 +23,20 @@ const comparison = [
   { prop: "Required offshore?", plain: "No", serrated: "Yes — NORSOK M-001" },
   { prop: "Best applications", plain: "Dry indoor floors, trench covers (vehicle loads)", serrated: "Outdoor walkways, platforms, wet industrial floors, stairs" },
 ];
+
+const toolSchema = {
+  "@type": "Article",
+  headline: title,
+  description,
+  datePublished: "2026-09-18",
+  dateModified: "2026-09-18",
+  inLanguage: "en",
+  url: "https://steelgratingcalculator.com/blog/plain-vs-serrated-steel-grating/",
+  publisher: { "@type": "Organization", name: "SteelGratingCalculator", url: "https://steelgratingcalculator.com" },
+  mainEntityOfPage: "https://steelgratingcalculator.com/blog/plain-vs-serrated-steel-grating/",
+};
 ---
-<Base title={title} description={description} lang="en" ogType="article">
+<Base title={title} description={description} lang="en" ogType="article" {toolSchema}>
 
   <article class="max-w-3xl mx-auto px-4 py-10">
 
@@ -43,6 +55,17 @@ const comparison = [
       </div>
       <h1 class="text-4xl font-semibold text-theme-primary leading-tight mb-4">Plain vs Serrated Steel Grating: When Do You Need Anti-Slip?</h1>
       <p class="text-lg text-theme-secondary leading-relaxed">The practical guide for deciding between plain (smooth) and serrated (notched) bar grating — by application, by code, and by cost.</p>
+    </div>
+
+    <!-- Key Takeaways -->
+    <div class="mb-8 p-5 bg-theme-card border border-accent rounded-xl">
+      <p class="text-xs font-mono accent-text uppercase tracking-wider mb-3">Key Takeaways</p>
+      <ul class="space-y-2 text-sm text-theme-secondary">
+        <li class="flex gap-2"><span class="accent-text shrink-0">▸</span> Serrated (I-series) grating has V-shaped notches every 20–25mm; plain (W-series) has smooth bar tops</li>
+        <li class="flex gap-2"><span class="accent-text shrink-0">▸</span> <strong class="text-theme-primary">OSHA 1910.22, NORSOK M-001, and BS 4592-0</strong> all require slip-resistant grating on wet, outdoor, or offshore surfaces</li>
+        <li class="flex gap-2"><span class="accent-text shrink-0">▸</span> Serrated costs <strong class="text-theme-primary">5–12% more</strong> per m² and weighs <strong class="text-theme-primary">5–8% more</strong> than equivalent plain grating</li>
+        <li class="flex gap-2"><span class="accent-text shrink-0">▸</span> Quick rule: if the surface will ever be wet, outdoors, or regulated — specify serrated</li>
+      </ul>
     </div>
 
     <div class="prose max-w-none text-theme-secondary leading-relaxed space-y-6">
@@ -132,6 +155,24 @@ const comparison = [
           <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1 leading-snug">NAAMM Bar Grating Designations Explained</h3>
         </a>
       </div>
+    </div>
+
+    <!-- Sister site -->
+    <div class="mt-8 p-4 bg-theme-tertiary rounded-xl border border-theme flex items-center gap-4">
+      <div class="flex-1">
+        <p class="text-sm font-medium text-theme-primary">Also need wire mesh? Same Anping factories, same containers.</p>
+        <p class="text-xs text-theme-muted">Woven, welded, and expanded metal — calculate specs and FOB price on our sister site.</p>
+      </div>
+      <a href="https://meshcalculator.com" target="_blank" rel="noopener" class="text-sm accent-text font-semibold hover:opacity-80 transition-opacity shrink-0 whitespace-nowrap">
+        MeshCalculator.com →
+      </a>
+    </div>
+
+    <!-- Inquiry CTA -->
+    <div class="mt-8 p-6 bg-theme-card border border-theme rounded-xl text-center">
+      <p class="font-semibold text-theme-primary mb-2">Need a quote for plain or serrated grating?</p>
+      <p class="text-sm text-theme-muted mb-4">Specify plain or serrated, bearing bar size, finish — Anping factories respond in writing within 24 hours.</p>
+      <a href="/inquiry/" class="inline-block px-8 py-3 accent-bg font-semibold rounded-lg hover:opacity-90 transition on-accent">Get a Quote →</a>
     </div>
 
   </article>

@@ -17,8 +17,20 @@ const containers = [
   { type: "40ft GP", intL: "12.0 m", intW: "2.35 m", intH: "2.39 m", cbm: "67.3 m³", payload: "26,500 kg" },
   { type: "40ft HC", intL: "12.0 m", intW: "2.35 m", intH: "2.70 m", cbm: "76.0 m³", payload: "26,500 kg" },
 ];
+
+const toolSchema = {
+  "@type": "Article",
+  headline: title,
+  description,
+  datePublished: "2026-09-18",
+  dateModified: "2026-09-18",
+  inLanguage: "en",
+  url: "https://steelgratingcalculator.com/blog/how-to-load-steel-grating-in-container/",
+  publisher: { "@type": "Organization", name: "SteelGratingCalculator", url: "https://steelgratingcalculator.com" },
+  mainEntityOfPage: "https://steelgratingcalculator.com/blog/how-to-load-steel-grating-in-container/",
+};
 ---
-<Base title={title} description={description} lang="en" ogType="article">
+<Base title={title} description={description} lang="en" ogType="article" {toolSchema}>
 
   <article class="max-w-3xl mx-auto px-4 py-10">
 
@@ -51,6 +63,17 @@ const containers = [
       <a href="/tools/container-loading-calculator/" class="text-sm accent-text font-semibold hover:opacity-80 transition-opacity shrink-0">
         Open Calculator →
       </a>
+    </div>
+
+    <!-- Key Takeaways -->
+    <div class="mb-8 p-5 bg-theme-card border border-accent rounded-xl">
+      <p class="text-xs font-mono accent-text uppercase tracking-wider mb-3">Key Takeaways</p>
+      <ul class="space-y-2 text-sm text-theme-secondary">
+        <li class="flex gap-2"><span class="accent-text shrink-0">▸</span> 20ft GP container: internal 5.9m × 2.35m × 2.39m, <strong class="text-theme-primary">21,700 kg payload</strong></li>
+        <li class="flex gap-2"><span class="accent-text shrink-0">▸</span> 25×5mm grating, 6000×1000mm panels: approx <strong class="text-theme-primary">~100 panels</strong> per 20ft (weight-limited at ~21.5 t)</li>
+        <li class="flex gap-2"><span class="accent-text shrink-0">▸</span> Panels must be cut to <strong class="text-theme-primary">5800mm</strong> for 20ft containers — confirm cut length with your factory</li>
+        <li class="flex gap-2"><span class="accent-text shrink-0">▸</span> 40ft GP holds ~200+ panels at 6000mm full length — lower freight cost per m² at scale</li>
+      </ul>
     </div>
 
     <div class="prose max-w-none text-theme-secondary leading-relaxed space-y-6">
@@ -165,6 +188,24 @@ const containers = [
           <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1 leading-snug">Steel Grating Weight Formula</h3>
         </a>
       </div>
+    </div>
+
+    <!-- Sister site — mixing cargo -->
+    <div class="mt-8 p-4 bg-theme-tertiary rounded-xl border border-theme flex items-center gap-4">
+      <div class="flex-1">
+        <p class="text-sm font-medium text-theme-primary">Loading wire mesh in the same container?</p>
+        <p class="text-xs text-theme-muted">Calculate wire mesh weight and rolls-per-container on our sister site.</p>
+      </div>
+      <a href="https://meshcalculator.com/tools/welded-wire-mesh-weight-calculator/" target="_blank" rel="noopener" class="text-sm accent-text font-semibold hover:opacity-80 transition-opacity shrink-0 whitespace-nowrap">
+        MeshCalculator.com →
+      </a>
+    </div>
+
+    <!-- Inquiry CTA -->
+    <div class="mt-8 p-6 bg-theme-card border border-theme rounded-xl text-center">
+      <p class="font-semibold text-theme-primary mb-2">Ready to ship from Anping?</p>
+      <p class="text-sm text-theme-muted mb-4">Send your spec — panel size, quantity, container type — factories confirm weight and cut length in writing.</p>
+      <a href="/inquiry/" class="inline-block px-8 py-3 accent-bg font-semibold rounded-lg hover:opacity-90 transition on-accent">Get a Quote →</a>
     </div>
 
   </article>
