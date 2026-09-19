@@ -9,6 +9,10 @@ interface Factory {
   nameZh?: string;
   tier: "listed" | "verified";
   categories: string[];
+  grating_types?: string[];
+  bearing_bar_range?: string;
+  max_panel_size?: string;
+  surface_finish?: string[];
   city: string;
   province: string;
   website?: string;
@@ -41,6 +45,7 @@ const origin = Astro.site?.origin ?? "https://steelgratingcalculator.com";
 const lang = "zh";
 
 const labelFor = (key: string) => CATEGORIES.find((c) => c.key === key)?.zh ?? key;
+const productLinkFor = (key: string) => CATEGORIES.find((c) => c.key === key)?.productZh ?? "/zh/products/";
 const primaryCategory = factory.categories[0];
 const inquiryUrl = `/zh/inquiry/?factory=${factory.slug}${primaryCategory ? `&category=${primaryCategory}` : ""}`;
 
@@ -70,7 +75,7 @@ const infoRows: [string, string][] = [
 ];
 ---
 <Base
-  title={`${factory.nameZh || factory.name} — 安平丝网工厂`}
+  title={`${factory.nameZh || factory.name} — 钢格栅生产厂家`}
   description={factory.descriptionZh || factory.description}
   {lang}
   forceTranslation={forceTranslation}
@@ -79,7 +84,7 @@ const infoRows: [string, string][] = [
     <nav class="text-sm text-theme-secondary mb-6">
       <a href="/zh/" class="hover:text-theme-primary">首页</a>
       <span class="mx-2">›</span>
-      <a href="/zh/factories/" class="hover:text-theme-primary">工厂目录</a>
+      <a href="/zh/factories/" class="hover:text-theme-primary">格栅厂家目录</a>
       <span class="mx-2">›</span>
       <span>{factory.nameZh || factory.name}</span>
     </nav>
@@ -94,6 +99,7 @@ const infoRows: [string, string][] = [
 
     <p class="text-theme-secondary text-lg mt-4 leading-relaxed">{factory.descriptionZh || factory.description}</p>
 
+    <!-- 工厂概况卡 -->
     <div class="mt-6 bg-theme-card border border-theme rounded-xl p-6">
       <div class="grid sm:grid-cols-2 gap-x-8 gap-y-3 text-sm">
         {infoRows.map(([k, v]) => (
@@ -103,11 +109,65 @@ const infoRows: [string, string][] = [
           </div>
         ))}
       </div>
-      <div class="flex flex-wrap gap-2 mt-4">
-        {factory.categories.map((c) => (
-          <a href={`/zh/factories/?category=${c}`} class="text-xs px-2 py-0.5 rounded-full bg-theme-secondary border border-theme text-theme-secondary hover:text-theme-primary transition-colors">{labelFor(c)}</a>
-        ))}
+    </div>
+
+    <!-- 钢格栅产品与规格能力（替代通用分类标签） -->
+    {(factory.grating_types?.length || factory.bearing_bar_range || factory.max_panel_size || factory.surface_finish?.length) && (
+      <div class="mt-6 bg-theme-card border border-theme rounded-xl p-6">
+        <h2 class="text-lg font-bold text-theme-primary mb-4">钢格栅产品与生产能力</h2>
+
+        {factory.grating_types?.length && (
+          <div class="mb-5">
+            <p class="text-xs font-semibold text-theme-muted uppercase tracking-widest mb-2">产品线</p>
+            <div class="flex flex-wrap gap-2">
+              {factory.grating_types.map((gt) => (
+                <a
+                  href={productLinkFor(gt)}
+                  class="text-sm px-3 py-1 rounded-lg bg-theme border border-theme text-theme-secondary hover:text-theme-primary hover:border-theme-primary transition-colors"
+                >
+                  {labelFor(gt)} ↗
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div class="grid sm:grid-cols-3 gap-4 text-sm">
+          {factory.bearing_bar_range && (
+            <div class="border border-theme rounded-lg p-3">
+              <p class="text-xs text-theme-muted mb-1">扁钢规格范围</p>
+              <p class="font-semibold text-theme-primary font-mono">{factory.bearing_bar_range}</p>
+            </div>
+          )}
+          {factory.max_panel_size && (
+            <div class="border border-theme rounded-lg p-3">
+              <p class="text-xs text-theme-muted mb-1">最大面板尺寸</p>
+              <p class="font-semibold text-theme-primary font-mono">{factory.max_panel_size}</p>
+            </div>
+          )}
+          {factory.surface_finish?.length && (
+            <div class="border border-theme rounded-lg p-3">
+              <p class="text-xs text-theme-muted mb-1">表面处理</p>
+              <ul class="space-y-0.5">
+                {factory.surface_finish.map((f) => (
+                  <li class="text-xs text-theme-secondary">· {f}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
       </div>
+    )}
+
+    <!-- 计算器 CTA -->
+    <div class="mt-6 bg-theme border border-theme rounded-xl p-5 flex flex-col sm:flex-row items-center gap-4">
+      <div class="flex-1">
+        <p class="font-semibold text-theme-primary text-sm">下单前先算好格栅重量与荷载</p>
+        <p class="text-xs text-theme-muted mt-0.5">输入扁钢规格、网格间距、面板尺寸，即可得到 kg/m² 和单块总重。</p>
+      </div>
+      <a href="/zh/" class="shrink-0 inline-block px-5 py-2.5 accent-bg font-semibold text-sm rounded-lg hover:opacity-90 transition on-accent whitespace-nowrap">
+        打开重量计算器 →
+      </a>
     </div>
 
     {factory.tier === "verified" && factory.contact && (
@@ -131,15 +191,18 @@ const infoRows: [string, string][] = [
     {factory.tier === "listed" && (
       <p class="mt-6 text-sm text-theme-muted bg-theme-secondary bg-opacity-10 border border-theme rounded-lg p-4">
         本页为免费<strong class="text-theme-secondary">收录</strong>资料——联系方式未公开。
-        通过下方询盘提交需求，将直接送达该工厂。
+        通过下方询盘提交规格需求，将直接送达该工厂。
       </p>
     )}
 
+    <!-- 询价 CTA -->
     <div class="mt-8 bg-theme-secondary bg-opacity-10 border border-theme rounded-lg p-8 text-center">
-      <p class="text-2xl font-bold text-theme-primary mb-4">联系 {factory.nameZh || factory.name}</p>
-      <p class="text-theme-secondary mb-6 max-w-2xl mx-auto">
-        一次提交您的规格需求——工厂直接回复您，重量与镀层书面写明。免费，24小时内回复。
+      <p class="text-2xl font-bold text-theme-primary mb-2">提交钢格栅询价</p>
+      <p class="text-theme-secondary mb-2 max-w-2xl mx-auto text-sm">
+        请注明：扁钢规格、横杆间距、面板尺寸、表面处理方式、数量。
+        {factory.nameZh || factory.name} 将直接回复，包含单板重量和交期。
       </p>
+      <p class="text-xs text-theme-muted mb-6">免费，通常 24 小时内回复。</p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a href={inquiryUrl} class="inline-block px-8 py-3 accent-bg font-semibold rounded-lg hover:opacity-90 transition on-accent">
           提交询盘
@@ -151,6 +214,22 @@ const infoRows: [string, string][] = [
         )}
       </div>
       {factory.website && <p class="text-xs text-theme-muted mt-3">官网链接带点击追踪，用于向我们证明收录价值。</p>}
+    </div>
+
+    <!-- 关联工具 -->
+    <div class="mt-8 grid sm:grid-cols-3 gap-4 text-sm">
+      <a href="/zh/products/plain-steel-grating/" class="bg-theme-card border border-theme rounded-lg p-4 hover:border-theme-primary transition block">
+        <p class="font-semibold text-theme-primary">普通钢格栅</p>
+        <p class="text-xs text-theme-muted mt-1">规格参数、荷载表、标准尺寸</p>
+      </a>
+      <a href="/zh/products/serrated-steel-grating/" class="bg-theme-card border border-theme rounded-lg p-4 hover:border-theme-primary transition block">
+        <p class="font-semibold text-theme-primary">防滑齿型格栅</p>
+        <p class="text-xs text-theme-muted mt-1">锯齿扁钢，适用于潮湿地面</p>
+      </a>
+      <a href="/zh/" class="bg-theme-card border border-theme rounded-lg p-4 hover:border-theme-primary transition block">
+        <p class="font-semibold text-theme-primary accent-text">重量计算器</p>
+        <p class="text-xs text-theme-muted mt-1">按扁钢规格和网格间距算 kg/m²</p>
+      </a>
     </div>
 
     <p class="mt-6 text-xs text-theme-muted">
