@@ -1,0 +1,72 @@
+---
+import Base from "../layouts/Base.astro";
+
+const origin = "https://steelgratingcalculator.com";
+
+const pageSchema = {
+  "@type": "AboutPage",
+  name: "About SteelGratingCalculator",
+  url: `${origin}/about/`,
+  description: "Kevin Wang built SteelGratingCalculator to give overseas engineers and procurement teams accurate, freely accessible steel grating weight calculators, load tables, and spec charts — tools that reflect how Anping manufacturers actually produce and quote.",
+  author: {
+    "@type": "Person",
+    name: "Kevin Wang",
+    jobTitle: "Steel Grating Sourcing Specialist",
+    worksFor: {
+      "@type": "Organization",
+      name: "SteelGratingCalculator",
+      url: `${origin}/`,
+    },
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Anping",
+      addressRegion: "Hebei",
+      addressCountry: "CN",
+    },
+  },
+};
+
+const faqs = [
+  {
+    q: "Who built SteelGratingCalculator?",
+    a: "The site was built by Kevin Wang, a sourcing specialist based in Anping, Hebei, China — the county that accounts for roughly 70% of China's welded bar grating output. Kevin has spent over a decade working with local manufacturers and fielding technical questions from overseas engineers and buyers.",
+  },
+  {
+    q: "Why is it free?",
+    a: "The tools started as internal spreadsheets to answer repetitive questions from clients. Making them public helps engineers and procurement teams worldwide work faster. There is no paywall, no registration required, and no commercial motive attached to the tools themselves.",
+  },
+  {
+    q: "How accurate are the weight calculations?",
+    a: "Calculations follow NAAMM MBG 531 (North American standard), BS 4592, and GB/T 12755 (Chinese standard) dimensional data. Typical accuracy is within ±3–5% of actual manufactured weights, which is within normal mill tolerance. Always confirm final weights with your supplier before using them for freight, customs, or engineering documentation.",
+  },
+  {
+    q: "How do I contact Kevin?",
+    a: "Use the inquiry form at steelgratingcalculator.com/inquiry/. Kevin reads every message and typically responds within one business day, accounting for China Standard Time.",
+  },
+];
+---
+
+<Base
+  title="About | SteelGratingCalculator"
+  description="Kevin Wang, a steel grating sourcing specialist based in Anping, Hebei, China, built SteelGratingCalculator to give engineers free, accurate weight calculators, load tables, and spec tools for bar grating."
+  faqs={faqs}
+  toolSchema={pageSchema}
+>
+  <section class="max-w-3xl mx-auto px-4 py-12 prose">
+    <h1 class="text-3xl font-extrabold text-theme-primary">About SteelGratingCalculator</h1>
+
+    <h2 class="text-xl font-bold text-theme-primary">Why This Site Exists</h2>
+    <p>Anping county in Hebei, China produces roughly 70% of the world's welded bar grating. If you have ever sourced steel grating from China, there is a good chance the material passed through a factory within 30 kilometres of where I work. Over the years I fielded the same questions from structural engineers, project managers, and import buyers: how much does a panel of 30/3 bearing bar weigh? What load can a 25-mm pitch grating carry at a given span? Which standard applies — NAAMM MBG 531, BS 4592, or GB/T 12755?</p>
+    <p>The answers existed, scattered across factory quotation sheets and trade association PDFs that were neither indexed in English nor easy to compare side by side. I built the first version of these calculators as internal spreadsheets and eventually put them online because the questions never stopped. The tools are free, and I am not affiliated with any single manufacturer.</p>
+
+    <h2 class="text-xl font-bold text-theme-primary">About Kevin Wang</h2>
+    <p>I am Kevin Wang, a sourcing and technical consultant based in Anping, Hebei. My work involves evaluating manufacturer capabilities, reviewing mill test reports, and bridging the specification gap between overseas project requirements and what Chinese factories actually produce. I have visited dozens of bar grating mills in Anping and have working knowledge of the entire production process — from wire rod and flat steel procurement through welding, surface treatment, and final inspection.</p>
+    <p>My specific areas of competence include NAAMM MBG 531 serrated and plain grating, bearing bar weight estimation, close-mesh and swaged grating, hot-dip galvanised coatings per ASTM A123, and trench cover load calculations to EN 124 and comparable standards. I am not an engineer of record — the tools here are reference aids, not substitutes for a licensed PE's sign-off on safety-critical installations.</p>
+
+    <h2 class="text-xl font-bold text-theme-primary">What This Site Does Not Do</h2>
+    <p>SteelGratingCalculator is not a reseller. It does not represent any factory, trading company, or distributor. If you submit an inquiry, I may introduce you to manufacturers whose capabilities match your specification, but I am not a party to any resulting transaction. The calculators produce theoretical estimates — actual manufactured weights vary within mill tolerances and coating thickness allowances.</p>
+
+    <h2 class="text-xl font-bold text-theme-primary">Get in Touch</h2>
+    <p>If you have a technical question about steel grating specifications, weight, or sourcing from Anping, use the <a href="/inquiry/" class="text-theme-accent hover:underline">inquiry form</a>. Kevin reads every message and responds within one business day, China time.</p>
+  </section>
+</Base>
