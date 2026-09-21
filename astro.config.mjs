@@ -7,7 +7,7 @@ export default defineConfig({
   integrations: [
     sitemap({
       // Thin conversion pages must not be indexed
-      filter: (page) => !page.includes('/inquiry/thanks/'),
+      filter: (page) => !page.includes('/inquiry/thanks/') && !page.includes('/404'),
     }),
   ],
   vite: {
