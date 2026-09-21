@@ -1,0 +1,273 @@
+---
+import Base from "../../layouts/Base.astro";
+
+const DESIGNATIONS = [
+  {
+    slug: "19-w-4",
+    code: "19-W-4",
+    surface: "plain",
+    barHeightIn: "1-3/16\"",
+    barThickIn: "1/4\"",
+    barHeightMm: 30,
+    barThickMm: 5,
+    metricDesig: "30 × 5 mm",
+    wtKgM2: "39–50",
+    applications: ["General industrial flooring", "Walkways and mezzanine platforms", "Drainage trench covers", "Stair treads"],
+    desc: "The most widely specified NAAMM bar grating designation. Found in petrochemical plants, warehouses, and commercial construction worldwide.",
+    orderNote: "Specify as GB/T 12755 Type I (plain), bearing bar 30×5 mm, pitch 30/100 mm when ordering metric-equivalent grating from Anping manufacturers.",
+  },
+  {
+    slug: "19-i-4",
+    code: "19-I-4",
+    surface: "serrated",
+    barHeightIn: "1-3/16\"",
+    barThickIn: "1/4\"",
+    barHeightMm: 30,
+    barThickMm: 5,
+    metricDesig: "30 × 5 mm (serrated)",
+    wtKgM2: "39–50",
+    applications: ["Wet and oily environments", "Offshore platforms", "Food processing floors", "External walkways"],
+    desc: "Serrated (I-series) bearing bars provide enhanced traction. Recommended wherever slip resistance is required — offshore, food processing, and external installations.",
+    orderNote: "Specify as GB/T 12755 Type II (serrated), bearing bar 30×5 mm, pitch 30/100 mm. Serration depth is typically 1 mm on one or both edges.",
+  },
+  {
+    slug: "19-w-2",
+    code: "19-W-2",
+    surface: "plain",
+    barHeightIn: "1-3/16\"",
+    barThickIn: "1/8\"",
+    barHeightMm: 30,
+    barThickMm: 3,
+    metricDesig: "30 × 3 mm",
+    wtKgM2: "24–31",
+    applications: ["Light-duty walkways", "Sunshades and screens", "Architectural cladding", "Non-structural flooring"],
+    desc: "Same bearing bar depth as 19-W-4 but with thinner bars, reducing weight and cost. Suitable where span or loading requirements are modest.",
+    orderNote: "Specify as GB/T 12755 Type I, bearing bar 30×3 mm. Note: thinner bars are more susceptible to distortion — confirm with supplier.",
+  },
+  {
+    slug: "15-w-4",
+    code: "15-W-4",
+    surface: "plain",
+    barHeightIn: "15/16\"",
+    barThickIn: "1/4\"",
+    barHeightMm: 25,
+    barThickMm: 5,
+    metricDesig: "25 × 5 mm",
+    wtKgM2: "33–42",
+    applications: ["Medium-duty platforms", "Commercial mezzanines", "HVAC equipment access", "Light industrial walkways"],
+    desc: "15-W-4 offers a balance of strength and economy for medium-duty applications where full 19-W-4 depth is unnecessary.",
+    orderNote: "Specify as GB/T 12755 Type I, bearing bar 25×5 mm, pitch 30/100 mm.",
+  },
+  {
+    slug: "15-w-2",
+    code: "15-W-2",
+    surface: "plain",
+    barHeightIn: "15/16\"",
+    barThickIn: "1/8\"",
+    barHeightMm: 25,
+    barThickMm: 3,
+    metricDesig: "25 × 3 mm",
+    wtKgM2: "20–25",
+    applications: ["Light platforms", "Sunshade louvres", "Decorative grilles", "Low-traffic walkways"],
+    desc: "Lightweight designation combining 15/16\" bar height with thin 1/8\" bars. Often used in architectural applications and non-structural access panels.",
+    orderNote: "Specify as GB/T 12755 Type I, bearing bar 25×3 mm.",
+  },
+  {
+    slug: "11-w-4",
+    code: "11-W-4",
+    surface: "plain",
+    barHeightIn: "11/16\"",
+    barThickIn: "1/4\"",
+    barHeightMm: 20,
+    barThickMm: 5,
+    metricDesig: "20 × 5 mm",
+    wtKgM2: "26–33",
+    applications: ["Light-duty flooring", "Ventilation grilles", "False floors", "Shelving"],
+    desc: "11-W-4 is the lightest duty designation in common use, suitable for foot traffic and light equipment loads over short spans.",
+    orderNote: "Specify as GB/T 12755 Type I, bearing bar 20×5 mm, pitch 30/100 mm.",
+  },
+  {
+    slug: "24-w-4",
+    code: "24-W-4",
+    surface: "plain",
+    barHeightIn: "1-1/2\"",
+    barThickIn: "1/4\"",
+    barHeightMm: 40,
+    barThickMm: 5,
+    metricDesig: "40 × 5 mm",
+    wtKgM2: "52–66",
+    applications: ["Heavy-duty platforms", "Vehicular traffic areas", "Loading docks", "Power plant walkways"],
+    desc: "24-W-4 handles heavier loads or longer spans than 19-W-4. Commonly specified for vehicular access panels and power plant applications.",
+    orderNote: "Specify as GB/T 12755 Type I, bearing bar 40×5 mm, pitch 40/100 mm (wider pitch commonly used for heavier bars).",
+  },
+  {
+    slug: "32-w-4",
+    code: "32-W-4",
+    surface: "plain",
+    barHeightIn: "2\"",
+    barThickIn: "1/4\"",
+    barHeightMm: 50,
+    barThickMm: 5,
+    metricDesig: "50 × 5 mm",
+    wtKgM2: "65–83",
+    applications: ["Extra heavy-duty flooring", "Long-span covers", "Forklift traffic areas", "Offshore topsides"],
+    desc: "32-W-4 is the deepest common NAAMM designation, used for maximum load capacity or long unsupported spans in demanding environments.",
+    orderNote: "Specify as GB/T 12755 Type I, bearing bar 50×5 mm, pitch 40/100 mm.",
+  },
+];
+
+export function getStaticPaths() {
+  return DESIGNATIONS.map(d => ({ params: { designation: d.slug }, props: { d } }));
+}
+
+const { d } = Astro.props;
+const origin = "https://steelgratingcalculator.com";
+const url = `${origin}/naamm/${d.slug}/`;
+
+const faqs = [
+  {
+    q: `What does NAAMM ${d.code} mean?`,
+    a: `The designation follows NAAMM MBG 531: the first number is bearing bar height in 16ths of an inch (${d.barHeightIn} = ${d.barHeightMm} mm), the letter indicates surface type (${d.surface}), and the last number is bar thickness in 16ths (${d.barThickIn} = ${d.barThickMm} mm). Bearing bar pitch is specified separately and is not encoded in the designation.`,
+  },
+  {
+    q: `What is the metric equivalent of ${d.code}?`,
+    a: `${d.code} corresponds to a bearing bar section of ${d.metricDesig} under GB/T 12755. Chinese manufacturers typically supply this as flat steel bars at 30 mm or 40 mm center-to-center pitch with 6 mm round cross bars at 100 mm pitch.`,
+  },
+  {
+    q: `How much does ${d.code} grating weigh?`,
+    a: `At standard 30 mm bearing bar pitch, ${d.code} grating weighs approximately ${d.wtKgM2} kg/m². Exact weight depends on bearing bar pitch, cross bar size, and whether bars are metric (5 mm thick) or imperial (6.35 mm). Use the weight calculator for your specific configuration.`,
+  },
+  {
+    q: `What are typical applications for ${d.code} grating?`,
+    a: `${d.applications.join(", ")}. Always verify load capacity for your span and loading using the load capacity calculator.`,
+  },
+];
+
+const toolSchema = {
+  "@type": "SoftwareApplication",
+  name: `NAAMM ${d.code} Steel Bar Grating Reference`,
+  url,
+  applicationCategory: "UtilityApplication",
+  operatingSystem: "Web",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  description: d.desc,
+};
+---
+
+<Base
+  title={`NAAMM ${d.code} Steel Bar Grating — Dimensions, Weight & Load Data`}
+  description={`${d.desc} Metric equivalent ${d.metricDesig}. Free weight and load capacity calculators.`}
+  {faqs}
+  {toolSchema}
+>
+  <div class="max-w-4xl mx-auto px-4 py-10 sm:py-14">
+
+    <!-- Breadcrumb -->
+    <nav class="text-xs text-theme-muted mb-6 flex items-center gap-1.5">
+      <a href="/" class="hover:text-theme-primary">Home</a>
+      <span>›</span>
+      <span>NAAMM Grating</span>
+      <span>›</span>
+      <span class="text-theme-secondary">{d.code}</span>
+    </nav>
+
+    <h1 class="text-3xl md:text-4xl font-bold text-theme-primary mb-4">NAAMM {d.code} Bar Grating</h1>
+    <p class="text-theme-secondary text-lg leading-relaxed mb-8">{d.desc}</p>
+
+    <!-- Designation breakdown -->
+    <div class="bg-theme-card border border-theme rounded-xl p-6 mb-8">
+      <h2 class="text-lg font-bold text-theme-primary mb-4">Designation Breakdown</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-theme text-left">
+              <th class="pb-2 text-theme-muted font-semibold">Field</th>
+              <th class="pb-2 text-theme-muted font-semibold">Value</th>
+              <th class="pb-2 text-theme-muted font-semibold">Metric</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-theme">
+            <tr>
+              <td class="py-2.5 text-theme-secondary">Bar Height</td>
+              <td class="py-2.5 text-theme-primary font-medium">{d.barHeightIn}</td>
+              <td class="py-2.5 text-theme-primary font-medium">{d.barHeightMm} mm</td>
+            </tr>
+            <tr>
+              <td class="py-2.5 text-theme-secondary">Surface Type</td>
+              <td class="py-2.5 text-theme-primary font-medium">{d.code.includes("-W-") ? "W — Plain / Smooth" : "I — Serrated"}</td>
+              <td class="py-2.5 text-theme-secondary">—</td>
+            </tr>
+            <tr>
+              <td class="py-2.5 text-theme-secondary">Bar Thickness</td>
+              <td class="py-2.5 text-theme-primary font-medium">{d.barThickIn}</td>
+              <td class="py-2.5 text-theme-primary font-medium">{d.barThickMm} mm (metric)</td>
+            </tr>
+            <tr>
+              <td class="py-2.5 text-theme-secondary">Metric Equivalent</td>
+              <td colspan="2" class="py-2.5 text-theme-primary font-medium">{d.metricDesig} flat steel, GB/T 12755</td>
+            </tr>
+            <tr>
+              <td class="py-2.5 text-theme-secondary">Approx. Weight</td>
+              <td colspan="2" class="py-2.5 text-theme-primary font-medium">{d.wtKgM2} kg/m² at 30 mm pitch</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Applications -->
+    <div class="mb-8">
+      <h2 class="text-xl font-bold text-theme-primary mb-3">Common Applications</h2>
+      <ul class="grid sm:grid-cols-2 gap-2">
+        {d.applications.map(app => (
+          <li class="flex items-center gap-2 text-theme-secondary text-sm">
+            <span class="accent-text font-bold">→</span>
+            {app}
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Calculator CTAs -->
+    <div class="grid sm:grid-cols-2 gap-4 mb-8">
+      <a href="/tools/steel-grating-weight-calculator/" class="block bg-theme-card border border-theme hover:bg-theme-tertiary rounded-xl p-5 transition-colors group">
+        <p class="font-bold text-theme-primary group-hover:accent-text transition-colors mb-1">Weight Calculator →</p>
+        <p class="text-sm text-theme-secondary">Enter bar dimensions and panel size to get exact weight for your {d.code} specification.</p>
+      </a>
+      <a href="/tools/bar-grating-load-capacity-calculator/" class="block bg-theme-card border border-theme hover:bg-theme-tertiary rounded-xl p-5 transition-colors group">
+        <p class="font-bold text-theme-primary group-hover:accent-text transition-colors mb-1">Load Capacity Calculator →</p>
+        <p class="text-sm text-theme-secondary">Calculate allowable UDL and point load for {d.code} grating at your required span.</p>
+      </a>
+    </div>
+
+    <!-- Ordering from China -->
+    <div class="bg-theme-card border border-theme rounded-xl p-6 mb-8">
+      <h2 class="text-lg font-bold text-theme-primary mb-2">Ordering Metric-Equivalent Grating from China</h2>
+      <p class="text-theme-secondary text-sm leading-relaxed">{d.orderNote}</p>
+    </div>
+
+    <!-- FAQ -->
+    <div>
+      <h2 class="text-xl font-bold text-theme-primary mb-4">Frequently Asked Questions</h2>
+      <div class="space-y-4">
+        {faqs.map(faq => (
+          <div class="border border-theme rounded-xl p-5">
+            <p class="font-semibold text-theme-primary mb-2">{faq.q}</p>
+            <p class="text-theme-secondary text-sm leading-relaxed">{faq.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Related designations -->
+    <div class="mt-10 pt-8 border-t border-theme">
+      <p class="text-sm text-theme-muted mb-3">Other NAAMM Designations:</p>
+      <div class="flex flex-wrap gap-2">
+        {DESIGNATIONS.filter(x => x.slug !== d.slug).map(x => (
+          <a href={`/naamm/${x.slug}/`} class="text-xs px-3 py-1.5 rounded-full border border-theme text-theme-secondary hover:text-theme-primary transition-colors">{x.code}</a>
+        ))}
+      </div>
+    </div>
+
+  </div>
+</Base>
