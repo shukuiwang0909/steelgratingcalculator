@@ -194,7 +194,7 @@ const nav = [
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CLQ8Q8ES9P"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      window.gtag = function(){dataLayer.push(arguments);};
       gtag('js', new Date());
       gtag('config', 'G-CLQ8Q8ES9P');
     </script>
