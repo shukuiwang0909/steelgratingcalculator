@@ -192,11 +192,11 @@ const nav = [
     </script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CLQ8Q8ES9P"></script>
-    <script>
+    <script is:inline>
       window.dataLayer = window.dataLayer || [];
       window.gtag = function(){dataLayer.push(arguments);};
-      gtag('js', new Date());
-      gtag('config', 'G-CLQ8Q8ES9P');
+      window.gtag('js', new Date());
+      window.gtag('config', 'G-CLQ8Q8ES9P');
     </script>
   </head>
   <body class="min-h-screen flex flex-col relative">
