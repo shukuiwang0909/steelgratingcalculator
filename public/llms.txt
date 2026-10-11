@@ -1,0 +1,56 @@
+# Steel Grating Calculator
+
+> Free engineering-grade steel grating calculators for industrial procurement and design. Tools cover grating weight estimation, load capacity (NAAMM MBG 531 / BS 4592), open area percentage, panel count, FOB price conversion, and container loading optimization. Data sourced from NAAMM MBG 531, BS 4592, EN ISO 14122, and standard mill specifications. No signup required.
+
+## Calculators
+
+- [Steel Grating Weight Calculator](https://steelgratingcalculator.com/tools/steel-grating-weight-calculator/): Calculate kg/m² and total panel weight from bearing bar size (height × thickness), pitch, cross bar spec, and material (carbon steel / SS 304 / SS 316L / aluminum 6061). Applies density correction for each material. Output: weight per m², weight per panel, and full order weight for any quantity.
+- [Bar Grating Load Capacity Calculator](https://steelgratingcalculator.com/tools/bar-grating-load-capacity-calculator/): Maximum allowable UDL (kN/m²) and point load (kN) by span for simply-supported and cantilever conditions. Dual-standard output: NAAMM MBG 531 (US) and BS 4592 (UK/International). Input: bearing bar depth and thickness, pitch, span, steel grade. Outputs: deflection at midspan, safety factor, pass/fail assessment.
+- [Open Area Percentage Calculator](https://steelgratingcalculator.com/tools/open-area-percentage-calculator/): Calculate the open area % for drainage, ventilation, and debris shedding design. Formula: [(P_bb − T_bb) / P_bb] × [(P_xb − d_xb) / P_xb] × 100. Input: bearing bar thickness and pitch, cross bar diameter and pitch. Suitability ratings: <40% minimal drainage, 40–55% standard industrial, 55–70% good drainage, >70% high-flow.
+- [Panel Count Estimator](https://steelgratingcalculator.com/tools/panel-count-estimator/): Enter total floor area (m² or ft²), panel size (1000×500 / 1000×1000 / 2000×1000 / 3000×1000mm or custom), and waste factor (5–20%) to get exact panel count, order quantity, and total weight estimate for freight planning.
+- [FOB Price Calculator](https://steelgratingcalculator.com/tools/fob-price-calculator/): Convert RMB factory price to USD/EUR/GBP FOB quotes with live exchange rates. Accounts for freight-to-port, inland transport, and export customs charges. Output: landed FOB price per tonne and per m².
+- [Container Loading Calculator](https://steelgratingcalculator.com/tools/container-loading-calculator/): Calculate how many steel grating panels fit in a 20ft or 40ft container. Optimizes stacking orientation, calculates total weight vs. container payload limit (20ft: 26t / 40ft: 27t), and produces a loading plan summary.
+
+## Technical Articles
+
+- [How to Calculate Steel Grating Weight](https://steelgratingcalculator.com/blog/how-to-calculate-steel-grating-weight/): Manual calculation method for grating weight using density × volume formula. Worked example: 25×5mm bearing bars at 30mm pitch gives ~22 kg/m² for carbon steel. Includes density table (carbon 7,850 / SS 304 7,930 / SS 316L 8,000 / aluminum 6061 2,700 kg/m³) and material factor corrections.
+- [How to Load Steel Grating in a Container](https://steelgratingcalculator.com/blog/how-to-load-steel-grating-in-container/): Step-by-step container loading guide. Optimal stacking patterns for 1m×2m panels in 20ft vs 40ft containers. Weight distribution, timber blocking requirements, lashing patterns, and moisture protection for ocean freight.
+- [NAAMM Bar Grating Designations](https://steelgratingcalculator.com/blog/naamm-bar-grating-designations/): Complete guide to NAAMM MBG 531 designation codes. How to read "19-W-4" (19mm span / welded / 4-inch cross bar spacing). Bearing bar depth/thickness codes, cross bar type codes (W=welded, R=riveted, S=pressure-locked), and standard tolerance ranges.
+- [Plain vs Serrated Steel Grating](https://steelgratingcalculator.com/blog/plain-vs-serrated-steel-grating/): When to specify serrated (anti-slip) vs plain steel grating. Serrated grating has notched top edges for improved grip, identical open area and weight to plain. Required by OSHA 1910.23 in slip-hazard environments (wet, oily, high pedestrian areas). Plain preferred where rolling equipment is used.
+
+## Products
+
+- [Plain Steel Bar Grating](https://steelgratingcalculator.com/products/plain-steel-grating/)
+- [Serrated Steel Grating](https://steelgratingcalculator.com/products/serrated-steel-grating/)
+- [Hot-Dip Galvanized Grating](https://steelgratingcalculator.com/products/galvanized-steel-grating/)
+- [Stainless Steel Grating](https://steelgratingcalculator.com/products/stainless-steel-grating/)
+- [Aluminum Bar Grating](https://steelgratingcalculator.com/products/aluminum-grating/)
+- [Grating Stair Treads](https://steelgratingcalculator.com/products/grating-stair-treads/)
+- [Trench Covers & Drain Grates](https://steelgratingcalculator.com/products/trench-covers/)
+- [Heavy Duty Steel Grating](https://steelgratingcalculator.com/products/heavy-duty-grating/)
+
+## Key Technical Facts
+
+- **Weight formula**: kg/m² = (N_bb × T_bb × H_bb + N_xb × A_xb) × ρ / panel_area, where N = number of bars, T = thickness, H = height, A = cross-section area, ρ = material density
+- **Standard carbon steel density**: 7,850 kg/m³ per EN 10025
+- **25×5 @ 30mm pitch**: ~22 kg/m² (most common specification worldwide)
+- **Open area range**: 40–75% for standard DGBB gratings; 45%+ minimum for drainage applications
+- **Safety factor for load calculations**: 1.5–2.0 for pedestrian loading (NAAMM MBG 531)
+- **Container payload**: 20ft: ~26 tonnes / 40ft: ~27 tonnes net payload
+- **Galvanizing standard**: EN ISO 1461 (hot-dip), minimum 610 g/m² for structural grating
+- **Stainless grades**: SS 304 (general), SS 316L (marine, chemical, food — molybdenum addition for chloride resistance)
+
+## Technical Standards Referenced
+
+- NAAMM MBG 531 — Metal Bar Grating Manual (load tables, span limits)
+- BS 4592 — Floors and stairs for industrial use (UK/International)
+- EN ISO 14122 — Safety of machinery, fixed means of access (walkway requirements)
+- EN ISO 1461 — Hot dip galvanized coatings (zinc mass requirements)
+- OSHA 1910.23 — Ladders and fall protection (slip resistance requirements)
+
+## About
+
+- Site: https://steelgratingcalculator.com
+- Contact: sales@steelgratingcalculator.com
+- License: Free to use, no signup required
+- Last updated: 2026-10-12

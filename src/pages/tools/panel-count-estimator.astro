@@ -1,0 +1,414 @@
+---
+import Base from "../../layouts/Base.astro";
+
+const title = "Panel Count Estimator | Steel Grating Panels Required | Free";
+const description = "Calculate exactly how many steel grating panels you need for any project area. Enter total m², panel size, and waste factor to get panel count, total weight, and order quantity.";
+
+const faqs = [
+  { q: "How do I calculate how many grating panels I need?", a: "Divide your total floor area by the coverage area of one panel. For a 1000×500mm panel, each covers 0.5 m². A 20 m² area needs 40 panels minimum. Always add a waste factor of 5–10% for cuts, offcuts, and installation tolerance. This tool does the calculation automatically." },
+  { q: "What waste factor should I use for steel grating?", a: "For regular rectangular areas with minimal cuts, use 5%. For areas with columns, cutouts, or diagonal runs, use 10–15%. For complex shapes with many penetrations (process platforms, offshore decks), budget 15–20% waste." },
+  { q: "What are standard steel grating panel sizes?", a: "The most common stock sizes are 1000×500mm, 1000×1000mm, 2000×1000mm, and 3000×1000mm. Custom-cut panels are available from most manufacturers at extra cost. Larger panels reduce joint count but increase installation difficulty for manual handling (>25 kg requires mechanical lifting)." },
+  { q: "How heavy is a standard steel grating panel?", a: "Weight depends on specification. A 25×5mm bearing bar at 30mm pitch weighs about 22 kg/m². So a 1m×2m panel weighs ≈44 kg, a 1m×1m panel ≈22 kg. Use the Weight Calculator for exact values based on your spec." },
+  { q: "Can I order cut-to-size grating panels?", a: "Yes. Most manufacturers offer custom sizes cut to ±1mm tolerance. Ordering cut-to-size reduces waste but increases unit cost and lead time. For large projects (>100 m²), mixed ordering — stock panels plus a small quantity of custom cuts — usually minimizes total cost." },
+];
+
+const toolSchema = {
+  "@type": "SoftwareApplication",
+  name: "Steel Grating Panel Count Estimator",
+  applicationCategory: "EngineeringApplication",
+  operatingSystem: "Web",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  description,
+  url: "https://steelgratingcalculator.com/tools/panel-count-estimator/",
+};
+
+const panelSizes = [
+  { label: "1000 × 500 mm  (0.50 m²)", w: 1000, h: 500, area: 0.5 },
+  { label: "1000 × 1000 mm (1.00 m²)", w: 1000, h: 1000, area: 1.0 },
+  { label: "2000 × 1000 mm (2.00 m²)", w: 2000, h: 1000, area: 2.0 },
+  { label: "3000 × 1000 mm (3.00 m²)", w: 3000, h: 1000, area: 3.0 },
+  { label: "2438 × 1219 mm (2.97 m²) — 8′×4′", w: 2438, h: 1219, area: 2.97 },
+  { label: "Custom size", w: 0, h: 0, area: 0 },
+];
+
+const weightPerM2 = [
+  { label: "25×5 @ 30mm pitch — 22 kg/m²", val: 22 },
+  { label: "25×5 @ 34mm pitch — 20 kg/m²", val: 20 },
+  { label: "32×5 @ 30mm pitch — 27 kg/m²", val: 27 },
+  { label: "40×5 @ 30mm pitch — 34 kg/m²", val: 34 },
+  { label: "50×5 @ 30mm pitch — 43 kg/m²", val: 43 },
+  { label: "25×3 @ 30mm pitch — 14 kg/m²", val: 14 },
+];
+---
+<Base title={title} description={description} lang="en" {faqs} {toolSchema}>
+
+  <section class="max-w-6xl mx-auto px-4 py-10">
+
+    <nav class="text-xs text-theme-muted mb-6 flex items-center gap-2">
+      <a href="/" class="hover:text-theme-primary transition-colors">Home</a>
+      <span>/</span>
+      <a href="/tools/panel-count-estimator/" class="accent-text">Panel Count Estimator</a>
+    </nav>
+
+    <div class="mb-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-theme accent-border accent-text text-xs font-mono uppercase tracking-wider mb-4">
+        <span class="w-1.5 h-1.5 rounded-full accent-bg animate-pulse"></span>
+        Tool 04 · Procurement
+      </div>
+      <h1 class="text-3xl font-semibold text-theme-primary mb-3">Steel Grating Panel Count Estimator</h1>
+      <p class="text-theme-secondary max-w-2xl leading-relaxed">
+        Enter your total floor area and panel size to get the exact number of panels required, including waste allowance. Also calculates total order weight for freight planning.
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-[1fr_380px] gap-6">
+
+      <!-- LEFT: Inputs -->
+      <div class="space-y-5">
+
+        <!-- Area Input -->
+        <div class="card">
+          <h2 class="text-sm font-semibold text-theme-primary uppercase tracking-wide mb-4 flex items-center gap-2">
+            <span class="w-1 h-4 accent-bg rounded-full"></span>
+            Project Area
+          </h2>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="label" for="total-area">Total area to cover</label>
+              <div class="flex gap-2 items-center">
+                <input id="total-area" type="number" min="0.1" max="100000" step="0.1" value="20"
+                  class="select flex-1" />
+                <select id="area-unit" class="select w-24">
+                  <option value="m2">m²</option>
+                  <option value="ft2">ft²</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label class="label" for="waste-pct">Waste / cut allowance</label>
+              <select id="waste-pct" class="select">
+                <option value="5">5% — Simple rectangle</option>
+                <option value="10" selected>10% — Typical industrial</option>
+                <option value="15">15% — Complex layout</option>
+                <option value="20">20% — Many cutouts</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel Size -->
+        <div class="card">
+          <h2 class="text-sm font-semibold text-theme-primary uppercase tracking-wide mb-4 flex items-center gap-2">
+            <span class="w-1 h-4 accent-bg rounded-full"></span>
+            Panel Size
+          </h2>
+          <div class="space-y-3">
+            <div>
+              <label class="label" for="panel-size-select">Standard panel size</label>
+              <select id="panel-size-select" class="select">
+                {panelSizes.map((p, i) => (
+                  <option value={i} selected={i === 1}>{p.label}</option>
+                ))}
+              </select>
+            </div>
+            <div id="custom-size-row" class="hidden grid grid-cols-2 gap-4">
+              <div>
+                <label class="label" for="custom-w">Panel width (mm)</label>
+                <input id="custom-w" type="number" min="100" max="10000" step="1" placeholder="e.g. 1200"
+                  class="select w-full" />
+              </div>
+              <div>
+                <label class="label" for="custom-h">Panel length (mm)</label>
+                <input id="custom-h" type="number" min="100" max="10000" step="1" placeholder="e.g. 800"
+                  class="select w-full" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Weight Spec -->
+        <div class="card">
+          <h2 class="text-sm font-semibold text-theme-primary uppercase tracking-wide mb-4 flex items-center gap-2">
+            <span class="w-1 h-4 accent-bg rounded-full"></span>
+            Weight Specification (for freight estimate)
+          </h2>
+          <div>
+            <label class="label" for="weight-spec">Grating specification</label>
+            <select id="weight-spec" class="select">
+              {weightPerM2.map(w => (
+                <option value={w.val}>{w.label}</option>
+              ))}
+            </select>
+            <p class="input-hint mt-2">For exact weight, use the <a href="/tools/steel-grating-weight-calculator/" class="accent-text hover:underline">Weight Calculator</a> with your full spec.</p>
+          </div>
+        </div>
+
+        <!-- Standard Sizes Reference -->
+        <div class="card bg-theme-tertiary">
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-theme-muted mb-3">Standard Panel Size Reference</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-xs text-theme-secondary">
+              <thead>
+                <tr class="border-b border-theme">
+                  <th class="text-left py-1.5 text-theme-muted font-medium">Size</th>
+                  <th class="text-right py-1.5 text-theme-muted font-medium">Area</th>
+                  <th class="text-right py-1.5 text-theme-muted font-medium">Weight (25×5@30)</th>
+                  <th class="text-right py-1.5 text-theme-muted font-medium">Handling</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-theme">
+                {[
+                  ["1000×500 mm", "0.5 m²", "11 kg", "1 person"],
+                  ["1000×1000 mm", "1.0 m²", "22 kg", "1 person"],
+                  ["2000×1000 mm", "2.0 m²", "44 kg", "2 persons"],
+                  ["3000×1000 mm", "3.0 m²", "66 kg", "Mechanical"],
+                ].map(([size, area, wt, handling]) => (
+                  <tr>
+                    <td class="py-1.5 font-mono text-theme-primary">{size}</td>
+                    <td class="py-1.5 text-right">{area}</td>
+                    <td class="py-1.5 text-right">{wt}</td>
+                    <td class="py-1.5 text-right">{handling}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: Results -->
+      <div>
+        <div class="card sticky top-20 space-y-4">
+          <h2 class="text-sm font-semibold text-theme-primary uppercase tracking-wide">Estimator Results</h2>
+
+          <div class="p-4 accent-bg rounded-lg text-center">
+            <p class="text-xs uppercase tracking-wide mb-1 on-accent opacity-80">Panels Required (incl. waste)</p>
+            <p id="result-panels" class="text-4xl font-bold on-accent font-mono">—</p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div class="p-3 bg-theme-tertiary rounded-lg border border-theme text-center">
+              <p class="text-xs text-theme-muted uppercase tracking-wide mb-1">Net area</p>
+              <p id="result-net-area" class="text-xl font-bold text-theme-primary font-mono">—</p>
+            </div>
+            <div class="p-3 bg-theme-tertiary rounded-lg border border-theme text-center">
+              <p class="text-xs text-theme-muted uppercase tracking-wide mb-1">Gross area</p>
+              <p id="result-gross-area" class="text-xl font-bold text-theme-primary font-mono">—</p>
+            </div>
+          </div>
+
+          <div class="p-3 bg-theme-tertiary rounded-lg border border-theme">
+            <p class="text-xs text-theme-muted uppercase tracking-wide mb-2">Order Breakdown</p>
+            <div class="space-y-2 text-sm">
+              <div class="flex justify-between">
+                <span class="text-theme-secondary">Min panels (no waste)</span>
+                <span id="result-min-panels" class="font-mono text-theme-primary font-semibold">—</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-theme-secondary">Waste panels</span>
+                <span id="result-waste-panels" class="font-mono text-amber-400">—</span>
+              </div>
+              <div class="flex justify-between border-t border-theme pt-2">
+                <span class="text-theme-secondary font-medium">Recommended order</span>
+                <span id="result-order" class="font-mono accent-text font-bold">—</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-3 bg-theme-tertiary rounded-lg border border-theme">
+            <p class="text-xs text-theme-muted uppercase tracking-wide mb-2">Weight Estimate</p>
+            <div class="space-y-1.5 text-sm">
+              <div class="flex justify-between">
+                <span class="text-theme-secondary">Total steel weight</span>
+                <span id="result-weight" class="font-mono text-theme-primary font-semibold">—</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-theme-secondary">Per panel</span>
+                <span id="result-panel-weight" class="font-mono text-theme-secondary">—</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-3 bg-theme-tertiary rounded-lg border border-theme text-xs font-mono text-theme-secondary">
+            <p class="text-theme-muted mb-1">Panel size used:</p>
+            <p id="result-panel-size" class="accent-text">—</p>
+            <p class="text-theme-muted mt-2 mb-1">Coverage per panel:</p>
+            <p id="result-coverage" class="accent-text">—</p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <button id="btn-copy-pc" class="flex items-center justify-center gap-2 border border-theme rounded-lg py-2 text-sm text-theme-secondary hover:text-theme-primary transition-all">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+              Copy
+            </button>
+            <a href="/inquiry/" class="flex items-center justify-center gap-2 accent-bg rounded-lg py-2 text-sm font-semibold on-accent hover:opacity-90 transition-opacity">
+              Get a Quote
+            </a>
+          </div>
+          <p id="pc-copy-feedback" class="hidden text-xs text-center text-green-400">Copied!</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Related tools -->
+    <div class="mt-12 pt-8 border-t border-theme">
+      <h2 class="text-lg font-semibold text-theme-primary mb-4">Related Tools</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        <a href="/tools/steel-grating-weight-calculator/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">Tool 01</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">Weight Calculator</h3>
+          <p class="text-sm text-theme-secondary mt-1">Precise kg/m² from bearing bar spec, pitch, and material.</p>
+        </a>
+        <a href="/tools/container-loading-calculator/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">Tool 06</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">Container Loading</h3>
+          <p class="text-sm text-theme-secondary mt-1">How many panels fit in a 20ft or 40ft container.</p>
+        </a>
+        <a href="/tools/fob-price-calculator/" class="card card-accent group">
+          <span class="text-xs font-mono accent-text uppercase tracking-wider">Tool 05</span>
+          <h3 class="font-semibold text-theme-primary group-hover:text-theme-secondary transition-colors mt-1">FOB Price Calculator</h3>
+          <p class="text-sm text-theme-secondary mt-1">Convert factory price to USD/EUR FOB quote.</p>
+        </a>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="mt-12 pt-8 border-t border-theme">
+      <h2 class="text-lg font-semibold text-theme-primary mb-6">Frequently Asked Questions</h2>
+      <div class="space-y-3 max-w-3xl">
+        {faqs.map(f => (
+          <details class="group bg-theme-card border border-theme rounded-xl overflow-hidden">
+            <summary class="flex items-center justify-between gap-3 px-5 py-4 cursor-pointer font-medium text-theme-primary list-none">
+              {f.q}
+              <svg class="w-4 h-4 shrink-0 text-theme-muted group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <div class="px-5 pb-4 text-sm text-theme-secondary leading-relaxed">{f.a}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+
+  </section>
+
+</Base>
+
+<script>
+(function () {
+  const panelSizes = [
+    { w: 1000, h: 500,  area: 0.5  },
+    { w: 1000, h: 1000, area: 1.0  },
+    { w: 2000, h: 1000, area: 2.0  },
+    { w: 3000, h: 1000, area: 3.0  },
+    { w: 2438, h: 1219, area: 2.97 },
+    { w: 0,    h: 0,    area: 0    }, // custom
+  ];
+
+  const $ = (id: string) => document.getElementById(id) as HTMLElement;
+  const getNum = (id: string) => parseFloat((document.getElementById(id) as HTMLInputElement | HTMLSelectElement)?.value || '0') || 0;
+
+  function getPanelArea(): number {
+    const idx = parseInt((document.getElementById('panel-size-select') as HTMLSelectElement).value, 10);
+    if (idx === panelSizes.length - 1) {
+      // custom
+      const w = getNum('custom-w');
+      const h = getNum('custom-h');
+      if (!w || !h) return 0;
+      return (w / 1000) * (h / 1000);
+    }
+    return panelSizes[idx].area;
+  }
+
+  function getPanelLabel(): string {
+    const idx = parseInt((document.getElementById('panel-size-select') as HTMLSelectElement).value, 10);
+    if (idx === panelSizes.length - 1) {
+      const w = getNum('custom-w');
+      const h = getNum('custom-h');
+      return `${w} × ${h} mm (custom)`;
+    }
+    const p = panelSizes[idx];
+    return `${p.w} × ${p.h} mm`;
+  }
+
+  function calc(): void {
+    const unit = (document.getElementById('area-unit') as HTMLSelectElement).value;
+    let netArea = getNum('total-area');
+    if (unit === 'ft2') netArea = netArea * 0.0929;
+
+    const wastePct = getNum('waste-pct');
+    const panelArea = getPanelArea();
+    const weightPerM2 = getNum('weight-spec');
+
+    if (!netArea || !panelArea) return;
+
+    const grossArea = netArea * (1 + wastePct / 100);
+    const minPanels = Math.ceil(netArea / panelArea);
+    const totalPanels = Math.ceil(grossArea / panelArea);
+    const wastePanels = totalPanels - minPanels;
+    const totalWeight = totalPanels * panelArea * weightPerM2;
+    const panelWeight = panelArea * weightPerM2;
+
+    const set = (id: string, val: string) => { const el = $(id); if (el) el.textContent = val; };
+
+    set('result-panels', String(totalPanels));
+    set('result-net-area', netArea.toFixed(1) + ' m²');
+    set('result-gross-area', grossArea.toFixed(1) + ' m²');
+    set('result-min-panels', String(minPanels));
+    set('result-waste-panels', '+' + String(wastePanels));
+    set('result-order', String(totalPanels) + ' pcs');
+    set('result-weight', totalWeight >= 1000
+      ? (totalWeight / 1000).toFixed(2) + ' t'
+      : Math.round(totalWeight) + ' kg');
+    set('result-panel-weight', panelWeight.toFixed(1) + ' kg/pc');
+    set('result-panel-size', getPanelLabel());
+    set('result-coverage', panelArea.toFixed(3) + ' m² / panel');
+  }
+
+  function copyResult(): void {
+    const panels = $('result-panels')?.textContent || '';
+    const netArea = $('result-net-area')?.textContent || '';
+    const weight  = $('result-weight')?.textContent || '';
+    const size    = $('result-panel-size')?.textContent || '';
+    const text = [
+      `Steel Grating Panel Count Estimate`,
+      `Panel size: ${size}`,
+      `---`,
+      `Net area: ${netArea}`,
+      `Panels required (incl. waste): ${panels}`,
+      `Estimated weight: ${weight}`,
+      `Calculated on SteelGratingCalculator.com`,
+    ].join('\n');
+    navigator.clipboard.writeText(text).then(() => {
+      const fb = $('pc-copy-feedback');
+      if (fb) { fb.classList.remove('hidden'); setTimeout(() => fb.classList.add('hidden'), 2500); }
+    });
+  }
+
+  // Show/hide custom size row
+  (document.getElementById('panel-size-select') as HTMLSelectElement).addEventListener('change', function () {
+    const last = panelSizes.length - 1;
+    const customRow = document.getElementById('custom-size-row');
+    if (customRow) {
+      customRow.classList.toggle('hidden', parseInt(this.value, 10) !== last);
+    }
+    calc();
+  });
+
+  document.querySelectorAll('#total-area,#area-unit,#waste-pct,#weight-spec,#custom-w,#custom-h')
+    .forEach(el => el.addEventListener('input', calc));
+  document.querySelectorAll('#area-unit,#waste-pct,#weight-spec')
+    .forEach(el => el.addEventListener('change', calc));
+
+  document.getElementById('btn-copy-pc')?.addEventListener('click', copyResult);
+
+  calc();
+})();
+</script>
+
+<style>
+  .label { display:block; font-size:.75rem; font-weight:600; margin-bottom:.25rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:.05em; }
+  .select { width:100%; border:1px solid var(--border-color); border-radius:.5rem; padding:.5rem .75rem; background-color:var(--bg-secondary); color:var(--text-primary); font-size:.875rem; outline:none; transition:all .2s; }
+  .select:focus { box-shadow:0 0 0 1px #f59e0b; }
+  .input-hint { margin-top:.25rem; font-size:.75rem; color:var(--text-muted); }
+</style>

@@ -5,3 +5,46 @@ Disallow: /inquiry/thanks/
 Disallow: /zh/inquiry/thanks/
 
 Sitemap: https://steelgratingcalculator.com/sitemap-index.xml
+
+# AI Crawlers — explicitly allowed for LLM training and retrieval
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Googlebot-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+# AI content manifest
+LLMs: https://steelgratingcalculator.com/llms.txt
